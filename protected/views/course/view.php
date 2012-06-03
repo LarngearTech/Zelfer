@@ -4,16 +4,28 @@ $this->breadcrumbs=array(
 	$model->name,
 );
 
-$this->menu=array(
-	array('label'=>'List Course', 'url'=>array('index')),
-	array('label'=>'Create Course', 'url'=>array('create')),
-	array('label'=>'Update Course', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Course', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Course', 'url'=>array('admin')),
-);
 ?>
 
 <h1><?php echo CHtml::encode($model->name); ?></h1>
 <br/>
 <p class="well"><?php echo CHtml::encode($model->description); ?></p>
+
+<?php
+$i = 0;
+$display_lectures = array();
+foreach ($lectures as $lecture)
+{
+	$i++;
+	$display_lectures[] = array(
+		'label' => 'Lecture '.$i,
+		'content' => '<p>'.$lecture->name.'</p>',
+		'active' => ($i == 1)? true: false,
+	);
+}
+$this->widget('bootstrap.widgets.BootTabbable', array(
+	'type'=>'tabs',
+	'placement'=>'left', // 'above', 'right', 'below' or 'left'
+	'tabs'=> $display_lectures,
+));
+?>
 

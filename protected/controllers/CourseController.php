@@ -50,8 +50,14 @@ class CourseController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$lecturesProvider = new CActiveDataProvider('Lecture', array(
+			'criteria' => array(
+				'condition' => 'course_id='.$id,
+			)
+		));
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model' => $this->loadModel($id),
+			'lectures' => $lecturesProvider->getData(),
 		));
 	}
 

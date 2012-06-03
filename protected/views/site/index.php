@@ -11,7 +11,8 @@
 <?php 
 
 // category sections
-foreach ($categories as $category) {
+foreach ($categories as $category)
+{
 	// display category name
 	echo '
 		<br />
