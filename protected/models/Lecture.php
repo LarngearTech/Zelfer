@@ -10,6 +10,12 @@
  */
 class Lecture extends CActiveRecord
 {
+    const ENCODING_PATH_PREFIX = '/asset/encoding/';
+	const STREAMING_PATH_PREFIX = '/asset/streaming/';
+
+    protected $encodingPath;
+    protected $streamingPath;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -18,6 +24,17 @@ class Lecture extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+    /**
+     * Post-processing after the record is instantiated by a find method.
+     * Assign encoding and streaming paths for a lecture.
+     */
+    protected function afterFind()
+    {
+		parent::afterFind();
+		$this->encodingPath = self::ENCODING_PATH_PREFIX.$this->id;
+		$this->streamingPath = self::STREAMING_PATH_PREFIX.$this->id;
 	}
 
 	/**
@@ -86,5 +103,21 @@ class Lecture extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * @return string lecture's encoding path
+	 */
+	public function getEncodingPath()
+	{
+		return $this->encodingPath;
+	}
+
+	/**
+	 * @return string lecture's streaming path
+	 */
+	public function getStreamingPath()
+	{
+		return $this->streamingPath;
 	}
 }
