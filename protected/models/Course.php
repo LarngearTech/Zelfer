@@ -11,6 +11,10 @@
  */
 class Course extends CActiveRecord
 {
+	const THUMBNAIL_URL_PREFIX = '/asset/thumbnail/';
+
+	protected $thumbnailUrl;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -19,6 +23,16 @@ class Course extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	/**
+	 * Post-processing after the record is instantiated by a find method.
+	 * Assign a thumbnail URL for a course.
+	 */
+	protected function afterFind()
+	{
+		parent::afterFind();
+		$this->thumbnailUrl = self::THUMBNAIL_URL_PREFIX.$this->id;
 	}
 
 	/**
@@ -89,5 +103,13 @@ class Course extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * @return string course's thumbnail URL
+	 */
+	public function getThumbnailUrl()
+	{
+		return $this->thumbnailUrl;
 	}
 }
