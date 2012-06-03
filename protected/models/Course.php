@@ -12,12 +12,8 @@
 class Course extends CActiveRecord
 {
 	const THUMBNAIL_URL_PREFIX = '/asset/thumbnail/';
-	const ENCODING_PATH_PREFIX = '/asset/encoding/';
-	const STREAMING_PATH_PREFIX = '/asset/streaming/';
 
 	protected $thumbnailUrl;
-	protected $encodingPath;
-	protected $streamingPath;
 
 	/**
 	 * Returns the static model of the specified AR class.
