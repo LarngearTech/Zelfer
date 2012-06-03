@@ -1,16 +1,36 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<?php $this->widget('bootstrap.widgets.BootCarousel', array(
+	'items'=>array(
+		array('image'=>'http://placehold.it/770x400&text=First+thumbnail', 'label'=>'First Thumbnail label', 'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
+		array('image'=>'http://placehold.it/770x400&text=Second+thumbnail', 'label'=>'Second Thumbnail label', 'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
+		array('image'=>'http://placehold.it/770x400&text=Third+thumbnail', 'label'=>'Third Thumbnail label', 'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
+	),
+)); ?>
 
-<p>Congratulations! You have successfully created your Yii application.</p>
+<?php 
 
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <tt><?php echo __FILE__; ?></tt></li>
-	<li>Layout file: <tt><?php echo $this->getLayoutFile('main'); ?></tt></li>
-</ul>
+// category sections
+foreach ($categories as $category) {
+	echo '
+	<br />
+<div class="page-header">
+	<h1>'.$category->name.'</h1>
+</div>';
+	echo '
+<ul class="thumbnails">';
 
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+	// display courses of each category
+	foreach ($courses_in_categories[$category->id] as $course) {
+		echo '
+	<li class="span3">
+		<a href="#" class="thumbnail">
+			<img src="http://placehold.it/260x180" alt="" />
+		</a>
+		<h5>'.$course->name.'</h5>
+		<p>'.$course->description.'</p>
+	</li>';
+	}
+	echo '</ul>';
+}
+?>

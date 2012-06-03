@@ -27,9 +27,27 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
+		// load all categories to display
+		$categoriesProvider = new CActiveDataProvider('Category');
+		$categories = $categoriesProvider->getData();
+
+		// load all courses of each catgegory to display
+		$courses_in_categories = array();
+		foreach ($categories as $category) {
+			$coursesProvider = new CActiveDataProvider('Course', array(
+				'criteria' => array(
+					'condition' => 'category_id='.$category->id,
+				),
+			));
+			$courses_in_categories[$category->id] = $coursesProvider->getData();
+		}
+
+	 	// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$this->render('index', array(
+				'categories' => $categories,
+				'courses_in_categories' => $courses_in_categories,
+		));
 	}
 
 	/**
