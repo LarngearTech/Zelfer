@@ -23,10 +23,16 @@ foreach ($categories as $category) {
 	// display courses of each category
 	foreach ($courses_in_categories[$category->id] as $course) {
 		echo '
-	<li class="span3">
-		<a href="#" class="thumbnail">
-			<img src="http://placehold.it/260x180" alt="" />
-		</a>
+	<li class="span3">';
+		echo CHtml::link(
+			// image to be linked
+			CHtml::image($course->thumbnailUrl, 'Course thumbnail: '.$course->name),
+			// url to course/view?id=course_id
+			array('course/view', 'id' => $course->id),
+			// class for tag a href
+			array('class' => 'thumbnail')
+		);
+		echo '
 		<h5>'.$course->name.'</h5>
 		<p>'.$course->description.'</p>
 	</li>';
