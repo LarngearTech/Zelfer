@@ -10,7 +10,10 @@ return array(
 	'name'=>'Zelfer',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array(
+		'log',
+		'bootstrap',
+	),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -33,6 +36,9 @@ return array(
 			'password'=>'giipass',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+
+			// twitter bootstrap extension
+			'generatorPaths' => array('bootstrap.gii'),
 		),
 	),
 
@@ -84,6 +90,10 @@ return array(
 				),
 				*/
 			),
+		),
+		// twitter bootstrap extension
+		'bootstrap' => array(
+			'class' => 'ext.bootstrap.components.Bootstrap',
 		),
 	),
 
