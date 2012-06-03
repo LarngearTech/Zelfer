@@ -12,8 +12,12 @@
 class Course extends CActiveRecord
 {
 	const THUMBNAIL_URL_PREFIX = '/asset/thumbnail/';
+	const ENCODING_PATH_PREFIX = '/asset/encoding/';
+	const STREAMING_PATH_PREFIX = '/asset/streaming/';
 
 	protected $thumbnailUrl;
+	protected $encodingPath;
+	protected $streamingPath;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -27,12 +31,14 @@ class Course extends CActiveRecord
 
 	/**
 	 * Post-processing after the record is instantiated by a find method.
-	 * Assign a thumbnail URL for a course.
+	 * Assign thumbnail URL, encoding path, and streaming path  for a course.
 	 */
 	protected function afterFind()
 	{
 		parent::afterFind();
 		$this->thumbnailUrl = self::THUMBNAIL_URL_PREFIX.$this->id;
+		$this->encodingPath = self::ENCODING_PATH_PREFIX.$this->id;
+		$this->streamingPath = self::STREAMING_PATH_PREFIX.$this->id;
 	}
 
 	/**
@@ -111,5 +117,21 @@ class Course extends CActiveRecord
 	public function getThumbnailUrl()
 	{
 		return $this->thumbnailUrl;
+	}
+
+	/**
+	 * @return string course's encoding path
+	 */
+	public function getEncodingPath()
+	{
+		return $this->encodingPath;
+	}
+
+	/**
+	 * @return string course's straming path
+	 */
+	public function getStreamingPath()
+	{
+		return $this->streamingPath;
 	}
 }
