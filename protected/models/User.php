@@ -89,4 +89,9 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function validatePassword($password)
+	{
+		return hash('sha256', $password) === $this->password;
+	}
 }
