@@ -13,14 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Course #<?php echo $model->id; ?></h1>
+<h1><?php echo CHtml::encode($model->name); ?></h1>
+<br/>
+<p class="well"><?php echo CHtml::encode($model->description); ?></p>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'name',
-		'description',
-		'category_id',
-	),
-)); ?>
