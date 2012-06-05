@@ -12,9 +12,11 @@ class Lecture extends CActiveRecord
 {
     const ENCODING_PATH_PREFIX = '/asset/encoding/';
 	const STREAMING_PATH_PREFIX = '/asset/streaming/';
+	const SLIDE_URL_PREFIX = '/asset/slide/';
 
     protected $encodingPath;
     protected $streamingPath;
+	protected $slideUrl;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -35,6 +37,7 @@ class Lecture extends CActiveRecord
 		parent::afterFind();
 		$this->encodingPath = self::ENCODING_PATH_PREFIX.$this->id;
 		$this->streamingPath = self::STREAMING_PATH_PREFIX.$this->id;
+		$this->slideUrl = self::SLIDE_URL_PREFIX.$this->id;
 	}
 
 	/**
@@ -120,5 +123,13 @@ class Lecture extends CActiveRecord
 	public function getStreamingPath()
 	{
 		return $this->streamingPath;
+	}
+
+	/**
+	 * @return string lecture's slide URL
+	 */
+	public function getSlideUrl()
+	{
+		return $this->slideUrl;
 	}
 }

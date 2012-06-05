@@ -16,6 +16,14 @@ class LectureTest extends CDbTestCase
 	{
 		$retrievedLecture = $this->lectures('lecture1');
 		$lectureId = $retrievedLecture->id;
-		$this->assertEquals('/asset/streaming/'.$lectureId, $retrievedLecture->streamingPath);
+		//$this->assertEquals('/asset/streaming/'.$lectureId, $retrievedLecture->streamingPath);
+		$this->assertEquals(Lecture::STREAMING_PATH_PREFIX.$lectureId, $retrievedLecture->streamingPath);
+	}
+
+	public function testGetSlideUrl()
+	{
+		$retrievedLecture = $this->lectures('lecture1');
+		$lectureId = $retrievedLecture->id;
+		$this->assertEquals(Lecture::SLIDE_URL_PREFIX.$lectureId, $retrievedLecture->slideUrl);
 	}
 }
