@@ -70,6 +70,7 @@ class Lecture extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'chapter' => array(self::BELONGS_TO, 'Chapter', 'chapter_id'),
 		);
 	}
 
