@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2012 at 10:11 AM
+-- Generation Time: Jun 05, 2012 at 12:44 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -54,10 +54,13 @@ INSERT INTO `course` (`id`, `name`, `description`, `category_id`) VALUES
 --
 
 INSERT INTO `lecture` (`id`, `name`, `chapter_id`) VALUES
-(1, 'สัญกรณ์โอใหญ่', 2),
-(2, 'อัตราการเติบโตของฟังก์ชัน', 2),
-(3, 'อาเรย์และรายการเชื่อมโยง', 3),
-(4, 'อัลกอริทึมคืออะไร', 1);
+(1, 'อัลกอริทึมคืออะไร', 1),
+(2, 'ประสิทธิภาพของอัลกอริทึม', 2),
+(3, 'สัญกรณ์โอใหญ่ (Big O)', 2),
+(4, 'โครงสร้างข้อมูลแบบต่อเนื่อง', 3),
+(5, 'โครงสร้างข้อมูลแบบเชื่อมโยง', 3),
+(6, 'กองซ้อน (Stack)', 3),
+(7, 'แถวคอย (Queue)', 3);
 
 --
 -- Dumping data for table `user`
