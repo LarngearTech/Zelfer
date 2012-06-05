@@ -9,14 +9,13 @@ class LectureTest extends CDbTestCase
 	{
 		$retrievedLecture = $this->lectures('lecture1');
 		$lectureId = $retrievedLecture->id;
-		$this->assertEquals('/asset/encoding/'.$lectureId, $retrievedLecture->encodingPath);
+		$this->assertEquals(Lecture::ENCODING_PATH_PREFIX.$lectureId, $retrievedLecture->encodingPath);
 	}
 
 	public function testGetStreamingPath()
 	{
 		$retrievedLecture = $this->lectures('lecture1');
 		$lectureId = $retrievedLecture->id;
-		//$this->assertEquals('/asset/streaming/'.$lectureId, $retrievedLecture->streamingPath);
 		$this->assertEquals(Lecture::STREAMING_PATH_PREFIX.$lectureId, $retrievedLecture->streamingPath);
 	}
 
