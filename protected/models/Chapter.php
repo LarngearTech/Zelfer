@@ -1,40 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "lecture".
+ * This is the model class for table "chapter".
  *
- * The followings are the available columns in table 'lecture':
+ * The followings are the available columns in table 'chapter':
  * @property integer $id
  * @property string $name
  * @property integer $course_id
  */
-class Lecture extends CActiveRecord
+class Chapter extends CActiveRecord
 {
-    const ENCODING_PATH_PREFIX = '/asset/encoding/';
-	const STREAMING_PATH_PREFIX = '/asset/streaming/';
-
-    protected $encodingPath;
-    protected $streamingPath;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Lecture the static model class
+	 * @return Chapter the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-
-    /**
-     * Post-processing after the record is instantiated by a find method.
-     * Assign encoding and streaming paths for a lecture.
-     */
-    protected function afterFind()
-    {
-		parent::afterFind();
-		$this->encodingPath = self::ENCODING_PATH_PREFIX.$this->id;
-		$this->streamingPath = self::STREAMING_PATH_PREFIX.$this->id;
 	}
 
 	/**
@@ -42,7 +25,7 @@ class Lecture extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'lecture';
+		return 'chapter';
 	}
 
 	/**
@@ -54,11 +37,11 @@ class Lecture extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, course_id', 'required'),
-			array('chapter_id', 'numerical', 'integerOnly'=>true),
+			array('course_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, chapter_id', 'safe', 'on'=>'search'),
+			array('id, name, course_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,7 +64,7 @@ class Lecture extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'chapter_id' => 'Chapter',
+			'course_id' => 'Course',
 		);
 	}
 
@@ -98,26 +81,10 @@ class Lecture extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('chapter_id',$this->chapter_id);
+		$criteria->compare('course_id',$this->course_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
-
-	/**
-	 * @return string lecture's encoding path
-	 */
-	public function getEncodingPath()
-	{
-		return $this->encodingPath;
-	}
-
-	/**
-	 * @return string lecture's streaming path
-	 */
-	public function getStreamingPath()
-	{
-		return $this->streamingPath;
 	}
 }

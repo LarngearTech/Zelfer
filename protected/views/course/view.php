@@ -12,20 +12,20 @@ $this->breadcrumbs=array(
 
 <?php
 $i = 0;
-$display_lectures = array();
-foreach ($lectures as $lecture)
+$display_chapters = array();
+foreach ($chapters as $chapter)
 {
 	$i++;
-	$display_lectures[] = array(
-		'label' => 'Lecture '.$i,
-		'content' => '<p>'.$lecture->name.'</p>',
+	$display_chapters[] = array(
+		'label' => 'Chapter '.$i.': '.$chapter->name,
+		'content' => '<p>'.$chapter->name.'</p>',
 		'active' => ($i == 1)? true: false,
 	);
 }
 $this->widget('bootstrap.widgets.BootTabbable', array(
 	'type'=>'tabs',
 	'placement'=>'left', // 'above', 'right', 'below' or 'left'
-	'tabs'=> $display_lectures,
+	'tabs'=> $display_chapters,
 ));
 ?>
 

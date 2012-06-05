@@ -1,7 +1,7 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'lecture-form',
+	'id'=>'chapter-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -16,9 +16,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'chapter_id'); ?>
-		<?php echo $form->textField($model,'chapter_id'); ?>
-		<?php echo $form->error($model,'chapter_id'); ?>
+		<?php echo $form->labelEx($model,'course_id'); ?>
+		<?php echo $form->textField($model,'course_id'); ?>
+		<?php echo $form->error($model,'course_id'); ?>
 	</div>
 
 	<div class="row buttons">

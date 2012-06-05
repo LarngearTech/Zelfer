@@ -16,8 +16,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'chapter_id'); ?>
-		<?php echo $form->textField($model,'chapter_id'); ?>
+		<?php echo $form->label($model,'course_id'); ?>
+		<?php echo $form->textField($model,'course_id'); ?>
 	</div>
 
 	<div class="row buttons">

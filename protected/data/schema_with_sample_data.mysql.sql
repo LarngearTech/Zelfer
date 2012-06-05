@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2012 at 10:10 AM
+-- Generation Time: Jun 05, 2012 at 10:11 AM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -63,6 +63,14 @@ CREATE TABLE IF NOT EXISTS `category` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `description`) VALUES
+(1, 'โครงการโอลิมปิกวิชาการ', 'คอร์สเรียนสำหรับผู้สนใจในรายวิชาต่างๆของโครงการโอลิมปิกวิชาการ'),
+(2, 'โครงการครูต้นแบบ', 'คอร์สเรียนสำหรับการเตรียมการสอนสำหรับครูต้นแบบ');
+
 -- --------------------------------------------------------
 
 --
@@ -75,6 +83,16 @@ CREATE TABLE IF NOT EXISTS `chapter` (
   `course_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `chapter`
+--
+
+INSERT INTO `chapter` (`id`, `name`, `course_id`) VALUES
+(1, 'รู้จักกับอัลกอริทึม', 1),
+(2, 'การวิเคราะห์ประสิทธิภาพอัลกอริทึม', 1),
+(3, 'โครงสร้างข้อมูลพื้นฐาน', 1),
+(4, 'การเรียงลำดับและการค้นข้อมูล', 1);
 
 -- --------------------------------------------------------
 
@@ -90,6 +108,17 @@ CREATE TABLE IF NOT EXISTS `course` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`id`, `name`, `description`, `category_id`) VALUES
+(1, 'คอมพิวเตอร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคอมพิวเตอร์โอลิมปิก', 1),
+(2, 'คณิตศาสตร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคณิตศาสตร์โอลิมปิก', 1),
+(3, 'เตรียมพร้อมการสอน', 'คอร์สสำหรับการเตรียมตัวสำหรับการสอน', 2),
+(4, 'เคมีโอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันเคมีโอลิมปิก', 1),
+(5, 'จิตวิทยาในการสอน', 'คอร์สสำหรับการเรียนรู้จิตวิทยาในการสอน', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -102,6 +131,16 @@ CREATE TABLE IF NOT EXISTS `lecture` (
   `chapter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `lecture`
+--
+
+INSERT INTO `lecture` (`id`, `name`, `chapter_id`) VALUES
+(1, 'สัญกรณ์โอใหญ่', 2),
+(2, 'อัตราการเติบโตของฟังก์ชัน', 2),
+(3, 'อาเรย์และรายการเชื่อมโยง', 3),
+(4, 'อัลกอริทึมคืออะไร', 1);
 
 -- --------------------------------------------------------
 
@@ -129,6 +168,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES
+(1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin@example.com'),
+(2, 'demo', '2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea', 'demo@example.com');
 
 -- --------------------------------------------------------
 

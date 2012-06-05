@@ -1,6 +1,6 @@
 <?php
 
-class CourseController extends Controller
+class ChapterController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -50,14 +50,8 @@ class CourseController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$chaptersProvider = new CActiveDataProvider('Chapter', array(
-			'criteria' => array(
-				'condition' => 'course_id='.$id,
-			)
-		));
 		$this->render('view',array(
-			'model' => $this->loadModel($id),
-			'chapters' => $chaptersProvider->getData(),
+			'model'=>$this->loadModel($id),
 		));
 	}
 
@@ -67,14 +61,14 @@ class CourseController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Course;
+		$model=new Chapter;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Course']))
+		if(isset($_POST['Chapter']))
 		{
-			$model->attributes=$_POST['Course'];
+			$model->attributes=$_POST['Chapter'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -96,9 +90,9 @@ class CourseController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Course']))
+		if(isset($_POST['Chapter']))
 		{
-			$model->attributes=$_POST['Course'];
+			$model->attributes=$_POST['Chapter'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -133,7 +127,7 @@ class CourseController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Course');
+		$dataProvider=new CActiveDataProvider('Chapter');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -144,10 +138,10 @@ class CourseController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Course('search');
+		$model=new Chapter('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Course']))
-			$model->attributes=$_GET['Course'];
+		if(isset($_GET['Chapter']))
+			$model->attributes=$_GET['Chapter'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -161,7 +155,7 @@ class CourseController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Course::model()->findByPk($id);
+		$model=Chapter::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -173,7 +167,7 @@ class CourseController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='course-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='chapter-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
