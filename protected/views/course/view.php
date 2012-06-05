@@ -17,7 +17,7 @@ foreach ($chapters as $chapter)
 {
 	$i++;
 	$display_chapters[] = array(
-		'label' => 'Chapter '.$i.': '.$chapter->name,
+		'label' => 'Chapter '.$i.' '.CHtml::encode($chapter->name),
 		'content' => '<p>'.$chapter->name.'</p>',
 		'active' => ($i == 1)? true: false,
 	);
