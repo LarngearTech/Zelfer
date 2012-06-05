@@ -12,31 +12,49 @@ $this->breadcrumbs=array(
 <?php
 // create contents for each chapter
 $chapIdx = 0;
-$display_chapters = array();
+$displayChapters = array();
 foreach ($chapters as $chapter)
 {
 	$chapIdx++;
 
 	// create chapter title
-	$chapter_content = '<h2>'.CHtml::encode($chapter->name).'</h2>';
+	$chapterContent = '<h2>'.CHtml::encode($chapter->name).'</h2>';
 
 	// create a lecture list
 	$lectIdx = 0;
 	foreach ($chapter->lectures as $lecture)
 	{
 		$lectIdx++;
-		$chapter_content = $chapter_content.'<br/>Lecture '.$lectIdx.': '.CHtml::encode($lecture->name).'<br/>';
+		$chapterContent = $chapterContent.'<br/>Lecture '.$lectIdx.': '.CHtml::encode($lecture->name).'<br/>';
 	}
-	$display_chapters[] = array(
+	$displayChapters[] = array(
 		'label' => 'Chapter '.$chapIdx,
-		'content' => '<p>'.$chapter_content.'</p>',
+		'content' => '<p>'.$chapterContent.'</p>',
 		'active' => ($chapIdx == 1)? true: false,
 	);
 }
-// create chapter tabbable navigation
+// create contents of the lecture tab 
+$lecturesTab = array(
+	'label' => 'Lecture',
+	'content' => $this->widget('bootstrap.widgets.BootTabbable', array(
+		'type'=>'tabs',
+		'placement'=>'left', 
+		'tabs'=> $displayChapters,
+	), true),
+	'active' => true,
+);
+
+// create contents of the problem set tab
+$problemSetsTab = array(
+	'label' => 'Problem Set',
+	'content' => 'problemset',
+);
+
+// create course tabs including lecture and problem set tabs.
+$courseTabs = array($lecturesTab, $problemSetsTab);
 $this->widget('bootstrap.widgets.BootTabbable', array(
 	'type'=>'tabs',
-	'placement'=>'left', 
-	'tabs'=> $display_chapters,
+	'placement' => 'top',
+	'tabs' => $courseTabs,
 ));
 ?>
