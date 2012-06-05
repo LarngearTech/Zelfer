@@ -50,14 +50,12 @@ class CourseController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$chaptersProvider = new CActiveDataProvider('Chapter', array(
-			'criteria' => array(
-				'condition' => 'course_id='.$id,
-			)
-		));
+		// get all chapters of a specified course id 
+		// with all corresponding lectures
+		$chapters = Chapter::model()->with('lectures')->findAll('course_id=:courseID', array(':courseID'=>$id));
 		$this->render('view',array(
 			'model' => $this->loadModel($id),
-			'chapters' => $chaptersProvider->getData(),
+			'chapters' => $chapters,
 		));
 	}
 

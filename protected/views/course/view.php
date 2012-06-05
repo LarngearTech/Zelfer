@@ -16,9 +16,14 @@ $display_chapters = array();
 foreach ($chapters as $chapter)
 {
 	$i++;
+	$chapter_content = '';
+	foreach ($chapter->lectures as $lecture)
+	{
+		$chapter_content = $chapter_content.' '.$lecture->name.' ';
+	}
 	$display_chapters[] = array(
 		'label' => 'Chapter '.$i.' '.CHtml::encode($chapter->name),
-		'content' => '<p>'.$chapter->name.'</p>',
+		'content' => '<p>'.$chapter_content.'</p>',
 		'active' => ($i == 1)? true: false,
 	);
 }
