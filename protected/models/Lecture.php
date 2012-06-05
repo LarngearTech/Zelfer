@@ -10,12 +10,12 @@
  */
 class Lecture extends CActiveRecord
 {
-    const ENCODING_PATH_PREFIX = '/asset/encoding/';
+	const ENCODING_PATH_PREFIX = '/asset/encoding/';
 	const STREAMING_PATH_PREFIX = '/asset/streaming/';
 	const SLIDE_URL_PREFIX = '/asset/slide/';
 
-    protected $encodingPath;
-    protected $streamingPath;
+	protected $encodingPath;
+	protected $streamingPath;
 	protected $slideUrl;
 
 	/**
@@ -28,12 +28,70 @@ class Lecture extends CActiveRecord
 		return parent::model($className);
 	}
 
-    /**
-     * Post-processing after the record is instantiated by a find method.
-     * Assign encoding and streaming paths for a lecture.
-     */
-    protected function afterFind()
-    {
+	/**
+	 * @return whether or not title and description of lecture has been defined
+	 */
+	public function step1Complete()
+	{
+		return true;
+	}
+
+	/**
+	 * @return state of the previously encoded input vdo
+	 */
+	public function inputVdoHealthy()
+	{
+		return true;
+	}
+
+	/**
+	 * @return whether vdo encoding process has warning
+	 */
+	public function hasWarning()
+	{
+		return false;
+	}
+
+	/**
+	 * @return whether input vdo can be encoded
+	 */
+	public function canEncode()
+	{
+		return true;
+	}
+
+	/**
+	 * @return is there any previously encoded vdo
+	 */
+	public function isPreviouslyEncoded()
+	{
+		return true;
+	}
+
+	/**
+	 * @return is there any ongoing encoding session
+	 */
+	public function isEncoding()
+	{
+		return true;
+	}
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+		);
+	}
+
+	/**
+     	 * Post-processing after the record is instantiated by a find method.
+     	 * Assign encoding and streaming paths for a lecture.
+     	 */
+    	protected function afterFind()
+    	{
 		parent::afterFind();
 		$this->encodingPath = self::ENCODING_PATH_PREFIX.$this->id;
 		$this->streamingPath = self::STREAMING_PATH_PREFIX.$this->id;
