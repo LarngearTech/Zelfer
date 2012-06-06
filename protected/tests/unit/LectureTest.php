@@ -25,4 +25,11 @@ class LectureTest extends CDbTestCase
 		$lectureId = $retrievedLecture->id;
 		$this->assertEquals(Lecture::SLIDE_URL_PREFIX.$lectureId, $retrievedLecture->slideUrl);
 	}
+
+	public function testGetVideoUrl()
+	{
+		$retrievedLecture = $this->lectures('lecture1');
+		$lectureId = $retrievedLecture->id;
+		$this->assertEquals(Lecture::VIDEO_URL_PREFIX.$lectureId, $retrievedLecture->videoUrl);
+	}
 }

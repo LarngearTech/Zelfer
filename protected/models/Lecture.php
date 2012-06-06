@@ -13,6 +13,7 @@ class Lecture extends CActiveRecord
 	const ENCODING_PATH_PREFIX = '/asset/encoding/';
 	const STREAMING_PATH_PREFIX = '/asset/streaming/';
 	const SLIDE_URL_PREFIX = '/asset/slide/';
+	const VIDEO_URL_PREFIX = '/asset/video/';
 
 	/**
 	 * @var boolean whether title and description of lecture has been defined.
@@ -57,6 +58,7 @@ class Lecture extends CActiveRecord
 	protected $_encodingPath;
 	protected $_streamingPath;
 	protected $_slideUrl;
+	protected $_videoUrl;
 
 
 	/**
@@ -86,6 +88,7 @@ class Lecture extends CActiveRecord
 		$this->_encodingPath 	= self::ENCODING_PATH_PREFIX.$id;
 		$this->_streamingPath 	= self::STREAMING_PATH_PREFIX.$id;
 		$this->_slideUrl 	= self::SLIDE_URL_PREFIX.$id;
+		$this->_videoUrl	= self::VIDEO_URL_PREFIX.$id;
 
 		$this->step1Complete	= file_exists($this->streamingPath."/SessionDescription.txt");
 
@@ -124,11 +127,11 @@ class Lecture extends CActiveRecord
 	}
 
 	/**
-     	 * Post-processing after the record is instantiated by a find method.
-     	 * Assign encoding and streaming paths for a lecture.
-     	 */
-    	protected function afterFind()
-    	{
+	 * Post-processing after the record is instantiated by a find method.
+	 * Assign encoding and streaming paths for a lecture.
+	 */
+    protected function afterFind()
+    {
 		parent::afterFind();
 		initWithId($this->id);
 	}
@@ -224,5 +227,13 @@ class Lecture extends CActiveRecord
 	public function getSlideUrl()
 	{
 		return $this->_slideUrl;
+	}
+	
+	/**
+	 * @return string lecture's video URL
+	 */
+	public function getVideoUrl()
+	{
+		return $this->_videoUrl;
 	}
 }
