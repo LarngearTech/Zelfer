@@ -15,4 +15,6 @@ $this->menu=array(
 
 <h1>Update Lecture <?php echo $model->id; ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 
+										'chapterId'=>$model->chapter->chapterId, 
+										'courseId'=>$model->chapter->course->courseId,)); ?>

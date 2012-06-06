@@ -20,9 +20,10 @@
 					$image_src=$greenCheckPath;
 					$lower_cell_content="This lecture has a date and description (" .
 					CHtml::link('Click here to edit',
-						    array('lecture/edit',
-							  'lectureId'=>$model->id,
-							  'sessionId'=>$this->sessionId)) .
+						    array('lecture/editInfo',
+								'lectureId'=>$model->id,
+								'chapterId'=>$chapterId,
+								'courseId' =>$courseId,)) .
 					") You may continue with the next steps.";
 				}
 				else
@@ -30,9 +31,10 @@
 					$image_src=$blueArrowPath;
 					$lower_cell_content="Please enter a date and description " .
 					CHtml::link('here',
-						    array('lecture/edit',
-							  'lectureId'=>$model->id,
-							  'sessionId'=>$this->sessionId));
+						    array('lecture/editInfo',
+							  	'lectureId'=>$model->id,
+								'chapterId'=>$chapterId,
+								'courseId' =>$courseId,));
 				}
 			?>
 			<img src='<?php echo $image_src ?>' width=20 height=20/>
@@ -63,8 +65,7 @@
 		<?php echo 
 			CHtml::link('Click here  to upload, view, or delete files for this lecture',
 			  array('lecture/uploadVdo',
-				'lectureId'=>$model->id,
-				'sessionId'=>$this->sessionId));
+				'id'=>$model->id));
 		?>
 
 
@@ -144,8 +145,7 @@
 				}
 				echo CHtml::link('Click here to go to the encoding page',
 						 array('lecture/encode',
-						       'lectureId'=>$model->id,
-						       'sessionId'=>$this->sessionId));
+						       'id'=>$model->id));
 			}
 			else {
 			?>

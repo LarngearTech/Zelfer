@@ -85,10 +85,10 @@ class Lecture extends CActiveRecord
 	 */
 	public function initWithId($id)
 	{
-		$this->_encodingPath 	= self::ENCODING_PATH_PREFIX.$id;
-		$this->_streamingPath 	= self::STREAMING_PATH_PREFIX.$id;
-		$this->_slideUrl 	= self::SLIDE_URL_PREFIX.$id;
-		$this->_videoUrl	= self::VIDEO_URL_PREFIX.$id;
+		$this->_encodingPath 	= self::ENCODING_PATH_PREFIX.$this->chapter_id.$this->id;
+		$this->_streamingPath 	= self::STREAMING_PATH_PREFIX.$this->chapter_id.$this->id;
+		$this->_slideUrl 		= self::SLIDE_URL_PREFIX.$this->chapter_id.$this->id;
+		$this->_videoUrl		= self::VIDEO_URL_PREFIX.$this->chapter_id.$this->id;
 
 		$this->step1Complete	= file_exists($this->streamingPath."/SessionDescription.txt");
 

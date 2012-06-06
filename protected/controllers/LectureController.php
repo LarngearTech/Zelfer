@@ -3,11 +3,6 @@
 class LectureController extends Controller
 {
 	/**
-	 * @var int session id
-	 */
-	public $sessionId=123;
-
-	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
@@ -55,7 +50,7 @@ class LectureController extends Controller
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($chapterId, $courseId)
 	{
 		$model = new Lecture;
 
@@ -71,6 +66,40 @@ class LectureController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+			'chapterId'=>$chapterId,
+			'courseId'=>$courseId,
+		));
+	}
+
+	/**
+	 * Edit lecture's information.
+	 * If creation is successful, the browser will be redirected to create page to proceed to next step.
+	 */
+	public function actionEditInfo($lectureId, $chapterId, $courseId)
+	{
+		$model;
+		if ($lectureId != "")
+		{
+			$model = $this->loadModel($lectureId);
+		}
+		else
+		{
+			$model = new Lecture();
+		}
+
+		if (isset($_POST['Lecture']))
+		{
+			$model->attributes = $_POST['Lecture'];
+			$model->chapter_id = $chapterId;
+			if($model->save())
+			{
+				$this->redirect(array('Update', 
+									'lectureId'=>$model->getPrimaryKey(),));
+			}
+		}
+
+		$this->render('editInfo',array(
+			'model'=>$model,
 		));
 	}
 
@@ -79,9 +108,9 @@ class LectureController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($lectureId)
 	{
-		$model=$this->loadModel($id);
+		$model=$this->loadModel($lectureId);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
