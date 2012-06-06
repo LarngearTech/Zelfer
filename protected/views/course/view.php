@@ -25,7 +25,11 @@ foreach ($chapters as $chapter)
 	foreach ($chapter->lectures as $lecture)
 	{
 		$lectIdx++;
-		$chapterContent = $chapterContent.'<br/>Lecture '.$lectIdx.': '.CHtml::encode($lecture->name).'<br/>';
+		$chapterContent .= '<br/><h3>Lecture '.$lectIdx.': '.CHtml::encode($lecture->name).'<br/></h3>';
+    	$chapterContent .= '<p class="well">
+			<span class="downloadlink"><a href=""><img src="images/slide.png"/></a></span>
+			<span class="downloadlink"><a href=""><img src="images/video.png"></a></span>
+		</p>';
 	}
 	$displayChapters[] = array(
 		'label' => 'Chapter '.$chapIdx,
