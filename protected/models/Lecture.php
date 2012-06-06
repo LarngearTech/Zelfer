@@ -18,24 +18,40 @@ class Lecture extends CActiveRecord
 	 * @var boolean whether title and description of lecture has been defined.
 	 */
 	public $step1Complete;
+	
 	/**
 	 * @var boolean true if input video was successfully encoded, false otherwise.
 	 */
 	public $inputVideoHealthy;
+
 	/**
 	 * @var string error message from video encoding process.
 	 */
 	public $videoCheckError;
+
 	/**
 	 * @var whether a video encoding process finish without.
 	 */
 	public $hasWarning;
+
 	/**
 	 * @var string warning message from video encoding process.
 	 */
 	public $warningMessage;
+
+	/**
+	 * @var boolean shortcut for step1Complete && inputVideoHealty.
+	 */
 	public $canEncode;
+
+	/**
+	 * @var boolean is there any previously encoded video files.
+	 */
 	public $isPreviouslyEncoded;
+
+	/**
+	 * @var boolean is ther any ongoing encoding sessions.
+	 */
 	public $isEncoding;
 
 	protected $_encodingPath;
@@ -76,12 +92,15 @@ class Lecture extends CActiveRecord
 		$scriptRoot = Yii::app()->basePath."/scripts";
 		$vhtString=exec("perl $scriptRoot./video_health_check.pl \"$this->encodingPath\"",$retval);
 		$this->inputVideoHealthy	= (substr($vhtString,0,1)=='1');;
-		if(!$this->inputVideoHealthy) {
+		if(!$this->inputVideoHealthy) 
+		{
 			$this->videoCheckError=substr($vhtString,2);
 		}
-		else {
+		else
+		{
 			$this->hasWarning=(strpos($vhtString,'Warning')==true);
-			if($this->hasWarning) {
+			if($this->hasWarning)
+			{
 				$elements=explode('#',$vhtString);
 				$this->warningMessage=$elements[2];
 			}
