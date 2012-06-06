@@ -133,7 +133,7 @@ class Lecture extends CActiveRecord
     protected function afterFind()
     {
 		parent::afterFind();
-		initWithId($this->id);
+		$this->initWithId($this->id);
 	}
 
 	/**
