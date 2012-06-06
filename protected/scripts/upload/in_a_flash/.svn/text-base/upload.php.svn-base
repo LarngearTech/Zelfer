@@ -1,0 +1,48 @@
+<?php
+	@extract($_GET);
+	
+	$filename	= $_FILES['Filedata']['name'];
+	$temp_name	= $_FILES['Filedata']['tmp_name'];
+	$error		= $_FILES['Filedata']['error'];
+	$size		= $_FILES['Filedata']['size'];
+	
+	// --------------------------------------------------------------------------
+	// Start-up
+	// ---------
+
+	session_start();
+
+	$classx_root=dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))));
+
+	require_once("$classx_root/system/common/lib/lib_core.php");
+	//require_once("$classx_root/system/common/lib/lib_access.php");
+	require_once("$classx_root/system/common/lib/lib_subjects.php");
+
+	$classx_webroot=get_webroot($classx_root);
+
+	// --------------------------------------------------------------------------
+
+	$subject=sanitize_input($_GET["subject"]);
+	$session=sanitize_input($_GET["session"]);
+
+	// --------------------------------------------------------------------------
+	// Access Control
+	// ---------------
+	//gate_keeper($_SESSION,'publisher',$subject);
+
+	// --------------------------------------------------------------------------
+	
+	// Get subject information
+	$subject_metadata = get_subject_metadata($subject);
+	$encodingPath     = "$classx_root/content/encoding/{$subject_metadata["internalPath"]}/$session" ;
+	$streamingPath    = "$classx_root/content/streaming/{$subject_metadata["internalPath"]}/$session";
+
+	/* NOTE: Some server setups might need you to use an absolute path to your "dropbox" folder
+	(as opposed to the relative one I've used below).  Check your server configuration to get
+	the absolute path to your web directory*/
+	if(!$error) {
+		move_uploaded_file($temp_name, "$encodingPath/$filename");
+		system("chmod 700 \"$encodingPath/$filename\"");
+	}
+	echo '1';
+?>

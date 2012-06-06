@@ -21,10 +21,10 @@
 					$lower_cell_content="This lecture has a date and description (" .
 					CHtml::link('Click here to edit',
 						    array('lecture/editInfo',
-								'lectureId'=>$model->id,
-								'chapterId'=>$chapterId,
-								'courseId' =>$courseId,
-								'returnAction'=>$returnAction)) .
+							'lectureId'=>$model->id,
+							'chapterId'=>$chapterId,
+							'courseId' =>$courseId,
+							'returnAction'=>$returnAction)) .
 					") You may continue with the next steps.";
 				}
 				else
@@ -33,10 +33,10 @@
 					$lower_cell_content="Please enter a date and description " .
 					CHtml::link('here',
 						    array('lecture/editInfo',
-							  	'lectureId'=>$model->id,
-								'chapterId'=>$chapterId,
-								'courseId' =>$courseId,
-								'returnAction'=>$returnAction));
+							'lectureId'=>$model->id,
+							'chapterId'=>$chapterId,
+							'courseId' =>$courseId,
+							'returnAction'=>$returnAction));
 				}
 			?>
 			<img src='<?php echo $image_src ?>' width=20 height=20/>
@@ -66,8 +66,8 @@
 		<?php echo 'Step 2: Upload/Delete Files' ?>
 		<?php echo 
 			CHtml::link('Click here  to upload, view, or delete files for this lecture',
-			  array('lecture/uploadVdo',
-				'id'=>$model->id));
+			  array('lecture/uploadVideo',
+				'lectureId'=>$model->id));
 		?>
 
 
