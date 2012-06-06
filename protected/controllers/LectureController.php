@@ -49,10 +49,23 @@ class LectureController extends Controller
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $lectureId the ID of the model to be updated.
+	 * @param integer $chapterId the chapter id.
+	 * @param integer $courseId the course id.
 	 */
-	public function actionCreate($chapterId, $courseId)
+	public function actionCreate($lectureId, $chapterId, $courseId)
 	{
-		$model = new Lecture;
+		// Wheter this is a newly created session or just a redirect from editInfo 
+		// Newly created session
+		if ($lectureId == "")
+		{
+			$model = new Lecture;	
+		}
+		// Was redirected from editInfo
+		else
+		{
+			$model = $this->loadModel($lectureId);
+		}
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -74,10 +87,13 @@ class LectureController extends Controller
 	/**
 	 * Edit lecture's information.
 	 * If creation is successful, the browser will be redirected to create page to proceed to next step.
+	 * @param integer $lectureId the ID of the model to be updated.
+	 * @param integer $chapterId the chapter id.
+	 * @param integer $courseId the course id.
+	 * @param string $returnAction can be either 'create' or 'update' depends on which page it was redirect from.
 	 */
-	public function actionEditInfo($lectureId, $chapterId, $courseId)
+	public function actionEditInfo($lectureId, $chapterId, $courseId, $returnAction)
 	{
-		$model;
 		if ($lectureId != "")
 		{
 			$model = $this->loadModel($lectureId);
@@ -93,20 +109,41 @@ class LectureController extends Controller
 			$model->chapter_id = $chapterId;
 			if($model->save())
 			{
-				$this->redirect(array('Update', 
-									'lectureId'=>$model->getPrimaryKey(),));
+				if ($returnAction == 'create')
+				{
+					$this->redirect(array('create', 
+										'lectureId'=>$model->getPrimaryKey(),
+										'chapterId'=>$model->chapter_id,
+										'courseId' =>$model->chapter->course->id));		
+				}
+				else if ($returnAction == 'update')
+				{
+					$this->redirect(array('update', 
+										'lectureId'=>$model->getPrimaryKey(),));		
+				}
 			}
 		}
 
 		$this->render('editInfo',array(
 			'model'=>$model,
+			'returnAction'=>$returnAction
 		));
+	}
+
+	/**
+	 * Upload video to server.
+	 * If creation is successful, the browser will be redirected to create page to proceed to next step.
+	 * @param integer $lectureId the ID of the model to be updated
+	 */
+	public function actionUploadVideo($lectureId)
+	{
+		$model = this->loadModel($lectureId);
 	}
 
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * @param integer $lectureId the ID of the model to be updated
 	 */
 	public function actionUpdate($lectureId)
 	{

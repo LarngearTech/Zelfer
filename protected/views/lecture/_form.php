@@ -23,7 +23,8 @@
 						    array('lecture/editInfo',
 								'lectureId'=>$model->id,
 								'chapterId'=>$chapterId,
-								'courseId' =>$courseId,)) .
+								'courseId' =>$courseId,
+								'returnAction'=>$returnAction)) .
 					") You may continue with the next steps.";
 				}
 				else
@@ -34,7 +35,8 @@
 						    array('lecture/editInfo',
 							  	'lectureId'=>$model->id,
 								'chapterId'=>$chapterId,
-								'courseId' =>$courseId,));
+								'courseId' =>$courseId,
+								'returnAction'=>$returnAction));
 				}
 			?>
 			<img src='<?php echo $image_src ?>' width=20 height=20/>
@@ -121,7 +123,7 @@
 		<?php } 
 		else 
 		{ 
-			if($model->step1Complete && $this->inputVideoHealthy) 
+			if($model->step1Complete && $model->inputVideoHealthy) 
 			{?>
 				<img src='<?php echo $blueArrowPath ?>' width=20 height=20/>
 			<?php } 

@@ -76,7 +76,19 @@ class Lecture extends CActiveRecord
 	 */
 	public function init()
 	{
-		$this->initWithId($this->id);
+		$this->_encodingPath 	= "";
+		$this->_streamingPath 	= "";
+		$this->_slideUrl 		= "";
+		$this->_videoUrl		= "";
+
+		$this->step1Complete	= false;
+		$this->inputVideoHealthy= false;
+		$this->videoCheckError	= "";
+		$this->hasWarning		= false;
+		$this->warningMessage	= "";
+		$this->canEncode		= false;
+		$this->isPreviouslyEncoded = false;
+		$this->isEncoding		= false;
 	}
 
 	/**
@@ -85,12 +97,12 @@ class Lecture extends CActiveRecord
 	 */
 	public function initWithId($id)
 	{
-		$this->_encodingPath 	= self::ENCODING_PATH_PREFIX.$this->chapter_id.$this->id;
-		$this->_streamingPath 	= self::STREAMING_PATH_PREFIX.$this->chapter_id.$this->id;
-		$this->_slideUrl 		= self::SLIDE_URL_PREFIX.$this->chapter_id.$this->id;
-		$this->_videoUrl		= self::VIDEO_URL_PREFIX.$this->chapter_id.$this->id;
+		$this->_encodingPath 	= self::ENCODING_PATH_PREFIX.$this->chapter->course->id.$this->chapter_id.$this->id;
+		$this->_streamingPath 	= self::STREAMING_PATH_PREFIX.$this->chapter->course->id.$this->chapter_id.$this->id;
+		$this->_slideUrl 		= self::SLIDE_URL_PREFIX.$this->chapter->course->id.$this->chapter_id.$this->id;
+		$this->_videoUrl		= self::VIDEO_URL_PREFIX.$this->chapter->course->id.$this->chapter_id.$this->id;
 
-		$this->step1Complete	= file_exists($this->streamingPath."/SessionDescription.txt");
+		$this->step1Complete	= $this->name!="";
 
 		$scriptRoot = Yii::app()->basePath."/scripts";
 		$vhtString=exec("perl $scriptRoot/video_health_check.pl \"$this->encodingPath\"",$retval);
