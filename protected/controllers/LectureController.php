@@ -137,7 +137,7 @@ class LectureController extends Controller
 	 */
 	public function actionUploadVideo($lectureId)
 	{
-		$model = this->loadModel($lectureId);
+		$model = $this->loadModel($lectureId);
 	}
 
 	/**
