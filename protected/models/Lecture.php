@@ -14,9 +14,34 @@ class Lecture extends CActiveRecord
 	const STREAMING_PATH_PREFIX = '/asset/streaming/';
 	const SLIDE_URL_PREFIX = '/asset/slide/';
 
-	protected $encodingPath;
-	protected $streamingPath;
-	protected $slideUrl;
+	/**
+	 * @var boolean whether title and description of lecture has been defined.
+	 */
+	public $step1Complete;
+	/**
+	 * @var boolean true if input video was successfully encoded, false otherwise.
+	 */
+	public $inputVideoHealthy;
+	/**
+	 * @var string error message from video encoding process.
+	 */
+	public $videoCheckError;
+	/**
+	 * @var whether a video encoding process finish without.
+	 */
+	public $hasWarning;
+	/**
+	 * @var string warning message from video encoding process.
+	 */
+	public $warningMessage;
+	public $canEncode;
+	public $isPreviouslyEncoded;
+	public $isEncoding;
+
+	protected $_encodingPath;
+	protected $_streamingPath;
+	protected $_slideUrl;
+
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -29,52 +54,45 @@ class Lecture extends CActiveRecord
 	}
 
 	/**
-	 * @return whether or not title and description of lecture has been defined
+	 * init member variables
 	 */
-	public function step1Complete()
+	public function init()
 	{
-		return true;
+		$this->initWithId($this->id);
 	}
 
 	/**
-	 * @return state of the previously encoded input vdo
+	 * init member variables and check vdo status for specified lectureId
+	 * @param int lectureId
 	 */
-	public function inputVdoHealthy()
+	public function initWithId($id)
 	{
-		return true;
+		$this->_encodingPath 	= self::ENCODING_PATH_PREFIX.$id;
+		$this->_streamingPath 	= self::STREAMING_PATH_PREFIX.$id;
+		$this->_slideUrl 	= self::SLIDE_URL_PREFIX.$id;
+
+		$this->step1Complete	= file_exists($this->streamingPath."/SessionDescription.txt");
+
+		$scriptRoot = Yii::app()->basePath."/scripts";
+		$vhtString=exec("perl $scriptRoot./video_health_check.pl \"$this->encodingPath\"",$retval);
+		$this->inputVideoHealthy	= (substr($vhtString,0,1)=='1');;
+		if(!$this->inputVideoHealthy) {
+			$this->videoCheckError=substr($vhtString,2);
+		}
+		else {
+			$this->hasWarning=(strpos($vhtString,'Warning')==true);
+			if($this->hasWarning) {
+				$elements=explode('#',$vhtString);
+				$this->warningMessage=$elements[2];
+			}
+		}
+
+		$this->canEncode=$this->inputVideoHealthy && $this->step1Complete;
+		$this->isPreviouslyEncoded=file_exists("$this->streamingPath/video_complete.txt");
+		$this->isEncoding=(file_exists("$this->streamingPath/video_encoding.txt") 
+				|| file_exists("$this->streamingPath/slide_encoding.txt"));
 	}
 
-	/**
-	 * @return whether vdo encoding process has warning
-	 */
-	public function hasWarning()
-	{
-		return false;
-	}
-
-	/**
-	 * @return whether input vdo can be encoded
-	 */
-	public function canEncode()
-	{
-		return true;
-	}
-
-	/**
-	 * @return is there any previously encoded vdo
-	 */
-	public function isPreviouslyEncoded()
-	{
-		return true;
-	}
-
-	/**
-	 * @return is there any ongoing encoding session
-	 */
-	public function isEncoding()
-	{
-		return true;
-	}
 
 	/**
 	 * @return array action filters
@@ -93,9 +111,7 @@ class Lecture extends CActiveRecord
     	protected function afterFind()
     	{
 		parent::afterFind();
-		$this->encodingPath = self::ENCODING_PATH_PREFIX.$this->id;
-		$this->streamingPath = self::STREAMING_PATH_PREFIX.$this->id;
-		$this->slideUrl = self::SLIDE_URL_PREFIX.$this->id;
+		initWithId($this->id);
 	}
 
 	/**
@@ -172,7 +188,7 @@ class Lecture extends CActiveRecord
 	 */
 	public function getEncodingPath()
 	{
-		return $this->encodingPath;
+		return $this->_encodingPath;
 	}
 
 	/**
@@ -180,7 +196,7 @@ class Lecture extends CActiveRecord
 	 */
 	public function getStreamingPath()
 	{
-		return $this->streamingPath;
+		return $this->_streamingPath;
 	}
 
 	/**
@@ -188,6 +204,6 @@ class Lecture extends CActiveRecord
 	 */
 	public function getSlideUrl()
 	{
-		return $this->slideUrl;
+		return $this->_slideUrl;
 	}
 }

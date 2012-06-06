@@ -57,7 +57,7 @@ class LectureController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Lecture;
+		$model = new Lecture;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

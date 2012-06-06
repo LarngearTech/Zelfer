@@ -15,7 +15,7 @@
 	<div>
 		<div>
 			<?php
-				if ($model->step1Complete())
+				if ($model->step1Complete)
 				{
 					$image_src=$greenCheckPath;
 					$lower_cell_content="This lecture has a date and description (" .
@@ -37,8 +37,6 @@
 			?>
 			<img src='<?php echo $image_src ?>' width=20 height=20/>
 			<?php echo 'Step 1: Title and Description' ?>
-		</div>
-		<div>
 			<?php echo $lower_cell_content ?>
 		</div>
 	</div>
@@ -46,9 +44,9 @@
 	<!-- Step 2:File Management -->
 	<div>
 	<?php
-		if(!$model->inputVdoHealthy())
+		if(!$model->inputVideoHealthy)
 		{
-			if($model->step1Complete())
+			if($model->step1Complete)
 			{ ?>
 				<img src='<?php echo $blueArrowPath ?>' width=30 height=20/>
 			<?php }
@@ -76,11 +74,11 @@
 	<!-- Step 3: Video Health Check -->
 	<div>
 		<?php 
-			if(!$model->inputVdoHealthy())
+			if(!$model->inputVideoHealthy)
 			{ ?>
 				&nbsp;
 			<?php } 
-			elseif($model->hasWarning()) 
+			elseif($model->hasWarning) 
 			{ ?>
 				<img src="<?php echo $yellowMarkPath ?>" width=20 height=20/>
 			<?php } 
@@ -90,20 +88,20 @@
 			<?php } ?>
 			<?php echo 'Step 3: Video File Check' ?> 
 			<?php
-			if($model->inputVdoHealthy()) {
-				if(!$model->hasWarning())
+			if($model->inputVideoHealthy) {
+				if(!$model->hasWarning)
 				{ ?>
 					Passed.
 				<?php } 
 				else 
 				{ ?>
-					Passed with warnings: Please try to resolve the following issues in order to guarantee successful encoding.<?php echo "" ?>
+					Passed with warnings: Please try to resolve the following issues in order to guarantee successful encoding.<?php echo $model->warningMessage ?>
 				<?php 
 				}
 			}
 			else 
 			{?>
-				Failed. Reason: <?php echo "error"; ?>
+				Failed. Reason: <?php echo $model->videoCheckError; ?>
 			<?php
 			}
 			?>						
@@ -112,17 +110,17 @@
 	<!-- Step 4: Encoding Options and Encoding -->
 	<div>
 		<?php
-		if($model->isPreviouslyEncoded()) 
+		if($model->isPreviouslyEncoded) 
 		{ ?>
 			<img src='<?php echo $greenCheckPath ?>' width=20 height=20/>
 		<?php } 
-		elseif($model->isEncoding()) 
+		elseif($model->isEncoding) 
 		{ ?>
 			<img src='<?php echo $yellowMarkPath ?>' width=20 height=20/>
 		<?php } 
 		else 
 		{ 
-			if($model->step1Complete() && $this->inputVdoHealthy()) 
+			if($model->step1Complete && $this->inputVideoHealthy) 
 			{?>
 				<img src='<?php echo $blueArrowPath ?>' width=20 height=20/>
 			<?php } 
@@ -134,13 +132,13 @@
 		<?php	echo 'Step 4: Enter Encoding Options and Start Encoding' ?>
 	
 		<?php
-			if($model->canEncode())
+			if($model->canEncode)
 			{
-				if($model->isPreviouslyEncoded()) 
+				if($model->isPreviouslyEncoded) 
 				{ 
 					echo 'This session has been encoded previously, but you can encode it again if you want to use different files or encoding settings. '; 
 				}
-				if($model->isEncoding())
+				if($model->isEncoding)
 				{ 
 					echo 'Warning: This session currently has an ongoing encoding. If you issue a new encoding, it will override the previous one. '; 
 				}
