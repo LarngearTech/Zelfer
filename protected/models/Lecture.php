@@ -93,7 +93,7 @@ class Lecture extends CActiveRecord
 		$this->step1Complete	= file_exists($this->streamingPath."/SessionDescription.txt");
 
 		$scriptRoot = Yii::app()->basePath."/scripts";
-		$vhtString=exec("perl $scriptRoot./video_health_check.pl \"$this->encodingPath\"",$retval);
+		$vhtString=exec("perl $scriptRoot/video_health_check.pl \"$this->encodingPath\"",$retval);
 		$this->inputVideoHealthy	= (substr($vhtString,0,1)=='1');;
 		if(!$this->inputVideoHealthy) 
 		{
