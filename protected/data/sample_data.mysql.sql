@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2012 at 12:44 PM
+-- Generation Time: Jun 07, 2012 at 03:24 AM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -54,21 +54,18 @@ INSERT INTO `course` (`id`, `name`, `description`, `category_id`) VALUES
 --
 
 INSERT INTO `lecture` (`id`, `name`, `chapter_id`) VALUES
-(1, 'อัลกอริทึมคืออะไร', 1),
-(2, 'ประสิทธิภาพของอัลกอริทึม', 2),
-(3, 'สัญกรณ์โอใหญ่ (Big O)', 2),
-(4, 'โครงสร้างข้อมูลแบบต่อเนื่อง', 3),
-(5, 'โครงสร้างข้อมูลแบบเชื่อมโยง', 3),
-(6, 'กองซ้อน (Stack)', 3),
-(7, 'แถวคอย (Queue)', 3);
+(1, 'สัญกรณ์โอใหญ่', 2),
+(2, 'อัตราการเติบโตของฟังก์ชัน', 2),
+(3, 'อาเรย์และรายการเชื่อมโยง', 3),
+(4, 'อัลกอริทึมคืออะไร', 1);
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES
-(1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin@example.com'),
-(2, 'demo', '2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea', 'demo@example.com');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `active`) VALUES
+(1, 'admin', '$2a$08$fWJc9zjpMTwjE/k/ZMKznOFQZTfcpjS/j7Ka.QmtPZMYTlBCftZZa', 'admin@example.com', 1, 1),
+(2, 'demo', '$2a$08$Ap944io4kt3jZBL35oxN/.lSp8TMAc7Q0iQ4ZGI8Of2SKg4eUsq4m', 'demo@example.com', 2, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

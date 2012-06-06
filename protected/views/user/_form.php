@@ -22,9 +22,27 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'repeat_password'); ?>
+		<?php echo $form->passwordField($model,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'repeat_password'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'email'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'role'); ?>
+		<?php echo $form->textField($model,'role',array('size'=>60,'maxlength'=>2)); ?>
+		<?php echo $form->error($model,'role'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'active'); ?>
+		<?php echo $form->textField($model,'active',array('size'=>60,'maxlength'=>1)); ?>
+		<?php echo $form->error($model,'active'); ?>
 	</div>
 
 	<div class="row buttons">

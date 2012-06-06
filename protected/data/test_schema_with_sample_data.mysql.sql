@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2012 at 05:10 PM
+-- Generation Time: Jun 07, 2012 at 03:25 AM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -130,16 +130,17 @@ CREATE TABLE IF NOT EXISTS `lecture` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `chapter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `lecture`
 --
 
 INSERT INTO `lecture` (`id`, `name`, `chapter_id`) VALUES
-(1, 'การวิเคราะห์ประสิทธิภาพของอัลกอริทึม', 1),
-(2, 'การแบ่งแยกและเอาชนะ', 1),
-(3, 'การโปรแกรมเชิงพลวัต', 1);
+(1, 'สัญกรณ์โอใหญ่', 2),
+(2, 'อัตราการเติบโตของฟังก์ชัน', 2),
+(3, 'อาเรย์และรายการเชื่อมโยง', 3),
+(4, 'อัลกอริทึมคืออะไร', 1);
 
 -- --------------------------------------------------------
 
@@ -165,6 +166,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `role` int(2) NOT NULL,
+  `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
@@ -172,9 +175,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES
-(1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin@example.com'),
-(2, 'demo', '2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea', 'demo@example.com');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `active`) VALUES
+(1, 'admin', '$2a$08$fWJc9zjpMTwjE/k/ZMKznOFQZTfcpjS/j7Ka.QmtPZMYTlBCftZZa', 'admin@example.com', 1, 1),
+(2, 'demo', '$2a$08$Ap944io4kt3jZBL35oxN/.lSp8TMAc7Q0iQ4ZGI8Of2SKg4eUsq4m', 'demo@example.com', 2, 1);
 
 -- --------------------------------------------------------
 

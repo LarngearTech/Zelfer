@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2012 at 10:10 AM
+-- Generation Time: Jun 07, 2012 at 03:23 AM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -127,6 +127,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `role` int(2) NOT NULL,
+  `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
