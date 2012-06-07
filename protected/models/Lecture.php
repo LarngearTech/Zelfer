@@ -10,10 +10,10 @@
  */
 class Lecture extends CActiveRecord
 {
-	const ENCODING_PATH_PREFIX = '/asset/encoding/';
-	const STREAMING_PATH_PREFIX = '/asset/streaming/';
-	const SLIDE_URL_PREFIX = '/asset/slide/';
-	const VIDEO_URL_PREFIX = '/asset/video/';
+	const ENCODING_PATH_PREFIX = '/contents/encoding/';
+	const STREAMING_PATH_PREFIX = '/contents/streaming/';
+	const SLIDE_URL_PREFIX = '/contents/slide/';
+	const VIDEO_URL_PREFIX = '/contents/video/';
 
 	/**
 	 * @var boolean whether title and description of lecture has been defined.
@@ -97,10 +97,11 @@ class Lecture extends CActiveRecord
 	 */
 	public function initWithId($id)
 	{
-		$this->_encodingPath 	= self::ENCODING_PATH_PREFIX.$this->chapter->course->id.$this->chapter_id.$this->id;
-		$this->_streamingPath 	= self::STREAMING_PATH_PREFIX.$this->chapter->course->id.$this->chapter_id.$this->id;
-		$this->_slideUrl 		= self::SLIDE_URL_PREFIX.$this->chapter->course->id.$this->chapter_id.$this->id;
-		$this->_videoUrl		= self::VIDEO_URL_PREFIX.$this->chapter->course->id.$this->chapter_id.$this->id;
+		$zelferRoot = Yii::app()->basePath."/..";
+		$this->_encodingPath 	= $zelferRoot.self::ENCODING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
+		$this->_streamingPath 	= $zelferRoot.self::STREAMING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
+		$this->_slideUrl 		= $zelferRoot.self::SLIDE_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
+		$this->_videoUrl		= $zelferRoot.self::VIDEO_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 
 		$this->step1Complete	= $this->name!="";
 

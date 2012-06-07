@@ -3,8 +3,8 @@ $this->breadcrumbs=array(
 	'Lectures'=>array('index'),
 	'Create'=>array('create', 
 				'lectureId'=>$model->id, 
-				'chapterId'=>$model->chapter_id, 
-				'courseId'=>$model->chapter->course->id,),
+				'chapterId'=>$chapterId, 
+				'courseId'=>$courseId,),
 	'Step 1',
 );?>
 

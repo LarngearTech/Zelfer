@@ -15,8 +15,16 @@
 	(as opposed to the relative one I've used below).  Check your server configuration to get
 	the absolute path to your web directory*/
 	if(!$error) {
+		if (!is_dir($encodingPath))
+		{
+			if (!mkdir($encodingPath, 0777, true))
+			{
+				die('Failed to create '.$encodingPath.' folders...'); 
+			}
+		}
 		move_uploaded_file($temp_name, "$encodingPath/$filename");
-		system("chmod 700 \"$encodingPath/$filename\"");
+		//system("chmod 770 \"$encodingPath/$filename\"");
 	}
 	echo '1';
+	echo $encodingPath;
 ?>
