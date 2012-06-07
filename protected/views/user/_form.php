@@ -10,9 +10,15 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'username'); ?>
+		<?php echo $form->labelEx($model,'fullname'); ?>
+		<?php echo $form->textField($model,'fullname',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'fullname'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'email'); ?>
+		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'email'); ?>
 	</div>
 
 	<div class="row">
@@ -27,11 +33,6 @@
 		<?php echo $form->error($model,'repeat_password'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'email'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'role'); ?>
@@ -40,9 +41,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'active'); ?>
-		<?php echo $form->textField($model,'active',array('size'=>60,'maxlength'=>1)); ?>
-		<?php echo $form->error($model,'active'); ?>
+		<?php echo $form->labelEx($model,'status'); ?>
+		<?php echo $form->textField($model,'status',array('size'=>60,'maxlength'=>1)); ?>
+		<?php echo $form->error($model,'status'); ?>
 	</div>
 
 	<div class="row buttons">

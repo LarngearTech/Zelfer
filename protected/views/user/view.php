@@ -19,8 +19,8 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
-		'username',
-		'password',
+		'fullname',
 		'email',
+		'password',
 	),
 )); ?>
