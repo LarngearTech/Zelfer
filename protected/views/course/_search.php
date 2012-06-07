@@ -16,8 +16,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->label($model,'short_description'); ?>
+		<?php echo $form->textField($model,'short_description',array('size'=>60,'maxlength'=>255)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'long_description'); ?>
+		<?php echo $form->textField($model,'long_description',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">

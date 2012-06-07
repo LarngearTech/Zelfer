@@ -16,9 +16,15 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'description'); ?>
+		<?php echo $form->labelEx($model,'short_description'); ?>
+		<?php echo $form->textField($model,'short_description',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'short_description'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'long_description'); ?>
+		<?php echo $form->textField($model,'long_description',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'long_description'); ?>
 	</div>
 
 	<div class="row">
