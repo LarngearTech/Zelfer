@@ -8,8 +8,8 @@
 	
 
 	/* Extract file's destination path */
-	$encodingPath     = sanitize_input($_GET["encodingPath"]);
-	$streamingPath    = sanitize_input($_GET["streamingPath"]);
+	$encodingPath     = $_GET["encodingPath"];
+	$streamingPath    = $_GET["streamingPath"];
 
 	/* NOTE: Some server setups might need you to use an absolute path to your "dropbox" folder
 	(as opposed to the relative one I've used below).  Check your server configuration to get

@@ -22,7 +22,8 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Done'); ?>
+		<?php echo CHtml::submitButton('Done',
+					array('style'=>'width:120px;margin-left:300px;margin-bottom:50px;')); ?>
 	</div>
 <?php $this->endWidget(); ?>
 </div>
