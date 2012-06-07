@@ -8,9 +8,13 @@
  * @property string $username
  * @property string $password
  * @property string $email
+ * @property integer $role
+ * @property boolean $active
  */
 class User extends CActiveRecord
 {
+	public $repeat_password;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -37,11 +41,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, email', 'required'),
-			array('username, password, email', 'length', 'max'=>128),
+			array('username, password, repeat_password, email, role', 'required'),
+			array('username, password, repeat_password, email', 'length', 'max'=>128),
+			array('password', 'compare', 'compareAttribute' => 'repeat_password'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, email', 'safe', 'on'=>'search'),
+			array('id, username, password, email, role, active', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,6 +71,8 @@ class User extends CActiveRecord
 			'username' => 'Username',
 			'password' => 'Password',
 			'email' => 'Email',
+			'role' => 'Role',
+			'active' => 'Active',
 		);
 	}
 
@@ -84,14 +91,21 @@ class User extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
+		$criteria->compare('role',$this->role,true);
+		$criteria->compare('active',$this->active,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
 
-	public function validatePassword($password)
+	public function beforeSave()
 	{
-		return hash('sha256', $password) === $this->password;
+		if (!empty($this->password) && $this->password == $this->repeat_password)
+		{
+			$ph = new PasswordHash(Yii::app()->params['phpass']['iteration_count_log2'], Yii::app()->params['phpass']['portable_hashes']);
+			$this->password = $ph->HashPassword($this->password);
+		}
+		return parent::beforeSave();
 	}
 }

@@ -17,13 +17,14 @@ class ESwfObject extends CWidget
     private $clientScript;
     
     public $randomID;
+	public $id;
 
     /**
      * Init the extension
      */
     public function init()
     {
-        $this->randomID  = '_' . date('YdmHis');
+        $this->randomID  = '_'.$this->id.date('YdmHis');
         $this->newLineJS = "\n";
         
         parent::init();
