@@ -26,6 +26,11 @@ class Lecture extends CActiveRecord
 	public $inputVideoHealthy;
 
 	/**
+	 * @var array additional input video information retrieved from video_health_check.pl script.
+	 */
+	public $inputVideoInfo;
+
+	/**
 	 * @var string error message from video encoding process.
 	 */
 	public $videoCheckError;
@@ -78,17 +83,18 @@ class Lecture extends CActiveRecord
 	{
 		$this->_encodingPath 	= "";
 		$this->_streamingPath 	= "";
-		$this->_slideUrl 		= "";
-		$this->_videoUrl		= "";
+		$this->_slideUrl 	= "";
+		$this->_videoUrl	= "";
 
 		$this->step1Complete	= false;
 		$this->inputVideoHealthy= false;
+		$this->inputVideoInfo	= array();
 		$this->videoCheckError	= "";
-		$this->hasWarning		= false;
+		$this->hasWarning	= false;
 		$this->warningMessage	= "";
-		$this->canEncode		= false;
+		$this->canEncode	= false;
 		$this->isPreviouslyEncoded = false;
-		$this->isEncoding		= false;
+		$this->isEncoding	= false;
 	}
 
 	/**
@@ -100,8 +106,8 @@ class Lecture extends CActiveRecord
 		$zelferRoot = Yii::app()->basePath."/..";
 		$this->_encodingPath 	= $zelferRoot.self::ENCODING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->_streamingPath 	= $zelferRoot.self::STREAMING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
-		$this->_slideUrl 		= $zelferRoot.self::SLIDE_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
-		$this->_videoUrl		= $zelferRoot.self::VIDEO_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
+		$this->_slideUrl 	= $zelferRoot.self::SLIDE_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
+		$this->_videoUrl	= $zelferRoot.self::VIDEO_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 
 		$this->step1Complete	= $this->name!="";
 
@@ -119,6 +125,10 @@ class Lecture extends CActiveRecord
 			{
 				$elements=explode('#',$vhtString);
 				$this->warningMessage=$elements[2];
+			}
+			else
+			{
+				$this->inputVideoInfo=explode('#',substr($vht_string,2));
 			}
 		}
 
