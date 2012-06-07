@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2012 at 03:25 AM
+-- Generation Time: Jun 07, 2012 at 01:35 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -122,6 +122,22 @@ INSERT INTO `course` (`id`, `name`, `description`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `instructor_course`
+--
+
+CREATE TABLE IF NOT EXISTS `instructor_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `instructor_career` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `instructor_description` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`course_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lecture`
 --
 
@@ -165,19 +181,21 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `fullname` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `role` int(2) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `active`) VALUES
-(1, 'admin', '$2a$08$fWJc9zjpMTwjE/k/ZMKznOFQZTfcpjS/j7Ka.QmtPZMYTlBCftZZa', 'admin@example.com', 1, 1),
-(2, 'demo', '$2a$08$Ap944io4kt3jZBL35oxN/.lSp8TMAc7Q0iQ4ZGI8Of2SKg4eUsq4m', 'demo@example.com', 2, 1);
+INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `email`, `role`, `active`) VALUES
+(1, 'admin', '$2a$08$AlQ93iTsZOZ6vQv7CRiwheS3gh16gRw5e2Ngw6q5qVc/PkVPQ0DHC', 'admin', 'admin@example.com', 1, 1),
+(2, 'demo', '$2a$08$gA137nB8.aZqbRBNjbur3OXWlyf7zv8MWnzFVzge06IPTNnJKFXdi', 'demo', 'demo@example.com', 2, 1),
+(3, 'supasate', '$2a$08$AKg6hDbIfIiFr6V3oOWJfePA9N0VkdP4VsJ5zE7RN3Ih7o8GcJm3e', 'Supasate Choochaisri', 'supasate.c@larngeartech.com', 1, 0);
 
 -- --------------------------------------------------------
 

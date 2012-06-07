@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2012 at 03:24 AM
+-- Generation Time: Jun 07, 2012 at 01:34 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -63,9 +63,10 @@ INSERT INTO `lecture` (`id`, `name`, `chapter_id`) VALUES
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `active`) VALUES
-(1, 'admin', '$2a$08$fWJc9zjpMTwjE/k/ZMKznOFQZTfcpjS/j7Ka.QmtPZMYTlBCftZZa', 'admin@example.com', 1, 1),
-(2, 'demo', '$2a$08$Ap944io4kt3jZBL35oxN/.lSp8TMAc7Q0iQ4ZGI8Of2SKg4eUsq4m', 'demo@example.com', 2, 1);
+INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `email`, `role`, `active`) VALUES
+(1, 'admin', '$2a$08$AlQ93iTsZOZ6vQv7CRiwheS3gh16gRw5e2Ngw6q5qVc/PkVPQ0DHC', 'admin', 'admin@example.com', 1, 1),
+(2, 'demo', '$2a$08$gA137nB8.aZqbRBNjbur3OXWlyf7zv8MWnzFVzge06IPTNnJKFXdi', 'demo', 'demo@example.com', 2, 1),
+(3, 'supasate', '$2a$08$AKg6hDbIfIiFr6V3oOWJfePA9N0VkdP4VsJ5zE7RN3Ih7o8GcJm3e', 'Supasate Choochaisri', 'supasate.c@larngeartech.com', 1, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
