@@ -55,7 +55,7 @@ class LectureController extends Controller
 	 */
 	public function actionCreate($lectureId, $chapterId, $courseId)
 	{
-		// Wheter this is a newly created session or just a redirect from editInfo 
+	/*	// Wheter this is a newly created session or just a redirect from editInfo 
 		// Newly created session
 		if ($lectureId == "")
 		{
@@ -81,7 +81,7 @@ class LectureController extends Controller
 			'model'=>$model,
 			'chapterId'=>$chapterId,
 			'courseId'=>$courseId,
-		));
+		));*/
 	}
 
 	/**
