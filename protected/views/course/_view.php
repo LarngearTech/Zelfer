@@ -8,8 +8,12 @@
 	<?php echo CHtml::encode($data->name); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
-	<?php echo CHtml::encode($data->description); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('short_description')); ?>:</b>
+	<?php echo CHtml::encode($data->short_description); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('long_description')); ?>:</b>
+	<?php echo CHtml::encode($data->long_description); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('category_id')); ?>:</b>

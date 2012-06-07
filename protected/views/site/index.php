@@ -34,7 +34,7 @@ foreach ($categories as $category)
 		);
 		echo '
 		<h5>'.CHtml::encode($course->name).'</h5>
-		<p>'.CHtml::encode($course->description).'</p>';
+		<p>'.CHtml::encode($course->short_description).'</p>';
 		echo CHtml::closeTag('li');
 	}
 	echo CHtml::closeTag('ul');

@@ -6,7 +6,8 @@
  * The followings are the available columns in table 'course':
  * @property integer $id
  * @property string $name
- * @property string $description
+ * @property string $short_description
+ * @property string $long_description
  * @property integer $category_id
  */
 class Course extends CActiveRecord
@@ -51,12 +52,13 @@ class Course extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, description, category_id', 'required'),
+			array('name, short_description, long_description, category_id', 'required'),
 			array('category_id', 'numerical', 'integerOnly'=>true),
-			array('name, description', 'length', 'max'=>255),
+			array('name, short_description', 'length', 'max'=>255),
+			array('long_description', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, description, category_id', 'safe', 'on'=>'search'),
+			array('id, name, category_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,7 +83,8 @@ class Course extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'description' => 'Description',
+			'short_description' => 'Description in one sentence',
+			'long_description' => 'Course summary',
 			'category_id' => 'Category',
 		);
 	}
@@ -99,7 +102,8 @@ class Course extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
+		$criteria->compare('short_description',$this->short_description,true);
+		$criteria->compare('long_description',$this->long_description,true);
 		$criteria->compare('category_id',$this->category_id);
 
 		return new CActiveDataProvider($this, array(
