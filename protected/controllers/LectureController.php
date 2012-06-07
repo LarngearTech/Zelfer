@@ -55,7 +55,7 @@ class LectureController extends Controller
 	 */
 	public function actionCreate($lectureId, $chapterId, $courseId)
 	{
-	/*	// Wheter this is a newly created session or just a redirect from editInfo 
+		// Wheter this is a newly created session or just a redirect from editInfo 
 		// Newly created session
 		if ($lectureId == "")
 		{
@@ -81,7 +81,7 @@ class LectureController extends Controller
 			'model'=>$model,
 			'chapterId'=>$chapterId,
 			'courseId'=>$courseId,
-		));*/
+		));
 	}
 
 	/**
@@ -126,6 +126,8 @@ class LectureController extends Controller
 
 		$this->render('editInfo',array(
 			'model'=>$model,
+			'chapterId'=>$chapterId,
+			'courseId'=>$courseId,
 			'returnAction'=>$returnAction
 		));
 	}
@@ -140,16 +142,44 @@ class LectureController extends Controller
 		$model = $this->loadModel($lectureId);
 		if ($model === null)
 		{
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(500, "Lecture with lecture id=$lectureId does not exist.");
 		}
 		else
 		{
-			$uploader_url = Yii::app()->baseUrl.'/protected/scripts/upload/upload_widgets.php?'.
+			if (isset($_POST['uploadDone']))
+			{
+				$this->redirect(array('create', 
+								'lectureId'=>$model->id,
+								'chapterId'=>$model->chapter_id,
+								'courseId' =>$model->chapter->course->id));	
+			}
+
+			$uploaderUrl = Yii::app()->baseUrl.'/protected/scripts/upload/upload_widgets.php?'.
 							'encodingPath='.$model->encodingPath.'&'.
 							'streamingPath='.$model->streamingPath;
+			$fileSummaryUrl = Yii::app()->baseUrl.'/protected/scripts/file_summary.php';
 			$this->render('uploadVideo',array(
 				'model'=>$model,
-				'uploader_url'=>$uploader_url));
+				'uploaderUrl'=>$uploaderUrl,
+				'fileSummaryUrl'=>$fileSummaryUrl,
+				'encodingPath'=>$model->encodingPath,
+				'streamingPath'=>$model->streamingPath));
+		}
+	}
+
+	public function actionEncode($lectureId)
+	{
+		$model = $this->loadModel($lectureId);
+		if ($model === null)
+		{
+			throw new CHttpException(500, "Lecture with lecture id=$lectureId does not exist.");
+		}
+		else
+		{
+			$this->render('encode',array(
+				'model'=>$model,
+				'encodingPath'=>$model->encodingPath,
+				'streamingPath'=>$model->streamingPath));
 		}
 	}
 
