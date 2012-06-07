@@ -72,6 +72,8 @@ class Course extends CActiveRecord
 		return array(
 			'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
 			'chapters' => array(self::HAS_MANY, 'Chapter', 'course_id'),
+			'instructors' => array(self::MANY_MANY, 'User', 'instructor_course(course_id, user_id)'),
+			'students' => array(self::MANY_MANY, 'User', 'student_course(course_id, user_id)'),
 		);
 	}
 

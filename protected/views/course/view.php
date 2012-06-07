@@ -6,6 +6,14 @@ $this->breadcrumbs=array(
 ?>
 
 <h1><?php echo CHtml::encode($model->name); ?></h1>
+<h3>By <?php 
+	echo CHtml::encode($model->instructors[0]->fullname); 
+	if (count($model->instructors) > 1)
+	{
+		echo CHtml::encode(" et al.");
+	}
+	?>
+</h3>
 <br/>
 <p class="well"><?php echo CHtml::encode($model->short_description); ?></p>
 <?php $this->widget('application.extensions.videojs.EVideoJS', array(
