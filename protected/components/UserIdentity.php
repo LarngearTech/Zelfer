@@ -25,21 +25,23 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		$username = strtolower($this->username);
-		$user = User::model()->find('LOWER(username)=?', array($username));
-		if($user === null)
+		$record = User::model()->find('LOWER(username)=?', array($username));
+		$ph = new PasswordHash(Yii::app()->params['phpass']['iteration_count_log2'], Yii::app()->params['phpass']['portable_hashes']);
+		if ($record === null)
 		{
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
+			$this->errorCode = self::ERROR_USERNAME_INVALID;
 		}
-		else if(!$user->validatePassword($this->password))
+		//else if(!$user->validatePassword($this->password))
+		else if (!$ph->CheckPassword($this->password, $record->password))
 		{
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
+			$this->errorCode = self::ERROR_PASSWORD_INVALID;
 		}
 		else
 		{
-			$this->_id = $user->id;
-			$this->username = $user->username;
-			$this->errorCode=self::ERROR_NONE;
+			$this->_id = $record->id;
+			$this->username = $record->username;
+			$this->errorCode = self::ERROR_NONE;
 		}
-		return $this->errorCode == self::ERROR_NONE;
+		return !$this->errorCode;
 	}
 }

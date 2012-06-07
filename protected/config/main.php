@@ -19,6 +19,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.extensions.PasswordHash',
 	),
 
 	'modules'=>array(
@@ -93,6 +94,10 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail' => 'webmaster@example.com',
+		'phpass' => array(
+			'iteration_count_log2' => 8,
+			'portable_hashes' => false,
+		),
 	),
 );

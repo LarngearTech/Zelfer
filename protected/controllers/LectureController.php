@@ -137,7 +137,20 @@ class LectureController extends Controller
 	 */
 	public function actionUploadVideo($lectureId)
 	{
-		$model = this->loadModel($lectureId);
+		$model = $this->loadModel($lectureId);
+		if ($model === null)
+		{
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		}
+		else
+		{
+			$uploader_url = Yii::app()->baseUrl.'/protected/scripts/upload/upload_widgets.php?'.
+							'encodingPath='.$model->encodingPath.'&'.
+							'streamingPath='.$model->streamingPath;
+			$this->render('uploadVideo',array(
+				'model'=>$model,
+				'uploader_url'=>$uploader_url));
+		}
 	}
 
 	/**

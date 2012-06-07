@@ -15,7 +15,7 @@ $this->breadcrumbs=array(
 		// Video and poster width in pixels
 		'width' => 640,
 		// Video and poster height in pixels
-		'height' => 480,
+		'height' => 360,
 		// Poster image absolute URL
 		'poster' => false,
 		// Absolute URL of the video in MP4 format
@@ -31,7 +31,7 @@ $this->breadcrumbs=array(
 		//'flash_player' => 'swf/ClassXPlayer_v2.swf',
 		'flash_player' => false,
 		// Show controls ?
-		'controls' => false,
+		'controls' => true,
 		// Preload video content ?
 		'preload' => false,
 		// Autostart the playback ?
