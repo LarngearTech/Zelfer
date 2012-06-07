@@ -1,0 +1,21 @@
+Array
+(
+    [encodingPath] => /var/www/zelfer/protected/../assets/encoding/1/1/14
+    [streamingPath] => /var/www/zelfer/protected/../assets/streaming/1/1/14
+)
+
+
+Array
+(
+    [Filedata] => Array
+        (
+            [name] => ifwehavetime_engagement_McNuggets Do the Dip.wmv
+            [type] => application/octet-stream
+            [tmp_name] => /tmp/phphn0kUx
+            [error] => 0
+            [size] => 2084203
+        )
+
+)
+
+
