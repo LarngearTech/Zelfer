@@ -5,12 +5,11 @@
  *
  * The followings are the available columns in table 'user':
  * @property integer $id
- * @property string $username
+ * @property string $email
  * @property string $password
  * @property string $fullname
- * @property string $email
  * @property integer $role
- * @property boolean $active
+ * @property boolean $status
  */
 class User extends CActiveRecord
 {
@@ -42,12 +41,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, repeat_password, fullname, email, role', 'required'),
-			array('username, password, repeat_password, fullname, email', 'length', 'max'=>128),
+			array('email, password, repeat_password, fullname, role', 'required'),
+			array('email, password, repeat_password, fullname', 'length', 'max'=>128),
 			array('password', 'compare', 'compareAttribute' => 'repeat_password'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password, fullname, email, role, active', 'safe', 'on'=>'search'),
+			array('id, email, password, fullname, role, active', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,10 +68,9 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'username' => 'Username',
+			'email' => 'Email',
 			'password' => 'Password',
 			'fullname' => 'Full name',
-			'email' => 'Email',
 			'role' => 'Role',
 			'active' => 'Active',
 		);
@@ -90,10 +88,9 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('username',$this->username,true);
+		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('fullname',$this->fullname,true);
-		$criteria->compare('email',$this->email,true);
 		$criteria->compare('role',$this->role,true);
 		$criteria->compare('active',$this->active,true);
 
