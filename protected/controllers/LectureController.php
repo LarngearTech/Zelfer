@@ -170,6 +170,7 @@ class LectureController extends Controller
 	public function actionEncode($lectureId)
 	{
 		$model = $this->loadModel($lectureId);
+		$encodeOption = new EncodeVideoOptionForm;
 		if ($model === null)
 		{
 			throw new CHttpException(500, "Lecture with lecture id=$lectureId does not exist.");
@@ -178,6 +179,7 @@ class LectureController extends Controller
 		{
 			$this->render('encode',array(
 				'model'=>$model,
+				'encodeOption'=>$encodeOption,
 				'encodingPath'=>$model->encodingPath,
 				'streamingPath'=>$model->streamingPath));
 		}

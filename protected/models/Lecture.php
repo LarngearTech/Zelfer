@@ -128,7 +128,7 @@ class Lecture extends CActiveRecord
 			}
 			else
 			{
-				$this->inputVideoInfo=explode('#',substr($vht_string,2));
+				$this->inputVideoInfo=explode('#',substr($vhtString,2));
 			}
 		}
 
