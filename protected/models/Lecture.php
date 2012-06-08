@@ -153,8 +153,8 @@ class Lecture extends CActiveRecord
 	 * Post-processing after the record is instantiated by a find method.
 	 * Assign encoding and streaming paths for a lecture.
 	 */
-    protected function afterFind()
-    {
+    	protected function afterFind()
+    	{
 		parent::afterFind();
 		$this->initWithId($this->id);
 	}

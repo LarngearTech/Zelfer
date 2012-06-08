@@ -1,0 +1,7 @@
+1920 1080
+DeviceManifest Mobile 460800 2
+DeviceManifest PC 4147200 5
+Group 29.97 60
+Group 29.97 60
+Thumbnail 0640 0360 110000 encodedVideo.mp4
+End

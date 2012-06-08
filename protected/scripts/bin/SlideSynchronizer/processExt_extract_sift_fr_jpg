@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Usage:
+# processExt_extract_sift_fr_jpg <SlideSyncWorkDir> <pipelinePath>
+#
+
+EXT0="jpg"
+#EXT0="JPG"
+EXT1="sift"
+
+for name0 in `ls $1/*.$EXT0`
+do
+name1=`echo $name0 | sed -e "s/^\(.*\)\.$EXT0$/\1\.$EXT1/g"`
+echo $name0 $name1
+convert $name0 $1/tmp.pgm
+$2/SlideSynchronizer/sift --output=$name1     $1/tmp.pgm   --threshold=0.025 --floating-point
+done
+
+rm $1/tmp.pgm
