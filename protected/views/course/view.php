@@ -6,13 +6,11 @@ $this->breadcrumbs=array(
 ?>
 
 <h1><?php echo CHtml::encode($model->name); ?></h1>
-<h3>By <?php 
-	echo CHtml::encode($model->instructors[0]->fullname); 
+<h3>By <?php echo CHtml::encode($model->instructors[0]->fullname); 
 	if (count($model->instructors) > 1)
 	{
 		echo CHtml::encode(" et al.");
-	}
-	?>
+	}?>
 </h3>
 <br/>
 <p class="well"><?php echo CHtml::encode($model->short_description); ?></p>
@@ -51,6 +49,26 @@ $this->breadcrumbs=array(
 	),
 ));
 ?>
+<br/>
+<div id="course-summary">
+	<h2>Course Summary</h2>
+	<p class="well"><?php echo CHtml::encode($model->long_description); ?></p>
+</div>
+<div id="course-instructors">
+	<h2>Instructor</h2>
+	<ul>
+	<?php
+		foreach ($model->instructors as $instructor)
+		{
+			echo '<li>'.$instructor->fullname.'</li>';
+		}
+		/*foreach ($model->instructor as $instructor)
+		{
+			echo '<li>'.$instructor->fullname.'</li>';
+		}*/
+	?>
+	</ul>
+</div>
 
 <?php
 // create contents for each chapter

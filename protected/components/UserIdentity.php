@@ -24,7 +24,7 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$email = strtolower($this->email);
+		$email = strtolower($this->username);
 		$record = User::model()->find('LOWER(email)=?', array($email));
 		$ph = new PasswordHash(Yii::app()->params['phpass']['iteration_count_log2'], Yii::app()->params['phpass']['portable_hashes']);
 		if ($record === null)
@@ -39,7 +39,8 @@ class UserIdentity extends CUserIdentity
 		else
 		{
 			$this->_id = $record->id;
-			$this->email = $record->email;
+			$this->username = $record->email;
+			$this->setState('fullname', $record->fullname);
 			$this->errorCode = self::ERROR_NONE;
 		}
 		return !$this->errorCode;
