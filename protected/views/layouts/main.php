@@ -32,7 +32,7 @@
 				array('label' => Yii::t('site', 'About'), 'url'=>array('/site/page', 'view'=>'about')),
 				array('label' => Yii::t('site', 'Contact'), 'url'=>array('/site/contact')),
 				array('label' => Yii::t('site', 'Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label' => Yii::t('site', 'Logout').' ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label' => Yii::t('site', 'Logout').' ('.Yii::app()->user->fullname.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->
