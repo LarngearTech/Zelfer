@@ -1,0 +1,13 @@
+1920 1080
+DeviceManifest Mobile 460800 2
+DeviceManifest PC 4147200 5
+Group 29.97 60
+Group 29.97 60
+Thumbnail 0640 0360 110000 stream0.mp4
+PZTile 0 2 0000 0000 0960 0540 582000 stream1.mp4
+PZTile 1 1 0000 0000 1280 0720 404000 stream2.mp4
+PZTile 1 1 0640 0000 1280 0720 312000 stream3.mp4
+PZTile 1 1 0000 0360 1280 0720 501000 stream4.mp4
+PZTile 1 1 0640 0360 1280 0720 404000 stream5.mp4
+TrackTile 0960 0540 313000 tracked.mp4
+End

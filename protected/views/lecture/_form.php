@@ -147,7 +147,7 @@
 				}
 				echo CHtml::link('Click here to go to the encoding page',
 						 array('lecture/encode',
-						       'id'=>$model->id));
+						       'lectureId'=>$model->id));
 			}
 			else {
 			?>

@@ -17,7 +17,7 @@
 	if(!$error) {
 		if (!is_dir($encodingPath))
 		{
-			if (!mkdir($encodingPath, 0777, true))
+			if (!mkdir($encodingPath, 0777, true) || !mkdir($streamingPath, 0777, true))
 			{
 				die('Failed to create '.$encodingPath.' folders...'); 
 			}

@@ -8,6 +8,159 @@ class LectureController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
+	/**
+	 * Script to do the real encode task
+	 * @param EncodeVideoOptionForm Designate encode video options.
+	 */
+	private function dispatchEncode($model, $encodeOption)
+	{
+		// Start: Get subject information
+
+		// Path information
+		$inputPath	=	$model->encodingPath;
+		$streamingPath	=	$model->streamingPath;
+		if (!is_dir($streamingPath))
+		{
+			if (!mkdir($streamingPath, 0777, true))
+			{
+				throw new CHttpException(500, "Failed to create $streamingPath folder."); 
+			}
+		}
+
+		// Option information
+		$encode_video	=	$encodeOption->encode_video;
+		$sync_slides	=	$encodeOption->sync_slides;
+		$format		=	$encodeOption->format;
+
+		$encode_for_mobile = 'n';
+
+		// Clear unwanted files from previous encodings
+		if($encode_video=='y') {
+			if(file_exists("$streamingPath/Snapshots")) { system("rm -rf \"$streamingPath/Snapshots\""); }
+			// Delete all mp4 files
+			if($dir=opendir($streamingPath)) {
+				while (false !== ($file = readdir($dir))) {
+					if(substr($file,-3)=='mp4') {
+					system("rm \"$streamingPath/$file\"");
+				}
+			}
+		}
+
+		if(file_exists("$streamingPath/Duration.txt"))	{ system("rm -rf \"$streamingPath/Duration.txt\""); }
+		if(file_exists("$streamingPath/MSM.txt"))	{ system("rm -rf \"$streamingPath/MSM.txt\""); 			}
+		if(file_exists("$streamingPath/PVManifest.txt")){ system("rm -rf \"$streamingPath/PVManifest.txt\""); 		}
+		if(file_exists("$streamingPath/TrackManifest.txt")){ system("rm -rf \"$streamingPath/TrackManifest.txt\""); 	}
+		if(file_exists("$streamingPath/tracked.log"))	{ system("rm -rf \"$streamingPath/tracked.log\""); 		}
+		if(file_exists("$streamingPath/TrackingParameters.txt")){ system("rm -rf \"$streamingPath/TrackingParameters.txt\""); 	}
+		if(file_exists("$streamingPath/video_encoding.txt"))	{ system("rm -rf \"$streamingPath/video_encoding.txt\""); 	}
+		if(file_exists("$streamingPath/video_complete.txt"))	{ system("rm -rf \"$streamingPath/video_complete.txt\""); 	}
+}
+
+		if($sync_slides=='y') 
+		{
+			if(file_exists("$streamingPath/SlideDeck"))		{ system("rm -rf \"$streamingPath/SlideDeck\""); 		}
+			if(file_exists("$streamingPath/SlideManifest.txt"))	{ system("rm -rf \"$streamingPath/SlideManifest.txt\""); 	}
+			if(file_exists("$streamingPath/slide_complete.txt"))	{ system("rm -rf \"$streamingPath/slide_complete.txt\""); 	}
+			if(file_exists("$streamingPath/slide_encoding.txt"))	{ system("rm -rf \"$streamingPath/slide_encoding.txt\""); 	}
+		}
+
+		// Generate Preset Views Manifests if format is ClassX
+		if($format=='classx') 
+		{
+
+			// Parse the data String
+			$regions=explode('-',$scene_annotation_data);
+
+			$trackFID=fopen("$streamingPath/TrackingParameters.txt",'w');
+			$presetFID=fopen("$streamingPath/PVManifest.txt",'w');
+
+			fwrite($trackFID,strval(sizeof($regions))."\n");
+
+			for($i=0;$i<sizeof($regions);$i++)
+			{
+				$regionElements=explode('_', $regions[$i]);
+		
+				$x=$regionElements[1];					$y=$regionElements[2];
+				$w=$regionElements[3];					$h=$regionElements[4];
+				$xMax=strval(intval($x)+intval($w));			$yMax=strval(intval($y)+intval($h));
+	
+				fwrite($trackFID,$x."\t".$xMax."\t".$y."\t".$yMax);	fwrite($presetFID,$x."\t".$y."\t".$w."\t".$h);
+		
+				if($i!=sizeof($regions)-1)
+				{
+					fwrite($trackFID,"\n");				fwrite($presetFID,"\n");
+				}
+			}
+
+			fclose($trackFID);	
+			fclose($presetFID);
+
+			system("chmod -R 700 \"$streamingPath\"");
+		}
+
+		if($encode_video=='n' || $format=="openclassroom" || file_exists("$streamingPath/TrackingParameters.txt"))
+		{
+			// Create the video_encoding.txt and/or slide_encoding.txt files in the streaming folder.
+	
+			if($encode_video=='y') 
+			{
+				if(file_exists("$streamingPath/video_complete.txt")) 
+				{
+					system("rm -rf \"$streamingPath/video_complete.txt\"");
+				}
+				$FID=fopen("$streamingPath/video_encoding.txt",'w');	fclose($FID);
+			}
+
+			if($sync_slides=='y') 
+			{
+				if(file_exists("$streamingPath/slide_complete.txt")) 
+				{
+					system("rm -rf \"$streamingPath/slide_complete.txt\"");
+				}
+
+				$FID=fopen("$streamingPath/slide_encoding.txt",'w');	fclose($FID);
+			}
+	
+			if($format == 'classx' && $encode_video == 'y') 
+			{
+				$encode_for_mobile = 'y';
+			} 
+			else 
+			{
+				$encode_for_mobile = 'n';
+			}
+
+			system("chmod 700 \"$streamingPath\"");
+
+			$scriptPath = Yii::app()->basePath."/scripts";
+			$pipelinePath = "$scriptPath/bin";
+	
+			$rand = rand();
+			$encodingPath = $inputPath."/.encoding_{$rand}";
+			system("mkdir \"$encodingPath\""); system("chmod 700 \"$encodingPath\"");
+	
+			// -----------------------------------------------------------------------------------
+			// It all comes down to this!!!
+
+			system("perl $scriptPath/encode.pl \"$inputPath\" \"$encodingPath\" \"$streamingPath\" \"$pipelinePath\" $format $encode_video $sync_slides $encode_for_mobile >/dev/null 2>/dev/null &");
+
+			$fid=fopen(Yii::app()->basePath.'/../CX_Log.txt','w'); fwrite($fid,"perl $scriptPath/encode.pl \"$inputPath\" \"$encodingPath\" \"$streamingPath\" \"$pipelinePath\" $format $encode_video $sync_slides $encode_for_mobile >/dev/null 2>/dev/null &\n"); 
+			fclose($fid);	
+
+			// We are redirecting STDOUT and STDERR to /dev/null and marking the process as background so that the process would be decoupled from its www-data trigger.
+	        	// This accomplishes two things:
+			//     1. It allows us to redirect the publisher's browser without having to wait for the encoding to complete.
+			//     2. It allows the publisher to navigate away without the closed PHP session terminating the encoding process.
+
+			// -----------------------------------------------------------------------------------
+	
+			$this->redirect(array('showEncodeResult', 'lectureId'=>$model->id));
+		}
+		else 
+		{
+			echo "failure";
+		}
+	}
 
 	/**
 	 * Specifies the access control rules.
@@ -112,14 +265,14 @@ class LectureController extends Controller
 				if ($returnAction == 'create')
 				{
 					$this->redirect(array('create', 
-										'lectureId'=>$model->getPrimaryKey(),
-										'chapterId'=>$model->chapter_id,
-										'courseId' =>$model->chapter->course->id));		
+							'lectureId'=>$model->getPrimaryKey(),
+							'chapterId'=>$model->chapter_id,
+							'courseId' =>$model->chapter->course->id));		
 				}
 				else if ($returnAction == 'update')
 				{
 					$this->redirect(array('update', 
-										'lectureId'=>$model->getPrimaryKey(),));		
+							'lectureId'=>$model->getPrimaryKey(),));		
 				}
 			}
 		}
@@ -167,20 +320,38 @@ class LectureController extends Controller
 		}
 	}
 
+	/**
+	 * Encode video file according to encoding option.
+	 * @param integer $lectureId the ID of the model whose vdo file need to be encoded.
+	 */
 	public function actionEncode($lectureId)
 	{
 		$model = $this->loadModel($lectureId);
+		$encodeOption = new EncodeVideoOptionForm;
 		if ($model === null)
 		{
 			throw new CHttpException(500, "Lecture with lecture id=$lectureId does not exist.");
 		}
 		else
 		{
+			if (isset($_POST['EncodeVideoOptionForm']))
+			{
+				//print_r($_POST);
+				$encodeOption->attributes = $_POST['EncodeVideoOptionForm'];
+				$this->dispatchEncode($model, $encodeOption);
+			}
 			$this->render('encode',array(
 				'model'=>$model,
+				'encodeOption'=>$encodeOption,
 				'encodingPath'=>$model->encodingPath,
 				'streamingPath'=>$model->streamingPath));
 		}
+	}
+
+	public function actionShowEncodeResult($lectureId)
+	{
+		$model = $this->loadModel($lectureId);
+		echo "Complete for lecture $model->name";
 	}
 
 	/**
