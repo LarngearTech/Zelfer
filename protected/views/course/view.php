@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 ?>
 
 <h1><?php echo CHtml::encode($model->name); ?></h1>
-<h3>By <?php echo CHtml::encode($model->instructors[0]->fullname); 
+<h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->instructors[0]->fullname); 
 	if (count($model->instructors) > 1)
 	{
 		echo CHtml::encode(" et al.");
@@ -58,14 +58,12 @@ $this->breadcrumbs=array(
 	<h2>Instructor</h2>
 	<ul>
 	<?php
-		foreach ($model->instructors as $instructor)
+		foreach ($model->courseInstructors as $instructorRecord)
 		{
-			echo '<li>'.$instructor->fullname.'</li>';
+			echo '<li>'.$instructorRecord['fullname'].'</li>';
+			echo '<li>'.$instructorRecord['instructor_career'].'</li>';
+			echo '<li>'.$instructorRecord['instructor_description'].'</li>';
 		}
-		/*foreach ($model->instructor as $instructor)
-		{
-			echo '<li>'.$instructor->fullname.'</li>';
-		}*/
 	?>
 	</ul>
 </div>
