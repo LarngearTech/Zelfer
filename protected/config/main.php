@@ -100,4 +100,6 @@ return array(
 			'portable_hashes' => false,
 		),
 	),
+	'sourceLanguage' => 'en_us',
+	'language' => 'th_th',
 );
