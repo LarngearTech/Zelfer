@@ -102,5 +102,5 @@ return array(
 		),
 	),
 	'sourceLanguage' => 'en_us',
-	'language' => 'th_th',
+	'language' => 'th',
 );

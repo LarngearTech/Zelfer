@@ -47,8 +47,8 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> Zelfer.com<br/>
-		All Rights Reserved.<br/>
+		<?php echo Yii::t('site', 'Copyright'); ?> &copy; <?php echo date('Y'); ?> Zelfer.com<br/>
+		<?php echo Yii::t('site', 'All Rights Reserved.'); ?><br/>
 	</div><!-- footer -->
 
 </div><!-- page -->
