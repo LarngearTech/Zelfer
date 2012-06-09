@@ -13,7 +13,6 @@ class Lecture extends CActiveRecord
 	const ENCODING_PATH_PREFIX = '/contents/encoding/';
 	const STREAMING_PATH_PREFIX = '/contents/streaming/';
 	const SLIDE_URL_PREFIX = '/contents/slide/';
-	const VIDEO_URL_PREFIX = '/contents/video/';
 
 	/**
 	 * @var boolean whether title and description of lecture has been defined.
@@ -63,7 +62,7 @@ class Lecture extends CActiveRecord
 	protected $_encodingPath;
 	protected $_streamingPath;
 	protected $_slideUrl;
-	protected $_videoUrl;
+	protected $_thumbnailUrl;
 
 
 	/**
@@ -84,7 +83,6 @@ class Lecture extends CActiveRecord
 		$this->_encodingPath 	= "";
 		$this->_streamingPath 	= "";
 		$this->_slideUrl 	= "";
-		$this->_videoUrl	= "";
 
 		$this->step1Complete	= false;
 		$this->inputVideoHealthy= false;
@@ -107,8 +105,6 @@ class Lecture extends CActiveRecord
 		$this->_encodingPath 	= $zelferRoot.self::ENCODING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->_streamingPath 	= $zelferRoot.self::STREAMING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->_slideUrl 	= $zelferRoot.self::SLIDE_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
-		$this->_videoUrl	= $zelferRoot.self::VIDEO_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
-
 		$this->step1Complete	= $this->name!="";
 
 		$scriptRoot = Yii::app()->basePath."/scripts";
@@ -254,10 +250,69 @@ class Lecture extends CActiveRecord
 	}
 	
 	/**
-	 * @return string lecture's video URL
+	 * @return string thumbnail's URL
 	 */
-	public function getVideoUrl()
+	public function getThumbnailUrl()
 	{
-		return $this->_videoUrl;
+		// Convert streamingPath to web accessible url		
+		$web_path = str_replace($_SERVER["DOCUMENT_ROOT"],"http://".$_SERVER["SERVER_NAME"],$this->streamingPath);
+		$this->_thumbnailUrl = "$web_path/Snapshots/00000.jpg";
+		return $this->_thumbnailUrl;
+	}
+
+	/**
+	 * @return string lecture's video URL
+	 * @param string player type can either be flash or silverlight
+	 */
+	public function getVideoObject($playerType)
+	{
+		// Get start and end times
+		$start='0'; $end='end';
+		if(file_exists("$this->streamingPath/Duration.txt")) {
+			$fid=fopen("$this->streamingPath/Duration.txt",'r'); $end=trim(fgets($fid)); fclose($fid);
+		}
+		if(file_exists("$this->streamingPath/Trimming.txt")) {
+			$lines=file("$this->streamingPath/Trimming.txt");
+			if(strlen(trim($lines[0]))>0) { $start=trim($lines[0]); }
+			if((sizeof($lines)==2) && (strlen(trim($lines[1]))>0))  { $end=trim($lines[1]); }
+		}
+
+		$format=(file_exists("$this->streamingPath/encodedVideo.mp4"))?('openclassroom'):('classx');
+		$has_slides=(file_exists("$this->streamingPath/SlideManifest.txt"))?('y'):('n');
+
+		// Convert streamingPath to web accessible url		
+		$web_path=str_replace($_SERVER["DOCUMENT_ROOT"],"http://".$_SERVER["SERVER_NAME"],$this->streamingPath);
+
+		if ($playerType === "silverlight")
+		{
+			$sl_param_string="sessionPath=$web_path,start=$start,end=$end,format=$format,splash=none,deviceID=1,has_slides=$has_slides";
+			$videoObject='<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="960" height="540">
+					<param name="source" value="'.Yii::app()->baseUrl.'/players/silverlight/ClassXPlayer_v2.xap"/>
+					<param name="initParams" value="'.$sl_param_string.'" />
+<param name="onerror" value="onSilverlightError" />
+					<param name="background" value="white" />
+					<param name="minRuntimeVersion" value="3.0.40624.0" />
+					<param name="autoUpgrade" value="true" />
+					<param name="MaxFrameRate" value="24" />
+					<a href="http://go.microsoft.com/fwlink/?LinkID=124807" style="text-decoration: none;">
+					<img src="http://go.microsoft.com/fwlink/?LinkId=108181" alt="Get Microsoft Silverlight" style="border-style: none"/>
+					</a>
+				</object>';
+		}
+		else if ($playerType === "flash")
+		{
+			$fl_param_string="sessionPath=$web_path&start=$start&end=$end&format=$format&splash=none&deviceID=1&has_slides=$has_slides";
+			$videoObject='<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="960" height="540" id="ClassXPlayer_v2">
+					<param name="movie" value="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf"/>
+					<param name="flashVars" value="'.$fl_param_string.'" />
+					<embed src="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf" width="960" height="540" quality="high" allowFullScreen="true" FlashVars="'.$fl_param_string.'" pluginspage="http://www.adobe.com/go/getflashplayer">
+					<param name="quality" value="high"/>
+					<param name="bgcolor" value="#000000"/>
+					<param name="allowScriptAccess" value="sameDomain"/>
+					<param name="allowFullScreen" value="true"/>
+				</object>';
+		}
+
+		return $videoObject;
 	}
 }
