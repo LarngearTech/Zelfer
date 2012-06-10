@@ -51,11 +51,11 @@ $this->breadcrumbs=array(
 ?>
 <br/>
 <div id="course-summary">
-	<h2>Course Summary</h2>
+	<h2><?php echo Yii::t('site', 'Course Summary');?></h2>
 	<p class="well"><?php echo CHtml::encode($model->long_description); ?></p>
 </div>
 <div id="course-instructors">
-	<h2>Instructor</h2>
+	<h2><?php echo Yii::t('site', 'Instructor');?></h2>
 	<ul>
 	<?php
 		foreach ($model->courseInstructors as $instructorRecord)
@@ -67,54 +67,36 @@ $this->breadcrumbs=array(
 	?>
 	</ul>
 </div>
-
-<?php
-// create contents for each chapter
-$chapIdx = 0;
-$displayChapters = array();
-foreach ($chapters as $chapter)
-{
-	$chapIdx++;
-
-	// create chapter title
-	$chapterContent = '<h2>'.CHtml::encode($chapter->name).'</h2>';
-
-	// create a lecture list
-	$lectIdx = 0;
-	foreach ($chapter->lectures as $lecture)
+<div id="course-syllabus">
+	<h2><?php echo Yii::t('site', 'Syllabus');?></h2>
+	<?php
+	// create contents for the lecture tab 
+	$this->widget('ext.slidetoggle.ESlidetoggle', array(
+		'itemSelector' => 'ul.collapsible',
+		'collapsed' => 'ul.collapsible',
+		'titleSelector' => 'ul.collapsible .caption',
+	));
+	$lecturesTabContent = '';
+	$chapIdx = 0;
+	foreach ($chapters as $chapter)
 	{
-		$lectIdx++;
-		$chapterContent .= '<br/><h3>Lecture '.$lectIdx.': '.CHtml::encode($lecture->name).'<br/></h3>';
-		$chapterContent .= $this->widget('ext.swfobject.ESwfObject', array(
-			'id'			=> $lecture->id,
-			'width' 		=> '590',
-			'height' 		=> '442.5',
-			'swfFile'		=> Yii::app()->baseUrl . '/swf/ClassXPlayer_v2.swf',
-			'playerVersion'	=> '9.0.0',
-			'params'		=> array('menu' => 'false', 'quality' => 'high', 'wmode' => 'transparent'),
-			'flashvars'		=> array(),
-			'attributes'	=> array(),
-		), true);
+		$chapIdx++;
+		$lecturesTabContent .= '<ul class="collapsible"><span class="caption" style="margin-left:-1.5em;">'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'</span>';
 
-		$chapterContent .= '<br/><p class="well">
-			<span class="downloadlink"><a href=""><img src="images/slide.png"/></a></span>
-			<span class="downloadlink"><a href=""><img src="images/video.png"></a></span>
-		</p>';
+		// create a lecture list
+		$lectIdx = 0;
+		foreach ($chapter->lectures as $lecture)
+		{
+			$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
+		}
+		$lecturesTabContent .= '</ul>';
 	}
-	$displayChapters[] = array(
-		'label' => 'Chapter '.$chapIdx,
-		'content' => '<p>'.$chapterContent.'</p>',
-		'active' => ($chapIdx == 1)? true: false,
-	);
-}
-// create contents of the lecture tab 
-$lecturesTab = array(
+	echo $lecturesTabContent;
+
+// create contant of the lecture tab
+/*$lecturesTab = array(
 	'label' => 'Lecture',
-	'content' => $this->widget('bootstrap.widgets.BootTabbable', array(
-		'type'=>'tabs',
-		'placement'=>'left', 
-		'tabs'=> $displayChapters,
-	), true),
+	'content' => $lecturesTabContent,
 	'active' => true,
 );
 
@@ -130,5 +112,5 @@ $this->widget('bootstrap.widgets.BootTabbable', array(
 	'type'=>'tabs',
 	'placement' => 'top',
 	'tabs' => $courseTabs,
-));
+));*/
 ?>
