@@ -37,5 +37,6 @@ return array(
 	'Instructor' => 'ผู้สอน',
 	'Course Logistics' => 'เนื้อหาของคอร์ส', 
 	'Chapter' => 'บทที่',
-	'and {numIns} others.' => 'และอีก {numIns} คน'
+	'and {numIns} others.' => 'และอีก {numIns} คน',
+	'Take Course' => 'เรียนคอร์สนี้',
 );
