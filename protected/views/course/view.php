@@ -25,7 +25,7 @@ $this->breadcrumbs=array(
 	'label' => Yii::t('site', 'Take Course'),
 	'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	'size' => 'large', // '', 'large', 'small' or 'mini'
-	'htmlOptions' => array('onclick' => 'window.location.href="index.php?r=course/inclass&id=1"'),
+	'htmlOptions' => array('onclick' => 'window.location.href="'.Yii::app()->getBaseUrl(true).'/course/inclass/'.$model->id.'"'),
 )); ?>
 <br/>
 <br/>
