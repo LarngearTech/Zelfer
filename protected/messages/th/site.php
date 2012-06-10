@@ -7,6 +7,7 @@ return array(
 	'Login' => 'เข้าสู่ระบบ',
 	'Logout' => 'ออกจากระบบ',
 	'By' => 'โดย',
+	'and' => 'และ',
 
 	// General Form 
 	'Fields with' => 'ช่องที่มีเครื่องหมาย',
@@ -30,4 +31,11 @@ return array(
 	// Footer
 	'Copyright' => 'ลิขสิทธิ์',
 	'All Rights Reserved.' => 'สงวนลิขสิทธิ์',
+
+	// Application Specific
+	'Course Summary' => 'เกี่ยวกับคอร์ส',
+	'Instructor' => 'ผู้สอน',
+	'Course Logistics' => 'เนื้อหาของคอร์ส', 
+	'Chapter' => 'บทที่',
+	'and {numIns} others.' => 'และอีก {numIns} คน'
 );

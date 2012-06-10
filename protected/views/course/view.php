@@ -7,9 +7,16 @@ $this->breadcrumbs=array(
 
 <h1><?php echo CHtml::encode($model->name); ?></h1>
 <h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->instructors[0]->fullname); 
-	if (count($model->instructors) > 1)
+	$numIns = count($model->instructors);
+	if ($numIns == 2)
 	{
-		echo CHtml::encode(" et al.");
+		echo ' '.Yii::t('site', 'and').' '.CHtml::encode($model->instructors[1]->fullname);
+	}
+	else if ($numIns > 2)
+	{
+		echo ' '.Yii::t('site', 'and {numIns} others.', array(
+			'{numIns}' => $numIns
+		));
 	}?>
 </h3>
 <br/>
@@ -60,15 +67,17 @@ $this->breadcrumbs=array(
 	<?php
 		foreach ($model->courseInstructors as $instructorRecord)
 		{
-			echo '<li>'.$instructorRecord['fullname'].'</li>';
-			echo '<li>'.$instructorRecord['instructor_career'].'</li>';
-			echo '<li>'.$instructorRecord['instructor_description'].'</li>';
+			echo '
+			<li><h3>'.$instructorRecord['fullname'].'</h3>'.
+				'<h4>'.$instructorRecord['instructor_career'].'</h4>'.
+				'<br/>'.$instructorRecord['instructor_description'].'</br>
+			</li>';
 		}
 	?>
 	</ul>
 </div>
 <div id="course-syllabus">
-	<h2><?php echo Yii::t('site', 'Syllabus');?></h2>
+	<h2><?php echo Yii::t('site', 'Course Logistics');?></h2>
 	<?php
 	// create contents for the lecture tab 
 	$this->widget('ext.slidetoggle.ESlidetoggle', array(
