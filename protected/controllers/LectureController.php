@@ -302,9 +302,9 @@ class LectureController extends Controller
 			if (isset($_POST['uploadDone']))
 			{
 				$this->redirect(array('create', 
-								'lectureId'=>$model->id,
-								'chapterId'=>$model->chapter_id,
-								'courseId' =>$model->chapter->course->id));	
+						'lectureId'=>$model->id,
+						'chapterId'=>$model->chapter_id,
+						'courseId' =>$model->chapter->course->id));	
 			}
 
 			$uploaderUrl = Yii::app()->baseUrl.'/protected/scripts/upload/upload_widgets.php?'.
@@ -351,7 +351,9 @@ class LectureController extends Controller
 	public function actionShowEncodeResult($lectureId)
 	{
 		$model = $this->loadModel($lectureId);
-		echo "Complete for lecture $model->name";
+		echo "<img src=$model->thumbnailUrl />";
+		echo $model->getVideoObject("flash");
+		//echo "Complete for lecture $model->name";
 	}
 
 	/**
