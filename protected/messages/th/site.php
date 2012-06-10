@@ -33,6 +33,7 @@ return array(
 	'All Rights Reserved.' => 'สงวนลิขสิทธิ์',
 
 	// Application Specific
+	'Courses' => 'คอร์ส',
 	'Course Summary' => 'เกี่ยวกับคอร์ส',
 	'Instructor' => 'ผู้สอน',
 	'Course Logistics' => 'เนื้อหาของคอร์ส', 

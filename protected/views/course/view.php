@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Courses'=>array('index'),
+	Yii::t('site', 'Courses') => array('index'),
 	$model->name,
 );
 ?>
@@ -25,6 +25,7 @@ $this->breadcrumbs=array(
 	'label' => Yii::t('site', 'Take Course'),
 	'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
 	'size' => 'large', // '', 'large', 'small' or 'mini'
+	'htmlOptions' => array('onclick' => 'window.location.href="index.php?r=course/inclass&id=1"'),
 )); ?>
 <br/>
 <br/>
@@ -108,25 +109,5 @@ $this->breadcrumbs=array(
 		$lecturesTabContent .= '</ul>';
 	}
 	echo $lecturesTabContent;
-
-// create contant of the lecture tab
-/*$lecturesTab = array(
-	'label' => 'Lecture',
-	'content' => $lecturesTabContent,
-	'active' => true,
-);
-
-// create contents of the problem set tab
-$problemSetsTab = array(
-	'label' => 'Problem Set',
-	'content' => 'problemset',
-);
-
-// create course tabs including lecture and problem set tabs.
-$courseTabs = array($lecturesTab, $problemSetsTab);
-$this->widget('bootstrap.widgets.BootTabbable', array(
-	'type'=>'tabs',
-	'placement' => 'top',
-	'tabs' => $courseTabs,
-));*/
 ?>
+</div>

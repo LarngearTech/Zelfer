@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Courses'=>array('index'),
+	Yii::t('site', 'Courses') => array('index'),
 	$model->name,
 );
 ?>
@@ -20,9 +20,7 @@ $this->breadcrumbs=array(
 	}?>
 </h3>
 <br/>
-</div>
 <div id="course-syllabus">
-	<h2><?php echo Yii::t('site', 'Course Logistics');?></h2>
 	<?php
 	// create contents for the lecture tab 
 	$this->widget('ext.slidetoggle.ESlidetoggle', array(
@@ -45,10 +43,9 @@ $this->breadcrumbs=array(
 		}
 		$lecturesTabContent .= '</ul>';
 	}
-	echo $lecturesTabContent;
 
 // create contant of the lecture tab
-/*$lecturesTab = array(
+$lecturesTab = array(
 	'label' => 'Lecture',
 	'content' => $lecturesTabContent,
 	'active' => true,
@@ -66,5 +63,6 @@ $this->widget('bootstrap.widgets.BootTabbable', array(
 	'type'=>'tabs',
 	'placement' => 'top',
 	'tabs' => $courseTabs,
-));*/
+));
 ?>
+</div>
