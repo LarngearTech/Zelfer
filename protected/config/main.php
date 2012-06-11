@@ -43,7 +43,7 @@ return array(
 			'class' => 'WebUser',
 		),
 		// uncomment the following to enable URLs in path-format
-		'urlManager'=>array(
+		/*'urlManager'=>array(
 			'urlFormat'=>'path',
 			'showScriptName' => false,
 			'rules'=>array(
@@ -51,7 +51,7 @@ return array(
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
-		),
+		),*/
 		// uncomment the following to use a SQLite database
 		/*
 		'db'=>array(
