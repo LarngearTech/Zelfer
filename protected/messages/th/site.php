@@ -39,6 +39,7 @@ return array(
 	'Course Logistics' => 'เนื้อหาของคอร์ส', 
 	'Chapter' => 'บทที่',
 	'and {numIns} others.' => 'และอีก {numIns} คน',
-	'Take Course' => 'เรียนคอร์สนี้',
+	'Go to course' => 'เข้าสู่คอร์ส',
+	'Take course' => 'เรียนคอร์สนี้',
 	'This lecture has a date and description' => 'เลขเชอร์นี้มีวันที่และคำอธิบาย',
 );

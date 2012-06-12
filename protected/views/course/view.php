@@ -21,12 +21,31 @@ $this->breadcrumbs=array(
 </h3>
 <br/>
 <p class="well"><?php echo CHtml::encode($model->short_description); ?></p>
-<?php $this->widget('bootstrap.widgets.BootButton', array(
-	'label' => Yii::t('site', 'Take Course'),
-	'type' => 'primary', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-	'size' => 'large', // '', 'large', 'small' or 'mini'
-	'htmlOptions' => array('onclick' => 'window.location.href="index.php?r=course/inclass&id='.$model->id.'"'),
-)); ?>
+<?php 
+if (Yii::app()->user->isGuest or !$model->hasStudent(Yii::app()->user->getId()))
+{
+	$this->widget('bootstrap.widgets.BootButton', array(
+		'label' => Yii::t('site', 'Take course'),
+		'type' => 'primary',
+		'size' => 'large', 
+		'htmlOptions' => array(
+			'onclick' => 'window.location.href="index.php?r=course/inclass&id='.$model->id.'"'
+		),
+	));
+
+}
+else
+{
+	$this->widget('bootstrap.widgets.BootButton', array(
+		'label' => Yii::t('site', 'Go to course'),
+		'type' => 'primary',
+		'size' => 'large', 
+		'htmlOptions' => array(
+			'onclick' => 'window.location.href="index.php?r=course/inclass&id='.$model->id.'"'
+		),
+	));
+}
+?>
 <br/>
 <br/>
 <?php $this->widget('application.extensions.videojs.EVideoJS', array(

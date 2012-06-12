@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2012 at 03:50 PM
+-- Generation Time: Jun 12, 2012 at 08:45 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -123,6 +123,30 @@ INSERT INTO `course` (`id`, `name`, `short_description`, `long_description`, `ca
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `course_open`
+--
+
+CREATE TABLE IF NOT EXISTS `course_open` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL,
+  `open_status_id` int(1) NOT NULL,
+  `start_date` date NOT NULL,
+  `duration` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `course_id` (`course_id`),
+  KEY `open_status_id` (`open_status_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `course_open`
+--
+
+INSERT INTO `course_open` (`id`, `course_id`, `open_status_id`, `start_date`, `duration`) VALUES
+(1, 1, 1, '2012-06-12', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `instructor_course`
 --
 
@@ -133,9 +157,8 @@ CREATE TABLE IF NOT EXISTS `instructor_course` (
   `instructor_career` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `instructor_description` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`,`course_id`),
-  KEY `user_id_2` (`user_id`),
-  KEY `course_id` (`course_id`)
+  KEY `course_id` (`course_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
@@ -157,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `lecture` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `chapter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `lecture`
@@ -167,7 +190,30 @@ INSERT INTO `lecture` (`id`, `name`, `chapter_id`) VALUES
 (1, 'สัญกรณ์โอใหญ่', 2),
 (2, 'อัตราการเติบโตของฟังก์ชัน', 2),
 (3, 'อาเรย์และรายการเชื่อมโยง', 3),
-(4, 'อัลกอริทึมคืออะไร', 1);
+(4, 'อัลกอริทึมคืออะไร', 1),
+(5, 'Lecture XYZ', 1),
+(6, 'test3', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `open_status`
+--
+
+CREATE TABLE IF NOT EXISTS `open_status` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `name` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `open_status`
+--
+
+INSERT INTO `open_status` (`id`, `name`) VALUES
+(1, 'open'),
+(2, 'close'),
+(3, 'running');
 
 -- --------------------------------------------------------
 
@@ -201,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `student_course` (
 --
 
 INSERT INTO `student_course` (`id`, `user_id`, `course_id`) VALUES
-(1, 4, 1);
+(1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -217,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role` int(2) NOT NULL,
   `status` tinyint(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `user`
@@ -225,9 +271,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `email`, `password`, `fullname`, `role`, `status`) VALUES
 (1, 'admin@zelfer.com', '$2a$08$AlQ93iTsZOZ6vQv7CRiwheS3gh16gRw5e2Ngw6q5qVc/PkVPQ0DHC', 'admin', 1, 1),
-(2, 'demo@zelfer.com', '$2a$08$gA137nB8.aZqbRBNjbur3OXWlyf7zv8MWnzFVzge06IPTNnJKFXdi', 'demo', 2, 1),
-(3, 'supasate@larngeartech.com', '$2a$08$AKg6hDbIfIiFr6V3oOWJfePA9N0VkdP4VsJ5zE7RN3Ih7o8GcJm3e', 'Supasate Choochaisri', 1, 1),
-(4, 'arnupharp@larngeartech.com', '$2a$08$bk.rXiSEhRLiYVgwrKHw3OzeZYWixlPVbcKvuYEQpnuZjIbIFuXsa', 'Arnupharp Viratanapanu', 1, 1);
+(2, 'demo@zelfer.com', '$2a$08$gA137nB8.aZqbRBNjbur3OXWlyf7zv8MWnzFVzge06IPTNnJKFXdi', 'demo', 2, 1);
 
 -- --------------------------------------------------------
 

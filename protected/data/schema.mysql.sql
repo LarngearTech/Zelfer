@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2012 at 03:49 PM
+-- Generation Time: Jun 12, 2012 at 08:46 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3.1
 
@@ -94,6 +94,23 @@ CREATE TABLE IF NOT EXISTS `course` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `course_open`
+--
+
+CREATE TABLE IF NOT EXISTS `course_open` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL,
+  `open_status_id` int(1) NOT NULL,
+  `start_date` date NOT NULL,
+  `duration` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `course_id` (`course_id`),
+  KEY `open_status_id` (`open_status_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `instructor_course`
 --
 
@@ -104,9 +121,8 @@ CREATE TABLE IF NOT EXISTS `instructor_course` (
   `instructor_career` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `instructor_description` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`,`course_id`),
-  KEY `user_id_2` (`user_id`),
-  KEY `course_id` (`course_id`)
+  KEY `course_id` (`course_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
@@ -120,7 +136,19 @@ CREATE TABLE IF NOT EXISTS `lecture` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `chapter_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `open_status`
+--
+
+CREATE TABLE IF NOT EXISTS `open_status` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `name` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -163,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `role` int(2) NOT NULL,
   `status` tinyint(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
