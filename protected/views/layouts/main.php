@@ -27,12 +27,13 @@
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label' => Yii::t('site', 'Home'), 'url'=>array('/site/index')),
-				array('label' => Yii::t('site', 'About'), 'url'=>array('/site/page', 'view'=>'about')),
-				array('label' => Yii::t('site', 'Contact'), 'url'=>array('/site/contact')),
-				array('label' => Yii::t('site', 'Login'), 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label' => Yii::t('site', 'Logout').' ('.Yii::app()->user->fullname.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+			'items' => array(
+				array('label' => Yii::t('site', 'Home'), 'url' => array('/site/index')),
+				array('label' => Yii::t('site', 'About'), 'url' => array('/site/page', 'view'=>'about')),
+				array('label' => Yii::t('site', 'Contact'), 'url' => array('/site/contact')),
+				array('label' => Yii::t('site', 'My Courses'), 'url' => array('/user/mycourses'), 'visible' => !Yii::app()->user->isGuest),
+				array('label' => Yii::t('site', 'Login'), 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+				array('label' => Yii::t('site', 'Logout').' ('.Yii::app()->user->fullname.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->

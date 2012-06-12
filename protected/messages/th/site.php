@@ -35,6 +35,7 @@ return array(
 	'All Rights Reserved.' => 'สงวนลิขสิทธิ์',
 
 	// Application Specific
+	'My Courses' => 'คอร์สที่สมัคร',
 	'Courses' => 'คอร์ส',
 	'Course Summary' => 'เกี่ยวกับคอร์ส',
 	'Instructor' => 'ผู้สอน',
