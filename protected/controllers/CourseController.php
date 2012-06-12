@@ -27,7 +27,7 @@ class CourseController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','inclass'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -59,6 +59,21 @@ class CourseController extends Controller
 		));
 	}
 
+	/**
+	 * Displays a class view if a user has already taken the course.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionInclass($id)
+	{
+		echo $id;
+		// get all chapters of a specified course id 
+		// with all corresponding lectures
+		$chapters = Chapter::model()->with('lectures')->findAll('course_id=:courseID', array(':courseID'=>$id));
+		$this->render('in_class',array(
+			'model' => $this->loadModel($id),
+			'chapters' => $chapters,
+		));
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.

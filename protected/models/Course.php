@@ -121,4 +121,19 @@ class Course extends CActiveRecord
 	{
 		return $this->thumbnailUrl;
 	}
+
+	/**
+	 * Return All record
+	 * @return array 
+	 */
+	public function getCourseInstructors()
+	{
+		$sql = 'SELECT instructor_course.instructor_career, instructor_course.instructor_description, user.fullname
+		FROM instructor_course
+		INNER JOIN user ON user.id = instructor_course.user_id
+		WHERE instructor_course.course_id = '.$this->id;
+
+		$rows = Yii::app()->db->createCommand($sql)->queryAll();
+		return $rows;
+	}
 }
