@@ -26,11 +26,12 @@ class LectureController extends Controller
 				throw new CHttpException(500, "Failed to create $streamingPath folder."); 
 			}
 		}
-
+		
 		// Option information
 		$encode_video	=	$encodeOption->encode_video;
 		$sync_slides	=	$encodeOption->sync_slides;
 		$format		=	$encodeOption->format;
+		$scene_annotation_data =$encodeOption->scene_annotation_data; 
 
 		$encode_for_mobile = 'n';
 
@@ -97,7 +98,7 @@ class LectureController extends Controller
 
 			system("chmod -R 700 \"$streamingPath\"");
 		}
-
+		
 		if($encode_video=='n' || $format=="openclassroom" || file_exists("$streamingPath/TrackingParameters.txt"))
 		{
 			// Create the video_encoding.txt and/or slide_encoding.txt files in the streaming folder.
@@ -123,7 +124,8 @@ class LectureController extends Controller
 	
 			if($format == 'classx' && $encode_video == 'y') 
 			{
-				$encode_for_mobile = 'y';
+				// Need to be fixed, just disable mobile encoding for the time being
+				$encode_for_mobile = 'n';
 			} 
 			else 
 			{
@@ -141,7 +143,7 @@ class LectureController extends Controller
 	
 			// -----------------------------------------------------------------------------------
 			// It all comes down to this!!!
-
+			
 			system("perl $scriptPath/encode.pl \"$inputPath\" \"$encodingPath\" \"$streamingPath\" \"$pipelinePath\" $format $encode_video $sync_slides $encode_for_mobile >/dev/null 2>/dev/null &");
 
 			$fid=fopen(Yii::app()->basePath.'/../CX_Log.txt','w'); fwrite($fid,"perl $scriptPath/encode.pl \"$inputPath\" \"$encodingPath\" \"$streamingPath\" \"$pipelinePath\" $format $encode_video $sync_slides $encode_for_mobile >/dev/null 2>/dev/null &\n"); 
@@ -158,7 +160,7 @@ class LectureController extends Controller
 		}
 		else 
 		{
-			echo "failure";
+			throw new CHttpException(500, "Cannot dispatch this request to available encoder.");
 		}
 	}
 
@@ -334,9 +336,9 @@ class LectureController extends Controller
 		}
 		else
 		{
+
 			if (isset($_POST['EncodeVideoOptionForm']))
 			{
-				//print_r($_POST);
 				$encodeOption->attributes = $_POST['EncodeVideoOptionForm'];
 				$this->dispatchEncode($model, $encodeOption);
 			}

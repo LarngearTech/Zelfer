@@ -31,8 +31,8 @@ if(!file_exists($snapshot_path)) {
 }
 
 $has_encoded_video=(file_exists("$streamingPath/video_complete.txt"))?('y'):('n');
+$check_openclassroom=''; $check_classx='';
 if($has_encoded_video=='y') {
-	$check_openclassroom=''; $check_classx='';
 	if(file_exists("$streamingPath/encodedVideo.mp4")) { $check_openclassroom='checked'; }
 	else { $check_classx='checked'; }
 }
@@ -77,28 +77,28 @@ $has_presentations=(sizeof($presentation_files)>0)?('y'):('n');
 			?>
 				<table style='width:700px;'>
 					<tr><td style='font-family:Arial;font-weight:bold;font-size:12pt;'>Output video format:</td></tr>
-					<tr><td style='font-family:Arial;'><?php echo $form->radioButton($encodeOption, 'format', array('id'=>'format_openclassroom', 'onclick'=>'UpdateFormControls()', 'value'=>'openclassroom', $check_openclassroom)) ?>Standard: Plays back as a 960x540 video with no pan/zoom features</td></tr>
-					<tr><td style='font-family:Arial;'><?php echo $form->radioButton($encodeOption, 'format', array('id'=>'format_classx', 'onclick'=>'UpdateFormControls()', 'value'=>'classx', $check_classx)) ?>Interactive: HD with pan/zoom features and automatic lecturer tracking</td></tr>				
+					<tr><td style='font-family:Arial;'><?php echo $form->radioButton($encodeOption, 'format', array('id'=>'format_openclassroom', 'onclick'=>'UpdateFormControls()', 'value'=>'openclassroom', 'uncheckValue'=>null, $check_openclassroom)) ?>Standard: Plays back as a 960x540 video with no pan/zoom features</td></tr>
+					<tr><td style='font-family:Arial;'><?php echo $form->radioButton($encodeOption, 'format', array('id'=>'format_classx', 'onclick'=>'UpdateFormControls()', 'value'=>'classx', 'uncheckValue'=>null, $check_classx)) ?>Interactive: HD with pan/zoom features and automatic lecturer tracking</td></tr>				
 				</table>
 			<?php
 			} else { ?>
 				<?php echo $form->hiddenField($encodeOption, 'format', array('value'=>'openclassroom')) ?>
 			<?php } ?>
-				<div id='annotation_div' style='width:750px;height:500px;display:block;'>
-					<p style="font-family:Arial;font-weight:bold;font-size:12pt;">Please draw rectangles around any boards or slide projections in the scene:</p>
-					<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="730" height="450">
-						<param name="source" value="<?php echo Yii::app()->baseUrl.'/protected/scripts/SceneAnnotationTool.xap'; ?>"/>
-						<param name="InitParams" value="<?php echo "snapshotPath=$snapshot_web_path"; ?>" />
-						<param name="onError" value="onSilverlightError" />
-						<param name="background" value="white" />
-						<param name="minRuntimeVersion" value="3.0.40818.0" />
-						<param name="autoUpgrade" value="true" />
-						<a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=3.0.40818.0" style="text-decoration:none">
+			<div id='annotation_div' style='width:750px;height:500px;display:block;'>
+				<p style="font-family:Arial;font-weight:bold;font-size:12pt;">Please draw rectangles around any boards or slide projections in the scene:</p>
+				<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="730" height="450">
+					<param name="source" value="<?php echo Yii::app()->baseUrl.'/protected/scripts/SceneAnnotationTool.xap'; ?>"/>
+					<param name="InitParams" value="<?php echo "snapshotPath=$snapshot_web_path"; ?>" />
+					<param name="onError" value="onSilverlightError" />
+					<param name="background" value="white" />
+					<param name="minRuntimeVersion" value="3.0.40818.0" />
+					<param name="autoUpgrade" value="true" />
+					<a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=3.0.40818.0" style="text-decoration:none">
 							<img src="http://go.microsoft.com/fwlink/?LinkId=108181" alt="Get Microsoft Silverlight" style="border-style:none"/>
-						</a>
-					</object>
-				</div><!-- annotation_div -->
-				<?php echo $form->hiddenField($encodeOption, 'scene_annotation_data', array('id'=>'scene_annotation_data', 'value'=>'')) ?>
+					</a>
+				</object>
+			</div><!-- annotation_div -->
+			<?php echo $form->hiddenField($encodeOption, 'scene_annotation_data', array('id'=>'scene_annotation_data', 'value'=>'')) ?>
 			</div><!-- video_options_div -->
 
 			<?php
