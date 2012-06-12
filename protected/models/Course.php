@@ -132,7 +132,6 @@ class Course extends CActiveRecord
 			FROM instructor_course
 			INNER JOIN user ON user.id = instructor_course.user_id
 			WHERE instructor_course.course_id = '.$this->id;
-
 		$rows = Yii::app()->db->createCommand($sql)->queryAll();
 		return $rows;
 	}

@@ -17,6 +17,7 @@ return array(
 	'Please enter the letters as they are shown in the image above.' => 'กรุณาพิมพ์ตัวอักษรที่เห็นในภาพข้างบน',
 	'Letters are not case-sensitive.' => 'พิมพ์ตัวอักษรเล็กหรือใหญ่ก็ได้',
 	'The verification code is incorrect.' => 'รหัสยืนยันไม่ถูกต้อง',
+	'Remember me next time' => 'จดจำสำหรับครั้งถัดไป',
 	'Submit' => 'ส่งข้อมูล',
 
 	// Contact Form
@@ -25,6 +26,7 @@ return array(
 	// Fields
 	'Name' => 'ชื่อ',
 	'Email' => 'อีเมล',
+	'Password' => 'พาสเวิร์ด',
 	'Subject' => 'หัวเรื่อง',
 	'Body' => 'ข้อความ',
 
