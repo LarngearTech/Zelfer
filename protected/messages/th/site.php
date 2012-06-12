@@ -40,4 +40,5 @@ return array(
 	'Chapter' => 'บทที่',
 	'and {numIns} others.' => 'และอีก {numIns} คน',
 	'Take Course' => 'เรียนคอร์สนี้',
+	'This lecture has a date and description' => 'เลขเชอร์นี้มีวันที่และคำอธิบาย',
 );

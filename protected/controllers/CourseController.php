@@ -65,6 +65,7 @@ class CourseController extends Controller
 	 */
 	public function actionInclass($id)
 	{
+		echo $id;
 		// get all chapters of a specified course id 
 		// with all corresponding lectures
 		$chapters = Chapter::model()->with('lectures')->findAll('course_id=:courseID', array(':courseID'=>$id));

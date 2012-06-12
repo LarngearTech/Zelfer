@@ -1,9 +1,9 @@
 <div class="form">
 
 <?php
-	$blueArrowPath =Yii::app()->baseUrl.'/protected/uploads/blue_arrow.png';
-	$yellowMarkPath=Yii::app()->baseUrl.'/protected/uploads/yellow_mark.png';
-	$greenCheckPath=Yii::app()->baseUrl.'/protected/uploads/green_check.png';
+	$blueArrowPath  = Yii::app()->baseUrl.'/images/blue_arrow.png';
+	$yellowMarkPath = Yii::app()->baseUrl.'/images/yellow_mark.png';
+	$greenCheckPath = Yii::app()->baseUrl.'/images/green_check.png';
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -17,26 +17,26 @@
 			<?php
 				if ($model->step1Complete)
 				{
-					$image_src=$greenCheckPath;
-					$lower_cell_content="This lecture has a date and description (" .
+					$image_src = $greenCheckPath;
+					$lower_cell_content = Yii::t('site', 'This lecture has a date and description').' (' .
 					CHtml::link('Click here to edit',
 						    array('lecture/editInfo',
-							'lectureId'=>$model->id,
-							'chapterId'=>$chapterId,
-							'courseId' =>$courseId,
-							'returnAction'=>$returnAction)) .
+							'lectureId' => $model->id,
+							'chapterId' => $chapterId,
+							'courseId'  => $courseId,
+							'returnAction' => $returnAction)) .
 					") You may continue with the next steps.";
 				}
 				else
 				{
-					$image_src=$blueArrowPath;
-					$lower_cell_content="Please enter a date and description " .
+					$image_src = $blueArrowPath;
+					$lower_cell_content = "Please enter a date and description " .
 					CHtml::link('here',
 						    array('lecture/editInfo',
-							'lectureId'=>$model->id,
-							'chapterId'=>$chapterId,
-							'courseId' =>$courseId,
-							'returnAction'=>$returnAction));
+							'lectureId' => $model->id,
+							'chapterId' => $chapterId,
+							'courseId' => $courseId,
+							'returnAction' => $returnAction));
 				}
 			?>
 			<img src='<?php echo $image_src ?>' width=20 height=20/>
