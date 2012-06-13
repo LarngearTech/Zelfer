@@ -32,15 +32,14 @@ if (Yii::app()->user->isGuest)
 		<h3><?php echo Yii::t('site', 'To take this course, please sign up.');?></h3>
 	</div>
  
+	<?php $userModel = new User; 
+	$form = $this->beginWidget('CActiveForm', array(
+		'id' => 'user-form',
+		'enableAjaxValidation' => false,
+	));?>
 	<div class="modal-body">
-		<p><?php $userModel = new User; 
-			$form = $this->beginWidget('CActiveForm', array(
-				'id' => 'user-form',
-				'enableAjaxValidation' => false,
-			));?>
-
+		<p>
 			<?php echo $form->errorSummary($userModel); ?>
-
 			<div>
 				<?php echo $form->labelEx($userModel,'fullname'); ?>
 				<?php echo $form->textField($userModel,'fullname',array('size'=>60,'maxlength'=>128)); ?>
@@ -64,7 +63,6 @@ if (Yii::app()->user->isGuest)
 				<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
 				<?php echo $form->error($userModel,'repeat_password'); ?>
 			</div>
-			<?php $this->endWidget();?>
 		</p>
 	</div>
  
@@ -81,8 +79,11 @@ if (Yii::app()->user->isGuest)
 			'htmlOptions' => array('data-dismiss'=>'modal'),
 		)); ?>
 	</div>
- 
-	<?php $this->endWidget();
+	<?php 
+	$this->endWidget(); // end ActiveForm widget
+	$this->endWidget(); // end modal widget
+
+	// Take course button
 	$this->widget('bootstrap.widgets.BootButton', array(
 		'label' => Yii::t('site', 'Take course'),
 		'url' => '#signUpModal',
