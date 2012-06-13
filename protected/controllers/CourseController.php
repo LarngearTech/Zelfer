@@ -145,9 +145,9 @@ class CourseController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Course');
+		$dataProvider = new CActiveDataProvider('Course');
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'dataProvider' => $dataProvider,
 		));
 	}
 
@@ -156,14 +156,22 @@ class CourseController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Course('search');
+		$model = new Course('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Course']))
-			$model->attributes=$_GET['Course'];
+			$model->attributes = $_GET['Course'];
 
 		$this->render('admin',array(
-			'model'=>$model,
+			'model' => $model,
 		));
+	}
+
+	/**
+	 * Subscribe to course.
+	 */
+	public function actionSubscribe($id)
+	{
+		echo $id;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 <?php
-$this->breadcrumbs=array(
+$this->breadcrumbs = array(
 	Yii::t('site', 'Courses') => array('index'),
 	$model->name,
 );
@@ -22,7 +22,77 @@ $this->breadcrumbs=array(
 <br/>
 <p class="well"><?php echo CHtml::encode($model->short_description); ?></p>
 <?php 
-if (Yii::app()->user->isGuest or !$model->hasStudent(Yii::app()->user->getId()))
+// If a user is a guest, show 'Take Course' and proceed the sign up.
+if (Yii::app()->user->isGuest)
+{
+	$this->beginWidget('bootstrap.widgets.BootModal', array('id'=>'signUpModal')); ?>
+ 
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">&times;</a>
+		<h3><?php echo Yii::t('site', 'To take this course, please sign up.');?></h3>
+	</div>
+ 
+	<div class="modal-body">
+		<p><?php $userModel = new User; 
+			$form = $this->beginWidget('CActiveForm', array(
+				'id' => 'user-form',
+				'enableAjaxValidation' => false,
+			));?>
+
+			<?php echo $form->errorSummary($userModel); ?>
+
+			<div>
+				<?php echo $form->labelEx($userModel,'fullname'); ?>
+				<?php echo $form->textField($userModel,'fullname',array('size'=>60,'maxlength'=>128)); ?>
+				<?php echo $form->error($userModel,'fullname'); ?>
+			</div>
+
+			<div>
+				<?php echo $form->labelEx($userModel,'email'); ?>
+				<?php echo $form->textField($userModel,'email',array('size'=>60,'maxlength'=>128)); ?>
+				<?php echo $form->error($userModel,'email'); ?>
+			</div>
+
+			<div>
+				<?php echo $form->labelEx($userModel,'password'); ?>
+				<?php echo $form->passwordField($userModel,'password',array('size'=>60,'maxlength'=>128)); ?>
+				<?php echo $form->error($userModel,'password'); ?>
+			</div>
+
+			<div>
+				<?php echo $form->labelEx($userModel,'repeat_password'); ?>
+				<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
+				<?php echo $form->error($userModel,'repeat_password'); ?>
+			</div>
+			<?php $this->endWidget();?>
+		</p>
+	</div>
+ 
+	<div class="modal-footer">
+		<?php $this->widget('bootstrap.widgets.BootButton', array(
+			'type' => 'primary',
+			'label' => Yii::t('site', 'Sign Up'),
+			'url' => '#',
+			'htmlOptions' => array('data-dismiss'=>'modal'),
+		)); ?>
+		<?php $this->widget('bootstrap.widgets.BootButton', array(
+			'label' => Yii::t('site', 'Cancel'),
+			'url' => '#',
+			'htmlOptions' => array('data-dismiss'=>'modal'),
+		)); ?>
+	</div>
+ 
+	<?php $this->endWidget();
+	$this->widget('bootstrap.widgets.BootButton', array(
+		'label' => Yii::t('site', 'Take course'),
+		'url' => '#signUpModal',
+		'type' => 'primary',
+		'size' => 'large',
+		'htmlOptions'=>array('data-toggle'=>'modal'),
+	));
+}
+// If a user does not enroll in a class, show 'Take course' to enroll.
+else if (!$model->hasStudent(Yii::app()->user->getId()))
 {
 	$this->widget('bootstrap.widgets.BootButton', array(
 		'label' => Yii::t('site', 'Take course'),
@@ -32,8 +102,8 @@ if (Yii::app()->user->isGuest or !$model->hasStudent(Yii::app()->user->getId()))
 			'onclick' => 'window.location.href="index.php?r=course/inclass&id='.$model->id.'"'
 		),
 	));
-
 }
+// If a user is already enrolled in a class, show 'Go to course'.
 else
 {
 	$this->widget('bootstrap.widgets.BootButton', array(
