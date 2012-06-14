@@ -68,6 +68,8 @@ if (Yii::app()->user->isGuest)
 					<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
 					<?php echo $form->error($userModel,'repeat_password'); ?>
 				</div>
+				<?php echo CHtml::hiddenField('returnUrl', 'index.php?r=course/inclass&id='.$model->id);?>
+				
 			</p>
 		</div>
  

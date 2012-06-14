@@ -62,7 +62,6 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model = new User;
-		$returnUrl = Yii::app()->user->returnUrl;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -74,18 +73,30 @@ class UserController extends Controller
 			$model->status = 1;
 			if($model->save())
 			{
-				//$this->redirect(array('view','id'=>$model->id));
-				$identity = new UserIdentity($model->email, $_POST['User']['password']);
-				$identity->authenticate();
-				if($identity->errorCode === UserIdentity::ERROR_NONE)
+				// auto log-in after registration
+				if (Yii::app()->user->isGuest)
 				{
-					$duration = 0; // no remember
-					Yii::app()->user->login($identity, $duration);
-					$this->redirect($returnUrl);
+					$identity = new UserIdentity($model->email, $_POST['User']['password']);
+					$identity->authenticate();
+					if($identity->errorCode === UserIdentity::ERROR_NONE)
+					{
+						$duration = 0; // no remember
+						Yii::app()->user->login($identity, $duration);
+
+						// redirect to the page before registration
+						if (isset($_POST['returnUrl']))
+						{
+							$this->redirect($_POST['returnUrl']);
+						}
+					}
+					else
+					{
+						// show error here
+					}
 				}
 				else
 				{
-					// do nothing
+					$this->redirect(array('view','id'=>$model->id));
 				}
 			}
 		}
