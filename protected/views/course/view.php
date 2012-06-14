@@ -33,54 +33,62 @@ if (Yii::app()->user->isGuest)
 	</div>
  
 	<?php $userModel = new User; 
-	$form = $this->beginWidget('CActiveForm', array(
+	/*$form = $this->beginWidget('CActiveForm', array(
 		'id' => 'user-form',
 		'enableAjaxValidation' => false,
-	));?>
-	<div class="modal-body">
-		<p>
-			<?php echo $form->errorSummary($userModel); ?>
-			<div>
-				<?php echo $form->labelEx($userModel,'fullname'); ?>
-				<?php echo $form->textField($userModel,'fullname',array('size'=>60,'maxlength'=>128)); ?>
-				<?php echo $form->error($userModel,'fullname'); ?>
-			</div>
+	));*/
+	$form = $this->beginWidget('bootstrap.widgets.BootActiveForm', array(
+		'id' => 'user-form',
+		'enableClientValidation' => true,
+		'clientOptions' => array(
+			'validateOnSubmit' => true,
+		),
+	));
+	?>
+		<div class="modal-body">
+			<p>
+				<?php echo $form->errorSummary($userModel); ?>
+				<div>
+					<?php echo $form->labelEx($userModel,'fullname'); ?>
+					<?php echo $form->textField($userModel,'fullname',array('size'=>60,'maxlength'=>128)); ?>
+					<?php echo $form->error($userModel,'fullname'); ?>
+				</div>
 
-			<div>
-				<?php echo $form->labelEx($userModel,'email'); ?>
-				<?php echo $form->textField($userModel,'email',array('size'=>60,'maxlength'=>128)); ?>
-				<?php echo $form->error($userModel,'email'); ?>
-			</div>
+				<div>
+					<?php echo $form->labelEx($userModel,'email'); ?>
+					<?php echo $form->textField($userModel,'email',array('size'=>60,'maxlength'=>128)); ?>
+					<?php echo $form->error($userModel,'email'); ?>
+				</div>
 
-			<div>
-				<?php echo $form->labelEx($userModel,'password'); ?>
-				<?php echo $form->passwordField($userModel,'password',array('size'=>60,'maxlength'=>128)); ?>
-				<?php echo $form->error($userModel,'password'); ?>
-			</div>
+				<div>
+					<?php echo $form->labelEx($userModel,'password'); ?>
+					<?php echo $form->passwordField($userModel,'password',array('size'=>60,'maxlength'=>128)); ?>
+					<?php echo $form->error($userModel,'password'); ?>
+				</div>
 
-			<div>
-				<?php echo $form->labelEx($userModel,'repeat_password'); ?>
-				<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
-				<?php echo $form->error($userModel,'repeat_password'); ?>
-			</div>
-		</p>
-	</div>
+				<div>
+					<?php echo $form->labelEx($userModel,'repeat_password'); ?>
+					<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
+					<?php echo $form->error($userModel,'repeat_password'); ?>
+				</div>
+			</p>
+		</div>
  
-	<div class="modal-footer">
-		<?php $this->widget('bootstrap.widgets.BootButton', array(
-			'type' => 'primary',
-			'label' => Yii::t('site', 'Sign Up'),
-			'url' => '#',
-			'htmlOptions' => array('data-dismiss'=>'modal'),
-		)); ?>
-		<?php $this->widget('bootstrap.widgets.BootButton', array(
-			'label' => Yii::t('site', 'Cancel'),
-			'url' => '#',
-			'htmlOptions' => array('data-dismiss'=>'modal'),
-		)); ?>
-	</div>
-	<?php 
-	$this->endWidget(); // end ActiveForm widget
+		<div class="modal-footer">
+			<?php $this->widget('bootstrap.widgets.BootButton', array(
+				'buttonType' => 'submit',
+				'type' => 'primary',
+				'label' => Yii::t('site', 'Sign Up'),
+			)); ?>
+			<?php $this->widget('bootstrap.widgets.BootButton', array(
+				'label' => Yii::t('site', 'Cancel'),
+				'url' => '#',
+				'htmlOptions' => array('data-dismiss'=>'modal'),
+			)); ?>
+		</div>
+		<?php 
+		$this->endWidget(); // end ActiveForm widget
+
 	$this->endWidget(); // end modal widget
 
 	// Take course button
