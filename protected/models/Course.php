@@ -129,11 +129,30 @@ class Course extends CActiveRecord
 	public function getCourseInstructors()
 	{
 		$sql = 'SELECT instructor_course.instructor_career, instructor_course.instructor_description, user.fullname
-		FROM instructor_course
-		INNER JOIN user ON user.id = instructor_course.user_id
-		WHERE instructor_course.course_id = '.$this->id;
-
+			FROM instructor_course
+			INNER JOIN user ON user.id = instructor_course.user_id
+			WHERE instructor_course.course_id = '.$this->id;
 		$rows = Yii::app()->db->createCommand($sql)->queryAll();
 		return $rows;
+	}
+
+	/**
+	 * Check whether $userId is already taken the course.
+	 * @return boolean true if $userId is in class, else, false.
+	 */
+	public function hasStudent($userId)
+	{
+		$sql = 'SELECT 1 FROM student_course 
+			WHERE course_id='.$this->id.'
+			AND user_id='.$userId;
+		$result = Yii::app()->db->createCommand($sql)->queryAll();
+		if (count($result) > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

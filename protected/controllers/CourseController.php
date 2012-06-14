@@ -65,7 +65,6 @@ class CourseController extends Controller
 	 */
 	public function actionInclass($id)
 	{
-		echo $id;
 		// get all chapters of a specified course id 
 		// with all corresponding lectures
 		$chapters = Chapter::model()->with('lectures')->findAll('course_id=:courseID', array(':courseID'=>$id));
@@ -155,9 +154,9 @@ class CourseController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Course');
+		$dataProvider = new CActiveDataProvider('Course');
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'dataProvider' => $dataProvider,
 		));
 	}
 
@@ -166,14 +165,22 @@ class CourseController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Course('search');
+		$model = new Course('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Course']))
-			$model->attributes=$_GET['Course'];
+			$model->attributes = $_GET['Course'];
 
 		$this->render('admin',array(
-			'model'=>$model,
+			'model' => $model,
 		));
+	}
+
+	/**
+	 * Subscribe to course.
+	 */
+	public function actionSubscribe($id)
+	{
+		echo $id;
 	}
 
 	/**

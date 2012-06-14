@@ -70,11 +70,12 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'email' => 'Email',
-			'password' => 'Password',
-			'fullname' => 'Full name',
-			'role' => 'Role',
-			'active' => 'Active',
+			'email' => Yii::t('site', 'Email'),
+			'password' => Yii::t('site', 'Password'),
+			'repeat_password' => Yii::t('site', 'Repeat Password'),
+			'fullname' => Yii::t('site', 'Full Name'),
+			'role' => Yii::t('site', 'Role'),
+			'active' => Yii::t('site', 'Active'),
 		);
 	}
 
