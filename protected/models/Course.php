@@ -13,6 +13,9 @@
 class Course extends CActiveRecord
 {
 	const THUMBNAIL_URL_PREFIX = '/asset/thumbnail/';
+	const STATUS_OPEN = 1;
+	const STATUS_CLOSE = 2;
+	const STATUS_RUNNING = 3;
 
 	protected $thumbnailUrl;
 
@@ -155,4 +158,39 @@ class Course extends CActiveRecord
 			return false;
 		}
 	}
+
+	/**
+	 * Get an in-class URL for a subscriber.
+	 * @return string in-class URL
+	 */
+	public function getInClassUrl()
+	{
+		if (self::isStarted())
+		{
+			return 'index.php?r=course/inclass&id='.$this->id;
+		}
+		else
+		{
+			return 'index.php?r=course/view&id='.$this->id;
+		}
+	}
+
+	/**
+	 * Check whether the course has started or not 
+	 * @return boolean true if course has started, else, false
+	 */
+	public function isStarted()
+	{
+		$sql = 'SELECT * FROM course_open WHERE course_id='.$this->id;
+		$rows = Yii::app()->db->createCommand($sql)->queryAll();
+		if (count($rows) > 0)
+		{
+			if ($rows[0]['open_status_id'] == self::STATUS_RUNNING)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
