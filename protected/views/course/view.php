@@ -33,16 +33,13 @@ if (Yii::app()->user->isGuest)
 	</div>
  
 	<?php $userModel = new User; 
-	/*$form = $this->beginWidget('CActiveForm', array(
-		'id' => 'user-form',
-		'enableAjaxValidation' => false,
-	));*/
 	$form = $this->beginWidget('bootstrap.widgets.BootActiveForm', array(
 		'id' => 'user-form',
 		'enableClientValidation' => true,
 		'clientOptions' => array(
 			'validateOnSubmit' => true,
 		),
+		'action' => 'index.php?r=course/create',
 	));
 	?>
 		<div class="modal-body">
