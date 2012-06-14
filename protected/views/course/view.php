@@ -39,7 +39,7 @@ if (Yii::app()->user->isGuest)
 		'clientOptions' => array(
 			'validateOnSubmit' => true,
 		),
-		'action' => 'index.php?r=course/create',
+		'action' => 'index.php?r=user/create',
 	));
 	?>
 		<div class="modal-body">

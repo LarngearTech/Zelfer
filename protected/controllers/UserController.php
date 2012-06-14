@@ -27,19 +27,19 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'actions' => array('index','view','create'),
+				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','mycourses'),
-				'users'=>array('@'),
+				'actions' => array('update','mycourses'),
+				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions' => array('admin','delete'),
+				'users' => array('admin'),
 			),
 			array('deny',  // deny all users
-				'users'=>array('*'),
+				'users' => array('*'),
 			),
 		);
 	}
@@ -61,20 +61,37 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new User;
+		$model = new User;
+		$returnUrl = Yii::app()->user->returnUrl;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['User']))
+		if (isset($_POST['User']))
 		{
-			$model->attributes=$_POST['User'];
+			$model->attributes = $_POST['User'];
+			$model->role = 2;
+			$model->status = 1;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				//$this->redirect(array('view','id'=>$model->id));
+				$identity = new UserIdentity($model->email, $_POST['User']['password']);
+				$identity->authenticate();
+				if($identity->errorCode === UserIdentity::ERROR_NONE)
+				{
+					$duration = 0; // no remember
+					Yii::app()->user->login($identity, $duration);
+					$this->redirect($returnUrl);
+				}
+				else
+				{
+					// do nothing
+				}
+			}
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model' => $model,
 		));
 	}
 
