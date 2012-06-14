@@ -74,6 +74,8 @@ class CourseController extends Controller
 			'chapters' => $chapters,
 		));
 	}
+
+
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -89,7 +91,14 @@ class CourseController extends Controller
 		{
 			$model->attributes=$_POST['Course'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				$thumbnail = CUploadedFile::getInstancesByName('thumbnail');
+				if (isset($thumbnail) && count($thumbnail)===1)
+				{
+					echo "thumbnail uploaded";
+				}
+				// $this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -191,5 +200,11 @@ class CourseController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	
+		
+	private function saveThumbnail($courseId)
+	{
 	}
 }
