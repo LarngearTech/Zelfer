@@ -12,9 +12,8 @@
  */
 class Course extends CActiveRecord
 {
-	const THUMBNAIL_URL_PREFIX = '/asset/thumbnail/';
-
-	protected $thumbnailUrl;
+	protected $_thumbnailUrl;
+	protected $_introUrl;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -33,7 +32,6 @@ class Course extends CActiveRecord
 	protected function afterFind()
 	{
 		parent::afterFind();
-		$this->thumbnailUrl = self::THUMBNAIL_URL_PREFIX.$this->id;
 	}
 
 	/**
@@ -114,13 +112,46 @@ class Course extends CActiveRecord
 		));
 	}
 
+
 	/**
-	 * @return string course's thumbnail URL
+	 * Getter of $_thumbnailUrl
+	 * return null if thumbail url is not found
 	 */
 	public function getThumbnailUrl()
 	{
-		return $this->thumbnailUrl;
+		$path = $this->getResourcePath();
+		if (file_exists("$path/thumbnail"))
+		{
+			$file = fopen("$path/thumbnail", 'r');
+			$this->_thumbnailUrl  = Yii::app()->baseUrl."/course/$this->id/".end(explode('/', fgets($file)));
+			fclose($file);
+			return $this->_thumbnailUrl;
+		}
+		else
+		{
+			return null;
+		}
 	}
+
+	
+	/**
+	 * Getter of $_introUrl
+	 * return null if intro url is not found
+	 */
+	public function getIntroUrl()
+	{
+		$path = $this->getResourcePath();
+		if (file_exists("$path/encodedVideo.mp4"))
+		{
+			$this->_introUrl = Yii::app()->baseUrl."/course/$this->id/encodedVideo.mp4";
+			return $this->_introUrl;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 
 	/**
 	 * Return All record
@@ -155,4 +186,15 @@ class Course extends CActiveRecord
 			return false;
 		}
 	}
+
+	/**
+	 * Return path to resource of course specified by $courseId
+	 * @param integer the ID of course
+	 * @return string resource path
+	 */
+	public function getResourcePath()
+	{
+		return Yii::getPathOfAlias('webroot').'/course/'. $this->id;
+	}
+
 }

@@ -9,6 +9,15 @@ class CourseController extends Controller
 	public $layout='//layouts/column2';
 
 	/**
+	 * @var string location of thumbnail of this course.
+	 */
+	protected $_thumbnailUrl;
+	/**
+	 * @var string location of introduction of this course.
+	 */
+	protected $_introUrl;
+
+	/**
 	 * @return array action filters
 	 */
 	public function filters()
@@ -91,18 +100,30 @@ class CourseController extends Controller
 			$model->attributes=$_POST['Course'];
 			if($model->save())
 			{
-				$thumbnail = CUploadedFile::getInstancesByName('thumbnail');
-				if (isset($thumbnail) && count($thumbnail)===1)
+				$thumbnails = CUploadedFile::getInstancesByName('thumbnails');
+				if (isset($thumbnails) && count($thumbnails)===1)
 				{
-					echo "thumbnail uploaded";
+					foreach ($thumbnails as $key=>$thumbnail)
+					{
+						$this->saveThumbnail($thumbnail, $model->id);
+					}
+				}
+
+				$intros = CUploadedFile::getInstancesByName('introductions');
+				if (isset($intros) && count($intros)===1)
+				{
+					foreach ($intros as $key=>$intro)
+					{
+						$this->saveIntro($intro, $model->id);
+					}
 				}
 				// $this->redirect(array('view','id'=>$model->id));
 			}
 		}
-
+		else{
 		$this->render('create',array(
 			'model'=>$model,
-		));
+		));}
 	}
 
 	/**
@@ -196,6 +217,7 @@ class CourseController extends Controller
 		return $model;
 	}
 
+
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
@@ -209,9 +231,97 @@ class CourseController extends Controller
 		}
 	}
 
-	
 		
-	private function saveThumbnail($courseId)
+	private function saveThumbnail($thumbnail, $courseId)
 	{
+		// Validate courseId
+		$course = $this->loadModel($courseId);
+		if ($course)
+		{
+			// make the directory to store the thumbnail
+			$path = $course->getResourcePath();
+			if(!is_dir($path)) 
+			{
+				mkdir($path, 0775, true);
+			}
+			else
+			{	
+				// remove all previous thumbnail
+				system("rm thumbnail*");
+			}
+
+			if ($thumbnail)
+			{
+				$ext = end(explode('.', $thumbnail->name));
+				$thumbnail->saveAs("$path/thumbnail.$ext");
+
+				// save thumbnail's file name
+				$file = fopen("$path/thumbnail", 'w');
+				fputs($file, "$path/thumbnail.$ext");
+				fclose($file);
+			}
+		}	
+		else
+		{
+			throw new CHttpException(500, "couseId was invalid");
+		}	
+	}
+
+	private function saveIntro($intro, $courseId)
+	{
+		// Validate courseId
+		$course = $this->loadModel($courseId);
+		if ($course)
+		{
+			// make the directory to store the thumbnail
+			$path = $course->getResourcePath();
+			if(!is_dir($path)) 
+			{
+				mkdir($path, 0775, true);
+			}
+			else
+			{	
+				// remove all previous thumbnail
+				system("rm intro*");
+			}
+
+			$inputPath = "$path/input"; 
+			if ($intro)
+			{
+				// make the directory to store the intro file
+				if(!is_dir($inputPath)) 
+				{
+					mkdir($inputPath, 0775, true);
+				}
+				else
+				{	
+					// reset all encoding state
+					if(file_exists("$path/video_complete.txt")) 
+					{
+						system("rm -rf \"$path/video_complete.txt\"");
+					}
+					$FID=fopen("$path/video_encoding.txt",'w');	fclose($FID);
+				}
+
+				if ($intro)
+				{
+					$ext = end(explode('.', $intro->name));
+					$intro->saveAs("$inputPath/intro.$ext");
+					// create a directory to store temporaly encoding data
+					$rand = rand();
+					$encodingPath = $path."/.encoding_{$rand}";
+					mkdir($encodingPath, 0775, true);
+	
+					$scriptPath = Yii::app()->basePath."/scripts";
+					$pipelinePath = "$scriptPath/bin";
+					system("perl $scriptPath/encode.pl \"$inputPath\" \"$encodingPath\" \"$path\" \"$pipelinePath\" openclassroom y n n >/dev/null 2>/dev/null &");
+					echo "perl $scriptPath/encode.pl \"$inputPath\" \"$encodingPath\" \"$path\" \"$pipelinePath\" openclassroom y n n >/dev/null 2>/dev/null &";
+				}
+			}
+		}	
+		else
+		{
+			throw new CHttpException(500, "couseId was invalid");
+		}	
 	}
 }
