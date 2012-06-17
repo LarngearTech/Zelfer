@@ -100,8 +100,17 @@ class CourseController extends Controller
 			}
 		}
 
+		// Query all category
+		$categoryList = array();
+		$data = Category::model()->getDataProvider()->getData();
+		foreach ($data as $category)
+		{
+			$categoryList[$category->id] = $category->name;
+		}
+	
 		$this->render('create',array(
 			'model'=>$model,
+			'categoryList'=>$categoryList,
 		));
 	}
 

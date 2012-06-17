@@ -68,6 +68,24 @@ class Category extends CActiveRecord
 		);
 	}
 
+	
+	/**
+	 * @param CDbCriteria criteria search criteria
+	 * @param integer pagination number of items per page
+	 * @return CActiveDataProvider data provider based on specified search criteria and pagination
+	 **/
+	public function getDataProvider($criteria=null, $pagination=null)
+	{
+ 		if ((is_array ($criteria)) || ($criteria instanceof CDbCriteria) )
+		           $this->getDbCriteria()->mergeWith($criteria);
+        	return new CActiveDataProvider(__CLASS__, array(
+        			                'criteria'=>$this->getDbCriteria(),
+        			                'pagination' => $pagination
+        					));		
+	}
+
+
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
