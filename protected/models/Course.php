@@ -12,9 +12,13 @@
  */
 class Course extends CActiveRecord
 {
-	const THUMBNAIL_URL_PREFIX = '/asset/thumbnail/';
+	protected $_thumbnailUrl;
+	protected $_introUrl;
 
-	protected $thumbnailUrl;
+	const THUMBNAIL_URL_PREFIX = '/asset/thumbnail/';
+	const STATUS_OPEN = 1;
+	const STATUS_CLOSE = 2;
+	const STATUS_RUNNING = 3;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -33,7 +37,6 @@ class Course extends CActiveRecord
 	protected function afterFind()
 	{
 		parent::afterFind();
-		$this->thumbnailUrl = self::THUMBNAIL_URL_PREFIX.$this->id;
 	}
 
 	/**
@@ -114,13 +117,46 @@ class Course extends CActiveRecord
 		));
 	}
 
+
 	/**
-	 * @return string course's thumbnail URL
+	 * Getter of $_thumbnailUrl
+	 * return null if thumbail url is not found
 	 */
 	public function getThumbnailUrl()
 	{
-		return $this->thumbnailUrl;
+		$path = $this->getResourcePath();
+		if (file_exists("$path/thumbnail"))
+		{
+			$file = fopen("$path/thumbnail", 'r');
+			$this->_thumbnailUrl  = Yii::app()->baseUrl."/course/$this->id/".end(explode('/', fgets($file)));
+			fclose($file);
+			return $this->_thumbnailUrl;
+		}
+		else
+		{
+			return null;
+		}
 	}
+
+	
+	/**
+	 * Getter of $_introUrl
+	 * return null if intro url is not found
+	 */
+	public function getIntroUrl()
+	{
+		$path = $this->getResourcePath();
+		if (file_exists("$path/encodedVideo.mp4"))
+		{
+			$this->_introUrl = Yii::app()->baseUrl."/course/$this->id/encodedVideo.mp4";
+			return $this->_introUrl;
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 
 	/**
 	 * Return All record
@@ -155,4 +191,49 @@ class Course extends CActiveRecord
 			return false;
 		}
 	}
+
+	/**
+	 * Return path to resource of course specified by $courseId
+	 * @param integer the ID of course
+	 * @return string resource path
+	 */
+	public function getResourcePath()
+	{
+		return Yii::getPathOfAlias('webroot').'/course/'. $this->id;
+	}
+
+	/*
+	 * Get an in-class URL for a subscriber.
+	 * @return string in-class URL
+	 */
+	public function getInClassUrl()
+	{
+		if (self::isStarted())
+		{
+			return 'index.php?r=course/inclass&id='.$this->id;
+		}
+		else
+		{
+			return 'index.php?r=course/view&id='.$this->id;
+		}
+	}
+
+	/**
+	 * Check whether the course has started or not 
+	 * @return boolean true if course has started, else, false
+	 */
+	public function isStarted()
+	{
+		$sql = 'SELECT * FROM course_open WHERE course_id='.$this->id;
+		$rows = Yii::app()->db->createCommand($sql)->queryAll();
+		if (count($rows) > 0)
+		{
+			if ($rows[0]['open_status_id'] == self::STATUS_RUNNING)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

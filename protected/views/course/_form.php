@@ -37,20 +37,22 @@
 	<div class="row">
 		<?php echo CHtml::label('Course\'s thumbnail', false); ?>
 		<?php $this->widget('CMultiFileUpload', array(
-					'name' => 'thumbnail',
-					'accept' => 'jpeg|jpg|gif|png', // useful for verifying files
-					'duplicate' => 'Duplicate file!', // useful, i think
-					'denied' => 'Invalid file type', // useful, i think
+					'name' => 'thumbnails',
+					'accept' => 'jpeg|jpg|gif|png',
+					'duplicate' => 'Duplicate file!',
+					'denied' => 'Invalid file type',
+					'max' => '1',
 		)); ?>
 	</div>
 
 	<div class="row">
 		<?php echo CHtml::label('Course\'s introduction', false); ?>
 		<?php $this->widget('CMultiFileUpload', array(
-					'name' => 'introduction',
-					'accept' => 'jpeg|jpg|gif|png|avi|flv|mov|mp4|mts|wmv', // useful for verifying files
-					'duplicate' => 'Duplicate file!', // useful, i think
-					'denied' => 'Invalid file type', // useful, i think
+					'name' => 'introductions',
+					'accept' => 'jpeg|jpg|gif|png|avi|flv|mov|mp4|mts|wmv', 
+					'duplicate' => 'Duplicate file!', 
+					'denied' => 'Invalid file type',
+					'max' => '1',
 		)); ?>
 	</div>
 

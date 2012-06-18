@@ -49,5 +49,5 @@ return array(
 	'Go to course' => 'เข้าสู่คอร์ส',
 	'Take course' => 'เรียนคอร์สนี้',
 	'This lecture has a date and description' => 'เลขเชอร์นี้มีวันที่และคำอธิบาย',
-	'To take this course, please sign up.' => 'กรุณาสมัครก่อนเพื่อเรียนวิชานี้',
+	'To take this course, please sign up.' => 'กรุณาลงทะเบียนกับระบบก่อนเพื่อเรียนวิชานี้',
 );
