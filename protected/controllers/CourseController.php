@@ -129,9 +129,20 @@ class CourseController extends Controller
 			$categoryList[$category->id] = $category->name;
 		}
 	
+		// Query all instructor
+		$instructorList = array();
+		$data = User::model()->getDataProvider()->getData();
+		$i = 0;
+		foreach ($data as $instructor)
+		{
+			$instructorList[$i] = $instructor->fullname;
+			$i++;
+		}
+
 		$this->render('create',array(
 			'model'=>$model,
 			'categoryList'=>$categoryList,
+			'instructorList'=>$instructorList,
 		));
 	}
 

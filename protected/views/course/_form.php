@@ -34,9 +34,26 @@
 		<?php echo $form->error($model, 'category_id'); ?>
 	</div>
 
+	<div>
+		<?php echo CHtml::label("Instructors", false) ?>
+		<?php
+			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+							'name' => 'instructorList',
+							'source'=> $instructorList,
+							    'options'=>array(
+ 										'minLength'=>2,
+										'showAnim'=>'fold',
+                ),
+            ));
+		?>
+		<?php
+			echo CHtml::button("Add instructor");
+		?>
+	</div>
 	<div class="row">
 		<?php echo CHtml::label('Course\'s thumbnail', false); ?>
 		<?php $this->widget('CMultiFileUpload', array(
+					'id' => 'thumbnails',
 					'name' => 'thumbnails',
 					'accept' => 'jpeg|jpg|gif|png',
 					'duplicate' => 'Duplicate file!',
@@ -48,6 +65,7 @@
 	<div class="row">
 		<?php echo CHtml::label('Course\'s introduction', false); ?>
 		<?php $this->widget('CMultiFileUpload', array(
+					'id' => 'introductions',
 					'name' => 'introductions',
 					'accept' => 'jpeg|jpg|gif|png|avi|flv|mov|mp4|mts|wmv', 
 					'duplicate' => 'Duplicate file!', 
@@ -57,9 +75,15 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('onclick'=>'SubmitEncodeForm()')); ?>
 	</div>
 	
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script type="text/javascript">
+	function SubmitEncodeForm() {
+		document.encode-form.submit();
+	}
+</script>
