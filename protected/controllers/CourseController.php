@@ -117,6 +117,17 @@ class CourseController extends Controller
 						$this->saveIntro($intro, $model->id);
 					}
 				}
+				
+				// Save instructor
+				$courseId = $model->id;
+
+				$instructor = User::model()->findAllByAttributes(array('fullname'=>$_POST['instructorList']));
+				$instructorId = $instructor[0]->id;
+
+				$sqlStatement = 'INSERT INTO instructor_course VALUES(NULL, '.$courseId.', '.$instructorId.',"","")';				
+				$command=Yii::app()->db->createCommand($sqlStatement);
+				$command->execute();
+				
 				// $this->redirect(array('view','id'=>$model->id));
 			}
 		}
