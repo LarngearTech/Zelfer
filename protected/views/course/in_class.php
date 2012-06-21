@@ -30,10 +30,11 @@ $this->breadcrumbs=array(
 	));
 	$lecturesTabContent = '';
 	$chapIdx = 0;
+	$lecturesTabContent .= '<div class="accordion" id="chapter-accordion">';
 	foreach ($chapters as $chapter)
 	{
 		$chapIdx++;
-		$lecturesTabContent .= '<ul class="collapsible"><span class="caption" style="margin-left:-1.5em;">'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'</span>';
+		/*$lecturesTabContent .= '<ul class="collapsible"><span class="caption" style="margin-left:-1.5em;">'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'</span>';
 
 		// create a lecture list
 		$lectIdx = 0;
@@ -41,7 +42,21 @@ $this->breadcrumbs=array(
 		{
 			$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
 		}
-		$lecturesTabContent .= '</ul>';
+		$lecturesTabContent .= '</ul>';*/
+		$lecturesTabContent .= '
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
+						'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
+						</a>
+					</div>
+					<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse">
+						<div class="accordion-inner">
+							test
+						</div>
+					</div>
+				</div>
+		';
 	}
 
 // create contant of the lecture tab
