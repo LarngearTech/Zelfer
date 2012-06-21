@@ -26,14 +26,33 @@ $this->breadcrumbs = array(
 if (Yii::app()->user->isGuest)
 {
 	$this->beginWidget('EBootstrapModal', array(
-		'id'=>'signUpModal',
+		'id' => 'signUpModal',
 		'show' => false,
+		'header' => Yii::t('site', 'To take this course, please sign up.'),
+		'footer' => array(
+			EBootstrap::ibutton(
+                		Yii::t('site', 'Take course'),
+                		'index.php?r=course/inclass&id='.$model->id,
+                		'primary',
+                		'large',
+                		false,
+                		'',
+                		false,
+                		array()
+        		),
+			EBootstrap::ibutton(
+                		Yii::t('site', 'Cancel'),
+                		'#',
+                		'',
+                		'large',
+                		false,
+                		'',
+                		false,
+                		array('data-dismiss' => 'modal')
+			),
+			'</form>',
+		),
 	)); ?>
- 
-	<div class="modal-header">
-		<a class="close" data-dismiss="modal">&times;</a>
-		<h3><?php echo Yii::t('site', 'To take this course, please sign up.');?></h3>
-	</div>
  
 	<?php $userModel = new User; 
 	$form = $this->beginWidget('EBootstrapActiveForm', array(
@@ -76,8 +95,6 @@ if (Yii::app()->user->isGuest)
 			</p>
 		</div>
  
-		<div class="modal-footer">
-		</div>
 		<?php 
 		$this->endWidget(); // end ActiveForm widget
 
