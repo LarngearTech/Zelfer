@@ -25,7 +25,10 @@ $this->breadcrumbs = array(
 // If a user is a guest, show 'Take Course' and proceed the sign up.
 if (Yii::app()->user->isGuest)
 {
-	$this->beginWidget('bootstrap.widgets.BootModal', array('id'=>'signUpModal')); ?>
+	$this->beginWidget('EBootstrapModal', array(
+		'id'=>'signUpModal',
+		'show' => false,
+	)); ?>
  
 	<div class="modal-header">
 		<a class="close" data-dismiss="modal">&times;</a>
@@ -33,7 +36,7 @@ if (Yii::app()->user->isGuest)
 	</div>
  
 	<?php $userModel = new User; 
-	$form = $this->beginWidget('bootstrap.widgets.BootActiveForm', array(
+	$form = $this->beginWidget('EBootstrapActiveForm', array(
 		'id' => 'user-form',
 		'enableClientValidation' => true,
 		'clientOptions' => array(
@@ -74,16 +77,6 @@ if (Yii::app()->user->isGuest)
 		</div>
  
 		<div class="modal-footer">
-			<?php $this->widget('bootstrap.widgets.BootButton', array(
-				'buttonType' => 'submit',
-				'type' => 'primary',
-				'label' => Yii::t('site', 'Sign Up'),
-			)); ?>
-			<?php $this->widget('bootstrap.widgets.BootButton', array(
-				'label' => Yii::t('site', 'Cancel'),
-				'url' => '#',
-				'htmlOptions' => array('data-dismiss'=>'modal'),
-			)); ?>
 		</div>
 		<?php 
 		$this->endWidget(); // end ActiveForm widget
@@ -91,37 +84,42 @@ if (Yii::app()->user->isGuest)
 	$this->endWidget(); // end modal widget
 
 	// Take course button
-	$this->widget('bootstrap.widgets.BootButton', array(
-		'label' => Yii::t('site', 'Take course'),
-		'url' => '#signUpModal',
-		'type' => 'primary',
-		'size' => 'large',
-		'htmlOptions'=>array('data-toggle'=>'modal'),
+	$this->widget('EBootstrapModalTrigger', array(
+		'element' => 'a',
+		'value' => 'Take course',
+		'modal' => 'signUpModal',
+		'htmlOptions' => array(
+			'class' => 'btn btn-primary',
+		),
 	));
 }
 // If a user does not enroll in a class, show 'Take course' to enroll.
 else if (!$model->hasStudent(Yii::app()->user->getId()))
 {
-	$this->widget('bootstrap.widgets.BootButton', array(
-		'label' => Yii::t('site', 'Take course'),
-		'type' => 'primary',
-		'size' => 'large', 
-		'htmlOptions' => array(
-			'onclick' => 'window.location.href="index.php?r=course/inclass&id='.$model->id.'"'
-		),
-	));
+	echo EBootstrap::ibutton(
+		Yii::t('site', 'Take course'),
+		'index.php?r=course/inclass&id='.$model->id,
+		'primary',
+		'large',
+		false,
+		'',
+		false,
+		array()
+	);
 }
 // If a user is already enrolled in a class, show 'Go to course'.
 else
 {
-	$this->widget('bootstrap.widgets.BootButton', array(
-		'label' => Yii::t('site', 'Go to course'),
-		'type' => 'primary',
-		'size' => 'large', 
-		'htmlOptions' => array(
-			'onclick' => 'window.location.href="index.php?r=course/inclass&id='.$model->id.'"'
-		),
-	));
+	echo EBootstrap::ibutton(
+		Yii::t('site', 'Go to course'),
+		'index.php?r=course/inclass&id='.$model->id,
+		'primary',
+		'large',
+		false,
+		'',
+		false,
+		array()
+	);
 }
 ?>
 <br/>
