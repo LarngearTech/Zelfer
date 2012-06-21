@@ -7,6 +7,9 @@
 	<!-- bootstrap CSS framework -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" />
 
+	<!-- customized CSS -->
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
+
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -44,9 +47,11 @@
 
 	<div class="clear"></div>
 
-	<div id="footer">
+	<div id="footer" class="row">
+		<div class="span12">
 		<?php echo Yii::t('site', 'Copyright'); ?> &copy; <?php echo date('Y'); ?> Zelfer.com<br/>
 		<?php echo Yii::t('site', 'All Rights Reserved.'); ?><br/>
+		</div>
 	</div><!-- footer -->
 
 </div><!-- page -->

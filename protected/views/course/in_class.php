@@ -1,5 +1,5 @@
 <?php
-$this->breadcrumbs=array(
+$this->breadcrumbs = array(
 	Yii::t('site', 'Courses') => array('index'),
 	$model->name,
 );
@@ -23,56 +23,36 @@ $this->breadcrumbs=array(
 <div id="course-syllabus">
 	<?php
 	// create contents for the lecture tab 
-	$this->widget('ext.slidetoggle.ESlidetoggle', array(
-		'itemSelector' => 'ul.collapsible',
-		'collapsed' => 'ul.collapsible',
-		'titleSelector' => 'ul.collapsible .caption',
-	));
-	$lecturesTabContent = '';
 	$chapIdx = 0;
-	$lecturesTabContent .= '<div class="accordion" id="chapter-accordion">';
+	$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
 	foreach ($chapters as $chapter)
 	{
 		$chapIdx++;
-		/*$lecturesTabContent .= '<ul class="collapsible"><span class="caption" style="margin-left:-1.5em;">'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'</span>';
-
+		$lecturesTabContent .= '
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
+						'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
+					</a>
+				</div>
+				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse'.(($chapIdx == 1)?' in':'').'">
+					<div class="accordion-inner">
+						<ul>';
 		// create a lecture list
 		$lectIdx = 0;
 		foreach ($chapter->lectures as $lecture)
 		{
 			$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
 		}
-		$lecturesTabContent .= '</ul>';*/
-		$lecturesTabContent .= '
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
-						'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
-						</a>
-					</div>
-					<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse">
-						<div class="accordion-inner">
-							test
-						</div>
+		$lecturesTabContent .= '</ul>
 					</div>
 				</div>
+			</div>
 		';
 	}
-
-// create contant of the lecture tab
-$lecturesTab = array(
-	'label' => 'Lecture',
-	'content' => $lecturesTabContent,
-	'active' => true,
-);
-
-$problemSetsTab = array(
-	'label' => 'Problem Set',
-	'content' => 'problemset',
-);
+	$lecturesTabContent .= '</div>'; 
 
 // create course tabs including lecture and problem set tabs.
-$courseTabs = array($lecturesTab, $problemSetsTab);
 $this->widget('EBootstrapTabNavigation', array(
 	'items' => array(
 		array('label' => 'Lecture', 'url' => '#lecture', 'active' => true),
@@ -88,7 +68,6 @@ $this->beginWidget('EBootstrapTabContentWrapper');
 	echo $lecturesTabContent;
 	$this->endWidget();
 	$this->beginWidget('EBootstrapTabContent', array(
-		'active' => true,
 		'id' => 'problemset',
 	));
 	echo 'Problem set';
