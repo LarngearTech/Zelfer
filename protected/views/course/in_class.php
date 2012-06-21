@@ -51,7 +51,6 @@ $lecturesTab = array(
 	'active' => true,
 );
 
-// create contents of the problem set tab
 $problemSetsTab = array(
 	'label' => 'Problem Set',
 	'content' => 'problemset',
@@ -59,10 +58,26 @@ $problemSetsTab = array(
 
 // create course tabs including lecture and problem set tabs.
 $courseTabs = array($lecturesTab, $problemSetsTab);
-$this->widget('bootstrap.widgets.BootTabbable', array(
-	'type'=>'tabs',
-	'placement' => 'top',
-	'tabs' => $courseTabs,
+$this->widget('EBootstrapTabNavigation', array(
+	'items' => array(
+		array('label' => 'Lecture', 'url' => '#lecture', 'active' => true),
+		array('label' => 'Problem Set', 'url' => '#problemset'),
+	),
 ));
+
+$this->beginWidget('EBootstrapTabContentWrapper');
+	$this->beginWidget('EBootstrapTabContent', array(
+		'active' => true,
+		'id' => 'lecture',
+	));
+	echo $lecturesTabContent;
+	$this->endWidget();
+	$this->beginWidget('EBootstrapTabContent', array(
+		'active' => true,
+		'id' => 'problemset',
+	));
+	echo 'Problem set';
+	$this->endWidget();
+$this->endWidget();
 ?>
 </div>
