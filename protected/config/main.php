@@ -12,7 +12,7 @@ return array(
 	// preloading 'log' component
 	'preload'=>array(
 		'log',
-		'bootstrap',
+//		'bootstrap',
 	),
 
 	// autoloading model and component classes
@@ -20,6 +20,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'application.extensions.PasswordHash',
+		'application.widgets.bootstrap.*',
 	),
 
 	'modules'=>array(

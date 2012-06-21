@@ -1,11 +1,37 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 
-<?php $this->widget('bootstrap.widgets.BootCarousel', array(
-	'items'=>array(
-		array('image'=>'http://placehold.it/770x400&text=First+thumbnail', 'label'=>'First Thumbnail label', 'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
-		array('image'=>'http://placehold.it/770x400&text=Second+thumbnail', 'label'=>'Second Thumbnail label', 'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
-		array('image'=>'http://placehold.it/770x400&text=Third+thumbnail', 'label'=>'Third Thumbnail label', 'caption'=>'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
+<?php $this->widget('EBootstrapCarousel', array(
+	'items' => array(
+		array(
+			'src' => EBootstrap::thumbnailSrc(940, 400, 'ccc'),
+			'caption' => 'Image Caption 1.',
+			'body' => 'This is a thumbnail',
+			'active' => true,
+		),
+		array(
+			'src' => EBootstrap::thumbnailSrc(940, 400, 'bbb'),
+			'caption' => 'Image Caption thumnail.',
+			'body' => 'This is a thumbnail',
+		),
+		array(
+			'src' => EBootstrap::thumbnailSrc(940, 400, 'aaa'),
+			'caption' => 'Image Caption thumnail.',
+			'body' => 'This is a thumbnail',
+		),
+		array(
+			'src' => EBootstrap::thumbnailSrc(940, 400, '999'),
+			'caption' => 'Image Caption thumnail.',
+			'body' => 'This is a thumbnail',
+		),
+		array(
+			'src' => EBootstrap::thumbnailSrc(940, 400, '888'),
+			'caption' => 'Image Caption thumnail.',
+			'body' => 'This is a thumbnail',
+		),
 	),
+	'interval' => 6000,
+	'infinite' => false,
+	'htmlOptions' => array(),
 )); ?>
 
 <?php 
