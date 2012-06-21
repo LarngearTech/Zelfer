@@ -106,7 +106,7 @@ if (Yii::app()->user->isGuest)
 	// Take course button
 	$this->widget('EBootstrapModalTrigger', array(
 		'element' => 'a',
-		'value' => 'Take course',
+		'value' => Yii::t('site', 'Take course'),
 		'modal' => 'signUpModal',
 		'htmlOptions' => array(
 			'class' => 'btn btn-primary',
@@ -133,7 +133,7 @@ else
 	echo EBootstrap::ibutton(
 		Yii::t('site', 'Go to course'),
 		'index.php?r=course/inclass&id='.$model->id,
-		'primary',
+		'success',
 		'large',
 		false,
 		'',
