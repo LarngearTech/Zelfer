@@ -40,7 +40,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update'),
+				'actions' => array('create', 'update', 'instructorList'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -83,6 +83,28 @@ class CourseController extends Controller
 		));
 	}
 
+	/**
+	 * @return list of pair of $user->id, $user->fullname for CJuiAutoComplete.
+	 */
+	public function actionInstructorList()
+	{
+		// Query all instructor
+		if (Yii::app()->request->isAjaxRequest && !empty($_GET['term']))
+		{
+			$instructorList = array();
+			$keyword = addcslashes($_GET['term'], '%_');
+
+			$data = User::model()->findAll(array('condition' => "fullname LIKE '%$keyword%'"));
+
+			foreach ($data as $instructor)
+			{
+				$instructorList[] = array('id'=>$instructor->id,
+										'label'=>$instructor->fullname, 
+										'value'=>$instructor->fullname);
+			}
+			echo CJSON::encode($instructorList);
+		}
+	}
 
 	/**
 	 * Creates a new model.
@@ -121,8 +143,8 @@ class CourseController extends Controller
 				// Save instructor
 				$courseId = $model->id;
 
-				$instructor = User::model()->findAllByAttributes(array('fullname'=>$_POST['instructorList']));
-				$instructorId = $instructor[0]->id;
+				$instructor = User::model()->findByPk(array('id'=>$_POST['instructorList']));
+				$instructorId = $instructor->id;
 
 				$sqlStatement = 'INSERT INTO instructor_course VALUES(NULL, '.$courseId.', '.$instructorId.',"","")';				
 				$command=Yii::app()->db->createCommand($sqlStatement);
@@ -134,26 +156,15 @@ class CourseController extends Controller
 
 		// Query all category
 		$categoryList = array();
-		$data = Category::model()->getDataProvider()->getData();
+		$data = Category::model()->findAll();
 		foreach ($data as $category)
 		{
 			$categoryList[$category->id] = $category->name;
 		}
 	
-		// Query all instructor
-		$instructorList = array();
-		$data = User::model()->getDataProvider()->getData();
-		$i = 0;
-		foreach ($data as $instructor)
-		{
-			$instructorList[$i] = $instructor->fullname;
-			$i++;
-		}
-
 		$this->render('create',array(
 			'model'=>$model,
 			'categoryList'=>$categoryList,
-			'instructorList'=>$instructorList,
 		));
 	}
 
