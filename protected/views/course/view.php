@@ -204,27 +204,35 @@ else
 <div id="course-syllabus">
 	<h2><?php echo Yii::t('site', 'Course Logistics');?></h2>
 	<?php
-	// create contents for the lecture tab 
-	$this->widget('ext.slidetoggle.ESlidetoggle', array(
-		'itemSelector' => 'ul.collapsible',
-		'collapsed' => 'ul.collapsible',
-		'titleSelector' => 'ul.collapsible .caption',
-	));
-	$lecturesTabContent = '';
+	Yii::app()->clientScript->registerScriptFile('/js/bootstrap.min.js');
 	$chapIdx = 0;
+	$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
 	foreach ($chapters as $chapter)
 	{
 		$chapIdx++;
-		$lecturesTabContent .= '<ul class="collapsible"><span class="caption" style="margin-left:-1.5em;">'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'</span>';
-
+		$lecturesTabContent .= '
+			<div class="accordion-group">
+				<div class="accordion-heading">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
+						'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
+					</a>
+				</div><!-- heading -->
+				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse'.(($chapIdx == 1)?' in':'').'">
+					<div class="accordion-inner">
+						<ul>';
 		// create a lecture list
 		$lectIdx = 0;
 		foreach ($chapter->lectures as $lecture)
 		{
 			$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
 		}
-		$lecturesTabContent .= '</ul>';
+		$lecturesTabContent .= '</ul>
+					</div><!-- inner -->
+				</div><!-- body -->
+			</div><!-- group -->
+		';
 	}
+	$lecturesTabContent .= '</div><!-- accordion -->'; 
 	echo $lecturesTabContent;
 ?>
-</div>
+</div><!-- course-syllabus -->

@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 
 <p><?php echo Yii::t('site', 'Please fill out the following form with your login credentials');?>:</p>
 
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
+<div class = "form">
+<?php $form = $this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(
