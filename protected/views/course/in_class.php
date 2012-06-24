@@ -53,8 +53,9 @@ $this->breadcrumbs = array(
 // create course tabs including lecture and problem set tabs.
 $this->widget('EBootstrapTabNavigation', array(
 	'items' => array(
-		array('label' => 'Lecture', 'url' => '#lecture', 'active' => true),
-		array('label' => 'Problem Set', 'url' => '#problemset'),
+		array('label' => Yii::t('site', 'Lecture'), 'url' => '#lecture', 'active' => true),
+		array('label' => Yii::t('site', 'Problem Set'), 'url' => '#problemset'),
+		array('label' => Yii::t('site', 'Discussion'), 'url' => '#discussion'),
 	),
 ));
 
@@ -69,6 +70,11 @@ $this->beginWidget('EBootstrapTabContentWrapper');
 		'id' => 'problemset',
 	));
 	echo 'Problem set';
+	$this->endWidget();
+	$this->beginWidget('EBootstrapTabContent', array(
+		'id' => 'discussion',
+	));
+	echo 'Discussion';
 	$this->endWidget();
 $this->endWidget();
 ?>

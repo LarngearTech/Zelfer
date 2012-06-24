@@ -50,4 +50,8 @@ return array(
 	'Take course' => 'เรียนคอร์สนี้',
 	'This lecture has a date and description' => 'เลขเชอร์นี้มีวันที่และคำอธิบาย',
 	'To take this course, please sign up.' => 'กรุณาลงทะเบียนกับระบบก่อนเพื่อเรียนวิชานี้',
+	'Lecture' => 'บทเรียน',
+	'Lectures' => 'บทเรียน',
+	'Problem Set' => 'โจทย์ปัญหา',
+	'Discussion' => 'แลกเปลี่ยนความเห็น',
 );
