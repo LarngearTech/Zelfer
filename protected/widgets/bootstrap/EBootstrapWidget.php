@@ -47,14 +47,22 @@ class EBootstrapWidget extends CWidget {
 			if ($this->collapseShow)
 				EBootstrap::mergeClass($this->htmlOptions, array('in'));
 			
-			if (is_null($this->collapseJsFile)) {
-				$collapseJsFile = dirname(__FILE__).'/js/bootstrap.min.js';
-				$this->collapseJsFile = Yii::app()->getAssetManager()->publish($collapseJsFile);
-				Yii::app()->clientScript->registerScriptFile($this->collapseJsFile);
-			}
-			elseif ($this->collapseJsFile !== false) {
-				Yii::app()->clientScript->registerScriptFile($this->collapseJsFile);
-			}
+	        if (is_null($this->jsFile)) {
+    	        if (Yii::app()->clientScript->isScriptFileRegistered(Yii::app()->baseUrl.'/js/bootstrap.min.js')) {
+       	         $jsFile = Yii::app()->baseUrl.'/js/bootstrap.min.js';
+       	     }
+       	     else {
+       	         $jsFile = dirname(__FILE__).'/js/bootstrap.min.js';
+       	         $this->jsFile = Yii::app()->getAssetManager()->publish($jsFile);
+       	         Yii::app()->clientScript->registerScriptFile($this->jsFile);
+       	     }
+       	 }
+       	 elseif ($this->jsFile !== false) {
+       	     if (!Yii::app()->clientScript->isScriptFileRegistered(Yii::app()->baseUrl.'/js/bootstrap.min.js')) {
+       	         Yii::app()->clientScript->registerScriptFile($this->jsFile);
+       	     }
+       	 }
+
 		}
 	}
 }

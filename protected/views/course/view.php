@@ -3,6 +3,9 @@ $this->breadcrumbs = array(
 	Yii::t('site', 'Courses') => array('index'),
 	$model->name,
 );
+Yii::app()->clientScript->registerScriptFile(
+	Yii::app()->baseUrl.'/js/bootstrap.min.js'
+);
 ?>
 <div id="course-header" class="row">
 	<div id="course-intro-video" class="span5">
@@ -204,9 +207,6 @@ $this->breadcrumbs = array(
 <div id="course-syllabus">
 	<h2><?php echo Yii::t('site', 'Course Logistics');?></h2>
 	<?php
-	Yii::app()->clientScript->registerScriptFile(
-		Yii::app()->baseUrl.'/js/bootstrap.min.js'
-	);
 	$chapIdx = 0;
 	$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
 	foreach ($chapters as $chapter)

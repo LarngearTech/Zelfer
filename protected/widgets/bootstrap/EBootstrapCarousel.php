@@ -59,11 +59,21 @@ class EBootstrapCarousel extends EBootstrapWidget {
 			$this->htmlOptions['id'] = $this->getId();
 		
 		Yii::app()->clientScript->registerCoreScript('jquery');
-		if (is_null($this->jsFile)) {
-			$jsFile = dirname(__FILE__).'/js/bootstrap.min.js';
-			$this->jsFile = Yii::app()->getAssetManager()->publish($jsFile);
-			Yii::app()->clientScript->registerScriptFile($this->jsFile);
-		}
+        if (is_null($this->jsFile)) {
+            if (Yii::app()->clientScript->isScriptFileRegistered(Yii::app()->baseUrl.'/js/bootstrap.min.js')) {
+                $jsFile = Yii::app()->baseUrl.'/js/bootstrap.min.js';
+            }
+            else {
+                $jsFile = dirname(__FILE__).'/js/bootstrap.min.js';
+                $this->jsFile = Yii::app()->getAssetManager()->publish($jsFile);
+                Yii::app()->clientScript->registerScriptFile($this->jsFile);
+            }
+        }
+        elseif ($this->jsFile !== false) {
+            if (!Yii::app()->clientScript->isScriptFileRegistered(Yii::app()->baseUrl.'/js/bootstrap.min.js')) {
+                Yii::app()->clientScript->registerScriptFile($this->jsFile);
+            }
+        }
 		
 		$jsId = 'carousel_'.$this->htmlOptions['id'];
 		$js = '';
