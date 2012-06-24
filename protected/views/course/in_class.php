@@ -24,7 +24,7 @@ $this->breadcrumbs = array(
 						'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
 					</a></h4>
 				</div>
-				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse'.(($chapIdx == 1)?' in':'').'">
+				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<ul>';
 		// create a lecture list
