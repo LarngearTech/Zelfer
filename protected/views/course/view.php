@@ -189,52 +189,57 @@ Yii::app()->clientScript->registerScriptFile(
 	<h2><?php echo Yii::t('site', 'Course Summary');?></h2>
 	<p class="well"><?php echo CHtml::encode($model->long_description); ?></p>
 </div>
-<div id="course-instructors">
-	<h2><?php echo Yii::t('site', 'Instructor');?></h2>
-	<ul>
-	<?php
-		foreach ($model->courseInstructors as $instructorRecord)
+<div class="row">
+	<div id="course-syllabus" class="span6">
+		<h2><?php echo Yii::t('site', 'Course Logistics');?></h2>
+		<?php
+		$chapIdx = 0;
+		$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
+		foreach ($chapters as $chapter)
 		{
-			echo '
-			<li><h3>'.$instructorRecord['fullname'].'</h3>'.
-				'<h4>'.$instructorRecord['instructor_career'].'</h4>'.
-				'<br>'.$instructorRecord['instructor_description'].'</br>
-			</li>';
+			$chapIdx++;
+			$lecturesTabContent .= '
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
+							'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
+						</a>
+					</div><!-- heading -->
+					<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse in">
+						<div class="accordion-inner">
+							<ul>';
+			// create a lecture list
+			$lectIdx = 0;
+			foreach ($chapter->lectures as $lecture)
+			{
+				$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
+			}
+			$lecturesTabContent .= '</ul>
+						</div><!-- inner -->
+					</div><!-- body -->
+				</div><!-- group -->
+			';
 		}
+		$lecturesTabContent .= '</div><!-- accordion -->'; 
+		echo $lecturesTabContent;
 	?>
-	</ul>
+	</div><!-- end course-syllabus -->
+	<div id="course-instructors" class="span6">
+		<h2><?php echo Yii::t('site', 'Instructor');?></h2>
+		<?php
+			foreach ($model->courseInstructors as $instructorRecord)
+			{
+				echo '<div class="instructor">
+						<div class="instructor-image">'.
+							CHtml::image('http://placehold.it/120x140', 'Image of '.$instructorRecord['fullname']).'
+						</div>
+						<div class="instructor-detail">
+							<h3>'.$instructorRecord['fullname'].'</h3>
+							<h4>'.$instructorRecord['instructor_career'].'</h4>'
+							.$instructorRecord['instructor_description'].'
+						</div>
+					</div><!-- end instructor -->';
+			}
+		?>
+	</div><!-- end course-instructors -->
 </div>
-<div id="course-syllabus">
-	<h2><?php echo Yii::t('site', 'Course Logistics');?></h2>
-	<?php
-	$chapIdx = 0;
-	$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
-	foreach ($chapters as $chapter)
-	{
-		$chapIdx++;
-		$lecturesTabContent .= '
-			<div class="accordion-group">
-				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
-						'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
-					</a>
-				</div><!-- heading -->
-				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse'.(($chapIdx == 1)?' in':'').'">
-					<div class="accordion-inner">
-						<ul>';
-		// create a lecture list
-		$lectIdx = 0;
-		foreach ($chapter->lectures as $lecture)
-		{
-			$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
-		}
-		$lecturesTabContent .= '</ul>
-					</div><!-- inner -->
-				</div><!-- body -->
-			</div><!-- group -->
-		';
-	}
-	$lecturesTabContent .= '</div><!-- accordion -->'; 
-	echo $lecturesTabContent;
-?>
-</div><!-- course-syllabus -->

@@ -231,3 +231,26 @@ div.search-form
 	margin-top: 20px;
 }
 
+#course-instructors .instructor
+{
+	margin-left: 10px;
+	margin-bottom: 20px;
+}
+
+#course-instructors .instructor-image
+{
+	float: left;
+	padding: 0 20px 8px 0;
+}
+
+#course-instructors .instructor-detail h3
+{
+	line-height: 17px;
+	margin-bottom: 10px;
+}
+
+#course-instructors .instructor-detail h4
+{
+	line-height: 20px;
+	margin-bottom: 10px;
+}
