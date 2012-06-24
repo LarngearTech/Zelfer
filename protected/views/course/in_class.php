@@ -6,19 +6,8 @@ $this->breadcrumbs = array(
 ?>
 
 <h1><?php echo CHtml::encode($model->name); ?></h1>
-<h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->instructors[0]->fullname); 
-	$numIns = count($model->instructors);
-	if ($numIns == 2)
-	{
-		echo ' '.Yii::t('site', 'and').' '.CHtml::encode($model->instructors[1]->fullname);
-	}
-	else if ($numIns > 2)
-	{
-		echo ' '.Yii::t('site', 'and {numIns} others.', array(
-			'{numIns}' => $numIns
-		));
-	}?>
-</h3>
+<h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->courseInstructorsShortString);?></h3>
+
 <br/>
 <div id="course-syllabus">
 	<?php
@@ -31,18 +20,27 @@ $this->breadcrumbs = array(
 		$lecturesTabContent .= '
 			<div class="accordion-group">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
+					<h4><a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
 						'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
-					</a>
+					</a></h4>
 				</div>
 				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse'.(($chapIdx == 1)?' in':'').'">
 					<div class="accordion-inner">
 						<ul>';
 		// create a lecture list
-		$lectIdx = 0;
 		foreach ($chapter->lectures as $lecture)
 		{
-			$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
+			$lecturesTabContent .= 
+				'<li class="lecture">
+					<div class="lecture-name">
+						<h4><a href="#">'.CHtml::encode($lecture->name).'
+						<img src="'.Yii::app()->baseUrl.'/images/play.png" class="icon play"></a></h4>
+					</div>
+					<div class="lecture-items well">
+						<a href="#"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>
+						<a href="#"><img src="'.Yii::app()->baseUrl.'/images/video.png" class="icon material"></a>
+					</div>	
+				</li>';
 		}
 		$lecturesTabContent .= '</ul>
 					</div>

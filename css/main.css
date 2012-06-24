@@ -216,6 +216,14 @@ div.search-form
 	padding: 0px 20px 0px 20px;
 }
 
+#course-header .course-header-wrapper
+{
+}
+
+#course-header #course-intro-video
+{
+}
+
 #course-header .course-button
 {
 	float: right;
@@ -254,3 +262,27 @@ div.search-form
 	line-height: 20px;
 	margin-bottom: 10px;
 }
+
+.lecture .lecture-name
+{
+	margin-bottom: 10px;
+}
+
+.lecture .icon
+{
+	margin: 0 10px 0 10px;
+}
+
+.lecture .play
+{
+	width: 30px;
+}
+
+.lecture .material
+{
+	height: 20px;
+}
+
+.lecture-items
+{
+	margin-bottom: 30px;
