@@ -236,4 +236,28 @@ class Course extends CActiveRecord
 		return false;
 	}
 
+	/**
+	 * Return a string of instructors in a shorten form
+	 * @return string instructors
+	 */
+	public function getCourseInstructorsShortString()
+	{
+		$insStr = '';
+		if ($this->instructors !== null)
+		{
+			$insStr = $this->instructors[0]->fullname; 
+			$numIns = count($this->instructors);
+            if ($numIns == 2)
+            {
+                $insStr .= ' '.Yii::t('site', 'and').' '.$this->instructors[1]->fullname;
+            }
+            else if ($numIns > 2)
+            {
+                $insStr .= ' '.Yii::t('site', 'and {numIns} others.', array(
+                    '{numIns}' => $numIns
+                ));
+            }
+		}
+		return $insStr;
+	}
 }

@@ -1,18 +1,38 @@
+
+@font-face
+{
+    font-family: 'RSURegular';
+    src: url('../fonts/rsu_regular.eot');
+    src: url('../fonts/rsu_regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/rsu_regular.woff') format('woff'),
+         url('../fonts/rsu_regular.ttf') format('truetype');
+         url('../fonts/rsu_regular.svg#RSURegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+	unicode-range: U+0E00-0E7F;*/
+}
+
+h1, h2
+{
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
+}
+
 body
 {
 	margin: 0;
 	padding: 0;
 	color: #555;
 	font: normal 10pt Arial,Helvetica,sans-serif;
-	background: #EFEFEF;
+	/*background: #EFEFEF;*/
+	background: white;
 }
 
 #page
 {
-	margin-top: 5px;
+	margin-top: 40px;
 	margin-bottom: 5px;
 	background: white;
-	border: 1px solid #C9E0ED;
+	/*border: 1px solid #C9E0ED;*/
 }
 
 #header
@@ -22,11 +42,6 @@ body
 	border-top: 3px solid #C9E0ED;
 }
 
-#content
-{
-    padding: 20px;
-}
-
 #sidebar
 {
 	padding: 20px 20px 20px 0;
@@ -34,8 +49,9 @@ body
 
 #footer
 {
-	padding: 10px;
-	margin: 10px 20px;
+	padding: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	font-size: 0.8em;
 	text-align: center;
 	border-top: 1px solid #C9E0ED;
@@ -45,39 +61,6 @@ body
 {
 	padding: 10px 20px;
 	font-size: 200%;
-}
-
-#mainmenu
-{
-	background:white url(bg.gif) repeat-x left top;
-}
-
-#mainmenu ul
-{
-	padding:6px 20px 5px 20px;
-	margin:0px;
-}
-
-#mainmenu ul li
-{
-	display: inline;
-}
-
-#mainmenu ul li a
-{
-	color:#ffffff;
-	background-color:transparent;
-	font-size:12px;
-	font-weight:bold;
-	text-decoration:none;
-	padding:5px 8px;
-}
-
-#mainmenu ul li a:hover, #mainmenu ul li.active a
-{
-	color: #6399cd;
-	background-color:#EFF4FA;
-	text-decoration:none;
 }
 
 div.flash-error, div.flash-notice, div.flash-success
@@ -138,7 +121,7 @@ div.view
 div.breadcrumbs
 {
 	font-size: 0.9em;
-	padding: 5px 20px;
+	margin-top: 10px;
 }
 
 div.breadcrumbs span
@@ -232,3 +215,19 @@ div.search-form
 {
 	padding: 0px 20px 0px 20px;
 }
+
+#course-header .course-button
+{
+	float: right;
+}
+
+#course-header #course-description
+{
+	margin-top: 20px;
+}
+
+#course-summary
+{
+	margin-top: 20px;
+}
+
