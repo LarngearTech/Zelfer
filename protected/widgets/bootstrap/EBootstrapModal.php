@@ -70,13 +70,11 @@ class EBootstrapModal extends EBootstrapWidget {
 		if (is_null($this->jsFile)) {
             if (Yii::app()->clientScript->isScriptFileRegistered(Yii::app()->baseUrl.'/js/bootstrap.min.js')) {
                 $jsFile = Yii::app()->baseUrl.'/js/bootstrap.min.js';
-				echo '1';
             }
             else {
                 $jsFile = dirname(__FILE__).'/js/bootstrap.min.js';
                 $this->jsFile = Yii::app()->getAssetManager()->publish($jsFile);
                 Yii::app()->clientScript->registerScriptFile($this->jsFile);
-				echo '2';
             }
 		}
 		elseif ($this->jsFile !== false) {
