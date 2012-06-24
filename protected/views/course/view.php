@@ -195,7 +195,7 @@ $this->breadcrumbs = array(
 			echo '
 			<li><h3>'.$instructorRecord['fullname'].'</h3>'.
 				'<h4>'.$instructorRecord['instructor_career'].'</h4>'.
-				'<br/>'.$instructorRecord['instructor_description'].'</br>
+				'<br>'.$instructorRecord['instructor_description'].'</br>
 			</li>';
 		}
 	?>
@@ -204,7 +204,9 @@ $this->breadcrumbs = array(
 <div id="course-syllabus">
 	<h2><?php echo Yii::t('site', 'Course Logistics');?></h2>
 	<?php
-	Yii::app()->clientScript->registerScriptFile('/js/bootstrap.min.js');
+	Yii::app()->clientScript->registerScriptFile(
+		Yii::app()->baseUrl.'/js/bootstrap.min.js'
+	);
 	$chapIdx = 0;
 	$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
 	foreach ($chapters as $chapter)

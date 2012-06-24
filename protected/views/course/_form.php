@@ -10,25 +10,25 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="input-row">
 		<?php echo $form->labelEx($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
-	<div class="row">
+	<div class="input-row">
 		<?php echo $form->labelEx($model,'short_description'); ?>
 		<?php echo $form->textField($model,'short_description',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'short_description'); ?>
 	</div>
 
-	<div class="row">
+	<div class="input-row">
 		<?php echo $form->labelEx($model,'long_description'); ?>
 		<?php echo $form->textField($model,'long_description',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'long_description'); ?>
 	</div>
 
-	<div class="row">
+	<div class="input-row">
 		<?php echo $form->labelEx($model,'category_id'); ?>
 		<?php echo $form->dropDownList($model, 'category_id', $categoryList); ?>
 		<?php echo $form->error($model, 'category_id'); ?>
@@ -50,7 +50,7 @@
 			echo CHtml::button("Add instructor");
 		?>
 	</div>
-	<div class="row">
+	<div class="input-row">
 		<?php echo CHtml::label('Course\'s thumbnail', false); ?>
 		<?php $this->widget('CMultiFileUpload', array(
 					'id' => 'thumbnails',
@@ -62,7 +62,7 @@
 		)); ?>
 	</div>
 
-	<div class="row">
+	<div class="input-row">
 		<?php echo CHtml::label('Course\'s introduction', false); ?>
 		<?php $this->widget('CMultiFileUpload', array(
 					'id' => 'introductions',
@@ -74,7 +74,7 @@
 		)); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="input-row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('onclick'=>'SubmitEncodeForm()')); ?>
 	</div>
 	

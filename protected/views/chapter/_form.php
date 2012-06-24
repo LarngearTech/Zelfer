@@ -9,19 +9,19 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="input-row">
 		<?php echo $form->labelEx($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
-	<div class="row">
+	<div class="input-row">
 		<?php echo $form->labelEx($model,'course_id'); ?>
 		<?php echo $form->textField($model,'course_id'); ?>
 		<?php echo $form->error($model,'course_id'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="input-row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 
