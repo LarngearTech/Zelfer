@@ -40,7 +40,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'instructorList'),
+				'actions' => array('create', 'update', 'instructorList', 'editInstructor'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -123,6 +123,9 @@ class CourseController extends Controller
 			if($model->save())
 			{
 				$thumbnails = CUploadedFile::getInstancesByName('thumbnails');
+				
+				// Each course can has one and only one thumbnail and intro video.
+				// We use CMultipleFileUploader only to allow user to remove incorrect file before submitting.
 				if (isset($thumbnails) && count($thumbnails)===1)
 				{
 					foreach ($thumbnails as $key=>$thumbnail)
@@ -140,17 +143,7 @@ class CourseController extends Controller
 					}
 				}
 				
-				// Save instructor
-				$courseId = $model->id;
-
-				$instructor = User::model()->findByPk(array('id'=>$_POST['instructorList']));
-				$instructorId = $instructor->id;
-
-				$sqlStatement = 'INSERT INTO instructor_course VALUES(NULL, '.$courseId.', '.$instructorId.',"","")';				
-				$command=Yii::app()->db->createCommand($sqlStatement);
-				$command->execute();
-				
-				// $this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('update','courseId'=>$model->id));
 			}
 		}
 
@@ -173,9 +166,9 @@ class CourseController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($courseId)
 	{
-		$model=$this->loadModel($id);
+		$model=$this->loadModel($courseId);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -188,6 +181,32 @@ class CourseController extends Controller
 		}
 
 		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+
+	
+	/**
+	 * Modify list of instructor
+	 */
+	public function actionEditInstructor($courseId)
+	{
+		$model = $this->loadModel($courseId);
+		if(isset($_POST['instructorIdList']))
+		{
+			foreach ($_POST['instructorIdList'] as $instructorId)
+			{
+				// Save instructor
+				$sqlStatement = 'INSERT INTO instructor_course VALUES(NULL, '.$courseId.', '.$instructorId.',"","")';				
+				$command=Yii::app()->db->createCommand($sqlStatement);
+				$command->execute();
+			}
+			$this->redirect( array('update',
+					'courseId'=>$courseId,
+			));
+		}
+
+		$this->render('editInstructor',array(
 			'model'=>$model,
 		));
 	}
@@ -357,7 +376,6 @@ class CourseController extends Controller
 					$scriptPath = Yii::app()->basePath."/scripts";
 					$pipelinePath = "$scriptPath/bin";
 					system("perl $scriptPath/encode.pl \"$inputPath\" \"$encodingPath\" \"$path\" \"$pipelinePath\" openclassroom y n n >/dev/null 2>/dev/null &");
-					echo "perl $scriptPath/encode.pl \"$inputPath\" \"$encodingPath\" \"$path\" \"$pipelinePath\" openclassroom y n n >/dev/null 2>/dev/null &";
 				}
 			}
 		}	

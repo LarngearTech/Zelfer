@@ -13,6 +13,17 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Course <?php echo $model->id; ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<h1>Edit Course <?php echo $model->name; ?></h1>
+<div class="row">
+	<?php echo CHtml::link('Create Lecture', array('lecture/create',
+							'lectureId'=>'', 
+							'chapterId'=>'1',
+							'courseId'=>$model->id));?>
+</div>
+<div class="row">
+	<?php echo CHtml::link('Edit Instructor', array('editInstructor',
+							'courseId'=>$model->id));?>
+</div>
+
