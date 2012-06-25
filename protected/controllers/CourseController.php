@@ -197,7 +197,7 @@ class CourseController extends Controller
 			foreach ($_POST['instructorIdList'] as $instructorId)
 			{
 				// Save instructor
-				$sqlStatement = 'INSERT INTO instructor_course VALUES(NULL, '.$courseId.', '.$instructorId.',"","")';				
+				$sqlStatement = 'INSERT INTO instructor_course VALUES(NULL, '.$instructorId.', '.$courseId.',"","")';				
 				$command=Yii::app()->db->createCommand($sqlStatement);
 				$command->execute();
 			}
