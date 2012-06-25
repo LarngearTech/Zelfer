@@ -3,7 +3,8 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'course-form',
 	'enableAjaxValidation'=>false,
-	'htmlOptions' => array('enctype' => 'multipart/form-data')
+	'htmlOptions' => array('enctype' => 'multipart/form-data',
+					'onsubmit'=>'return submitForm();',)
 )); ?>
 
 	<p class="note"><?php echo Yii::t('site', 'Fields with');?> <span class="required">*</span> <?php echo Yii::t('site', 'are required.');?></p>
@@ -30,26 +31,11 @@
 
 	<div class="input-row">
 		<?php echo $form->labelEx($model,'category_id'); ?>
-		<?php echo $form->dropDownList($model, 'category_id', $categoryList); ?>
+		<?php echo $form->dropDownList($model, 'category_id', $categoryList, array('maxlength'=>255)); ?>
 		<?php echo $form->error($model, 'category_id'); ?>
 	</div>
 
-	<div>
-		<?php echo CHtml::label("Instructors", false) ?>
-		<?php
-			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-							'name' => 'instructorList',
-							'source'=> $instructorList,
-							    'options'=>array(
- 										'minLength'=>2,
-										'showAnim'=>'fold',
-                ),
-            ));
-		?>
-		<?php
-			echo CHtml::button("Add instructor");
-		?>
-	</div>
+
 	<div class="input-row">
 		<?php echo CHtml::label('Course\'s thumbnail', false); ?>
 		<?php $this->widget('CMultiFileUpload', array(
@@ -83,7 +69,21 @@
 </div><!-- form -->
 
 <script type="text/javascript">
-	function SubmitEncodeForm() {
-		document.encode-form.submit();
+
+	function submitForm() {
+		// Check if both files has been uploaded
+		thumbnail = document.forms['course-form'].elements['thumbnails'].value;
+		intro = document.forms['course-form'].elements['introductions'].value;
+		if (thumbnail == "")
+		{
+			alert("You haven't chosen thumbnail");
+			return false;
+		}
+		else if (intro == "")
+		{
+			alert("You haven't chosen introduction video");
+			return false;
+		}
+		return true;
 	}
 </script>
