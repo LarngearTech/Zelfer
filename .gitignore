@@ -1,5 +1,11 @@
 themes/classic/views/
+course/*
 *~
 *.tmp
 *.swp
 application.log
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*.orig
