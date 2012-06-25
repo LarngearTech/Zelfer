@@ -9,6 +9,8 @@ return array(
 	'Logout' => 'ออกจากระบบ',
 	'By' => 'โดย',
 	'and' => 'และ',
+	'Edit' => 'แก้ไข',
+	'More' => 'เพิ่มเติม',
 
 	// General Form 
 	'Fields with' => 'ช่องที่มีเครื่องหมาย',
@@ -42,6 +44,7 @@ return array(
 	'My Courses' => 'คอร์สที่สมัคร',
 	'Courses' => 'คอร์ส',
 	'Course Summary' => 'เกี่ยวกับคอร์ส',
+	'Edit Course' => 'แก้ไขคอร์ส',
 	'Instructor' => 'ผู้สอน',
 	'Course Logistics' => 'เนื้อหาของคอร์ส', 
 	'Chapter' => 'บทที่',
@@ -52,6 +55,9 @@ return array(
 	'To take this course, please sign up.' => 'กรุณาลงทะเบียนกับระบบก่อนเพื่อเรียนวิชานี้',
 	'Lecture' => 'บทเรียน',
 	'Lectures' => 'บทเรียน',
+	'Create Lecture' => 'เพิ่มเนื้อหาใหม่',
 	'Problem Set' => 'โจทย์ปัญหา',
 	'Discussion' => 'แลกเปลี่ยนความเห็น',
+
+	'Edit Instructors' => 'แก้ไขผู้สอน',
 );
