@@ -43,6 +43,7 @@ return array(
 	// Application Specific
 	'My Courses' => 'คอร์สที่สมัคร',
 	'Courses' => 'คอร์ส',
+	'Create Course' => 'สร้างคอร์ส',
 	'Course Summary' => 'เกี่ยวกับคอร์ส',
 	'Edit Course' => 'แก้ไขคอร์ส',
 	'Instructor' => 'ผู้สอน',
