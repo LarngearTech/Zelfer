@@ -3,30 +3,35 @@
 <?php $this->widget('EBootstrapCarousel', array(
 	'items' => array(
 		array(
-			'src' => EBootstrap::thumbnailSrc(940, 400, 'ccc'),
+			'src' => Yii::app()->baseUrl.'/images/banner/1.jpg',
+			'caption' => 'Image Caption 1.',
+			'body' => 'This is a thumbnail',
+		),
+		array(
+			'src' => Yii::app()->baseUrl.'/images/banner/2.jpg',
+			'caption' => 'Image Caption 1.',
+			'body' => 'This is a thumbnail',
+		),
+		array(
+			'src' => Yii::app()->baseUrl.'/images/banner/3.jpg',
+			'caption' => 'Image Caption 1.',
+			'body' => 'This is a thumbnail',
+		),
+		array(
+			'src' => Yii::app()->baseUrl.'/images/banner/4.jpg',
+			'caption' => 'Image Caption 1.',
+			'body' => 'This is a thumbnail',
+		),
+		array(
+			'src' => Yii::app()->baseUrl.'/images/banner/5.jpg',
+			'caption' => 'Image Caption 1.',
+			'body' => 'This is a thumbnail',
+		),
+		array(
+			'src' => Yii::app()->baseUrl.'/images/banner/6.jpg',
 			'caption' => 'Image Caption 1.',
 			'body' => 'This is a thumbnail',
 			'active' => true,
-		),
-		array(
-			'src' => EBootstrap::thumbnailSrc(940, 400, 'bbb'),
-			'caption' => 'Image Caption thumnail.',
-			'body' => 'This is a thumbnail',
-		),
-		array(
-			'src' => EBootstrap::thumbnailSrc(940, 400, 'aaa'),
-			'caption' => 'Image Caption thumnail.',
-			'body' => 'This is a thumbnail',
-		),
-		array(
-			'src' => EBootstrap::thumbnailSrc(940, 400, '999'),
-			'caption' => 'Image Caption thumnail.',
-			'body' => 'This is a thumbnail',
-		),
-		array(
-			'src' => EBootstrap::thumbnailSrc(940, 400, '888'),
-			'caption' => 'Image Caption thumnail.',
-			'body' => 'This is a thumbnail',
 		),
 	),
 	'interval' => 6000,
@@ -49,10 +54,12 @@ foreach ($categories as $category)
 	// display courses of each category
 	echo CHtml::openTag('ul', array('class' => 'thumbnails'));
 	foreach ($courses_in_categories[$category->id] as $course) {
-		echo CHtml::openTag('li', array('class' => 'span3'));
+		echo CHtml::openTag('li', array('class' => 'span4'));
 		echo CHtml::link(
 			// image to be linked
-			CHtml::image($course->thumbnailUrl, CHtml::encode('Course thumbnail: '.$course->name)),
+			CHtml::image($course->thumbnailUrl, CHtml::encode('Course thumbnail: '.$course->name), array(
+				'height' => '180',
+			)),
 			// url to course/view?id=course_id
 			array('course/view', 'id' => $course->id),
 			// class for tag a href
