@@ -38,7 +38,7 @@
 	</div><!-- end mainmenu -->
 </div><!-- end top-bar -->
 <div id="page" class="container">
-	<!-- breadcrumbs -->
+
 	<div id="breadcrumbs" class="breadcrumbs">
 		<?php if(isset($this->breadcrumbs)):?>
 			<?php $this->widget('EBootstrapBreadcrumbs', array(

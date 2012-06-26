@@ -85,10 +85,6 @@ return array(
 				*/
 			),
 		),
-		// twitter bootstrap extension
-		'bootstrap' => array(
-			'class' => 'ext.bootstrap.components.Bootstrap',
-		),
 	),
 
 	// application-level parameters that can be accessed
