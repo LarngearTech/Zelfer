@@ -25,19 +25,20 @@ Yii::app()->clientScript->registerScriptFile(
 						//'video_mp4' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.mp4',
 						'video_mp4' => $model->introUrl,
 						// Absolute URL of the video in OGV format
-						//'video_ogv' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF',
+						'video_ogv' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv',
 						// Absolute URL of the video in WebM format
-						//'video_webm' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm',
+						'video_webm' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm',
 						// Use Flash fallback player ?
-						//'flash_fallback' => true,
-						'flash_fallback' => false,
+						'flash_fallback' => true,
+						//'flash_fallback' => false,
 						// Address of custom Flash player to use as fallback
 						//'flash_player' => 'swf/ClassXPlayer_v2.swf',
-						'flash_player' => false,
+						//'flash_player' => false,
+						'flash_player' => 'http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf',
 						// Show controls ?
 						'controls' => true,
 						// Preload video content ?
-						'preload' => false,
+						'preload' => true,
 						// Autostart the playback ?
 						'autoplay' => false,
 						// Show VideoJS support link ?
