@@ -13,6 +13,7 @@ class Lecture extends CActiveRecord
 	const ENCODING_PATH_PREFIX = '/contents/encoding/';
 	const STREAMING_PATH_PREFIX = '/contents/streaming/';
 	const SLIDE_URL_PREFIX = '/contents/slide/';
+	const VIDEO_URL_PREFIX = '/contents/video/';
 
 	/**
 	 * @var boolean whether title and description of lecture has been defined.
@@ -62,6 +63,7 @@ class Lecture extends CActiveRecord
 	protected $_encodingPath;
 	protected $_streamingPath;
 	protected $_slideUrl;
+	protected $_videoUrl;
 	protected $_thumbnailUrl;
 
 
@@ -83,6 +85,7 @@ class Lecture extends CActiveRecord
 		$this->_encodingPath 	= "";
 		$this->_streamingPath 	= "";
 		$this->_slideUrl 	= "";
+		$this->_videoUrl	= "";
 
 		$this->step1Complete	= false;
 		$this->inputVideoHealthy= false;
@@ -105,6 +108,7 @@ class Lecture extends CActiveRecord
 		$this->_encodingPath 	= $zelferRoot.self::ENCODING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->_streamingPath 	= $zelferRoot.self::STREAMING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->_slideUrl 	= $zelferRoot.self::SLIDE_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
+		$this->_videoUrl 	= $zelferRoot.self::VIDEO_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->step1Complete	= $this->name!="";
 
 		$scriptRoot = Yii::app()->basePath."/scripts";
@@ -242,11 +246,27 @@ class Lecture extends CActiveRecord
 	}
 
 	/**
+	 * @return string lecture's streaming URL
+	 */
+	public function getStreamingUrl()
+	{
+		return Yii::app()->baseUrl.'/index.php?r=lecture/showEncodeResult&lectureId='.$this->id;
+	}
+
+	/**
 	 * @return string lecture's slide URL
 	 */
 	public function getSlideUrl()
 	{
 		return $this->_slideUrl;
+	}
+	
+	/**
+	 * @return string lecture's video URL
+	 */
+	public function getVideoUrl()
+	{
+		return $this->_videoUrl;
 	}
 	
 	/**

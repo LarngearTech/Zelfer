@@ -33,12 +33,12 @@ $this->breadcrumbs = array(
 			$lecturesTabContent .= 
 				'<li class="lecture">
 					<div class="lecture-name">
-						<h4><a href="#">'.CHtml::encode($lecture->name).'
-						<img src="'.Yii::app()->baseUrl.'/images/play.png" class="icon play"></a></h4>
+						<h4>'.CHtml::encode($lecture->name).'</h4>
 					</div>
-					<div class="lecture-items well">
-						<a href="#"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>
-						<a href="#"><img src="'.Yii::app()->baseUrl.'/images/video.png" class="icon material"></a>
+					<div class="lecture-items">
+						<a href="'.$lecture->streamingUrl.'"><img src="'.Yii::app()->baseUrl.'/images/play.png" class="icon"></a> || 
+						<a href="'.$lecture->slideUrl.'"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>
+						<a href="'.$lecture->videoUrl.'"><img src="'.Yii::app()->baseUrl.'/images/video.png" class="icon material"></a>
 					</div>	
 				</li>';
 		}
