@@ -114,27 +114,27 @@ class Lecture extends CActiveRecord
 		$scriptRoot = Yii::app()->basePath."/scripts";
 		$vhtString=exec("perl $scriptRoot/video_health_check.pl \"$this->encodingPath\"",$retval);
 		$this->inputVideoHealthy	= (substr($vhtString,0,1)=='1');;
-		if(!$this->inputVideoHealthy) 
+		if (!$this->inputVideoHealthy) 
 		{
-			$this->videoCheckError=substr($vhtString,2);
+			$this->videoCheckError = substr($vhtString,2);
 		}
 		else
 		{
-			$this->hasWarning=(strpos($vhtString,'Warning')==true);
+			$this->hasWarning = (strpos($vhtString,'Warning') == true);
 			if($this->hasWarning)
 			{
-				$elements=explode('#',$vhtString);
-				$this->warningMessage=$elements[2];
+				$elements = explode('#',$vhtString);
+				$this->warningMessage = $elements[2];
 			}
 			else
 			{
-				$this->inputVideoInfo=explode('#',substr($vhtString,2));
+				$this->inputVideoInfo = explode('#',substr($vhtString,2));
 			}
 		}
 
-		$this->canEncode=$this->inputVideoHealthy && $this->step1Complete;
-		$this->isPreviouslyEncoded=file_exists("$this->streamingPath/video_complete.txt");
-		$this->isEncoding=(file_exists("$this->streamingPath/video_encoding.txt") 
+		$this->canEncode = $this->inputVideoHealthy && $this->step1Complete;
+		$this->isPreviouslyEncoded = file_exists("$this->streamingPath/video_complete.txt");
+		$this->isEncoding = (file_exists("$this->streamingPath/video_encoding.txt") 
 				|| file_exists("$this->streamingPath/slide_encoding.txt"));
 	}
 
@@ -218,14 +218,14 @@ class Lecture extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('chapter_id',$this->chapter_id);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 
@@ -275,7 +275,7 @@ class Lecture extends CActiveRecord
 	public function getThumbnailUrl()
 	{
 		// Convert streamingPath to web accessible url		
-		$web_path = str_replace($_SERVER["DOCUMENT_ROOT"],"http://".$_SERVER["SERVER_NAME"],$this->streamingPath);
+		$web_path = str_replace($_SERVER["DOCUMENT_ROOT"], "http://".$_SERVER["SERVER_NAME"], $this->streamingPath);
 		$this->_thumbnailUrl = "$web_path/Snapshots/00000.jpg";
 		return $this->_thumbnailUrl;
 	}
@@ -287,26 +287,36 @@ class Lecture extends CActiveRecord
 	public function getVideoObject($playerType)
 	{
 		// Get start and end times
-		$start='0'; $end='end';
-		if(file_exists("$this->streamingPath/Duration.txt")) {
-			$fid=fopen("$this->streamingPath/Duration.txt",'r'); $end=trim(fgets($fid)); fclose($fid);
+		$start = '0';
+		$end = 'end';
+		if (file_exists("$this->streamingPath/Duration.txt")) 
+		{
+			$fid = fopen("$this->streamingPath/Duration.txt",'r');
+			$end = trim(fgets($fid));
+			fclose($fid);
 		}
-		if(file_exists("$this->streamingPath/Trimming.txt")) {
-			$lines=file("$this->streamingPath/Trimming.txt");
-			if(strlen(trim($lines[0]))>0) { $start=trim($lines[0]); }
-			if((sizeof($lines)==2) && (strlen(trim($lines[1]))>0))  { $end=trim($lines[1]); }
+		if (file_exists("$this->streamingPath/Trimming.txt"))
+		{
+			$lines = file("$this->streamingPath/Trimming.txt");
+			if (strlen(trim($lines[0])) > 0)
+			{
+				$start = trim($lines[0]);
+			}
+			if ((sizeof($lines) == 2) && (strlen(trim($lines[1])) > 0))
+			{
+				$end = trim($lines[1]);
+			}
 		}
-
-		$format=(file_exists("$this->streamingPath/encodedVideo.mp4"))?('openclassroom'):('classx');
-		$has_slides=(file_exists("$this->streamingPath/SlideManifest.txt"))?('y'):('n');
+		$format = (file_exists("$this->streamingPath/encodedVideo.mp4"))?('openclassroom'):('classx');
+		$has_slides = (file_exists("$this->streamingPath/SlideManifest.txt"))?('y'):('n');
 
 		// Convert streamingPath to web accessible url		
-		$web_path=str_replace($_SERVER["DOCUMENT_ROOT"],"http://".$_SERVER["SERVER_NAME"],$this->streamingPath);
+		$web_path = str_replace($_SERVER["DOCUMENT_ROOT"], "http://".$_SERVER["SERVER_NAME"], $this->streamingPath);
 
 		if ($playerType === "silverlight")
 		{
-			$sl_param_string="sessionPath=$web_path,start=$start,end=$end,format=$format,splash=none,deviceID=1,has_slides=$has_slides";
-			$videoObject='<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="960" height="540">
+			$sl_param_string = "sessionPath=$web_path,start=$start,end=$end,format=$format,splash=none,deviceID=1,has_slides=$has_slides";
+			$videoObject = '<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="960" height="540">
 					<param name="source" value="'.Yii::app()->baseUrl.'/players/silverlight/ClassXPlayer_v2.xap"/>
 					<param name="initParams" value="'.$sl_param_string.'" />
 <param name="onerror" value="onSilverlightError" />
@@ -321,8 +331,8 @@ class Lecture extends CActiveRecord
 		}
 		else if ($playerType === "flash")
 		{
-			$fl_param_string="sessionPath=$web_path&start=$start&end=$end&format=$format&splash=none&deviceID=1&has_slides=$has_slides";
-			$videoObject='<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="960" height="540" id="ClassXPlayer_v2">
+			$fl_param_string = "sessionPath=$web_path&start=$start&end=$end&format=$format&splash=none&deviceID=1&has_slides=$has_slides";
+			$videoObject = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="960" height="540" id="ClassXPlayer_v2">
 					<param name="movie" value="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf"/>
 					<param name="flashVars" value="'.$fl_param_string.'" />
 					<embed src="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf" width="960" height="540" quality="high" allowFullScreen="true" FlashVars="'.$fl_param_string.'" pluginspage="http://www.adobe.com/go/getflashplayer">
