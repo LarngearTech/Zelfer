@@ -365,20 +365,22 @@ class LectureController extends Controller
 	 */
 	public function actionUpdate($lectureId)
 	{
-		$model=$this->loadModel($lectureId);
+		$model = $this->loadModel($lectureId);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Lecture']))
+		if (isset($_POST['Lecture']))
 		{
-			$model->attributes=$_POST['Lecture'];
-			if($model->save())
+			$model->attributes = $_POST['Lecture'];
+			if ($model->save())
+			{
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model' => $model,
 		));
 	}
 
@@ -389,7 +391,7 @@ class LectureController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
+		if (Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
@@ -407,9 +409,9 @@ class LectureController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Lecture');
+		$dataProvider = new CActiveDataProvider('Lecture');
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'dataProvider' => $dataProvider,
 		));
 	}
 
@@ -418,7 +420,7 @@ class LectureController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Lecture('search');
+		$model = new Lecture('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Lecture']))
 			$model->attributes=$_GET['Lecture'];
@@ -435,8 +437,8 @@ class LectureController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Lecture::model()->findByPk($id);
-		if($model===null)
+		$model = Lecture::model()->findByPk($id);
+		if ($model === null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
@@ -447,7 +449,7 @@ class LectureController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='lecture-form')
+		if (isset($_POST['ajax']) && $_POST['ajax']==='lecture-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

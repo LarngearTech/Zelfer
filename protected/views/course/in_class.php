@@ -8,21 +8,22 @@ $this->breadcrumbs = array(
 <h1><?php echo CHtml::encode($model->name); ?></h1>
 <h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->courseInstructorsShortString);?></h3>
 
-<br/>
-<div id="course-syllabus">
+<div id="course-tabs"">
 	<?php
 	// create contents for the lecture tab 
 	$chapIdx = 0;
-	$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
+	$lecturesTabContent = '
+	<div class="row">
+		<div class="accordion span4" id="chapter-accordion">';
 	foreach ($chapters as $chapter)
 	{
 		$chapIdx++;
 		$lecturesTabContent .= '
 			<div class="accordion-group">
 				<div class="accordion-heading">
-					<h4><a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
-						'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
-					</a></h4>
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
+						'.Yii::t('site', 'Chapter').' '.$chapIdx.'<br /><br />'.CHtml::encode($chapter->name).'
+					</a>
 				</div>
 				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse">
 					<div class="accordion-inner">
@@ -33,7 +34,7 @@ $this->breadcrumbs = array(
 			$lecturesTabContent .= 
 				'<li class="lecture">
 					<div class="lecture-name">
-						<h4>'.CHtml::encode($lecture->name).'</h4>
+						'.CHtml::encode($lecture->name).'
 					</div>
 					<div class="lecture-items">
 						<a href="'.$lecture->streamingUrl.'"><img src="'.Yii::app()->baseUrl.'/images/play.png" class="icon"></a> || 
@@ -43,39 +44,43 @@ $this->breadcrumbs = array(
 				</li>';
 		}
 		$lecturesTabContent .= '</ul>
-					</div>
-				</div>
-			</div>
+					</div><!-- end accordion-inner -->
+				</div><!-- end chapter -->
+			</div><!-- end accorion-group -->
 		';
 	}
-	$lecturesTabContent .= '</div>'; 
+	$lecturesTabContent .= '</div><!-- end accordion -->';
+	$lecturesTabContent .= '<div id="lecture-content-wrapper" class="span8">
+		'.$lecture->getVideoObject('flash').'
+		</div><!-- end lecture-content-wrapper -->
+	</div><!-- end row -->';
 
-// create course tabs including lecture and problem set tabs.
-$this->widget('EBootstrapTabNavigation', array(
-	'items' => array(
-		array('label' => Yii::t('site', 'Lecture'), 'url' => '#lecture', 'active' => true),
-		array('label' => Yii::t('site', 'Problem Set'), 'url' => '#problemset'),
-		array('label' => Yii::t('site', 'Discussion'), 'url' => '#discussion'),
-	),
-));
+	// create course tabs including lecture and problem set tabs.
+	$this->widget('EBootstrapTabNavigation', array(
+		'items' => array(
+			array('label' => Yii::t('site', 'Lecture'), 'url' => '#lecture', 'active' => true),
+			array('label' => Yii::t('site', 'Problem Set'), 'url' => '#problemset'),
+			array('label' => Yii::t('site', 'Discussion'), 'url' => '#discussion'),
+		),
+)	);
 
-$this->beginWidget('EBootstrapTabContentWrapper');
-	$this->beginWidget('EBootstrapTabContent', array(
-		'active' => true,
-		'id' => 'lecture',
-	));
-	echo $lecturesTabContent;
+	$this->beginWidget('EBootstrapTabContentWrapper');
+		$this->beginWidget('EBootstrapTabContent', array(
+			'active' => true,
+			'id' => 'lecture',
+		));
+		echo $lecturesTabContent;
+		$this->endWidget();
+		$this->beginWidget('EBootstrapTabContent', array(
+			'id' => 'problemset',
+		));
+		echo 'Problem set';
+		$this->endWidget();
+		$this->beginWidget('EBootstrapTabContent', array(
+			'id' => 'discussion',
+		));
+		echo 'Discussion';
+		$this->endWidget();
 	$this->endWidget();
-	$this->beginWidget('EBootstrapTabContent', array(
-		'id' => 'problemset',
-	));
-	echo 'Problem set';
-	$this->endWidget();
-	$this->beginWidget('EBootstrapTabContent', array(
-		'id' => 'discussion',
-	));
-	echo 'Discussion';
-	$this->endWidget();
-$this->endWidget();
 ?>
-</div>
+</div><!-- end course-tabs -->
