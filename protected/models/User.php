@@ -13,7 +13,12 @@
  */
 class User extends CActiveRecord
 {
+	const USER_RESOURCE_PREFIX = '/user/';
+	const DEFAULT_USER_PROFILE_URL = 'http://placehold.it/120x140';
+
 	public $repeat_password;
+
+	protected $_profileImageUrl;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -127,5 +132,33 @@ class User extends CActiveRecord
 			$this->password = $ph->HashPassword($this->password);
 		}
 		return parent::beforeSave();
+	}
+
+	 /**
+         * Return path to resource of user
+         * @return string resource path
+         */
+        public function getResourcePath()
+        {
+                return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
+        }
+
+	/**
+	 * Get URL of a user.
+	 * Return template image URL if image URL is not found
+	 * @return string profile image URL
+	 */
+	public function getProfileImageUrl()
+	{
+		$path = $this->getResourcePath();
+		if (file_exists("$path/profile.jpg"))
+		{
+			$this->_profileImageUrl = Yii::app()->baseUrl.self::USER_RESOURCE_PREFIX.$this->id."/profile.jpg";
+			return $this->_profileImageUrl;
+		}
+		else
+		{
+			return DEFAULT_USER_PROFILE_URL;
+		}
 	}
 }

@@ -251,6 +251,12 @@ div.search-form
 	padding: 0 20px 8px 0;
 }
 
+#course-instructors .instructor-image img
+{
+	width: 120px;
+	height: 140px;
+}
+
 #course-instructors .instructor-detail h3
 {
 	line-height: 17px;

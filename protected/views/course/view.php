@@ -234,9 +234,11 @@ Yii::app()->clientScript->registerScriptFile(
 		<?php
 			foreach ($model->courseInstructors as $instructorRecord)
 			{
+				$instructorModel = User::model();
+				$instructorModel->id = $instructorRecord['id'];
 				echo '<div class="instructor">
 						<div class="instructor-image">'.
-							CHtml::image('http://placehold.it/120x140', 'Image of '.$instructorRecord['fullname']).'
+							CHtml::image($instructorModel->profileImageUrl, 'Image of '.$instructorRecord['fullname']).'
 						</div>
 						<div class="instructor-detail">
 							<h3>'.$instructorRecord['fullname'].'</h3>

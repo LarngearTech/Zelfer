@@ -164,7 +164,7 @@ class Course extends CActiveRecord
 	 */
 	public function getCourseInstructors()
 	{
-		$sql = 'SELECT instructor_course.instructor_career, instructor_course.instructor_description, user.fullname
+		$sql = 'SELECT instructor_course.instructor_career, instructor_course.instructor_description, user.fullname, user.id
 			FROM instructor_course
 			INNER JOIN user ON user.id = instructor_course.user_id
 			WHERE instructor_course.course_id = '.$this->id;
@@ -247,16 +247,16 @@ class Course extends CActiveRecord
 		{
 			$insStr = $this->instructors[0]->fullname; 
 			$numIns = count($this->instructors);
-            if ($numIns == 2)
-            {
-                $insStr .= ' '.Yii::t('site', 'and').' '.$this->instructors[1]->fullname;
-            }
-            else if ($numIns > 2)
-            {
-                $insStr .= ' '.Yii::t('site', 'and {numIns} others.', array(
-                    '{numIns}' => $numIns
-                ));
-            }
+			if ($numIns == 2)
+			{
+				$insStr .= ' '.Yii::t('site', 'and').' '.$this->instructors[1]->fullname;
+			}
+			else if ($numIns > 2)
+			{
+				$insStr .= ' '.Yii::t('site', 'and {numIns} others.', array(
+					'{numIns}' => $numIns
+				));
+			}
 		}
 		return $insStr;
 	}
