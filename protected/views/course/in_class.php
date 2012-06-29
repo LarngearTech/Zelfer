@@ -37,7 +37,7 @@ $this->breadcrumbs = array(
 						'.CHtml::encode($lecture->name).'
 					</div>
 					<div class="lecture-items">
-						<a href="'.$lecture->streamingUrl.'"><img src="'.Yii::app()->baseUrl.'/images/play.png" class="icon"></a> || 
+						<a href="'.$lecture->streamingUrl.'"><img src="'.Yii::app()->baseUrl.'/images/play.png" class="icon"></a> 
 						<a href="'.$lecture->slideUrl.'"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>
 						<a href="'.$lecture->videoUrl.'"><img src="'.Yii::app()->baseUrl.'/images/video.png" class="icon material"></a>
 					</div>	

@@ -14,6 +14,8 @@ class Lecture extends CActiveRecord
 	const STREAMING_PATH_PREFIX = '/contents/streaming/';
 	const SLIDE_URL_PREFIX = '/contents/slide/';
 	const VIDEO_URL_PREFIX = '/contents/video/';
+	const DEFAULT_PLAYER_WIDTH = 700;
+	const DEFAULT_PLAYER_HEIGHT = 525;
 
 	/**
 	 * @var boolean whether title and description of lecture has been defined.
@@ -193,7 +195,7 @@ class Lecture extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'chapter' => array(self::BELONGS_TO, 'Chapter', 'chapter_id'),
-			'course' => array(self::HAS_ONE, 'Course', array('course_id'=>'id'), 'through'=>'chapter'),
+			'course' => array(self::HAS_ONE, 'Course', array('course_id' => 'id'), 'through' => 'chapter'),
 		);
 	}
 
@@ -316,7 +318,7 @@ class Lecture extends CActiveRecord
 		if ($playerType === "silverlight")
 		{
 			$sl_param_string = "sessionPath=$web_path,start=$start,end=$end,format=$format,splash=none,deviceID=1,has_slides=$has_slides";
-			$videoObject = '<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="960" height="540">
+			$videoObject = '<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="'.self::DEFAULT_PLAYER_WIDTH.'" height="'.self::DEFAULT_PLAYER_HEIGHT.'">
 					<param name="source" value="'.Yii::app()->baseUrl.'/players/silverlight/ClassXPlayer_v2.xap"/>
 					<param name="initParams" value="'.$sl_param_string.'" />
 <param name="onerror" value="onSilverlightError" />
@@ -335,7 +337,7 @@ class Lecture extends CActiveRecord
 			$videoObject = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="960" height="540" id="ClassXPlayer_v2">
 					<param name="movie" value="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf"/>
 					<param name="flashVars" value="'.$fl_param_string.'" />
-					<embed src="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf" width="700" height="525" quality="high" allowFullScreen="true" FlashVars="'.$fl_param_string.'" pluginspage="http://www.adobe.com/go/getflashplayer">
+					<embed src="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf" width="'.self::DEFAULT_PLAYER_WIDTH.'" height="'.self::DEFAULT_PLAYER_HEIGHT.'" quality="high" allowFullScreen="true" FlashVars="'.$fl_param_string.'" pluginspage="http://www.adobe.com/go/getflashplayer">
 					<param name="quality" value="high"/>
 					<param name="bgcolor" value="#000000"/>
 					<param name="allowScriptAccess" value="sameDomain"/>
