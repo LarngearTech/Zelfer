@@ -14,7 +14,7 @@ $this->breadcrumbs = array(
 	$chapIdx = 0;
 	$lecturesTabContent = '
 	<div class="row">
-		<div class="accordion span4" id="chapter-accordion">';
+		<div class="accordion span3" id="chapter-accordion">';
 	foreach ($chapters as $chapter)
 	{
 		$chapIdx++;
@@ -22,7 +22,7 @@ $this->breadcrumbs = array(
 			<div class="accordion-group">
 				<div class="accordion-heading">
 					<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
-						'.Yii::t('site', 'Chapter').' '.$chapIdx.'<br /><br />'.CHtml::encode($chapter->name).'
+						'.$chapIdx.'. '.CHtml::encode($chapter->name).'
 					</a>
 				</div>
 				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse">
@@ -50,7 +50,7 @@ $this->breadcrumbs = array(
 		';
 	}
 	$lecturesTabContent .= '</div><!-- end accordion -->';
-	$lecturesTabContent .= '<div id="lecture-content-wrapper" class="span8">
+	$lecturesTabContent .= '<div id="lecture-content-wrapper" class="span9">
 		'.$lecture->getVideoObject('flash').'
 		</div><!-- end lecture-content-wrapper -->
 	</div><!-- end row -->';

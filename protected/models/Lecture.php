@@ -335,7 +335,7 @@ class Lecture extends CActiveRecord
 			$videoObject = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="960" height="540" id="ClassXPlayer_v2">
 					<param name="movie" value="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf"/>
 					<param name="flashVars" value="'.$fl_param_string.'" />
-					<embed src="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf" width="960" height="540" quality="high" allowFullScreen="true" FlashVars="'.$fl_param_string.'" pluginspage="http://www.adobe.com/go/getflashplayer">
+					<embed src="'.Yii::app()->baseUrl.'/players/flash/ClassXPlayer_v2.swf" width="700" height="525" quality="high" allowFullScreen="true" FlashVars="'.$fl_param_string.'" pluginspage="http://www.adobe.com/go/getflashplayer">
 					<param name="quality" value="high"/>
 					<param name="bgcolor" value="#000000"/>
 					<param name="allowScriptAccess" value="sameDomain"/>
