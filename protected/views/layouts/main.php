@@ -39,14 +39,6 @@
 </div><!-- end top-bar -->
 <div id="page" class="container">
 
-	<div id="breadcrumbs" class="breadcrumbs">
-		<?php if(isset($this->breadcrumbs)):?>
-			<?php $this->widget('EBootstrapBreadcrumbs', array(
-				'links'=>$this->breadcrumbs,
-			)); ?>
-		<?php endif?>
-	</div><!-- end breadcrumbs -->
-
 	<?php echo $content; ?>
 
 	<div class="clear"></div>

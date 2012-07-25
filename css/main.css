@@ -218,6 +218,10 @@ div.search-form
 
 #course-header .course-header-wrapper
 {
+	margin-bottom: 50px;
+	padding-top: 40px;
+	padding-bottom: 50px;
+
 }
 
 #course-header #course-intro-video
