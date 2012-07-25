@@ -218,28 +218,45 @@ div.search-form
 
 #course-header 
 {
-	background-color: rgb(237, 232, 221);
+	background: url("../images/bg.jpg") repeat fixed 0% 0% rgb(201, 204, 208);
+	border-bottom: 1px solid;
+	box-shadow: 0px 0px 30px black;
 }
 
 #course-header .course-header-wrapper
 {
-	margin-bottom: 50px;
-	padding-top: 40px;
-	padding-bottom: 50px;
+	margin-bottom: 60px;
+	margin-top: 50px;
 }
 
 #course-header #course-intro-video
 {
+	box-shadow: 5px 5px 15px black;
 }
 
-#course-header .course-button
+#course-header #course-institute-logo
 {
-	float: right;
+	margin-left: 60px;
+	margin-bottom: 10px;
+}
+
+#course-header #course-header-name
+{
+	margin-left: 60px;
 }
 
 #course-header #course-description
 {
 	margin-top: 20px;
+	margin-left: 60px;
+	margin-bottom: 20px;
+	font-size: 1.3em;
+}
+
+#course-header #course-header-button
+{
+	margin-top: 20px;
+	margin-left: 60px;
 }
 
 #course-summary
