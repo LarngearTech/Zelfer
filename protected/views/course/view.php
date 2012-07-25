@@ -203,14 +203,14 @@ Yii::app()->clientScript->registerScriptFile(
 
 <div id="course-summary">
 	<div class="container">
-		<h2><?php echo Yii::t('site', 'Course Summary');?></h2>
+		<h1><?php echo Yii::t('site', 'Course Summary');?></h1>
 		<p class="well"><?php echo CHtml::encode($model->long_description); ?></p>
 	</div>
 </div>
 <div class="container">
 <div class="row">
 	<div id="course-syllabus" class="span6">
-		<h2><?php echo Yii::t('site', 'Course Logistics');?></h2>
+		<h1><?php echo Yii::t('site', 'Course Logistics');?></h1>
 		<?php
 		$chapIdx = 0;
 		$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
@@ -244,7 +244,7 @@ Yii::app()->clientScript->registerScriptFile(
 	?>
 	</div><!-- end course-syllabus -->
 	<div id="course-instructors" class="span6">
-		<h2><?php echo Yii::t('site', 'Instructor');?></h2>
+		<h1><?php echo Yii::t('site', 'Instructor');?></h1>
 		<?php
 			foreach ($model->courseInstructors as $instructorRecord)
 			{
@@ -255,9 +255,8 @@ Yii::app()->clientScript->registerScriptFile(
 							CHtml::image($instructorModel->profileImageUrl, 'Image of '.$instructorRecord['fullname']).'
 						</div>
 						<div class="instructor-detail">
-							<h3>'.$instructorRecord['fullname'].'</h3>
-							<h4>'.$instructorRecord['instructor_career'].'</h4>'
-							.$instructorRecord['instructor_description'].'
+							<h2>'.$instructorRecord['fullname'].'</h3>
+							<h4>'.$instructorRecord['instructor_career'].'</h4>								<p>'.$instructorRecord['instructor_description'].'</p>
 						</div>
 					</div><!-- end instructor -->';
 			}

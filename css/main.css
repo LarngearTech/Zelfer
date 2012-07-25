@@ -250,7 +250,7 @@ div.search-form
 	margin-top: 20px;
 	margin-left: 60px;
 	margin-bottom: 20px;
-	font-size: 1.3em;
+	font-size: 1.4em;
 }
 
 #course-header #course-header-button
@@ -261,11 +261,35 @@ div.search-form
 
 #course-summary
 {
-	margin-top: 20px;
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
+
+#course-summary p.well
+{
+	margin-top: 10px;
+	font-size: 1.2em;
+}
+
+#course-syllabus #chapter-accordion
+{
+	margin-top: 10px;
+}
+
+#course-syllabus .accordion-heading
+{
+	font-size: 1.2em;
+}
+
+#course-syllabus .accordion-inner li 
+{
+	font-size: 1.1em;
+	line-height: 1.7em;
 }
 
 #course-instructors .instructor
 {
+	margin-top: 10px;
 	margin-left: 10px;
 	margin-bottom: 20px;
 }
@@ -280,6 +304,7 @@ div.search-form
 {
 	width: 120px;
 	height: 140px;
+	box-shadow: 3px 5px 5px black;
 }
 
 #course-instructors .instructor-detail h3
@@ -294,6 +319,12 @@ div.search-form
 	margin-bottom: 10px;
 }
 
+#course-instructors .instructor-detail p
+{
+	line-height: 1.6em;
+	font-size: 1.2em;
+}
+ 
 #course-tabs
 {
 	margin-top: 10px;
