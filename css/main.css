@@ -274,9 +274,50 @@ div.search-form
 	margin-top: 10px;
 }
 
+
+#edit-course-menu .btn-toolbar
+{
+	padding: 10px;
+	color: #c09853;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background-color: #fcf8e3;
+	border: 1px solid #fbeed5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.chapter .accordion-inner
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+.chapter ul
+{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+
+}
+
+.chapter ul li.lecture
+{
+	padding-bottom: 5px;
+	margin: 0;
+	background-color: #FFFFCC;
+}
+
+.chapter ul li.lecture .active
+{
+	background-color: #FFFFCC;
+}
+
 .lecture .lecture-name
 {
-	margin-bottom: 10px;
+	padding: 2px 2px 2px 20px;
+	background-color: #AAAAAA;
+	color: white;
 }
 
 .lecture .icon
@@ -294,20 +335,10 @@ div.search-form
 	height: 20px;
 }
 
-.lecture-items
+.lecture .lecture-items
 {
-	margin-bottom: 30px;
-}
-
-#edit-course-menu .btn-toolbar
-{
-	padding: 10px;
-	color: #c09853;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	background-color: #fcf8e3;
-	border: 1px solid #fbeed5;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding-left: 20px;
 }
 

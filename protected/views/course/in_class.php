@@ -4,11 +4,21 @@ $this->breadcrumbs = array(
 	$model->name,
 );
 ?>
-
+<?php
+	Yii::app()->clientScript->registerScript('activate-chapter', '
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("a.accordion-body .chapter").click(function(e) {
+					alert(this.id);
+				})
+			});
+		</script>
+	');
+?>
 <h1><?php echo CHtml::encode($model->name); ?></h1>
 <h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->courseInstructorsShortString);?></h3>
 
-<div id="course-tabs"">
+<div id="course-tabs">
 	<?php
 	// create contents for the lecture tab 
 	$chapIdx = 0;
@@ -25,7 +35,7 @@ $this->breadcrumbs = array(
 						'.$chapIdx.'. '.CHtml::encode($chapter->name).'
 					</a>
 				</div>
-				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse">
+				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse chapter">
 					<div class="accordion-inner">
 						<ul>';
 		// create a lecture list
