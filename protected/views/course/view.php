@@ -7,7 +7,8 @@ Yii::app()->clientScript->registerScriptFile(
 	Yii::app()->baseUrl.'/js/bootstrap.min.js'
 );
 ?>
-<div id="course-header" class="row">
+<div id="course-header">
+	<div class="container row">
 	<div class="course-header-wrapper span12">
 		<div class="row">
 			<div id="course-intro-video" class="span6">
@@ -187,6 +188,7 @@ Yii::app()->clientScript->registerScriptFile(
 			</div><!-- end course-header-description -->
 		</div><!-- end row -->
 	</div><!-- end wrapper -->
+</div>
 </div><!-- end course-header -->
 
 

@@ -37,7 +37,7 @@
 		</div>
 	</div><!-- end mainmenu -->
 </div><!-- end top-bar -->
-<div id="page" class="container">
+<div id="page">
 
 	<?php echo $content; ?>
 

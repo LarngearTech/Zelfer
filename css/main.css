@@ -216,12 +216,16 @@ div.search-form
 	padding: 0px 20px 0px 20px;
 }
 
+#course-header 
+{
+	background-color: rgb(237, 232, 221);
+}
+
 #course-header .course-header-wrapper
 {
 	margin-bottom: 50px;
 	padding-top: 40px;
 	padding-bottom: 50px;
-
 }
 
 #course-header #course-intro-video
