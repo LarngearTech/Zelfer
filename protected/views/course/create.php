@@ -9,8 +9,9 @@ $this->menu=array(
 	array('label'=>'Manage Course', 'url'=>array('admin')),
 );
 ?>
-
+<div class="container">
 <h1>Create Course</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model,
 					'categoryList'=>$categoryList,)); ?>
+</div><!-- /container -->

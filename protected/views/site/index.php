@@ -1,5 +1,5 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
-
+<div class="container">
 <?php $this->widget('EBootstrapCarousel', array(
 	'items' => array(
 		array(
@@ -73,3 +73,4 @@ foreach ($categories as $category)
 	echo CHtml::closeTag('ul');
 }
 ?>
+</div><!-- /container -->

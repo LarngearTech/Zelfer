@@ -24,12 +24,12 @@ Yii::app()->clientScript->registerScriptFile(
 							// Poster image absolute URL
 							'poster' => false,
 							// Absolute URL of the video in MP4 format
-							//'video_mp4' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.mp4',
-							'video_mp4' => $model->introUrl,
+							'video_mp4' => $model->introUrl.".mp4",
 							// Absolute URL of the video in OGV format
-							'video_ogv' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv',
+							//'video_ogv' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv',
+							'video_ogv' => $model->introUrl.".ogv",
 							// Absolute URL of the video in WebM format
-							'video_webm' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm',
+							//'video_webm' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm',
 							// Use Flash fallback player ?
 							'flash_fallback' => true,
 							//'flash_fallback' => false,
@@ -54,7 +54,7 @@ Yii::app()->clientScript->registerScriptFile(
 				<div id="course-header-description" class="span6"> 
 					<div class="row">
 						<div id="course-institute-logo">
-							<a href=""><img src="<?php echo Yii::app()->baseUrl.'/institute/ipst/logo.png'; ?>"/></a>
+							<a href=""><img width=100 height=100 src="<?php echo Yii::app()->baseUrl.'/institute/tpa/logo.png'; ?>"/></a>
 						</div>
 					</div>
 					<div class="row">
