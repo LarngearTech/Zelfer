@@ -158,7 +158,7 @@ class User extends CActiveRecord
 		}
 		else
 		{
-			return DEFAULT_USER_PROFILE_URL;
+			return self::DEFAULT_USER_PROFILE_URL;
 		}
 	}
 }
