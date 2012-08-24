@@ -148,7 +148,7 @@ class Course extends CActiveRecord
 		$path = $this->getResourcePath();
 		if (file_exists("$path/encodedVideo.mp4"))
 		{
-			$this->_introUrl = Yii::app()->baseUrl."/course/$this->id/encodedVideo.mp4";
+			$this->_introUrl = Yii::app()->baseUrl."/course/$this->id/encodedVideo";
 			return $this->_introUrl;
 		}
 		else

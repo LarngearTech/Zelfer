@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 	Yii::t('site', 'Login'),
 );
 ?>
-
+<div class="container">
 <h1><?php echo Yii::t('site', 'Login');?></h1>
 
 <p><?php echo Yii::t('site', 'Please fill out the following form with your login credentials');?>:</p>
@@ -46,4 +46,5 @@ $this->breadcrumbs=array(
 	</div>
 
 <?php $this->endWidget(); ?>
-</div><!-- form -->
+</div><!-- /form -->
+</div><!-- /container -->
