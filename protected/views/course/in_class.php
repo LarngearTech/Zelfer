@@ -59,7 +59,7 @@ $this->breadcrumbs = array(
 		$lecturesTabContent .= '</ul>
 					</div><!-- end accordion-inner -->
 				</div><!-- end chapter -->
-			</div><!-- end accorion-group -->
+			</div><!-- end accordion-group -->
 		';
 	}
 	$lecturesTabContent .= '</div><!-- end accordion -->';
