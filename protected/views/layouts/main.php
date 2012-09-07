@@ -15,27 +15,55 @@
 
 <body>
 <div class="top-bar"> 
-	<div id="mainmenu" class="navbar navbar-fixed-top navbar-inverse">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="<?php echo CHtml::normalizeUrl(array('/site/index'));?>"><?php echo CHtml::encode(Yii::app()->name); ?></a>
-				<?php $this->widget('zii.widgets.CMenu',array(
-					'items' => array(
-						array('label' => Yii::t('site', 'Home'), 'url' => array('/site/index')),
-						/*array('label' => Yii::t('site', 'About'), 'url' => array('/site/page', 'view'=>'about')),
-						array('label' => Yii::t('site', 'Contact'), 'url' => array('/site/contact')),*/
-						array('label' => Yii::t('site', 'Create Course'), 'url' => array('/course/create')), 
-						array('label' => Yii::t('site', 'My Courses'), 'url' => array('/user/mycourses'), 'visible' => !Yii::app()->user->isGuest),
-						array('label' => Yii::t('site', 'Login'), 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-						array('label' => Yii::t('site', 'Logout').' ('.Yii::app()->user->fullname.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-					),
-					'htmlOptions' => array(
-						'class' => 'nav',
-					),
-				)); ?>
-			</div>
-		</div>
-	</div><!-- end mainmenu -->
+	<?php
+		// Query all registered courses to display on menu
+		$registeredCourses = array();
+		if (!Yii::app()->user->isGuest)
+		{
+			$userModel = User::model()->findByPk(Yii::app()->user->id);
+			foreach ($userModel->registeredCourses as $registeredCourse)
+			{
+				$course = array();
+				$course['label'] = $registeredCourse['name'];
+				$course['url'] = array('/course/inclass&id='.$registeredCourse['id']);
+				$registeredCourses[] = $course;
+			}
+		}
+		
+		$this->widget('EBootstrapNavigation', array(
+			'fixed' => true,
+			'htmlOptions' => array(
+				'class' => 'navbar-inverse',
+			),
+			'items' => array(
+				array(
+					'label' => Yii::t('site', 'Home'),
+					'url' => array('/site/index'),
+				),
+				array(
+					'label' => Yii::t('site', 'Create Course'),
+					'url' => array('/course/create'),
+				),
+				array(
+					'label' => Yii::t('site', 'My Courses'),
+					'url' => '#',
+					'visible' => !Yii::app()->user->isGuest,
+					'dropdown' => true,
+					'items' => $registeredCourses,
+				),
+				array(
+					'label' => Yii::t('site', 'Login'), 
+					'url' => array('/site/login'),
+					'visible' => Yii::app()->user->isGuest,
+				),
+				array(
+					'label' => Yii::t('site', 'Logout').' ('.Yii::app()->user->fullname.')', 
+					'url' => array('/site/logout'),
+					'visible' => !Yii::app()->user->isGuest,
+				),
+			),
+		));
+	?>
 </div><!-- end top-bar -->
 <div id="page">
 

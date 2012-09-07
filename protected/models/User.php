@@ -161,4 +161,19 @@ class User extends CActiveRecord
 			return self::DEFAULT_USER_PROFILE_URL;
 		}
 	}
+
+	/**
+	 * Get ID of all registered courses.
+	 * Return array of registered courses' Ids
+	 * @return array registered courses' ids
+	 */
+	public function getRegisteredCourses()
+	{
+		$sql = 'SELECT course.id, course.name 
+				FROM student_course
+				INNER JOIN course ON course.id = student_course.course_id
+				WHERE student_course.user_id = '.$this->id;
+		$rows = Yii::app()->db->createCommand($sql)->queryAll();
+		return $rows;
+	}
 }
