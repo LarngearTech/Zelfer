@@ -4,18 +4,46 @@ $this->breadcrumbs = array(
 	$model->name,
 );
 ?>
+<script type="text/javascript">
+$(document).ready(function() {
+				$("a.accordion-body .chapter").click(function(e) {
+					alert(this.id);
+				});
+				$(".playbutton").click(function(e){
+					ajaxUrl = "<?php echo $this->createUrl("course/changeVideo") ?>";
+					$.ajax({
+						url : ajaxUrl,
+						data : {
+								videoId : this.id
+								},
+						dataType : "html",
+						success : function(html){$("#lecture-content-wrapper").html(html);}
+					});
+				});
+			});
+</script>
 <?php
-	Yii::app()->clientScript->registerScript('activate-chapter', '
+	/*Yii::app()->clientScript->registerScript('activate-chapter', '
 			$(document).ready(function() {
 				$("a.accordion-body .chapter").click(function(e) {
 					alert(this.id);
 				});
 				$(".playbutton").click(function(e){
-				 	$("video:nth-child(1)").attr("src",this.id+"/encodedVideo.mp4");
-				 	$("video:nth-child(1)").attr("src",this.id+"/encodedVideo.ogv");
+					ajaxUrl = <?php echo $this->createUrl("course/changeVideo") ?>;
+					$.ajax({
+						type : post,
+						url : ajaxUrl,
+						data : {
+								videoId : $this.id
+								},
+						dataType : "html",
+						success : "function(html){$(#lecture-content-wrapper).html(html);}"
+					});
+				 	//$("video:nth-child(1)").attr("src",this.id+"/encodedVideo.mp4");
+				 	//$("video:nth-child(1)").attr("src",this.id+"/encodedVideo.ogv");
 				});
 			});
-	');
+	');*/
 ?>
 <div class="container">
 <h1><?php echo CHtml::encode($model->name); ?></h1>
