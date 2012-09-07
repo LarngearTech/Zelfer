@@ -110,7 +110,7 @@ class Lecture extends CActiveRecord
 		$this->_encodingPath 	= $zelferRoot.self::ENCODING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->_streamingPath 	= $zelferRoot.self::STREAMING_PATH_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->_slideUrl 	= $zelferRoot.self::SLIDE_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
-		$this->_videoUrl 	= $zelferRoot.self::VIDEO_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
+		$this->_videoUrl 	= Yii::app()->baseUrl.self::VIDEO_URL_PREFIX.$this->chapter->course->id."/".$this->chapter_id."/".$this->id;
 		$this->step1Complete	= $this->name!="";
 
 		$scriptRoot = Yii::app()->basePath."/scripts";

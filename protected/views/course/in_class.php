@@ -4,7 +4,6 @@ $this->breadcrumbs = array(
 	$model->name,
 );
 ?>
-<div class="container">
 <?php
 	Yii::app()->clientScript->registerScript('activate-chapter', '
 			$(document).ready(function() {
@@ -14,9 +13,11 @@ $this->breadcrumbs = array(
 				$(".playbutton").click(function(e){
 				 	$("video:nth-child(1)").attr("src",this.id+"/encodedVideo.mp4");
 				 	$("video:nth-child(1)").attr("src",this.id+"/encodedVideo.ogv");
+				});
 			});
 	');
 ?>
+<div class="container">
 <h1><?php echo CHtml::encode($model->name); ?></h1>
 <h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->courseInstructorsShortString);?></h3>
 
@@ -50,9 +51,10 @@ $this->breadcrumbs = array(
 					</div>
 					<div class="lecture-items">
 						<!--<a href="'.$lecture->streamingUrl.'"><img src="'.Yii::app()->baseUrl.'/images/play.png" class="icon"></a> -->
-						<img id="'.$lecture->videoUrl.'" src="'.Yii::app()->baseUrl.'/images/play.png" class="icon playbutton"/>
-						<a href="'.$lecture->slideUrl.'"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>
-						<a href="'.$lecture->videoUrl.'"><img src="'.Yii::app()->baseUrl.'/images/video.png" class="icon material"></a>
+						<a href="javascript:void(0)"><img id="'.$lecture->videoUrl.'" src="'.Yii::app()->baseUrl.'/images/play.png" class="icon playbutton"/></a>
+						<!--<a href="'.$lecture->slideUrl.'"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>-->
+						<a href="contents/slide/slide.pdf"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>
+						<a href="'.$lecture->videoUrl."/encodedVideo.ogv".'"><img src="'.Yii::app()->baseUrl.'/images/video.png" class="icon material"></a>
 					</div>	
 				</li>';
 		}
