@@ -16,6 +16,20 @@
 <body>
 <div class="top-bar"> 
 	<?php
+		// Query all registered courses to display on menu
+		if (!Yii::app()->user->isGuest)
+		{
+			$registeredCourses = array();
+			$userModel = User::model()->findByPk(Yii::app()->user->id);
+			foreach ($userModel->registeredCourses as $registeredCourse)
+			{
+				$course = array();
+				$course['label'] = $registeredCourse['name'];
+				$course['url'] = array('/course/inclass&id='.$registeredCourse['id']);
+				$registeredCourses[] = $course;
+			}
+		}
+		
 		$this->widget('EBootstrapNavigation', array(
 			'fixed' => true,
 			'htmlOptions' => array(
@@ -35,16 +49,7 @@
 					'url' => '#',
 					'visible' => !Yii::app()->user->isGuest,
 					'dropdown' => true,
-					'items' => array(
-						array(
-							'label' => 'test3',
-							'url' => '#',
-						),
-						array(
-							'label' => 'test4',
-							'url' => '#',
-						),
-					),
+					'items' => $registeredCourses,
 				),
 				array(
 					'label' => Yii::t('site', 'Login'), 
