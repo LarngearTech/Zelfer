@@ -15,7 +15,7 @@
 
 <body>
 <div class="top-bar"> 
-	<div id="mainmenu" class="navbar navbar-fixed-top">
+	<div id="mainmenu" class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="brand" href="<?php echo CHtml::normalizeUrl(array('/site/index'));?>"><?php echo CHtml::encode(Yii::app()->name); ?></a>
