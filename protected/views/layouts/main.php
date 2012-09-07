@@ -17,9 +17,9 @@
 <div class="top-bar"> 
 	<?php
 		// Query all registered courses to display on menu
+		$registeredCourses = array();
 		if (!Yii::app()->user->isGuest)
 		{
-			$registeredCourses = array();
 			$userModel = User::model()->findByPk(Yii::app()->user->id);
 			foreach ($userModel->registeredCourses as $registeredCourse)
 			{
