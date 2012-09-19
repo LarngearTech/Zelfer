@@ -21,6 +21,9 @@ return array(
 		'application.components.*',
 		'application.extensions.PasswordHash',
 		'application.widgets.bootstrap.*',
+		'application.widgets.ZLogIn.*',
+		'application.widgets.ZSignUp.*',
+		'application.widgets.ZLogInSignUpFlipper.*',
 	),
 
 	'modules'=>array(
