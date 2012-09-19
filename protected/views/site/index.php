@@ -1,6 +1,6 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 <div class="container">
-<?php $this->widget('EBootstrapCarousel', array(
+<!--?php $this->widget('EBootstrapCarousel', array(
 	'items' => array(
 		array(
 			'src' => Yii::app()->baseUrl.'/images/banner/1.jpg',
@@ -37,7 +37,7 @@
 	'interval' => 6000,
 	'infinite' => false,
 	'htmlOptions' => array(),
-)); ?>
+)); ?-->
 
 <?php 
 
