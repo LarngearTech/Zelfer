@@ -1,6 +1,11 @@
 <?php
 return array(
+	// Menu
 	'Home' => 'หน้าแรก',
+	'Edit Profile' => 'แก้ไขข้อมูลส่วนตัว',
+	'Change Password' => 'เปลี่ยนรหัสผ่าน',
+	'My Courses' => 'คอร์สของฉัน',
+	'My Activities' => 'ดูกิจกรรมย้อนหลัง',
 	'About' => 'เกี่ยวกับ',
 	'Contact' => 'ติดต่อ',
 	'Contact Us' => 'ติดต่อเรา',

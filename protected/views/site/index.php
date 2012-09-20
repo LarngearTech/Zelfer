@@ -55,19 +55,10 @@ foreach ($categories as $category)
 	echo CHtml::openTag('ul', array('class' => 'thumbnails'));
 	foreach ($courses_in_categories[$category->id] as $course) {
 		echo CHtml::openTag('li', array('class' => 'span4'));
-		echo CHtml::link(
-			// image to be linked
-			CHtml::image($course->thumbnailUrl, CHtml::encode('Course thumbnail: '.$course->name), array(
-				'height' => '180',
-			)),
-			// url to course/view?id=course_id
-			array('course/view', 'id' => $course->id),
-			// class for tag a href
-			array('class' => 'thumbnail')
-		);
-		echo '
-		<h5>'.CHtml::encode($course->name).'</h5>
-		<p>'.CHtml::encode($course->short_description).'</p>';
+		$this->widget('ext.coursethumbnail.CourseThumbnail', array(
+								'course'=>$course,
+								'css'=>'thumbnail'
+		));
 		echo CHtml::closeTag('li');
 	}
 	echo CHtml::closeTag('ul');

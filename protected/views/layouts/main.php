@@ -5,10 +5,10 @@
 	<meta name="language" content="en" />
 
 	<!-- bootstrap CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" />
+	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.css'); ?>
 
 	<!-- customized CSS -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
+	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main.css') ?>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -17,17 +17,12 @@
 <div class="top-bar"> 
 	<?php
 		// Query all registered courses to display on menu
-		$registeredCourses = array();
+		$userModel;
+		$mycourseUrl="#";
 		if (!Yii::app()->user->isGuest)
 		{
 			$userModel = User::model()->findByPk(Yii::app()->user->id);
-			foreach ($userModel->registeredCourses as $registeredCourse)
-			{
-				$course = array();
-				$course['label'] = $registeredCourse['name'];
-				$course['url'] = array('/course/inclass&id='.$registeredCourse['id']);
-				$registeredCourses[] = $course;
-			}
+			$mycourseUrl = Yii::app()->createUrl('course/myCourse', array('uid'=>$userModel->id));
 		}
 		
 		$this->widget('EBootstrapNavigation', array(
@@ -41,15 +36,27 @@
 					'url' => array('/site/index'),
 				),
 				array(
+					'label' => !Yii::app()->user->isGuest?$userModel->fullname:'Guest',
+					'url' => '#',
+					'dropdown' => true,
+					'items' => array(
+							array('label' => Yii::t('site', 'Edit Profile'), 'url' => '#'),
+							array('label' => Yii::t('site', 'Change Password'), 'url' => '#'),
+							array('label' => Yii::t('site', 'My Courses'), 'url' => $mycourseUrl),
+							array('label' => Yii::t('site', 'My Activities'), 'url' => '#'),
+							array('label' => Yii::t('site', 'Logout'), 'url' => array('/site/logout')),
+						),
+					'visible' => !Yii::app()->user->isGuest,
+				),
+				array(
 					'label' => Yii::t('site', 'Create Course'),
 					'url' => array('/course/create'),
+					'visible' => !Yii::app()->user->isGuest,
 				),
 				array(
 					'label' => Yii::t('site', 'My Courses'),
-					'url' => '#',
+					'url' => $mycourseUrl,
 					'visible' => !Yii::app()->user->isGuest,
-					'dropdown' => true,
-					'items' => $registeredCourses,
 				),
 				array(
 					'label' => Yii::t('site', 'Login'), 
