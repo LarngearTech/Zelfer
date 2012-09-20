@@ -40,7 +40,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'instructorList', 'editInstructor', 'changeVideo'),
+				'actions' => array('create', 'update', 'instructorList', 'editInstructor', 'changeVideo', 'myCourse'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -122,6 +122,26 @@ class CourseController extends Controller
 						),
 					), true);
 	}
+
+	
+	/**
+	 * Display user's learn courses and teach courses
+	 * @param integer $uid user's id
+	 */
+	function actionMyCourse($uid)
+	{
+		$userModel = User::model()->findByPk($uid);
+		$registeredCourses = array();
+		if (count($userModel->registeredCourses) > 0)
+		{
+			$registeredCourses = $userModel->registeredCourses;
+		}
+		$this->render('myCourse', array(
+						'userModel' => $userModel,
+						'registeredCourses' => $registeredCourses,
+						));
+	}
+
 
 	/**
 	 * @return list of pair of $user->id, $user->fullname for CJuiAutoComplete.
