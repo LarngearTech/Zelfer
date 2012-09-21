@@ -132,22 +132,9 @@ class CourseController extends Controller
 	{
 		$userModel = User::model()->findByPk($uid);
 
-		$takeCourses = array();
-		$teachCourses = array();
-
-		if (count($userModel->takeCourses) > 0)
-		{
-			$takeCourses = $userModel->takeCourseIds;
-		}
-		if (count($userModel->teachCourses) > 0)
-		{
-			$teachCourses = $userModel->teachCourses;
-		}
-		/*$this->render('myCourse', array(
+		$this->render('myCourse', array(
 						'userModel' => $userModel,
-						'takeCourses' => $takeCourses,
-						'teachCourses'=> $teachCourses,
-						));*/
+						));
 	}
 
 

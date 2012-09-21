@@ -4,32 +4,30 @@ Yii::app()->clientScript->registerScriptFile(
 );?>
 
 <h1>Courses|Take</h1>
-	<ul>
+	<ul class='thumbnails'>
 	<?php
-		foreach ($takeCourses as $course){
-			print_r($course);
-/*			echo CHtml::openTag('li', array('class' => 'span3'));
+		foreach ($userModel->takeCourses as $course){
+			//print_r($course);
+			echo CHtml::openTag('li', array('class' => 'span3'));
  			$this->widget('ext.coursethumbnail.CourseThumbnail', array(
 										'course'=>$course,
 										'css'=>'coursethumbnail'
 			));
-			echo CHtml::closeTag('li');*/
+			echo CHtml::closeTag('li');
 		}
 	?>
 	</ul>
 <h1>Courses|Teach</h1>
-	<ul>
+	<ul class='thumbnails'>
 	<?php	
-		foreach ($teachCourses as $course){
-			print_r($course);
-			/*
+		foreach ($userModel->teachCourses as $course){
+			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span3'));
 			$this->widget('ext.coursethumbnail.CourseThumbnail', array(
 										'course'=>$course,
 										'css'=>'coursethumbnail'
 			));
-			echo CHtml::closeTag('li');*/
+			echo CHtml::closeTag('li');
                 }
         ?>
         </ul>
-?>

@@ -195,28 +195,33 @@ class User extends CActiveRecord
 		$courseIds = $this->takeCourseIds;
 		$courses = array();
 		foreach($courseIds as $courseId){
-			$coursesProvider = new CActiveDataProvider('Course', array(
-				'criteria' => array(
-				'condition' => 'id='.$courseId['course_id'],
-				),
-			));
-			$courses[] = $coursesProvider->getData();
+			$courses[] = Course::model()->findByPk($courseId['course_id']);	
 		}
-		print_r($courses);
+		return $courses;
 	}
+	
 	 /**
          * Get ID of all teach courses.
          * Return array of registered courses' Ids
          * @return array teach courses' ids
          */
-        public function getTeachCourses()
+        public function getTeachCourseIds()
         {
-                $sql = 'SELECT course.id, course.name
+                $sql = 'SELECT course_id
                                 FROM instructor_course
-                                INNER JOIN course ON course.id = instructor_course.course_id
-                                WHERE instructor_course.user_id = '.$this->id;
+                                WHERE user_id = '.$this->id;
                 $rows = Yii::app()->db->createCommand($sql)->queryAll();
                 return $rows;
         }
+
+	public function getTeachCourses()
+	{
+		$courseIds = $this->teachCourseIds;
+		$courses = array();
+		foreach($courseIds as $courseId){
+			$courses[] = Course::model()->findByPk($courseId['course_id']);
+		}
+		return $courses;
+	}
 
 }
