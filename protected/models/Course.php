@@ -128,7 +128,7 @@ class Course extends CActiveRecord
 		if (file_exists("$path/thumbnail"))
 		{
 			$file = fopen("$path/thumbnail", 'r');
-			$this->_thumbnailUrl  = Yii::app()->baseUrl."/course/$this->id/".end(explode('/', fgets($file)));
+			$this->_thumbnailUrl  = Yii::app()->baseUrl."/course/$this->id/".end(explode('/', chop(fgets($file))));
 			fclose($file);
 			return $this->_thumbnailUrl;
 		}

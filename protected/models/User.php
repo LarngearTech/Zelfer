@@ -163,17 +163,46 @@ class User extends CActiveRecord
 	}
 
 	/**
-	 * Get ID of all registered courses.
+	 * Get ID of all take courses.
 	 * Return array of registered courses' Ids
-	 * @return array registered courses' ids
+	 * @return array take courses' ids
 	 */
-	public function getRegisteredCourses()
+	public function getTakeCourseIds()
 	{
-		$sql = 'SELECT course.id, course.name 
+		$sql = 'SELECT course_id 
 				FROM student_course
-				INNER JOIN course ON course.id = student_course.course_id
-				WHERE student_course.user_id = '.$this->id;
+				WHERE user_id = '.$this->id;
 		$rows = Yii::app()->db->createCommand($sql)->queryAll();
 		return $rows;
 	}
+
+	public function getTakeCourses()
+	{
+		$courseIds = $this->takeCourseIds;
+		$courses = array();
+		foreach($courseIds as $courseId){
+			$coursesProvider = new CActiveDataProvider('Course', array(
+				'criteria' => array(
+				'condition' => 'id='.$courseId['course_id'],
+				),
+			));
+			$courses[] = $coursesProvider->getData();
+		}
+		print_r($courses);
+	}
+	 /**
+         * Get ID of all teach courses.
+         * Return array of registered courses' Ids
+         * @return array teach courses' ids
+         */
+        public function getTeachCourses()
+        {
+                $sql = 'SELECT course.id, course.name
+                                FROM instructor_course
+                                INNER JOIN course ON course.id = instructor_course.course_id
+                                WHERE instructor_course.user_id = '.$this->id;
+                $rows = Yii::app()->db->createCommand($sql)->queryAll();
+                return $rows;
+        }
+
 }

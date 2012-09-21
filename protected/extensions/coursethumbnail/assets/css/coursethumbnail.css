@@ -8,26 +8,31 @@
 	-webkit-box-shadow: 0px 2px 4px rgb(170, 170, 170);
 	border: 1px solid rgb(188, 190, 192);
 	background-color:none repeat scroll 0% 0% rgb(247, 247, 247);
+	color:rgb(51,51,51);
+}
+
+.coursethumbnail:hover{
+        background: none repeat scroll 0% 0% rgb(238, 238, 238);
+        box-shadow: 0px 2px 4px rgb(0, 0, 0);
+        -moz-box-shadow: 0px 2px 4px rgb(0, 0, 0);
+        -webkit-box-shadow: 0px 2px 4px rgb(0, 0, 0);
+        border: 1px solid rgb(188, 190, 192);
+        text-decoration:none;
+        color:rgb(51,51,51);
 }
 
 .coursethumbnail #thumbnail-img-container{
 	margin:0;
 	padding:0;
 	background-color: white;
+	height:140px;
 }
 
 .coursethumbnail #thumbnail-caption-container{
 	margin:0;
 	padding:0px 6px 0px 6px;
 	word-wrap: break-word;
-}
-
-.coursethumbnail:hover{
-	background: none repeat scroll 0% 0% rgb(238, 238, 238);
-	box-shadow: 0px 2px 4px rgb(0, 0, 0);
-	-moz-box-shadow: 0px 2px 4px rgb(0, 0, 0);
-	-webkit-box-shadow: 0px 2px 4px rgb(0, 0, 0);
-	border: 1px solid rgb(188, 190, 192);
+	height:80px;
 }
 
 .coursethumbnail img{
@@ -35,4 +40,5 @@
 	display:block;
 	margin:0px auto 0 auto;
 	max-width:100%;
+	max-height:100%;
 }

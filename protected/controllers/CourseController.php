@@ -131,15 +131,23 @@ class CourseController extends Controller
 	function actionMyCourse($uid)
 	{
 		$userModel = User::model()->findByPk($uid);
-		$registeredCourses = array();
-		if (count($userModel->registeredCourses) > 0)
+
+		$takeCourses = array();
+		$teachCourses = array();
+
+		if (count($userModel->takeCourses) > 0)
 		{
-			$registeredCourses = $userModel->registeredCourses;
+			$takeCourses = $userModel->takeCourseIds;
 		}
-		$this->render('myCourse', array(
+		if (count($userModel->teachCourses) > 0)
+		{
+			$teachCourses = $userModel->teachCourses;
+		}
+		/*$this->render('myCourse', array(
 						'userModel' => $userModel,
-						'registeredCourses' => $registeredCourses,
-						));
+						'takeCourses' => $takeCourses,
+						'teachCourses'=> $teachCourses,
+						));*/
 	}
 
 

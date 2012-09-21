@@ -1,4 +1,4 @@
-<div class=<?php echo $css; ?>>
+<a class=<?php echo $css; ?> href=<?php echo $courseUrl?>>
 	<div id='thumbnail-img-container'>
 		<img src=<?php echo $thumbnailUrl; ?> alt='Course thumbnail: '.<?php echo CHtml::encode($courseName); ?>/>
 	</div>
@@ -6,4 +6,4 @@
 		<h5><?php echo CHtml::encode($courseName) ?></h5>
 		<p><?php echo CHtml::encode($courseShortDescription) ?></p>
 	</div>
-</div>
+</a>
