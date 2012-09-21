@@ -54,10 +54,10 @@ foreach ($categories as $category)
 	// display courses of each category
 	echo CHtml::openTag('ul', array('class' => 'thumbnails'));
 	foreach ($courses_in_categories[$category->id] as $course) {
-		echo CHtml::openTag('li', array('class' => 'span4'));
+		echo CHtml::openTag('li', array('class' => 'span3'));
 		$this->widget('ext.coursethumbnail.CourseThumbnail', array(
 								'course'=>$course,
-								'css'=>'thumbnail'
+								'css'=>'coursethumbnail'
 		));
 		echo CHtml::closeTag('li');
 	}
