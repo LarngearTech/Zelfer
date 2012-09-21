@@ -21,6 +21,6 @@ class ZLogInSignUpFlipper extends CWidget
 
 	public function run()
 	{
-		$this->render('ZLogInSignUpFlipper');
+		$this->render('LogIn');
 	}
 }
