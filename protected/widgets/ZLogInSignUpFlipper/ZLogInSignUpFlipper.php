@@ -17,10 +17,14 @@ class ZLogInSignUpFlipper extends CWidget
 		ScriptRegisteringHelper::registerScript('jquery.min.js');
 		ScriptRegisteringHelper::registerScript('jquery-ui.min.js');
 		ScriptRegisteringHelper::registerScript('jquery.flip.min.js');
+		ScriptRegisteringHelper::registerScript('flipper.js');
+		Yii::app()->clientScript->registerCssFile(
+        	Yii::app()->assetManager->publish(dirname(__FILE__).'/css/style.css')
+		);
 	}
 
 	public function run()
 	{
-		$this->render('LogIn');
+		$this->render('ZLogInSignUpFlipper');
 	}
 }

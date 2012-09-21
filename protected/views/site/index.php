@@ -28,9 +28,7 @@
 			<img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" />
 		</div><!-- /span9 -->
 		<div class="span3" >
-			<div class="login-signup-flipper">
-				<?php $this->widget('ZLogInSignUpFlipper');?>
-			</div><!-- login-signup-flipper -->
+			<?php $this->widget('ZLogInSignUpFlipper');?>
 		</div><!-- /span3 -->
 	</div><!-- /row-fluid -->
 <?php 

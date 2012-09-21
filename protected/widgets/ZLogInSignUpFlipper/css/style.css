@@ -1,0 +1,7 @@
+.login-signup-flipper div.flip-fore {
+	background-color: #ffffff;
+}
+
+.login-signup-flipper div.flip-back {
+	display: none;
+}
