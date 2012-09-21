@@ -1,44 +1,36 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 <div class="container">
-<!--?php $this->widget('EBootstrapCarousel', array(
-	'items' => array(
-		array(
-			'src' => Yii::app()->baseUrl.'/images/banner/1.jpg',
-			'caption' => 'Image Caption 1.',
-			'body' => 'This is a thumbnail',
-		),
-		array(
-			'src' => Yii::app()->baseUrl.'/images/banner/2.jpg',
-			'caption' => 'Image Caption 1.',
-			'body' => 'This is a thumbnail',
-		),
-		array(
-			'src' => Yii::app()->baseUrl.'/images/banner/3.jpg',
-			'caption' => 'Image Caption 1.',
-			'body' => 'This is a thumbnail',
-		),
-		array(
-			'src' => Yii::app()->baseUrl.'/images/banner/4.jpg',
-			'caption' => 'Image Caption 1.',
-			'body' => 'This is a thumbnail',
-		),
-		array(
-			'src' => Yii::app()->baseUrl.'/images/banner/5.jpg',
-			'caption' => 'Image Caption 1.',
-			'body' => 'This is a thumbnail',
-		),
-		array(
-			'src' => Yii::app()->baseUrl.'/images/banner/6.jpg',
-			'caption' => 'Image Caption 1.',
-			'body' => 'This is a thumbnail',
-			'active' => true,
-		),
-	),
-	'interval' => 6000,
-	'infinite' => false,
-	'htmlOptions' => array(),
-)); ?-->
-
+	<div class="row-fluid">
+		<div class="span9">
+			<!-- Carousel -->		
+			<!--?php $this->widget('EBootstrapCarousel', array(
+				'items' => array(
+					array(
+						'src' => Yii::app()->baseUrl.'/images/banner/1.jpg',
+						'caption' => 'Image Caption 1.',
+						'body' => 'This is a thumbnail',
+					),
+					array(
+						'src' => Yii::app()->baseUrl.'/images/banner/2.jpg',
+						'caption' => 'Image Caption 1.',
+						'body' => 'This is a thumbnail',
+					),
+					array(
+						'src' => Yii::app()->baseUrl.'/images/banner/3.jpg',
+						'caption' => 'Image Caption 1.',
+						'body' => 'This is a thumbnail',
+					),
+				),
+				'interval' => 6000,
+				'infinite' => false,
+				'htmlOptions' => array(),
+			)); ?-->
+			<img src="<?php echo Yii::app()->baseUrl.'/images/banner/1.jpg';?>" />
+		</div><!-- /span9 -->
+		<div class="span3" >
+			<?php $this->widget('ZLogIn');?>
+		</div>
+	</div><!-- /row-fluid -->
 <?php 
 
 // category sections
