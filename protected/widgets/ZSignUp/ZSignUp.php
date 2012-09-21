@@ -5,17 +5,55 @@
 class ZSignUp extends CWidget
 {
 
-	/**
-	 * Initializes the sign-up widget.
-	 * This method will initialize require property value.
-	 */
-	public function init()
-	{
-
-	}
-
 	public function run()
 	{
-		$this->render('ZSignUp');
+		$userModel = new User;
+
+		// if it is ajax validation request
+		if (isset($_POST['ajax']) && $_POST['ajax'] === 'signup-form')
+		{
+			echo CActiveForm::validate($userModel);
+			Yii::app()->end();
+		}
+
+		if (isset($_POST['User']))
+		{
+			$userModel->attributes = $_POST['User'];
+
+			// Default role is 2 (normal user)
+			$userModel->role = 2;
+
+			// Default status is 1 (active)
+			$userModel->status = 1;
+			if ($userModel->save())
+			{
+				// auto log-in after registration
+				if (Yii::app()->user->isGuest)
+				{
+					$identity = new UserIdentity($userModel->email, $_POST['User']['password']);
+					$identity->authenticate();
+					if($identity->errorCode === UserIdentity::ERROR_NONE)
+					{
+						$duration = 0; // no remember
+						Yii::app()->user->login($identity, $duration);
+
+						// redirect to the page before registration
+						if (isset($_POST['returnUrl']))
+						{
+							$this->redirect($_POST['returnUrl']);
+						}
+					}
+					else
+					{
+						// show error here
+					}
+				}
+				else
+				{
+					Yii::app()->controller->redirect(array('view', 'id' => $userModel->id));
+				}
+			}
+		}
+		$this->render('ZSignUp', array('userModel' => $userModel));
 	}
 }
