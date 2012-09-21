@@ -6,7 +6,7 @@ class UserController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/main';
 
 	/**
 	 * @return array action filters
@@ -61,49 +61,7 @@ class UserController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model = new User;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if (isset($_POST['User']))
-		{
-			$model->attributes = $_POST['User'];
-			$model->role = 2;
-			$model->status = 1;
-			if($model->save())
-			{
-				// auto log-in after registration
-				if (Yii::app()->user->isGuest)
-				{
-					$identity = new UserIdentity($model->email, $_POST['User']['password']);
-					$identity->authenticate();
-					if($identity->errorCode === UserIdentity::ERROR_NONE)
-					{
-						$duration = 0; // no remember
-						Yii::app()->user->login($identity, $duration);
-
-						// redirect to the page before registration
-						if (isset($_POST['returnUrl']))
-						{
-							$this->redirect($_POST['returnUrl']);
-						}
-					}
-					else
-					{
-						// show error here
-					}
-				}
-				else
-				{
-					$this->redirect(array('view','id'=>$model->id));
-				}
-			}
-		}
-
-		$this->render('create',array(
-			'model' => $model,
-		));
+		$this->render('create');
 	}
 
 	/**

@@ -126,11 +126,25 @@ class User extends CActiveRecord
 
 	public function beforeSave()
 	{
+		// Hash password
 		if (!empty($this->password) && $this->password == $this->repeat_password)
 		{
 			$ph = new PasswordHash(Yii::app()->params['phpass']['iteration_count_log2'], Yii::app()->params['phpass']['portable_hashes']);
 			$this->password = $ph->HashPassword($this->password);
 		}
+
+		// Default role is '2' (normal user).
+		if (empty($this->role))
+		{
+			$this->role = 2;
+		}
+
+		// Default status is '1' (active).
+		if (empty($this->status))
+		{
+			$this->status = 1;
+		}
+
 		return parent::beforeSave();
 	}
 
