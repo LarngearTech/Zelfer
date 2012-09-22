@@ -1,17 +1,14 @@
 $(function () {
-   $('.flip-fore a').bind('click', function() {
+	$(document).on('click', '.flip-fore a', function() {
 		var elem = $('.flip-fore');
-        //alert('before');
         if (elem.data('flipped'))
         {
-            //alert('flipped');
             elem.revertFlip();
 
             elem.data('flipped', false);
         }
         else
         {
-            //alert('not flipped');
             elem.flip({
                 direction: 'lr',
                 speed: 350,
