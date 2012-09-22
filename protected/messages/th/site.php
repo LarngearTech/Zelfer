@@ -28,6 +28,7 @@ return array(
 	'Remember me next time' => 'จดจำสำหรับครั้งถัดไป',
 	'Submit' => 'ส่งข้อมูล',
 	'Cancel' => 'ยกเลิก',
+	'Incorrect email or password.' => 'อีเมล์หรือพาสเวิร์ดไม่ถูกต้อง',
 
 	// Contact Form
 	'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' => 'ถ้าคุณต้องการติดต่อธุรกิจหรือมีข้อสงสัย กรุณากรอกแบบฟอร์มข้างล่างเพื่อติดต่อเรา ขอบคุณครับ',
