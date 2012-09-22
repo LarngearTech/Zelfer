@@ -10,25 +10,25 @@
 
 	<div class="input-row">
 		<?php echo $form->labelEx($userModel,'fullname'); ?>
-		<?php echo $form->textField($userModel,'fullname',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->textField($userModel,'fullname',array('size' => 60, 'maxlength' => 128, 'placeholder' => 'Full Name')); ?>
 		<?php echo $form->error($userModel,'fullname'); ?>
 	</div>
 
 	<div class="input-row">
 		<?php echo $form->labelEx($userModel,'email'); ?>
-		<?php echo $form->textField($userModel,'email',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->textField($userModel,'email',array('size'=>60,'maxlength'=>128, 'placeholder' => 'Email')); ?>
 		<?php echo $form->error($userModel,'email'); ?>
 	</div>
 
 	<div class="input-row">
 		<?php echo $form->labelEx($userModel,'password'); ?>
-		<?php echo $form->passwordField($userModel,'password',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->passwordField($userModel,'password',array('size'=>60,'maxlength'=>128, 'placeholder' => 'Password')); ?>
 		<?php echo $form->error($userModel,'password'); ?>
 	</div>
 
 	<div class="input-row">
 		<?php echo $form->labelEx($userModel,'repeat_password'); ?>
-		<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128, 'placeholder' => 'Repeat password')); ?>
 		<?php echo $form->error($userModel,'repeat_password'); ?>
 	</div>
 
