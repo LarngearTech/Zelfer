@@ -7,6 +7,13 @@ class CourseThumbnail extends CWidget{
 	public $courseUrl;
 	public $css;
 
+	// @param string location of assets directory
+	// @return default thumbnail url
+	function defaultThumbnailUrl($assets)
+	{
+		return $assets.'/img/default.jpg';
+	}
+
 	function run(){
 		// Get assets dir
 		$baseDir = dirname(__FILE__);
@@ -19,12 +26,15 @@ class CourseThumbnail extends CWidget{
 		// Set parameter for widget 
 		// User does not specified course
 		if (!$this->course) {
-			$this->thumbnailUrl = $assets.'/img/default.jpg';
+			$this->thumbnailUrl = $this->defaultThumbnailUrl($assets);
 		}
 		// User specified course. Give priority to directly specified paramenter's value first, find from $course if isn't given.
 		else {
 			$this->thumbnailUrl		= ($this->thumbnailUrl)?$this->thumbnailUrl:$this->course->thumbnailUrl;
-			$this->thumbnailUrl		= file_exists(Yii::app()->basePath.'/../..'.$this->thumbnailUrl)?$this->thumbnailUrl:$assets.'/img/default.jpg';
+			if (empty($this->thumbnailUrl)){
+				$this->thumbnailUrl	= $this->defaultThumbnailUrl($assets);
+			}
+			$this->thumbnailUrl		= file_exists(Yii::app()->basePath.'/../..'.$this->thumbnailUrl)?$this->thumbnailUrl:$this->defaultThumbnailUrl($assets);
 			$this->courseName		= ($this->courseName)?$this->courseName:$this->course->name;
 			$this->courseShortDescription	= ($this->courseShortDescription)?$this->courseShortDescription:$this->course->short_description;
 			$this->courseUrl		= ($this->courseUrl)?$this->courseUrl:Yii::app()->createUrl('course/view', array('id'=>$this->course->id));
