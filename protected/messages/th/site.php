@@ -9,7 +9,7 @@ return array(
 	'About' => 'เกี่ยวกับ',
 	'Contact' => 'ติดต่อ',
 	'Contact Us' => 'ติดต่อเรา',
-	'Sign Up' => 'สมัคร',
+	'Sign Up' => 'สมัครเข้าระบบ',
 	'Login' => 'เข้าสู่ระบบ',
 	'Logout' => 'ออกจากระบบ',
 	'By' => 'โดย',
@@ -65,4 +65,8 @@ return array(
 	'Discussion' => 'แลกเปลี่ยนความเห็น',
 
 	'Edit Instructors' => 'แก้ไขผู้สอน',
+	'Don\'t you have an account?' => 'ยังไม่เคยสมัครใช้งาน?',
+	'signup now' => 'สมัครเลย',
+	'Already have an account?' => 'เคยสมัครไว้แล้ว?',
+	'login' => 'เข้าสู่ระบบ',
 );
