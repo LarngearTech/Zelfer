@@ -2,6 +2,7 @@
 <div class="container">
 	<div class="row-fluid">
 		<div class="span9">
+			<img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" />
 			<!-- Carousel -->		
 			<!--?php $this->widget('EBootstrapCarousel', array(
 				'items' => array(
@@ -25,11 +26,12 @@
 				'infinite' => false,
 				'htmlOptions' => array(),
 			)); ?-->
-			<img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" />
 		</div><!-- /span9 -->
-		<div class="span3" >
+		<?php if (Yii::app()->user->isGuest): ?>
+		<div class="span3">
 			<?php $this->widget('ZLogInSignUpFlipper');?>
 		</div><!-- /span3 -->
+		<?php endif; ?>
 	</div><!-- /row-fluid -->
 <?php 
 
