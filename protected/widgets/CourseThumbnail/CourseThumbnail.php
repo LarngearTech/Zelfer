@@ -26,7 +26,12 @@ class CourseThumbnail extends CWidget{
 		// Set parameter for widget 
 		// User does not specified course
 		if (!$this->course) {
-			$this->thumbnailUrl = $this->defaultThumbnailUrl($assets);
+			if (!empty($this->thumbnailUrl)){
+				$this->thumbnailUrl = file_exists(Yii::app()->basePath.'/../..'.$this->thumbnailUrl)?$this->thumbnailUrl:$this->defaultThumbnailUrl($assets);
+			}
+			else{
+				$this->thumbnailUrl = $this->defaultThumbnailUrl($assets);
+			}
 		}
 		// User specified course. Give priority to directly specified paramenter's value first, find from $course if isn't given.
 		else {

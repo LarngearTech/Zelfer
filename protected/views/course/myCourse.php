@@ -9,7 +9,7 @@ Yii::app()->clientScript->registerScriptFile(
 		foreach ($userModel->takeCourses as $course){
 			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span3'));
- 			$this->widget('ext.coursethumbnail.CourseThumbnail', array(
+ 			$this->widget('CourseThumbnail', array(
 										'course'=>$course,
 										'css'=>'coursethumbnail'
 			));
@@ -23,7 +23,7 @@ Yii::app()->clientScript->registerScriptFile(
 		foreach ($userModel->teachCourses as $course){
 			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span3'));
-			$this->widget('ext.coursethumbnail.CourseThumbnail', array(
+			$this->widget('CourseThumbnail', array(
 										'course'=>$course,
 										'css'=>'coursethumbnail'
 			));
