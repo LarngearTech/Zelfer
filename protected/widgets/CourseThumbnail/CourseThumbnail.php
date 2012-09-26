@@ -23,6 +23,11 @@ class CourseThumbnail extends CWidget{
 		$cs = Yii::app()->getClientScript();
 		$cs->registerCssFile($assets.'/css/coursethumbnail.css');
 
+		// Set default css
+		if (!$this->css){
+			$this->css = 'coursethumbnail';
+		}
+
 		// Set parameter for widget 
 		// User does not specified course
 		if (!$this->course) {

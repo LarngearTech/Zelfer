@@ -10,11 +10,16 @@ Yii::app()->clientScript->registerScriptFile(
 			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span3'));
  			$this->widget('CourseThumbnail', array(
-										'course'=>$course,
-										'css'=>'coursethumbnail'
+							'course'=>$course,
 			));
 			echo CHtml::closeTag('li');
 		}
+		echo CHtml::openTag('li', array('class' => 'span3'));
+		$this->widget('AddCourseThumbnail', array(
+							'redirectUrl'=>$this->createUrl('site/index'),
+							'caption'=>'Browse Course'
+			));
+		echo CHtml::closeTag('li');
 	?>
 	</ul>
 <h1>Courses|Teach</h1>
@@ -24,10 +29,15 @@ Yii::app()->clientScript->registerScriptFile(
 			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span3'));
 			$this->widget('CourseThumbnail', array(
-										'course'=>$course,
-										'css'=>'coursethumbnail'
+							'course'=>$course,
 			));
 			echo CHtml::closeTag('li');
                 }
+                echo CHtml::openTag('li', array('class' => 'span3'));
+                $this->widget('AddCourseThumbnail', array(
+                                                        'redirectUrl'=>$this->createUrl('course/create'),
+                                                        'caption'=>'Create Course'
+                        ));
+                echo CHtml::closeTag('li');
         ?>
         </ul>

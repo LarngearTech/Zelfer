@@ -21,6 +21,7 @@ return array(
 		'application.components.*',
 		'application.extensions.PasswordHash',
 		'application.widgets.bootstrap.*',
+		'application.widgets.AddCourseThumbnail.*',
 		'application.widgets.CourseThumbnail.*',
 		'application.widgets.ZLogIn.*',
 		'application.widgets.ZSignUp.*',

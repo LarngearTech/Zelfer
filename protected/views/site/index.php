@@ -1,5 +1,6 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 <div class="container">
+	<?php if (Yii::app()->user->isGuest): ?>
 	<div class="row-fluid">
 		<div class="span9">
 			<img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" />
@@ -27,12 +28,11 @@
 				'htmlOptions' => array(),
 			)); ?-->
 		</div><!-- /span9 -->
-		<?php if (Yii::app()->user->isGuest): ?>
 		<div class="span3">
 			<?php $this->widget('ZLogInSignUpFlipper');?>
 		</div><!-- /span3 -->
-		<?php endif; ?>
 	</div><!-- /row-fluid -->
+	<?php endif; ?>
 <?php 
 
 // category sections
@@ -51,7 +51,6 @@ foreach ($categories as $category)
 		echo CHtml::openTag('li', array('class' => 'span3'));
 		$this->widget('CourseThumbnail', array(
 						'course'=>$course,
-						'css'=>'coursethumbnail'
 		));
 		echo CHtml::closeTag('li');
 	}
