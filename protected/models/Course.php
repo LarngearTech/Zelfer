@@ -117,6 +117,46 @@ class Course extends CActiveRecord
 		));
 	}
 
+	/**
+	 * Default scope return only publish course
+	 */
+	public function defaultScope()
+	{
+		return array(
+			'condition' => 'status=1',
+		);
+	}
+
+	/**
+	 * Return only record that match specified status.
+	 * @param string $status course status can be 'draft' or 'publish'.
+	 */
+	public function status($status)
+	{
+		$status_code = $status==='draft'?0:1;
+		$this->getDbCriteria()->mergeWith(array(
+			'condition' => 'status=:status',
+			'params' => array(
+				':status' => $status_code,
+			),
+		));
+		return $this;
+	}
+
+	/**
+	 * Return only record that match specified category id.
+	 * @param integer $categoryId course's category id.
+	 */
+	public function category($categoryId)
+	{
+		$this->getDbCriteria()->mergeWith(array(
+			'condition' => 'category_id=:categoryId',
+			'params' => array(
+				':categoryId' => $categoryId,
+			),
+		));
+		return $this;
+	}
 
 	/**
 	 * Getter of $_thumbnailUrl
