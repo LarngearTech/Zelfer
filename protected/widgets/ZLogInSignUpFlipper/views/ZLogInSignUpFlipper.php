@@ -1,6 +1,9 @@
 <div class="login-signup-flipper">
 	<div class="flip-fore">
-		<?php $this->widget('ZLogIn');?>
+		<?php $this->widget('ZLogIn', array(
+			'courseId' => $courseId,
+			'returnUrl' => $returnUrl,
+		));?>
 		<div class="form-bottom">
 			<span><?php echo Yii::t('site', "Don't you have an account?");?> <a href="#" class="goto-signup-btn"><?php echo Yii::t('site', 'signup now');?> </a> </span>
 		</div>

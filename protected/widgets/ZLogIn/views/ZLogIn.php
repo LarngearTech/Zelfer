@@ -26,6 +26,18 @@
         <?php echo $form->error($loginFormModel,'rememberMe'); ?>
     </div>
 
+    <?php if ($courseId != null): ?>
+    <div class="input-row">
+        <?php echo CHtml::hiddenField('courseId', $courseId); ?>
+    </div>
+    <?php endif; ?>
+    <?php if ($returnUrl != null): ?>
+    <div class="input-row">
+        <?php echo CHtml::hiddenField('returnUrl', $returnUrl); ?>
+    </div>
+    <?php endif; ?>
+
+
     <div class="input-row buttons">
         <?php echo CHtml::submitButton(Yii::t('site', 'Login')); ?>
     </div>
