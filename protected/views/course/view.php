@@ -74,15 +74,6 @@ Yii::app()->clientScript->registerScriptFile(
 							// If a user is a guest, show 'Take Course' and proceed the sign up.
 							if (Yii::app()->user->isGuest)
 							{
-								echo "<script type='text/javascript'>
-									$(document).ready(function() {
-										$('#signup-btn').click(function(e) {
-											e.preventDefault();
-											$('#signUpModal').modal('hide');
-											$('form').submit();
-										})
-									});
-								</script>";
 								$this->beginWidget('EBootstrapModal', array(
 									'id' => 'signUpModal',
 									'show' => false,
