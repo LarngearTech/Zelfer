@@ -32,7 +32,12 @@
 		<?php echo $form->error($userModel,'repeat_password'); ?>
 	</div>
 
-	<?php if ($returnUrl !== null): ?>
+	<?php if ($courseId != null): ?>
+	<div class="input-row">
+		<?php echo CHtml::hiddenField('courseId', $courseId); ?>
+	</div>
+	<?php endif; ?>
+	<?php if ($returnUrl != null): ?>
 	<div class="input-row">
 		<?php echo CHtml::hiddenField('returnUrl', $returnUrl); ?>
 	</div>

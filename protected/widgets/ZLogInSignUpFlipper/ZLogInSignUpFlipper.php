@@ -9,6 +9,9 @@ class ZLogInSignUpFlipper extends CWidget
 	// $returnUrl used to redirect to course/view after loggin in or signing up
 	public $returnUrl;
 
+	// $courseId used for course subscription
+	public $courseId;
+
     /**
      * Initializes the log-in widget.
      * This method will initialize required property values.
@@ -28,6 +31,9 @@ class ZLogInSignUpFlipper extends CWidget
 
 	public function run()
 	{
-		$this->render('ZLogInSignUpFlipper', array('returnUrl' => $this->returnUrl));
+		$this->render('ZLogInSignUpFlipper', array(
+			'courseId' => $this->courseId,
+			'returnUrl' => $this->returnUrl,
+		));
 	}
 }

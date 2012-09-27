@@ -92,7 +92,8 @@ Yii::app()->clientScript->registerScriptFile(
 									),
 								)); 
 								$this->widget('ZLogInSignUpFlipper', array(
-									'returnUrl' => $this->createUrl('course/view', array('id' => $model->id)),
+									'courseId' => $model->id,
+									'returnUrl' => $this->createUrl('course/inclass', array('id' => $model->id)),
 								));
 	
 								$this->endWidget(); // end Modal widget

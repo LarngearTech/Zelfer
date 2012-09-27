@@ -4,6 +4,9 @@
  */
 class ZSignUp extends CWidget
 {
+	// $courseId used for course subscription
+	public $courseId;
+	
 	// $returnUrl used to redirect to course/view page after signing up
 	public $returnUrl;
 
@@ -39,10 +42,18 @@ class ZSignUp extends CWidget
 						$duration = 0; // no remember
 						Yii::app()->user->login($identity, $duration);
 
+						// subscribe to $courseId
+						if (isset($_POST['courseId']))
+						{
+							$sqlStatement = 'INSERT INTO student_course VALUE(NULL, '.$userModel->id.', '.$_POST['courseId'].')';
+							$command = Yii::app()->db->createCommand($sqlStatement);
+							$command->execute();
+						}
+
 						// redirect to the page before registration
 						if (isset($_POST['returnUrl']))
 						{
-							Yii::app()->controler->redirect($_POST['returnUrl']);
+							Yii::app()->controller->redirect($_POST['returnUrl']);
 						}
 					}
 					else
@@ -58,6 +69,7 @@ class ZSignUp extends CWidget
 		}
 		$this->render('ZSignUp', array(
 			'userModel' => $userModel, 
+			'courseId' => $this->courseId,
 			'returnUrl' => $this->returnUrl,
 		));
 	}
