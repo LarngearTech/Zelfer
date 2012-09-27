@@ -34,12 +34,13 @@ class SiteController extends Controller
 		// load all courses of each catgegory to display
 		$courses_in_categories = array();
 		foreach ($categories as $category) {
-			$coursesProvider = new CActiveDataProvider('Course', array(
+			/*$coursesProvider = new CActiveDataProvider('Course', array(
 				'criteria' => array(
 					'condition' => 'category_id='.$category->id,
 				),
 			));
-			$courses_in_categories[$category->id] = $coursesProvider->getData();
+			$courses_in_categories[$category->id] = $coursesProvider->getData();*/
+			$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
 		}
 
 	 	// renders the view file 'protected/views/site/index.php'
