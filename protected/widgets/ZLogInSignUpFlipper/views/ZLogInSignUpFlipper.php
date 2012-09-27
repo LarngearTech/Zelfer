@@ -8,7 +8,7 @@
 	</div><!-- /fore -->
 
 	<div class="flip-back">
-		<?php $this->widget('ZSignUp');?>
+		<?php $this->widget('ZSignUp', array('returnUrl' => $returnUrl));?>
 		<div class="form-bottom">
 			<span><?php echo Yii::t('site', 'Already have an account?');?> <a href="#" class="goto-login-btn"><?php echo Yii::t('site', 'login');?> </a> </span>
 		</div>

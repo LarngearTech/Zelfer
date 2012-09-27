@@ -4,6 +4,8 @@
  */
 class ZSignUp extends CWidget
 {
+	// $returnUrl used to redirect to course/view page after signing up
+	public $returnUrl;
 
 	public function run()
 	{
@@ -40,7 +42,7 @@ class ZSignUp extends CWidget
 						// redirect to the page before registration
 						if (isset($_POST['returnUrl']))
 						{
-							$this->redirect($_POST['returnUrl']);
+							Yii::app()->controler->redirect($_POST['returnUrl']);
 						}
 					}
 					else
@@ -54,6 +56,9 @@ class ZSignUp extends CWidget
 				}
 			}
 		}
-		$this->render('ZSignUp', array('userModel' => $userModel));
+		$this->render('ZSignUp', array(
+			'userModel' => $userModel, 
+			'returnUrl' => $this->returnUrl,
+		));
 	}
 }

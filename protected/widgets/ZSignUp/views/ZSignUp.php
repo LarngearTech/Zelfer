@@ -32,6 +32,12 @@
 		<?php echo $form->error($userModel,'repeat_password'); ?>
 	</div>
 
+	<?php if ($returnUrl !== null): ?>
+	<div class="input-row">
+		<?php echo CHtml::hiddenField('returnUrl', $returnUrl); ?>
+	</div>
+	<?php endif; ?>
+
 	<div class="input-row buttons">
 		<?php echo CHtml::submitButton($userModel->isNewRecord ? Yii::t('site', 'Sign Up') : Yii::t('site', 'Save')); ?>
 	</div>

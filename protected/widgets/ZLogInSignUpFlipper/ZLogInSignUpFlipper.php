@@ -6,6 +6,9 @@ require_once(dirname(__FILE__).'/ScriptRegisteringHelper.php');
 
 class ZLogInSignUpFlipper extends CWidget
 {
+	// $returnUrl used to redirect to course/view after loggin in or signing up
+	public $returnUrl;
+
     /**
      * Initializes the log-in widget.
      * This method will initialize required property values.
@@ -25,6 +28,6 @@ class ZLogInSignUpFlipper extends CWidget
 
 	public function run()
 	{
-		$this->render('ZLogInSignUpFlipper');
+		$this->render('ZLogInSignUpFlipper', array('returnUrl' => $this->returnUrl));
 	}
 }
