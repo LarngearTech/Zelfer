@@ -101,6 +101,12 @@ return array(
 			'iteration_count_log2' => 8,
 			'portable_hashes' => false,
 		),
+		// user roles
+		'admin_user' => 1,
+		'normal_user' => 2,
+		// user status
+		'active_status' => 1,
+		'inactive_status' => 2,
 	),
 	'sourceLanguage' => 'en_us',
 	'language' => 'th',

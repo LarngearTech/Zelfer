@@ -20,11 +20,11 @@ class ZSignUp extends CWidget
 		{
 			$userModel->attributes = $_POST['User'];
 
-			// Default role is 2 (normal user)
-			$userModel->role = 2;
+			// Default role is normal user
+			$userModel->role = Yii::app()->params['normal_user'];
 
-			// Default status is 1 (active)
-			$userModel->status = 1;
+			// Default status is active
+			$userModel->status = Yii::app()->params['active_status'];
 			if ($userModel->save())
 			{
 				// auto log-in after registration
