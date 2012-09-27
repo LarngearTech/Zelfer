@@ -43,7 +43,6 @@
 					'items' => array(
 							array('label' => Yii::t('site', 'Edit Profile'), 'url' => '#'),
 							array('label' => Yii::t('site', 'Change Password'), 'url' => '#'),
-							array('label' => Yii::t('site', 'My Courses'), 'url' => $mycourseUrl),
 							array('label' => Yii::t('site', 'My Activities'), 'url' => '#'),
 							array('label' => Yii::t('site', 'Logout'), 'url' => array('/site/logout')),
 						),
@@ -63,11 +62,6 @@
 					'label' => Yii::t('site', 'Login'), 
 					'url' => array('/site/login'),
 					'visible' => Yii::app()->user->isGuest,
-				),
-				array(
-					'label' => Yii::t('site', 'Logout').' ('.Yii::app()->user->fullname.')', 
-					'url' => array('/site/logout'),
-					'visible' => !Yii::app()->user->isGuest,
 				),
 			),
 		));
