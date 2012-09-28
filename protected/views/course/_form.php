@@ -25,7 +25,7 @@
 
 	<div class="input-row">
 		<?php echo $form->labelEx($model,'long_description'); ?>
-		<?php echo $form->textField($model,'long_description',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->textArea($model,'long_description',array('style'=>'width:500px;resize:none', 'rows'=>10, 'cols'=>40,'maxlength'=>1000)); ?>
 		<?php echo $form->error($model,'long_description'); ?>
 	</div>
 
@@ -61,7 +61,7 @@
 	</div>
 
 	<div class="input-row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('onclick'=>'SubmitEncodeForm()')); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('style'=>'margin-top:10px', 'onclick'=>'SubmitEncodeForm()')); ?>
 	</div>
 	
 <?php $this->endWidget(); ?>
