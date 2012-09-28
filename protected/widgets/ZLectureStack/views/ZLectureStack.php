@@ -8,7 +8,7 @@
 					<?php echo $chapIdx.'.'.CHtml::encode($chapter->name);?>
 				</a>
 			</div><!-- /accordion-heading -->
-			<div id="chapter<?php echo $chapIdx;?>-collapse" class="accordion-body collpase chapter">
+			<div id="chapter<?php echo $chapIdx;?>-collapse" class="accordion-body collapse <?php if ($chapIdx==1) echo 'in';?> chapter">
 				<div class="accordion-inner-wrapper">
 				<div class="accordion-inner">
 					<ul>
