@@ -10,8 +10,10 @@ $this->menu=array(
 );
 ?>
 <div class="container">
+<div class="span12">
 <h1>Create Course</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model,
 					'categoryList'=>$categoryList,)); ?>
+</div><!-- /span12 -->
 </div><!-- /container -->
