@@ -58,11 +58,6 @@
 					'url' => $mycourseUrl,
 					'visible' => !Yii::app()->user->isGuest,
 				),
-				array(
-					'label' => Yii::t('site', 'Login'), 
-					'url' => array('/site/login'),
-					'visible' => Yii::app()->user->isGuest,
-				),
 			),
 		));
 	?>
