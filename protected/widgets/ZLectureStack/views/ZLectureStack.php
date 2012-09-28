@@ -1,4 +1,3 @@
-<div class="row">
 	<div class="accordion" id="chapter-accordion">
 	<?php $chapIdx = 0; ?>
 	<?php foreach ($chapters as $chapter): ?>
@@ -25,4 +24,3 @@
 		</div><!-- /accordion-group -->
 	<?php endforeach; ?>
 	</div><!-- /accordion -->
-</div><!-- /row -->

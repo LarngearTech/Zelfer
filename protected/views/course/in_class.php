@@ -52,7 +52,7 @@ $(document).ready(function() {
 <div id="course-tabs">
 	<?php
 	// create contents for the lecture tab 
-	$chapIdx = 0;
+	/*$chapIdx = 0;
 	$lecturesTabContent = '
 	<div class="row">
 		<div class="accordion span3" id="chapter-accordion">';
@@ -92,7 +92,15 @@ $(document).ready(function() {
 			</div><!-- end accordion-group -->
 		';
 	}
-	$lecturesTabContent .= '</div><!-- end accordion -->';
+	$lecturesTabContent .= '</div><!-- end accordion -->';*/
+	$lecturesTabContent = '
+		<div class="row">
+			<div class="lecture-stack-wrapper span3">';
+	$lecturesTabContent .= $this->widget('ZLectureStack', array(
+								'chapters' => $chapters,
+							), true);			
+	$lecturesTabContent .= '
+			</div><!-- /lecture-stack-wrapperspan3 -->';
 	$lecturesTabContent .= '<div id="lecture-content-wrapper" class="span9">';
 	$lecturesTabContent .= $this->widget('application.extensions.videojs.EVideoJS', array(
 						'options' => array(
@@ -130,7 +138,7 @@ $(document).ready(function() {
 							'download' => false,
 						),
 					), true);
-	$lecturesTabContent .= '</div><!-- end lecture-content-wrapper -->
+	$lecturesTabContent .= '</div><!-- end lecture-content-wrapper span9 -->
 			</div><!-- end row -->';
 
 	// create course tabs including lecture and problem set tabs.

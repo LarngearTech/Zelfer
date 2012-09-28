@@ -13,7 +13,7 @@ class ZLectureStack extends CWidget
 	public function run()
 	{
 		$this->render('ZLectureStack', array(
-			'chapters' => $chapters,
+			'chapters' => $this->chapters,
 		));
 	}
 }

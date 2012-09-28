@@ -26,6 +26,7 @@ return array(
 		'application.widgets.ZLogIn.*',
 		'application.widgets.ZSignUp.*',
 		'application.widgets.ZLogInSignUpFlipper.*',
+		'application.widgets.ZLectureStack.*',
 	),
 
 	'modules'=>array(
