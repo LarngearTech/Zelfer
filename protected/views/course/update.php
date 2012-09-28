@@ -17,6 +17,8 @@ $this->menu = array(
 	Yii::app()->clientScript->registerScript('dropdown-toggle',
 		'$(".dropdown-toggle").dropdown();');
 ?>
+
+<div class=container>
 <h1><?php echo Yii::t('site', 'Edit Course');?> <?php echo $model->name; ?></h1>
 <div id="edit-course-menu" class="row">
 	<div class="span12">
@@ -47,4 +49,5 @@ $this->menu = array(
 			</div><!-- end btn-group -->
 		</div><!-- end btn-toolbar -->
 	</div><!-- end wrapper -->
+</div>
 </div>

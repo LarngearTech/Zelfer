@@ -14,7 +14,7 @@
 					<ul>
 					<?php foreach ($chapter->lectures as $lecture): ?>
 						<li class="lecture">
-							<a href="#"><?php echo CHtml::encode($lecture->name);?><em><img src="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.widgets.ZLectureStack.assets.images'));?>/play.png" class="playbutton" /></em></a>
+							<a href="#"><?php echo CHtml::encode($lecture->name);?><em><img src="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.widgets.ZLectureStack.assets.images'));?>/play.png" class="playbutton" id='<?php echo Yii::app()->baseUrl.'/course/'.$lecture->id.'/';?>'/></em></a>
 						</li>	
 					<?php endforeach; ?>
 					</ul>

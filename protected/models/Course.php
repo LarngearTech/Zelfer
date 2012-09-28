@@ -123,12 +123,13 @@ class Course extends CActiveRecord
 	public function defaultScope()
 	{
 		return array(
-			'condition' => 'status=1',
+			'condition' => 'status=0 or status=1',
 		);
 	}
 
+
 	/**
-	 * Return only record that match specified status.
+	 * Return only records that match specified status.
 	 * @param string $status course status can be 'draft' or 'publish'.
 	 */
 	public function status($status)
@@ -144,7 +145,7 @@ class Course extends CActiveRecord
 	}
 
 	/**
-	 * Return only record that match specified category id.
+	 * Return only records that match specified category id.
 	 * @param integer $categoryId course's category id.
 	 */
 	public function category($categoryId)
