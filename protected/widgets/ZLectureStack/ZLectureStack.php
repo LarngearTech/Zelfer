@@ -10,6 +10,11 @@ class ZLectureStack extends CWidget
 	// Chapters in this course
 	public $chapters;
 
+	public function init()
+	{
+		Yii::app()->getClientScript()->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.widgets.ZLectureStack.assets.css').'/style.css'));
+	}
+
 	public function run()
 	{
 		$this->render('ZLectureStack', array(
