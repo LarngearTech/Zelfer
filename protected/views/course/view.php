@@ -74,30 +74,11 @@ Yii::app()->clientScript->registerScriptFile(
 							// If a user is a guest, show 'Take Course' and proceed the sign up.
 							if (Yii::app()->user->isGuest)
 							{
-								echo "<script type='text/javascript'>
-									$(document).ready(function() {
-										$('#signup-btn').click(function(e) {
-											e.preventDefault();
-											$('#signUpModal').modal('hide');
-											$('form').submit();
-										})
-									});
-								</script>";
 								$this->beginWidget('EBootstrapModal', array(
 									'id' => 'signUpModal',
 									'show' => false,
-									'header' => Yii::t('site', 'To take this course, please sign up.'),
+									'header' => Yii::t('site', 'To take this course, please log in.'),
 									'footer' => array(
-										EBootstrap::ibutton(
-											Yii::t('site', 'Sign Up'),
-											'#',
-											'primary',
-											'large',
-											false,
-											'',
-											false,
-											array('id' => 'signup-btn')
-										),
 										EBootstrap::ibutton(
 											Yii::t('site', 'Cancel'),
 											'#',
@@ -110,45 +91,10 @@ Yii::app()->clientScript->registerScriptFile(
 										),
 									),
 								)); 
-								// Modal content
-								$userModel = new User; 
-								$form = $this->beginWidget('EBootstrapActiveForm', array(
-									'id' => 'user-form',
-									'enableClientValidation' => true,
-									'clientOptions' => array(
-										'validateOnSubmit' => true,
-									),
-									'action' => 'index.php?r=user/create',
+								$this->widget('ZLogInSignUpFlipper', array(
+									'courseId' => $model->id,
+									'returnUrl' => $this->createUrl('course/inclass', array('id' => $model->id)),
 								));
-							?>
-							<?php echo $form->errorSummary($userModel); ?>
-							<div>
-								<?php echo $form->labelEx($userModel,'fullname'); ?>
-								<?php echo $form->textField($userModel,'fullname',array('size'=>60,'maxlength'=>128)); ?>
-								<?php echo $form->error($userModel,'fullname'); ?>
-							</div>
-	
-							<div>
-								<?php echo $form->labelEx($userModel,'email'); ?>
-								<?php echo $form->textField($userModel,'email',array('size'=>60,'maxlength'=>128)); ?>
-								<?php echo $form->error($userModel,'email'); ?>
-							</div>
-	
-							<div>
-								<?php echo $form->labelEx($userModel,'password'); ?>
-								<?php echo $form->passwordField($userModel,'password',array('size'=>60,'maxlength'=>128)); ?>
-								<?php echo $form->error($userModel,'password'); ?>
-							</div>
-
-							<div>
-								<?php echo $form->labelEx($userModel,'repeat_password'); ?>
-								<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
-								<?php echo $form->error($userModel,'repeat_password'); ?>
-							</div>
-							<?php echo CHtml::hiddenField('returnUrl', $model->getInClassUrl());?>
-						
-							<?php 
-								$this->endWidget(); // end ActiveForm widget
 	
 								$this->endWidget(); // end Modal widget
 		

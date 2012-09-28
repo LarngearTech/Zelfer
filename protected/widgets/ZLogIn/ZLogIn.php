@@ -4,6 +4,11 @@
  */
 class ZLogIn extends CWidget
 {
+	// $courseId used for course subscription
+	public $courseId;
+
+	// $returnUrl used to redirect to inclass page after loging in
+	public $returnUrl;
 
 	public function run()
 	{
@@ -23,11 +28,22 @@ class ZLogIn extends CWidget
             // validate user input and redirect to the previous page if valid
             if ($loginFormModel->validate() && $loginFormModel->login())
 			{
-				Yii::app()->controller->redirect(Yii::app()->user->returnUrl);
+				if (isset($_POST['returnUrl']))
+				{
+					Yii::app()->controller->redirect($_POST['returnUrl']);
+				}
+				else
+				{
+					Yii::app()->controller->redirect(Yii::app()->user->returnUrl);
+				}
 			}
         }
 
-		$this->render('ZLogIn', array('loginFormModel' => $loginFormModel));
+		$this->render('ZLogIn', array(
+			'loginFormModel' => $loginFormModel,
+			'courseId' => $this->courseId,
+			'returnUrl' => $this->returnUrl,
+		));
 	}
 }
 

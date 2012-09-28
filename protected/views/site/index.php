@@ -1,7 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
 <div class="container">
 	<?php if (Yii::app()->user->isGuest): ?>
-	<div class="row-fluid">
+	<div class="row">
 		<div class="span9">
 			<img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" />
 			<!-- Carousel -->		
@@ -31,7 +31,7 @@
 		<div class="span3">
 			<?php $this->widget('ZLogInSignUpFlipper');?>
 		</div><!-- /span3 -->
-	</div><!-- /row-fluid -->
+	</div><!-- /row -->
 	<?php endif; ?>
 <?php 
 

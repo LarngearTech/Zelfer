@@ -4,6 +4,11 @@
  */
 class ZSignUp extends CWidget
 {
+	// $courseId used for course subscription
+	public $courseId;
+	
+	// $returnUrl used to redirect to course/view page after signing up
+	public $returnUrl;
 
 	public function run()
 	{
@@ -20,11 +25,11 @@ class ZSignUp extends CWidget
 		{
 			$userModel->attributes = $_POST['User'];
 
-			// Default role is 2 (normal user)
-			$userModel->role = 2;
+			// Default role is normal user
+			$userModel->role = Yii::app()->params['normal_user'];
 
-			// Default status is 1 (active)
-			$userModel->status = 1;
+			// Default status is active
+			$userModel->status = Yii::app()->params['active_status'];
 			if ($userModel->save())
 			{
 				// auto log-in after registration
@@ -37,10 +42,18 @@ class ZSignUp extends CWidget
 						$duration = 0; // no remember
 						Yii::app()->user->login($identity, $duration);
 
+						// subscribe to $courseId
+						if (isset($_POST['courseId']))
+						{
+							$sqlStatement = 'INSERT INTO student_course VALUE(NULL, '.$userModel->id.', '.$_POST['courseId'].')';
+							$command = Yii::app()->db->createCommand($sqlStatement);
+							$command->execute();
+						}
+
 						// redirect to the page before registration
 						if (isset($_POST['returnUrl']))
 						{
-							$this->redirect($_POST['returnUrl']);
+							Yii::app()->controller->redirect($_POST['returnUrl']);
 						}
 					}
 					else
@@ -54,6 +67,10 @@ class ZSignUp extends CWidget
 				}
 			}
 		}
-		$this->render('ZSignUp', array('userModel' => $userModel));
+		$this->render('ZSignUp', array(
+			'userModel' => $userModel, 
+			'courseId' => $this->courseId,
+			'returnUrl' => $this->returnUrl,
+		));
 	}
 }
