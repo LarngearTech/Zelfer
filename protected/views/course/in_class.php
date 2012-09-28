@@ -51,48 +51,6 @@ $(document).ready(function() {
 
 <div id="course-tabs">
 	<?php
-	// create contents for the lecture tab 
-	/*$chapIdx = 0;
-	$lecturesTabContent = '
-	<div class="row">
-		<div class="accordion span3" id="chapter-accordion">';
-	foreach ($chapters as $chapter)
-	{
-		$chapIdx++;
-		$lecturesTabContent .= '
-			<div class="accordion-group">
-				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
-						'.$chapIdx.'. '.CHtml::encode($chapter->name).'
-					</a>
-				</div>
-				<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse chapter">
-					<div class="accordion-inner">
-						<ul>';
-		// create a lecture list
-		foreach ($chapter->lectures as $lecture)
-		{
-			$lecturesTabContent .= 
-				'<li class="lecture">
-					<div class="lecture-name">
-						'.CHtml::encode($lecture->name).'
-					</div>
-					<div class="lecture-items">
-						<!--<a href="'.$lecture->streamingUrl.'"><img src="'.Yii::app()->baseUrl.'/images/play.png" class="icon"></a> -->
-						<a href="javascript:void(0)"><img id="'.$lecture->videoUrl.'" src="'.Yii::app()->baseUrl.'/images/play.png" class="icon playbutton"/></a>
-						<!--<a href="'.$lecture->slideUrl.'"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>-->
-						<a href="contents/slide/slide.pdf"><img src="'.Yii::app()->baseUrl.'/images/slide.png" class="icon material"></a>
-						<a href="'.$lecture->videoUrl."/encodedVideo.ogv".'"><img src="'.Yii::app()->baseUrl.'/images/video.png" class="icon material"></a>
-					</div>	
-				</li>';
-		}
-		$lecturesTabContent .= '</ul>
-					</div><!-- end accordion-inner -->
-				</div><!-- end chapter -->
-			</div><!-- end accordion-group -->
-		';
-	}
-	$lecturesTabContent .= '</div><!-- end accordion -->';*/
 	$lecturesTabContent = '
 		<div class="row">
 			<div class="lecture-stack-wrapper span3">';
