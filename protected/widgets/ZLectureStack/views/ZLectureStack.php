@@ -16,6 +16,9 @@
 							<div class="lecture-name">
 								<?php echo CHtml::encode($lecture->name);?>
 							</div><!-- /lecture-name -->
+							<div class="play-icon">
+								<img src="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.widgets.ZLectureStack.assets.images'));?>/play.png" />
+							</div><!-- /play-icon -->
 						</li>	
 					<?php endforeach; ?>
 					</ul>
