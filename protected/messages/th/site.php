@@ -35,10 +35,10 @@ return array(
 
 	// Fields
 	'Name' => 'ชื่อ',
-	'Full Name' => 'ชื่อ',
+	'Full Name' => 'ชื่อ นามสกุล',
 	'Email' => 'อีเมล',
-	'Password' => 'พาสเวิร์ด',
-	'Repeat Password' => 'พิมพ์พาสเวิร์ดอีกครั้ง',
+	'Password' => 'รหัสผ่าน',
+	'Repeat password' => 'พิมพ์รหัสผ่านอีกครั้ง',
 	'Subject' => 'หัวเรื่อง',
 	'Body' => 'ข้อความ',
 
