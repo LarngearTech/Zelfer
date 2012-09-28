@@ -5,7 +5,7 @@
 		<div class="accordion-group">
 			<div class="accordion-heading">
 				<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter<?php echo $chapIdx;?>-collapse">
-					<?php echo $chapIdx.CHtml::encode($chapter->name);?>
+					<?php echo $chapIdx.'.'.CHtml::encode($chapter->name);?>
 				</a>
 			</div><!-- /accordion-heading -->
 			<div id="chapter<?php echo $chapIdx;?>-collapse" class="accordion-body collpase chapter">
