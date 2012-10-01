@@ -23,15 +23,20 @@ body
 	padding: 0;
 	color: #555;
 	font: normal 10pt Arial,Helvetica,sans-serif;
-	/*background: #EFEFEF;*/
-	background: white;
+	background: #f5f5f5;
+}
+
+body .modal
+{
+	width: 480px;
+	margin: -210px 0 0 -240px;
 }
 
 #page
 {
 	margin-top: 40px;
 	margin-bottom: 5px;
-	background: white;
+	background: #f5f5f5;
 	/*border: 1px solid #C9E0ED;*/
 }
 
@@ -61,6 +66,10 @@ body
 {
 	padding: 10px 20px;
 	font-size: 200%;
+}
+
+.nav-tabs > .active > a, .nav-tas > .active > a:hover {
+	background-color: #f5f5f5;
 }
 
 div.flash-error, div.flash-notice, div.flash-success
