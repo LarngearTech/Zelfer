@@ -177,7 +177,7 @@ class CourseController extends Controller
 			$model->attributes=$_POST['Course'];
 			if($model->save())
 			{
-				$thumbnails = CUploadedFile::getInstancesByName('thumbnails');
+				/*$thumbnails = CUploadedFile::getInstancesByName('thumbnails');
 				
 				// Each course can has one and only one thumbnail and intro video.
 				// We use CMultipleFileUploader only to allow user to remove incorrect file before submitting.
@@ -196,7 +196,7 @@ class CourseController extends Controller
 					{
 						$this->saveIntro($intro, $model->id);
 					}
-				}
+				}*/
 				
 				$this->redirect(array('update','courseId'=>$model->id));
 			}
