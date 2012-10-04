@@ -35,7 +35,7 @@
 		<?php echo $form->error($model, 'category_id'); ?>
 	</div>
 
-
+<!--
 	<div class="input-row">
 		<?php echo CHtml::label('Course\'s thumbnail', false); ?>
 		<?php $this->widget('CMultiFileUpload', array(
@@ -59,6 +59,7 @@
 					'max' => '1',
 		)); ?>
 	</div>
+-->
 
 	<div class="input-row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('style'=>'margin-top:10px', 'onclick'=>'SubmitEncodeForm()')); ?>
@@ -72,7 +73,7 @@
 
 	function submitForm() {
 		// Check if both files has been uploaded
-		thumbnail = document.forms['course-form'].elements['thumbnails'].value;
+		/*thumbnail = document.forms['course-form'].elements['thumbnails'].value;
 		intro = document.forms['course-form'].elements['introductions'].value;
 		if (thumbnail == "")
 		{
@@ -83,7 +84,7 @@
 		{
 			alert("You haven't chosen introduction video");
 			return false;
-		}
+		}*/
 		return true;
 	}
 </script>

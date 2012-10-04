@@ -6,7 +6,7 @@ Yii::app()->clientScript->registerScriptFile(
 	<h1>Courses|Take</h1>
 	<ul class='thumbnails'>
 		<?php
-		foreach ($userModel->takeCourses as $course) {
+		foreach ($userModel->take_courses as $course) {
 			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span3'));
  			$this->widget('CourseThumbnail', array(
@@ -25,7 +25,7 @@ Yii::app()->clientScript->registerScriptFile(
 	<h1>Courses|Teach</h1>
 	<ul class='thumbnails'>
 		<?php	
-		foreach ($userModel->teachCourses as $course) {
+		foreach ($userModel->teach_courses as $course) {
 			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span3'));
 			$this->widget('CourseThumbnail', array(

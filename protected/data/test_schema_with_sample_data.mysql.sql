@@ -156,6 +156,7 @@ CREATE TABLE IF NOT EXISTS `instructor_course` (
   `course_id` int(11) NOT NULL,
   `instructor_career` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `instructor_description` text COLLATE utf8_unicode_ci NOT NULL,
+  `is_owner` boolean NOT NULL,
   PRIMARY KEY (`id`),
   KEY `course_id` (`course_id`),
   KEY `user_id` (`user_id`)

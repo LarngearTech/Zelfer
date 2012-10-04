@@ -63,8 +63,8 @@ class User extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'created_courses' => array(self::MANY_MANY, 'Course', 'instructor_course(user_id, course_id)'),
-			'taken_courses' => array(self::MANY_MANY, 'Course', 'student_course(user_id, course_id)'),
+			'teach_courses' => array(self::MANY_MANY, 'Course', 'instructor_course(user_id, course_id)'),
+			'take_courses' => array(self::MANY_MANY, 'Course', 'student_course(user_id, course_id)'),
 		);
 	}
 
@@ -148,6 +148,26 @@ class User extends CActiveRecord
 		return parent::beforeSave();
 	}
 
+	/**
+	 * @param integer $courseId courseId that will be added to student_course table
+	 */
+	public function addTakeCourse($courseId)
+	{
+	}
+
+	/**
+	 * @param integer $courseId courseId that will be added to instructor_course table
+	 * @param boolean $isOwner wheter this user is the owner of the course specified by $courseId
+	 */
+	public function addTeachCourse($courseId, $isOwner)
+	{
+		$sql = 'SELECT course_id 
+			FROM student_course
+			WHERE user_id = '.$this->id;
+		$rows = Yii::app()->db->createCommand($sql)->queryAll();
+		return $rows;
+	}
+	
 	 /**
          * Return path to resource of user
          * @return string resource path
@@ -175,53 +195,4 @@ class User extends CActiveRecord
 			return self::DEFAULT_USER_PROFILE_URL;
 		}
 	}
-
-	/**
-	 * Get ID of all take courses.
-	 * Return array of registered courses' Ids
-	 * @return array take courses' ids
-	 */
-	public function getTakeCourseIds()
-	{
-		$sql = 'SELECT course_id 
-				FROM student_course
-				WHERE user_id = '.$this->id;
-		$rows = Yii::app()->db->createCommand($sql)->queryAll();
-		return $rows;
-	}
-
-	public function getTakeCourses()
-	{
-		$courseIds = $this->takeCourseIds;
-		$courses = array();
-		foreach($courseIds as $courseId){
-			$courses[] = Course::model()->findByPk($courseId['course_id']);	
-		}
-		return $courses;
-	}
-	
-	 /**
-         * Get ID of all teach courses.
-         * Return array of registered courses' Ids
-         * @return array teach courses' ids
-         */
-        public function getTeachCourseIds()
-        {
-                $sql = 'SELECT course_id
-                                FROM instructor_course
-                                WHERE user_id = '.$this->id;
-                $rows = Yii::app()->db->createCommand($sql)->queryAll();
-                return $rows;
-        }
-
-	public function getTeachCourses()
-	{
-		$courseIds = $this->teachCourseIds;
-		$courses = array();
-		foreach($courseIds as $courseId){
-			$courses[] = Course::model()->findByPk($courseId['course_id']);
-		}
-		return $courses;
-	}
-
 }
