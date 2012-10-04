@@ -7,8 +7,6 @@
 					'onsubmit'=>'return submitForm();',)
 )); ?>
 
-	<p class="note"><?php echo Yii::t('site', 'Fields with');?> <span class="required">*</span> <?php echo Yii::t('site', 'are required.');?></p>
-
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="input-row">

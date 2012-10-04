@@ -214,17 +214,9 @@ class CourseController extends Controller
 			}*/
 		}
 
-		// Query all category
-		$categoryList = array();
-		$data = Category::model()->findAll();
-		foreach ($data as $category)
-		{
-			$categoryList[$category->id] = $category->name;
-		}
-	
 		$this->render('create',array(
 			'model'=>$model,
-			'categoryList'=>$categoryList,
+			'categoryList'=>$this->categoryList(),
 		));
 	}
 
@@ -249,6 +241,7 @@ class CourseController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'categoryList'=>$this->categoryList(),
 		));
 	}
 
@@ -357,6 +350,22 @@ class CourseController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+
+	/**
+	 * Return Array array list of mapping between category->id and categoryName
+	 */
+	private function categoryList()
+	{
+		// Query all category
+		$categoryList = array();
+		$data = Category::model()->findAll();
+		foreach ($data as $category)
+		{
+			$categoryList[$category->id] = $category->name;
+		}
+		return $categoryList;
 	}
 
 		
