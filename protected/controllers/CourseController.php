@@ -175,9 +175,22 @@ class CourseController extends Controller
 		if(isset($_POST['Course']))
 		{
 			$model->attributes=$_POST['Course'];
-			if($model->save())
+			$transaction = Yii::app()->db->beginTransaction();
+			try {
+				$model->save();
+				$user = User::model()->findByPk(Yii::app()->user->id);
+				$user->addTeachCourse($model->id, true);
+				$transaction->commit();
+
+				$this->redirect(array('update','courseId'=>$model->id));
+			}
+			catch (Exception $e) {
+				$transaction->rollback();
+				throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			}
+			/*if($model->save())
 			{
-				/*$thumbnails = CUploadedFile::getInstancesByName('thumbnails');
+				$thumbnails = CUploadedFile::getInstancesByName('thumbnails');
 				
 				// Each course can has one and only one thumbnail and intro video.
 				// We use CMultipleFileUploader only to allow user to remove incorrect file before submitting.
@@ -196,10 +209,9 @@ class CourseController extends Controller
 					{
 						$this->saveIntro($intro, $model->id);
 					}
-				}*/
-				
+				}
 				$this->redirect(array('update','courseId'=>$model->id));
-			}
+			}*/
 		}
 
 		// Query all category
