@@ -15,14 +15,7 @@
 				<div>Max 256 KB JPG, PNG, GIF, JPEG and BMP</div>
 			</div>
 			<div class="upload-thumbnail-file-container">
-				<?php
-				$this->widget('XUpload', array(
-					'url'=>Yii::app()->createUrl('course/uploadThumbnail'),
-					'multiple'=>true,
-					'model'=>$course,
-					'attribute'=>'thumbnail-file',
-				));
-				?>
+				<input type='file'/>
 			</div>
 		</div>
 	</div>
