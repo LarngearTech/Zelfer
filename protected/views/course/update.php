@@ -59,7 +59,7 @@ $this->menu = array(
 					)); 
 					?>
 					</div>
-					<div>
+					<div class="well form">
 						<?php
 						$this->widget('UploadCourseThumbnail', array(
 							'course'=>$model,
