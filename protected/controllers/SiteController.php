@@ -27,6 +27,16 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+
+		/*Yii::import('ext.qtiprocessor.*');
+		require_once('QtiProcessor.php');
+		//$qp = qp(Yii::app()->basePath.'/../qti-example.xml')->writeHTML();
+		$file = Yii::app()->basePath.'/../qti-choice-multiple.xml';
+		$qp = new QtiProcessor();
+		$items = $qp->parseAssessmentItems($file);
+		print_r($items);
+		exit();*/
+
 		$categories = Category::model()->findAll();
 
 		// load all courses of each catgegory to display
