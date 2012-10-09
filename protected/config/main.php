@@ -6,20 +6,21 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Zelfer',
+	'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	'name' => 'Zelfer',
 
 	// preloading 'log' component
-	'preload'=>array(
+	'preload' => array(
 		'log',
 //		'bootstrap',
 	),
 
 	// autoloading model and component classes
-	'import'=>array(
+	'import' => array(
 		'application.models.*',
 		'application.components.*',
 		'application.extensions.PasswordHash',
+		'application.extensions.querypath.*',
 		'application.widgets.bootstrap.*',
 		'application.widgets.AddCourseThumbnail.*',
 		'application.widgets.CourseThumbnail.*',
@@ -30,7 +31,7 @@ return array(
 		'application.widgets.ZLectureStack.*',
 	),
 
-	'modules'=>array(
+	'modules' => array(
 		// uncomment the following to enable the Gii tool
 		/*'gii'=>array(
 			'class'=>'system.gii.GiiModule',
@@ -44,10 +45,10 @@ return array(
 	),
 
 	// application components
-	'components'=>array(
-		'user'=>array(
+	'components' => array(
+		'user' => array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			'allowAutoLogin' => true,
 			'class' => 'WebUser',
 		),
 		// uncomment the following to enable URLs in path-format
@@ -66,28 +67,28 @@ return array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
 		*/
-		'db'=>array(
+		'db' => array(
 			'connectionString' => 'mysql:host=localhost;dbname=zelfer',
 			'emulatePrepare' => true,
 			'username' => 'username_here',
 			'password' => 'password_here',
 			'charset' => 'utf8',
 		),
-		'errorHandler'=>array(
+		'errorHandler' => array(
 			// use 'site/error' action to display errors
-            'errorAction'=>'site/error',
+            'errorAction' => 'site/error',
         ),
-		'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
+		'log' => array(
+			'class' => 'CLogRouter',
+			'routes' => array(
 				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					'class' => 'CFileLogRoute',
+					'levels' => 'error, warning',
 				),
 				// uncomment the following to show log messages on web pages
 				/*
 				array(
-					'class'=>'CWebLogRoute',
+					'class' => 'CWebLogRoute',
 				),
 				*/
 			),
@@ -96,7 +97,7 @@ return array(
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
-	'params'=>array(
+	'params' => array(
 		// this is used in contact page
 		'adminEmail' => 'webmaster@example.com',
 		'phpass' => array(
