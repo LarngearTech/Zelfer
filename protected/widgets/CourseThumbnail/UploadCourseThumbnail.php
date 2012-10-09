@@ -17,10 +17,11 @@ class UploadCourseThumbnail extends CWidget{
 		$cs->registerScriptFile($assets.'/js/uploadcoursethumbnail.js');
 
 		// Render widget
-		echo $this->render('uploadcoursethumbnail', array(
-							'course'=>$this->course,
-							'css'=>$this->css
-					));
+		$this->render('uploadcoursethumbnail', 
+			array(
+			'course'=>$this->course,
+			'css'=>$this->css
+		));
 	}
 }
 ?>

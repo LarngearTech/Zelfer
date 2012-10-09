@@ -12,10 +12,8 @@
  */
 class Course extends CActiveRecord
 {
-	protected $_thumbnailUrl;
 	protected $_introUrl;
 
-	const THUMBNAIL_URL_PREFIX = '/asset/thumbnail/';
 	const STATUS_OPEN = 1;
 	const STATUS_CLOSE = 2;
 	const STATUS_RUNNING = 3;
@@ -55,7 +53,7 @@ class Course extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, short_description, long_description, category_id', 'required'),
+			array('name, category_id', 'required'),
 			array('category_id', 'numerical', 'integerOnly'=>true),
 			array('name, short_description', 'length', 'max'=>255),
 			array('long_description', 'length', 'max'=>200),
@@ -157,26 +155,6 @@ class Course extends CActiveRecord
 			),
 		));
 		return $this;
-	}
-
-	/**
-	 * Getter of $_thumbnailUrl
-	 * return null if thumbail url is not found
-	 */
-	public function getThumbnailUrl()
-	{
-		$path = $this->getResourcePath();
-		if (file_exists("$path/thumbnail"))
-		{
-			$file = fopen("$path/thumbnail", 'r');
-			$this->_thumbnailUrl  = Yii::app()->baseUrl."/course/$this->id/".end(explode('/', chop(fgets($file))));
-			fclose($file);
-			return $this->_thumbnailUrl;
-		}
-		else
-		{
-			return null;
-		}
 	}
 
 	

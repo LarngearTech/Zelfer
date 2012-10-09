@@ -40,7 +40,7 @@ class CourseThumbnail extends CWidget{
 		}
 		// User specified course. Give priority to directly specified paramenter's value first, find from $course if isn't given.
 		else {
-			$this->thumbnailUrl		= ($this->thumbnailUrl)?$this->thumbnailUrl:$this->course->thumbnailUrl;
+			$this->thumbnailUrl		= ($this->thumbnailUrl)?$this->thumbnailUrl:$this->course->thumbnail_url;
 			if (empty($this->thumbnailUrl)){
 				$this->thumbnailUrl	= $this->defaultThumbnailUrl($assets);
 			}

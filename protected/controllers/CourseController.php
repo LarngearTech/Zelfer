@@ -40,7 +40,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'instructorList', 'editInstructor', 'changeVideo', 'myCourse'),
+				'actions' => array('create', 'update', 'instructorList', 'editInstructor', 'changeVideo', 'myCourse', 'changeThumbnail'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -135,6 +135,54 @@ class CourseController extends Controller
 		$this->render('myCourse', array(
 						'userModel' => $userModel,
 						));
+	}
+
+
+	/**
+	 * Change course's thumbnail
+	 */
+	function actionChangeThumbnail($courseId)
+	{
+		$course = Course::model()->findByPk($courseId);
+
+		if ($course)
+		{
+			Yii::import("application.widgets.EAjaxUpload.qqFileUploader");
+ 
+			$folder='course/thumbnails/';
+			$sizeLimit = 256 * 1024;// maximum file size in bytes
+			$allowedExtensions = array("jpg", "jpeg", "bmp", "gif", "png");
+			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+			$result = $uploader->handleUpload($folder);
+ 
+			$fileSize=filesize($folder.$result['filename']);
+			$fileName=$result['filename'];
+
+			// Replace previous thumbnail with the current one
+			if (!empty($course->thumbnail_url))
+			{
+				$thumbnailPath = Yii::app()->basePath.'/../../'.$course->thumbnail_url;
+				if (file_exists($thumbnailPath))
+				{
+					unlink($thumbnailPath);
+				}
+			}
+			$newname = uniqid().'.'.PHPHelper::getFileExtension($fileName);
+			rename($folder.$fileName, $folder.$newname);
+			$course->thumbnail_url = Yii::app()->baseUrl.'/'.$folder.$newname;
+			if($course->save()){
+				$result['html'] = $this->widget('CourseThumbnail', 
+							array('course'=>$course),
+						true);
+				$return = json_encode($result);
+				echo $return;
+			}
+			else
+			{
+				throw CException('Cannot not update database');
+			}
+		}
+ 
 	}
 
 

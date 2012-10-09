@@ -24,6 +24,7 @@ return array(
 		'application.widgets.bootstrap.*',
 		'application.widgets.AddCourseThumbnail.*',
 		'application.widgets.CourseThumbnail.*',
+		'application.widgets.EAjaxUpload.*',
 		'application.widgets.ZLogIn.*',
 		'application.widgets.ZSignUp.*',
 		'application.widgets.ZLogInSignUpFlipper.*',
