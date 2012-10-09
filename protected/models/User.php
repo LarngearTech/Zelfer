@@ -161,11 +161,9 @@ class User extends CActiveRecord
 	 */
 	public function addTeachCourse($courseId, $isOwner)
 	{
-		$sql = 'SELECT course_id 
-			FROM student_course
-			WHERE user_id = '.$this->id;
-		$rows = Yii::app()->db->createCommand($sql)->queryAll();
-		return $rows;
+		$sql = 'INSERT INTO instructor_course (user_id, course_id, is_owner)
+			VALUES('.$this->id.','.$courseId.','. $isOwner.')';
+		Yii::app()->db->createCommand($sql)->execute();
 	}
 	
 	 /**

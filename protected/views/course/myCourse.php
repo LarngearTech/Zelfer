@@ -30,6 +30,9 @@ Yii::app()->clientScript->registerScriptFile(
 			echo CHtml::openTag('li', array('class' => 'span3'));
 			$this->widget('CourseThumbnail', array(
 							'course'=>$course,
+							'courseUrl'=>$this->createUrl('course/update', array(
+								'courseId'=>$course->id,
+				)),
 			));
 			echo CHtml::closeTag('li');
 		}
