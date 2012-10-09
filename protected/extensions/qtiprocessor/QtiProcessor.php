@@ -6,6 +6,10 @@ require_once('QueryPath.php');
 class QtiProcessor
 {
 
+	public $XMLNS = "http://www.imsglobal.org/xsd/imsqti_v2p1";
+	public $XMLNS_XSI = "http://www.w3.org/2001/XMLSchema-instance";
+	public $XSI_SCHEMALOCATION = "http://www.imsglobal.org/xsd/imsqti_v2p1 http://www.imsglobal.org/xsd/imsqti_v2p1.xsd";
+
 	/**
 	 * Parse QTI file in XML format to an array of items
 	 */
@@ -64,5 +68,55 @@ class QtiProcessor
 			$items[] = $new_item;
 		}
 		return $items;
+	}
+
+	/**
+	 * Create QTI XML from items
+	 */
+	function createQtiXmlItem($item)
+	{
+		$qp = qp()->append('<assessmentItem></assessmentItem>');
+		$type = strtolower($item['type']);
+		// type: select one choice
+		if ($type == 'choice')
+		{
+			$qp->find(':root')
+				->append('<responseDeclaration identifier="RESPONSE" cardicality="single" baseType="identifier"></responseDeclaration>')
+				->children('responseDeclaration')
+				->append('<correctResponse></correctResponse>')
+				->children('correctResponse')
+				->append('<value>'.$item['answers'][0].'</value>');
+			$qp->find(':root')->append('<itemBody></itemBody>');
+			$qp = $this->appendChoiceInteraction($qp, $item['prompt'], $item['choices'], $item['shuffle'], $item['maxChoices']);
+		}
+		// type: select multiple choices
+		else if ($type == 'choicemultiple')
+		{
+			$qp->find(':root')
+				->append('<responseDeclaration identifier="RESPONSE" cardicality="multiple" baseType="identifier"></responseDeclaration>')
+				->children('responseDeclaration')
+				->append('<correctResponse></correctResponse>')
+				->children('correctResponse');
+			foreach ($item['answers'] as $answer)
+			{
+				$qp->append('<value>'.$answer.'</value>');
+			}
+			$qp->find(':root')->append('<itemBody></itemBody>');
+			$qp = $this->appendChoiceInteraction($qp, $item['prompt'], $item['choices'], $item['shuffle'], $item['maxChoices']);
+		}
+		print htmlspecialchars($qp->top()->xml());
+	}
+
+	function appendChoiceInteraction($qp, $prompt, $choices, $shuffle, $maxChoices)
+	{
+		$qp = $qp->find('itemBody')
+					->append('<choiceInteraction responseIdentifier="RESPONSE" shuffle="'.$shuffle.'" maxChoices="'.$maxChoices.'"></choiceInteraction>')
+					->children('choiceInteraction')
+					->append('<prompt>'.$prompt.'</prompt>');
+		foreach ($choices as $choice)
+		{
+			$qp = $qp->append('<simpleChoice identifier="'.$choice['value'].'" fixed="false">'.$choice['text'].'</simpleChoice>');
+		}
+		return $qp;
 	}
 }
