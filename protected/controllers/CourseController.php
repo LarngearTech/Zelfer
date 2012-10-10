@@ -294,7 +294,7 @@ class CourseController extends Controller
 		{
 			$model->attributes=$_POST['Course'];
 			if($model->save()){
-				echo $this->widget('CourseThumbnail', array('course'=>$course));
+				echo $this->widget('CourseThumbnail', array('course'=>$model), true);
 			}
 		}
 	}
