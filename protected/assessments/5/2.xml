@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assessmentItem identifier="choice" title="Insertion Sort" adaptive="false" timeDependent="false">
+	<responseDeclaration identifier="RESPONSE" cardinality="single" baseType="identifier">
+		<correctResponse>
+			<value>1</value>
+		</correctResponse>
+	</responseDeclaration>
+	<outcomeDeclaration identifier="SCORE" cardinality="single" baseType="integer">
+		<defaultValue>
+			<value>0</value>
+		</defaultValue>
+	</outcomeDeclaration>
+	<itemBody>
+		<choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="1">
+			<prompt>Insertion Sort มีประสิทธิภาพทางเวลาเท่าไร</prompt>
+			<simpleChoice identifier="1">O(n^2)</simpleChoice>
+			<simpleChoice identifier="2">O(n log n)</simpleChoice>
+			<simpleChoice identifier="3">O(n)</simpleChoice>
+		</choiceInteraction>
+	</itemBody>
+</assessmentItem>
