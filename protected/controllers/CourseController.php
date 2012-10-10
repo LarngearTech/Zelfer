@@ -40,7 +40,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'instructorList', 'editInstructor', 'changeVideo', 'myCourse', 'changeThumbnail'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'myCourse', 'changeThumbnail'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -132,9 +132,10 @@ class CourseController extends Controller
 	{
 		$userModel = User::model()->findByPk($uid);
 
-		$this->render('myCourse', array(
-						'userModel' => $userModel,
-						));
+		$this->render('myCourse', 
+			array(
+			'userModel' => $userModel,
+		));
 	}
 
 
@@ -268,12 +269,21 @@ class CourseController extends Controller
 		));
 	}
 
+
+	public function actionUpdate($courseId)
+	{
+		$model=$this->loadModel($courseId);
+		$this->render('update', array(
+			'model'=>$model,
+			'categoryList'=>$this->categoryList(),
+		)); 
+	}
+
+	
 	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($courseId)
+	public function actionChangeCourseInfo($courseId)
 	{
 		$model=$this->loadModel($courseId);
 
@@ -283,14 +293,10 @@ class CourseController extends Controller
 		if(isset($_POST['Course']))
 		{
 			$model->attributes=$_POST['Course'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save()){
+				echo $this->widget('CourseThumbnail', array('course'=>$course));
+			}
 		}
-
-		$this->render('update',array(
-			'model'=>$model,
-			'categoryList'=>$this->categoryList(),
-		));
 	}
 
 	
@@ -417,41 +423,6 @@ class CourseController extends Controller
 	}
 
 		
-	private function saveThumbnail($thumbnail, $courseId)
-	{
-		// Validate courseId
-		$course = $this->loadModel($courseId);
-		if ($course)
-		{
-			// make the directory to store the thumbnail
-			$path = $course->getResourcePath();
-			if(!is_dir($path)) 
-			{
-				mkdir($path, 0775, true);
-			}
-			else
-			{	
-				// remove all previous thumbnail
-				system("rm thumbnail*");
-			}
-
-			if ($thumbnail)
-			{
-				$ext = end(explode('.', $thumbnail->name));
-				$thumbnail->saveAs("$path/thumbnail.$ext");
-
-				// save thumbnail's file name
-				$file = fopen("$path/thumbnail", 'w');
-				fputs($file, "$path/thumbnail.$ext");
-				fclose($file);
-			}
-		}	
-		else
-		{
-			throw new CHttpException(500, "couseId was invalid");
-		}	
-	}
-
 	private function saveIntro($intro, $courseId)
 	{
 		// Validate courseId
