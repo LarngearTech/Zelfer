@@ -1,5 +1,5 @@
 <?php
-class UploadCourseThumbnail extends CWidget{
+class CourseThumbnailUploader extends CWidget{
 	public $course;
 	public $thumbnailUrl;
 	public $courseName;
@@ -14,10 +14,10 @@ class UploadCourseThumbnail extends CWidget{
 
 		// Publish required assets
 		$cs = Yii::app()->getClientScript();
-		$cs->registerScriptFile($assets.'/js/uploadcoursethumbnail.js');
+		$cs->registerScriptFile($assets.'/js/coursethumbnailuploader.js');
 
 		// Render widget
-		$this->render('uploadcoursethumbnail', 
+		$this->render('coursethumbnailuploader', 
 			array(
 			'course'=>$this->course,
 			'css'=>$this->css
