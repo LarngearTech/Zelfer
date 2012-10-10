@@ -95,21 +95,32 @@ $this->breadcrumbs = array(
 			'active' => true,
 			'id' => 'lecture',
 		));
-		echo $lecturesTabContent;
+			echo $lecturesTabContent;
 		$this->endWidget();
 		$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'problemset',
 		));
-		//echo 'Problem set';
-		$this->widget('ZAssessmentItem', array(
-    		'id' => 'test-id',
-    		'itemPath' => Yii::app()->basePath.'/assessments/5/1.xml',
-		));
-		$this->endWidget();
+			$this->widget('ZAssessmentItem', array(
+    			'id' => 'test-1',
+    			'itemPath' => Yii::app()->basePath.'/assessments/5/1.xml',
+			));
+			$this->widget('ZAssessmentItem', array(
+    			'id' => 'test-2',
+    			'itemPath' => Yii::app()->basePath.'/assessments/5/2.xml',
+			));
+			$this->widget('ZAssessmentItem', array(
+    			'id' => 'test-3',
+    			'itemPath' => Yii::app()->basePath.'/assessments/5/3.xml',
+			));
+			$this->widget('ZAssessmentItem', array(
+    			'id' => 'test-4',
+    			'itemPath' => Yii::app()->basePath.'/assessments/5/4.xml',
+			));
+		$this->endWidget(); // end EbootstrapTabConent
 		$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'discussion',
 		));
-		echo 'Discussion';
+			echo 'Discussion';
 		$this->endWidget();
 	$this->endWidget();
 ?>
