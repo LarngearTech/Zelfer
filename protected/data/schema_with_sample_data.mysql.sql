@@ -107,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `long_description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL,
   `thumbnail_url` varchar(255) COLLATE utf8_unicode_ci,
+  `intro_url` varchar(255) COLLATE utf8_unicode_ci,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;

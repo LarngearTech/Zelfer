@@ -12,8 +12,6 @@
  */
 class Course extends CActiveRecord
 {
-	protected $_introUrl;
-
 	const STATUS_OPEN = 1;
 	const STATUS_CLOSE = 2;
 	const STATUS_RUNNING = 3;
@@ -158,25 +156,6 @@ class Course extends CActiveRecord
 	}
 
 	
-	/**
-	 * Getter of $_introUrl
-	 * return null if intro url is not found
-	 */
-	public function getIntroUrl()
-	{
-		$path = $this->getResourcePath();
-		if (file_exists("$path/encodedVideo.mp4"))
-		{
-			$this->_introUrl = Yii::app()->baseUrl."/course/$this->id/encodedVideo";
-			return $this->_introUrl;
-		}
-		else
-		{
-			return null;
-		}
-	}
-
-
 	/**
 	 * Return All record
 	 * @return array 

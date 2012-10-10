@@ -40,7 +40,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'myCourse', 'changeThumbnail'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -106,6 +106,54 @@ class CourseController extends Controller
 
 
 	/**
+	 * Change course's intro video
+	 */
+	function actionChangeIntroVideo($courseId)
+	{
+		$course = Course::model()->findByPk($courseId);
+
+		if ($course)
+		{
+			Yii::import("application.widgets.EAjaxUpload.qqFileUploader");
+ 
+			$folder='course/intros/';
+			$sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
+			$allowedExtensions = array("avi", "wmv", "mp4");
+			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+			$result = $uploader->handleUpload($folder);
+ 
+			$fileSize=filesize($folder.$result['filename']);
+			$fileName=$result['filename'];
+
+			// Replace previous thumbnail with the current one
+			if (!empty($course->intro_url))
+			{
+				$introVideoPath = Yii::app()->basePath.'/../../'.$course->intro_url;
+				if (file_exists($introVideoPath))
+				{
+					unlink($introVideoPath);
+				}
+			}
+			$newname = uniqid().'.'.PHPHelper::getFileExtension($fileName);
+			rename($folder.$fileName, $folder.$newname);
+			$course->intro_url = Yii::app()->baseUrl.'/'.$folder.basename($newname, '.mp4');
+			if($course->save()){
+				$result['html'] = $this->widget('IntroVideoPlayer', 
+							array('course'=>$course),
+						true);
+				$return = json_encode($result);
+				echo $return;
+			}
+			else
+			{
+				throw CException('Cannot not update database');
+			}
+		}
+ 
+	}
+
+
+	/*
 	 * Change course's thumbnail
 	 */
 	function actionChangeThumbnail($courseId)
