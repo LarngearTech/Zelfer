@@ -16,6 +16,7 @@ return array(
 	'and' => 'และ',
 	'Edit' => 'แก้ไข',
 	'More' => 'เพิ่มเติม',
+	'Create' => 'สร้าง',
 
 	// General Form 
 	'Fields with' => 'ช่องที่มีเครื่องหมาย',
@@ -49,7 +50,11 @@ return array(
 	// Application Specific
 	'Courses' => 'คอร์ส',
 	'Create Course' => 'สร้างคอร์ส',
+	'Course Name' => 'ชื่อคอร์ส',
+	'Description in one sentence' => 'คำอธิบายหนึ่งประโยคที่บ่งบอกถึงคอร์สนี้',
 	'Course Summary' => 'เกี่ยวกับคอร์ส',
+	'Course summary' => 'เกี่ยวกับคอร์ส',
+	'Category' => 'หมวด',
 	'Edit Course' => 'แก้ไขคอร์ส',
 	'Instructor' => 'ผู้สอน',
 	'Course Logistics' => 'เนื้อหาของคอร์ส', 

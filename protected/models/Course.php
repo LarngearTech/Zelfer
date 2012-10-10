@@ -84,10 +84,10 @@ class Course extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
-			'short_description' => 'Description in one sentence',
-			'long_description' => 'Course summary',
-			'category_id' => 'Category',
+			'name' => Yii::t('site', 'Course Name'),
+			'short_description' => Yii::t('site', 'Description in one sentence'),
+			'long_description' => Yii::t('site', 'Course summary'),
+			'category_id' => Yii::t('site', 'Category'),
 		);
 	}
 

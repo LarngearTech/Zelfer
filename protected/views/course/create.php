@@ -11,7 +11,7 @@ $this->menu=array(
 ?>
 <div class="container">
 <div class="span12">
-<h1>Create Course</h1>
+<h1><?php echo Yii::t('site', 'Create Course');?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model,
 					'categoryList'=>$categoryList,)); ?>

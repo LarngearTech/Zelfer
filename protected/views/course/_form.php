@@ -62,7 +62,7 @@
 	<div class="input-row buttons">
 		<?php 
 		if ($model->isNewRecord) {
-			echo CHtml::submitButton('Create', array('style'=>'margin-top:10px', 'onclick'=>'SubmitEncodeForm()')); 
+			echo CHtml::submitButton(Yii::t('site', 'Create'), array('style'=>'margin-top:10px', 'onclick'=>'SubmitEncodeForm()')); 
 		}
 		else {
 			echo CHtml::ajaxSubmitButton(
