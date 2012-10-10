@@ -12,9 +12,13 @@ class ZLectureStack extends CWidget
 
 	public function init()
 	{
+		// Get assets dir
+		$baseDir = dirname(__FILE__);
+		$assets = Yii::app()->getAssetManager()->publish($baseDir.DIRECTORY_SEPARATOR.'assets', false, -1, YII_DEBUG);
+
+		// Publish required assets
 		$cs = Yii::app()->getClientScript();
-		$cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.widgets.ZLectureStack.assets.css').'/style.css'));
-		//$cs->registerScriptFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.widgets.ZLectureStack.assets.js').'/script.js'));
+		$cs->registerCssFile($assets.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR.'style.css');
 		$cs->registerScript(
 			'playbutton-click',
 			'$(document).ready(function() {

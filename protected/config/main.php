@@ -30,6 +30,7 @@ return array(
 		'application.widgets.ZSignUp.*',
 		'application.widgets.ZLogInSignUpFlipper.*',
 		'application.widgets.ZLectureStack.*',
+		'application.widgets/ZAssessmentItem.*',
 	),
 
 	'modules' => array(

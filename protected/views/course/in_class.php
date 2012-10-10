@@ -100,7 +100,11 @@ $this->breadcrumbs = array(
 		$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'problemset',
 		));
-		echo 'Problem set';
+		//echo 'Problem set';
+		$this->widget('ZAssessmentItem', array(
+    		'id' => 'test-id',
+    		'itemPath' => Yii::app()->basePath.'/assessments/5/1.xml',
+		));
 		$this->endWidget();
 		$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'discussion',
