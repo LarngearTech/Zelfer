@@ -10,10 +10,10 @@ $this->widget('application.extensions.videojs.EVideoJS', array(
 		// Poster image absolute URL
 		'poster' => false,
 		// Absolute URL of the video in MP4 format
-		'video_mp4' => $model->introUrl.".mp4",
+		'video_mp4' => $model->intro_url.".mp4",
 		// Absolute URL of the video in OGV format
 		//'video_ogv' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv',
-		'video_ogv' => $model->introUrl.".ogv",
+		'video_ogv' => $model->intro_url.".ogv",
 		// Absolute URL of the video in WebM format
 		//'video_webm' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm',
 		// Use Flash fallback player ?

@@ -27,7 +27,7 @@
 						'allowedExtensions'=>array("jpg", "jpeg", "bmp", "gif", "png"),
 						'sizeLimit'=> 256*1024,// maximum file size in bytes
 						'onComplete'=>"js:function(id, fileName, responseJSON){
-								$('.course-thumbnail-container').html(responseJSON.html); 
+								$('.coursethumbnail-container').html(responseJSON.html); 
 							}",
 					)
 				)
