@@ -60,7 +60,21 @@
 -->
 
 	<div class="input-row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('style'=>'margin-top:10px', 'onclick'=>'SubmitEncodeForm()')); ?>
+		<?php 
+		if ($model->isNewRecord) {
+			echo CHtml::submitButton('Create', array('style'=>'margin-top:10px', 'onclick'=>'SubmitEncodeForm()')); 
+		}
+		else {
+			echo CHtml::ajaxSubmitButton(
+				'Save', 
+				Yii::app()->createUrl('course/changeCourseInfo', array('courseId'=>$model->id)),
+				array(
+					'dataType'=>'html',
+					'update'=>'.course-thumbnail-container',
+				)
+			);
+		}
+		?>
 	</div>
 	
 <?php $this->endWidget(); ?>
