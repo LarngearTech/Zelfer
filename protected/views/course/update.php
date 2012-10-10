@@ -61,10 +61,17 @@ $this->menu = array(
 					</div>
 					<div class="well form">
 						<?php
-						$this->widget('UploadCourseThumbnail', array(
+						$this->widget('CourseThumbnailUploader', array(
 							'course'=>$model,
 							'courseUrl'=>'#',
 						)); 
+						?>
+					</div>
+					<div class="well form">
+						<?php
+						$this->widget('IntroVideoUploader', array(
+							'course'=>$model,
+						));
 						?>
 					</div>
 				</div>
