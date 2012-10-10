@@ -57,4 +57,8 @@ foreach ($categories as $category)
 	echo CHtml::closeTag('ul');
 }
 ?>
+<!--?php $this->widget('ZAssessmentItem', array(
+	'id' => 'test-id',
+	'itemPath' => Yii::app()->basePath.'/assessments/5/1.xml',
+));?-->
 </div><!-- /container -->
