@@ -4,3 +4,28 @@
 	border: solid 1px rgb(204, 204, 204);
 	padding: 10px 10px 30px 10px;
 }
+
+.assessment-item h1
+{
+	font-size: 2em;
+}
+
+.assessment-prompt
+{
+	margin: 0 0 10px 0;
+}
+
+.assessment-choices input[type=radio]
+{
+	float: left;
+	clear: none;
+	margin: 2px 0 0 2px;
+}
+
+.assessment-choices label
+{
+	float: left;
+	clear: none;
+	display: block;
+	padding: 2px 1em 0 0;
+}
