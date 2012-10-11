@@ -1,5 +1,5 @@
 <div class="assessment-item">
-	<h1><?php echo $item['title']; ?></h1>
+	<h4><?php echo $item['title']; ?></h4>
 	<div class="assessment-prompt"><?php echo $item['prompt']; ?></div>
 	<div class="assessment-choices">
 		<?php foreach ($item['choices'] as $choice): ?>
