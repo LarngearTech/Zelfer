@@ -100,21 +100,27 @@ $this->breadcrumbs = array(
 		$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'problemset',
 		));
-			$this->widget('ZAssessmentItem', array(
-    			'id' => 'test-1',
-    			'itemPath' => Yii::app()->basePath.'/assessments/5/1.xml',
-			));
-			$this->widget('ZAssessmentItem', array(
-    			'id' => 'test-2',
-    			'itemPath' => Yii::app()->basePath.'/assessments/5/2.xml',
-			));
-			$this->widget('ZAssessmentItem', array(
-    			'id' => 'test-3',
-    			'itemPath' => Yii::app()->basePath.'/assessments/5/3.xml',
-			));
-			$this->widget('ZAssessmentItem', array(
-    			'id' => 'test-4',
-    			'itemPath' => Yii::app()->basePath.'/assessments/5/4.xml',
+			$this->widget('ZAssessment', array(
+				'headline' => 'Problem Set 1',
+				'description' => 'กรุณาเลือกคำตอบที่ดีที่สุด',
+				'items' => array(
+					array(
+						'id' => 'test-1',
+						'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'1.xml',
+					),
+					array(
+                        'id' => 'test-2',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'2.xml',
+                    ),
+					array(
+                        'id' => 'test-3',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'3.xml',
+                    ),  
+					array(
+                        'id' => 'test-4',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'4.xml',
+                    ),
+				)
 			));
 		$this->endWidget(); // end EbootstrapTabConent
 		$this->beginWidget('EBootstrapTabContent', array(

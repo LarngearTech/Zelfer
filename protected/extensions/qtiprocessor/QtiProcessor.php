@@ -11,63 +11,49 @@ class QtiProcessor
 	public $XSI_SCHEMALOCATION = "http://www.imsglobal.org/xsd/imsqti_v2p1 http://www.imsglobal.org/xsd/imsqti_v2p1.xsd";
 
 	/**
-	 * Parse QTI file in XML format to an array of items
+	 * Parse one AssessmentItem from QTI XML.
 	 */
-	function parseAssessmentItems($file)
+	function parseAssessmentItem($file)
 	{
-		$items = array();
-
-		foreach (qp($file, 'assessmentItem') as $item)
+		$qp = qp($file, 'assessmentItem');
+		$item = array();
+		$item['title'] = $qp->attr('title');
+		$item['type'] = $qp->attr('identifier');
+		$answers = array();
+		$correctValues = $qp->find('responseDeclaration>correctResponse>value');
+		foreach ($correctValues as $value)
 		{
-			$new_item = array();
-
-			// item's title and type
-			$title = $item->attr('title');
-			$type = $item->attr('identifier');
-
-			// item's correct answers
-			$answers = array();
-			$correctValues = $item->find('responseDeclaration>correctResponse>value');
-			foreach ($correctValues as $value)
-			{
-				$answers[] = $value->text();
-			}
-
-			$new_item['title'] = $title;
-			$new_item['type'] = $type;
-			$new_item['answers'] = $answers;
-
-			// Handle multiple choice questions:
-			if (strtolower($type) == 'choice' or strtolower($type) == 'choicemultiple')
-			{
-				$choiceInteraction = $item->parent('assessmentItem')->find('itemBody>choiceInteraction');
-				$shuffle = $choiceInteraction->attr('shuffle');
-				$maxChoices = $choiceInteraction->attr('maxChoices');
-				$prompt = $choiceInteraction->find('prompt')->text();
-				$choices = array();
-			
-				// First, get all answers and loop through them.
-				$simpleChoices = $choiceInteraction->parent('choiceInteraction')->find('simpleChoice');
-				foreach ($simpleChoices as $simpleChoice) {
-				
-					$text = $simpleChoice->text();
-					$value = $simpleChoice->attr('identifier');
-				
-					$choices[] = array(
-						'text' => $text,
-						'value' => $value,
-					);
-				}
-				// Store choices
-				$new_item['shuffle'] = $shuffle;
-				$new_item['maxChoices'] = $maxChoices;
-				$new_item['prompt'] = $prompt;
-				$new_item['choices'] = $choices;
-			}
-			// Store questions
-			$items[] = $new_item;
+			$answers[] = $value->text();
 		}
-		return $items;
+		$item['answers'] = $answers;
+// Handle multiple choice questions:
+		if (strtolower($item['type']) == 'choice' or strtolower($item['type']) == 'choicemultiple')
+		{
+			$choiceInteraction = $qp->parent('assessmentItem')->find('itemBody>choiceInteraction');
+			$shuffle = $choiceInteraction->attr('shuffle');
+			$maxChoices = $choiceInteraction->attr('maxChoices');
+			$prompt = $choiceInteraction->find('prompt')->text();
+			$choices = array();
+
+			// First, get all answers and loop through them.
+			$simpleChoices = $choiceInteraction->parent('choiceInteraction')->find('simpleChoice');
+			foreach ($simpleChoices as $simpleChoice) {
+
+				$text = $simpleChoice->text();
+				$value = $simpleChoice->attr('identifier');
+
+				$choices[] = array(
+				'text' => $text,
+				'value' => $value,
+				);
+			}
+			// Store choices
+			$item['shuffle'] = $shuffle;
+			$item['maxChoices'] = $maxChoices;
+			$item['prompt'] = $prompt;
+			$item['choices'] = $choices;
+		}
+		return $item;
 	}
 
 	/**

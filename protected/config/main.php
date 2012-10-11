@@ -30,6 +30,7 @@ return array(
 		'application.widgets.ZSignUp.*',
 		'application.widgets.ZLogInSignUpFlipper.*',
 		'application.widgets.ZLectureStack.*',
+		'application.widgets/ZAssessment.*',
 		'application.widgets/ZAssessmentItem.*',
 	),
 
