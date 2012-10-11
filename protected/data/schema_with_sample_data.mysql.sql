@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 27, 2012 at 02:36 AM
+-- Generation Time: Oct 11, 2012 at 06:04 PM
 -- Server version: 5.5.24
--- PHP Version: 5.3.10-1ubuntu3.2
+-- PHP Version: 5.3.10-1ubuntu3.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -106,22 +106,23 @@ CREATE TABLE IF NOT EXISTS `course` (
   `short_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `long_description` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `category_id` int(11) NOT NULL,
-  `thumbnail_url` varchar(255) COLLATE utf8_unicode_ci,
-  `intro_url` varchar(255) COLLATE utf8_unicode_ci,
+  `thumbnail_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `intro_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `course`
 --
 
-INSERT INTO `course` (`id`, `name`, `short_description`, `long_description`, `category_id`, `status`) VALUES
-(1, 'คอมพิวเตอร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคอมพิวเตอร์โอลิมปิก', 'เพื่อเป็นการเตรียมพร้อมสำหรับการแข่งขันคอมพิวเตอร์โอลิมปิก คอร์สนี้จะสอนให้คุณได้รู้ถึงโครงสร้างข้อมูลพื้นฐานจนไปถึงการวิเคราะห์และการออกแบบอัลกอริทึมที่จำเป็นสำหรับการแข่งขัน', 1, 1),
-(2, 'คณิตศาสตร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคณิตศาสตร์โอลิมปิก', '', 1, 1),
-(3, 'เตรียมพร้อมการสอน', 'คอร์สสำหรับการเตรียมตัวสำหรับการสอน', '', 2, 1),
-(4, 'เคมีโอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันเคมีโอลิมปิก', '', 1, 1),
-(5, 'จิตวิทยาในการสอน', 'คอร์สสำหรับการเรียนรู้จิตวิทยาในการสอน', '', 2, 1);
+INSERT INTO `course` (`id`, `name`, `short_description`, `long_description`, `category_id`, `thumbnail_url`, `intro_url`, `status`) VALUES
+(1, 'คอมพิวเตอร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคอมพิวเตอร์โอลิมปิก', 'เพื่อเป็นการเตรียมพร้อมสำหรับการแข่งขันคอมพิวเตอร์โอลิมปิก คอร์สนี้จะสอนให้คุณได้รู้ถึงโครงสร้างข้อมูลพื้นฐานจนไปถึงการวิเคราะห์และการออกแบบอัลกอริทึมที่จำเป็นสำหรับการแข่งขัน', 1, NULL, NULL, 1),
+(2, 'คณิตศาสตร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคณิตศาสตร์โอลิมปิก', '', 1, NULL, NULL, 1),
+(3, 'เตรียมพร้อมการสอน', 'คอร์สสำหรับการเตรียมตัวสำหรับการสอน', '', 2, NULL, NULL, 1),
+(4, 'เคมีโอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันเคมีโอลิมปิก', '', 1, NULL, NULL, 1),
+(5, 'จิตวิทยาในการสอน', 'คอร์สสำหรับการเรียนรู้จิตวิทยาในการสอน', '', 2, NULL, NULL, 1),
+(6, 'ทดสอบการใช้งาน', 'สำหรับทดสอบการใช้งาน', 'คอร์สนี้สร้างมาเพื่อทดสอบการใช้งานระบบ', 2, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -159,11 +160,11 @@ CREATE TABLE IF NOT EXISTS `instructor_course` (
   `course_id` int(11) NOT NULL,
   `instructor_career` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `instructor_description` text COLLATE utf8_unicode_ci NOT NULL,
-  `is_owner` boolean NOT NULL,
+  `is_owner` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `course_id` (`course_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `instructor_course`
@@ -175,7 +176,8 @@ INSERT INTO `instructor_course` (`id`, `user_id`, `course_id`, `instructor_caree
 (3, 2, 2, '', '', 1),
 (4, 2, 3, '', '', 1),
 (5, 1, 4, '', '', 1),
-(6, 3, 5, '', '', 1);
+(6, 3, 5, '', '', 1),
+(7, 2, 6, '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -234,6 +236,31 @@ CREATE TABLE IF NOT EXISTS `slide` (
   `lecture_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_assessmentitem`
+--
+
+CREATE TABLE IF NOT EXISTS `student_assessmentitem` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `lecture_id` int(11) NOT NULL,
+  `assessmentitem_id` int(11) NOT NULL,
+  `chosen_value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `student_assessmentitem`
+--
+
+INSERT INTO `student_assessmentitem` (`id`, `user_id`, `lecture_id`, `assessmentitem_id`, `chosen_value`) VALUES
+(1, 2, 5, 1, '2'),
+(2, 2, 5, 2, '1'),
+(3, 2, 5, 3, '3'),
+(4, 2, 5, 4, '1');
 
 -- --------------------------------------------------------
 
