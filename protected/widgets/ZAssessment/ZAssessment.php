@@ -4,7 +4,11 @@
  */
 class ZAssessment extends CWidget
 {
-	// $itemIds Array of assessment items 
+	public $headline;
+
+	public $description;
+
+	// $itemIds Array of assessment items (id, xmlPath)
 	public $items;
 
 
@@ -16,6 +20,8 @@ class ZAssessment extends CWidget
 		}
 
 		$this->render('ZAssessment', array(
+			'headline' => $this->headline,
+			'description' => $this->description,
 			'items' => $this->items,
 		));
 	}

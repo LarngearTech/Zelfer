@@ -101,6 +101,8 @@ $this->breadcrumbs = array(
 			'id' => 'problemset',
 		));
 			$this->widget('ZAssessment', array(
+				'headline' => 'Problem Set 1',
+				'description' => 'กรุณาเลือกคำตอบที่ดีที่สุด',
 				'items' => array(
 					array(
 						'id' => 'test-1',
