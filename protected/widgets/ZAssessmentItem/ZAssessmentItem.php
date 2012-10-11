@@ -28,10 +28,10 @@ class ZAssessmentItem extends CWidget
 	public function run()
 	{
 		$qp = new QtiProcessor();
-		$items = $qp->parseAssessmentItems($this->itemPath);
+		$item = $qp->parseAssessmentItem($this->itemPath);
 		$this->render('ZAssessmentItem', array(
 			'id' => $this->id,
-			'item' => $items[0],
+			'item' => $item,
 		));
 	}
 }

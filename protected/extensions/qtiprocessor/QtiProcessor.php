@@ -11,6 +11,51 @@ class QtiProcessor
 	public $XSI_SCHEMALOCATION = "http://www.imsglobal.org/xsd/imsqti_v2p1 http://www.imsglobal.org/xsd/imsqti_v2p1.xsd";
 
 	/**
+	 * Parse one AssessmentItem from QTI XML.
+	 */
+	function parseAssessmentItem($file)
+	{
+		$qp = qp($file, 'assessmentItem');
+		$item = array();
+		$item['title'] = $qp->attr('title');
+		$item['type'] = $qp->attr('identifier');
+		$answers = array();
+		$correctValues = $qp->find('responseDeclaration>correctResponse>value');
+		foreach ($correctValues as $value)
+		{
+			$answers[] = $value->text();
+		}
+		$item['answers'] = $answers;
+// Handle multiple choice questions:
+		if (strtolower($item['type']) == 'choice' or strtolower($item['type']) == 'choicemultiple')
+		{
+			$choiceInteraction = $qp->parent('assessmentItem')->find('itemBody>choiceInteraction');
+			$shuffle = $choiceInteraction->attr('shuffle');
+			$maxChoices = $choiceInteraction->attr('maxChoices');
+			$prompt = $choiceInteraction->find('prompt')->text();
+			$choices = array();
+
+			// First, get all answers and loop through them.
+			$simpleChoices = $choiceInteraction->parent('choiceInteraction')->find('simpleChoice');
+			foreach ($simpleChoices as $simpleChoice) {
+
+				$text = $simpleChoice->text();
+				$value = $simpleChoice->attr('identifier');
+
+				$choices[] = array(
+				'text' => $text,
+				'value' => $value,
+				);
+			}
+			// Store choices
+			$item['shuffle'] = $shuffle;
+			$item['maxChoices'] = $maxChoices;
+			$item['prompt'] = $prompt;
+			$item['choices'] = $choices;
+		}
+		return $item;
+	}
+	/**
 	 * Parse QTI file in XML format to an array of items
 	 */
 	function parseAssessmentItems($file)
