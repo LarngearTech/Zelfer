@@ -9,15 +9,6 @@ class CourseController extends Controller
 	public $layout='//layouts/column1';
 
 	/**
-	 * @var string location of thumbnail of this course.
-	 */
-	protected $_thumbnailUrl;
-	/**
-	 * @var string location of introduction of this course.
-	 */
-	protected $_introUrl;
-
-	/**
 	 * @return array action filters
 	 */
 	public function filters()
@@ -83,6 +74,9 @@ class CourseController extends Controller
 		));
 	}
 	
+	/*
+	 * Change lecture video
+	 */
 	public function actionChangeVideo($videoId)
 	{
 		$model = Course::model()->findByPk($videoId);
@@ -107,6 +101,7 @@ class CourseController extends Controller
 
 	/**
 	 * Change course's intro video
+	 * @param integer $courseId
 	 */
 	function actionChangeIntroVideo($courseId)
 	{
@@ -116,40 +111,42 @@ class CourseController extends Controller
 		{
 			Yii::import("application.widgets.EAjaxUpload.qqFileUploader");
  
-			$folder='course/intros/';
+			$folder=PHPHelper::getIntroVideoBasePath();
 			$sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
-			$allowedExtensions = array("avi", "wmv", "mp4");
+			$allowedExtensions = array("avi", "mpeg", "mov","mp4");
 			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
 			$result = $uploader->handleUpload($folder);
  
 			$fileSize=filesize($folder.$result['filename']);
 			$fileName=$result['filename'];
 
-			// Replace previous thumbnail with the current one
+			// Replace previous intro video with the current one
 			if (!empty($course->intro_url))
 			{
-				$introVideoPath = Yii::app()->basePath.'/../../'.$course->intro_url;
+				$introVideoPath = $folder.$course->intro_url;
 				if (file_exists($introVideoPath))
 				{
-					unlink($introVideoPath);
+					shell_exec('rm -rf '.$introVideoPath);
 				}
 			}
-			$newname = uniqid().'.'.PHPHelper::getFileExtension($fileName);
-			rename($folder.$fileName, $folder.$newname);
-			$course->intro_url = Yii::app()->baseUrl.'/'.$folder.basename($newname, '.mp4');
+			$newName = uniqid().'.'.PHPHelper::getFileExtension($fileName);
+			rename($folder.$fileName, $folder.$newName);
+			// Convert file to x264 using ffmpeg
+			$baseName = VideoUtil::encode($folder.$newName, $folder);
+				
+			$course->intro_url = $baseName;
 			if($course->save()){
 				$result['html'] = $this->widget('IntroVideoPlayer', 
 							array('course'=>$course),
-						true);
+							true);
 				$return = json_encode($result);
 				echo $return;
 			}
-			else
-			{
-				throw CException('Cannot not update database');
-			}
 		}
- 
+		else
+		{
+			throw CException('Cannot not update database');
+		}
 	}
 
 
