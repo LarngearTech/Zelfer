@@ -4,8 +4,9 @@
  */
 class ZAssessment extends CWidget
 {
-	//$items  Array of assessment items
+	// $itemIds Array of assessment items 
 	public $items;
+
 
 	public function run()
 	{
@@ -15,7 +16,7 @@ class ZAssessment extends CWidget
 		}
 
 		$this->render('ZAssessment', array(
-			'items' => $items,
+			'items' => $this->items,
 		));
 	}
 }
