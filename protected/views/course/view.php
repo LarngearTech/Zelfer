@@ -156,7 +156,8 @@ Yii::app()->clientScript->registerScriptFile(
 	<div id="course-instructors" class="span6">
 		<h1><?php echo Yii::t('site', 'Instructor');?></h1>
 		<?php
-			foreach ($model->courseInstructors as $instructorRecord)
+			$this->widget('InstructorList', array('instructorList'=>$model->instructors));
+			/*foreach ($model->courseInstructors as $instructorRecord)
 			{
 				$instructorModel = User::model();
 				$instructorModel->id = $instructorRecord['id'];
@@ -169,7 +170,7 @@ Yii::app()->clientScript->registerScriptFile(
 							<h4>'.$instructorRecord['instructor_career'].'</h4>								<p>'.$instructorRecord['instructor_description'].'</p>
 						</div>
 					</div><!-- end instructor -->';
-			}
+			}*/
 		?>
 	</div><!-- end course-instructors -->
 </div>

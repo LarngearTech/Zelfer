@@ -23,25 +23,45 @@ $this->menu = array(
 		<div class="btn-toolbar well">
 			<div class="btn-group">
 				<?php echo CHtml::link(
-					Yii::t('site', 'Delete Course'), array(
+					Yii::t('site', 'Delete Course'), 
+					array(
 						'course/delete',
 						'courseId' => $model->id,
 					),
 					array(
 						'class' => 'btn btn-danger',
+						'confirm' => 'Do you really want to delete this course, this cannot be undone',
 					)
 				);?>
 			</div><!-- end btn-group -->
 			<div class="btn-group">
-				<?php echo CHtml::link(
-					Yii::t('site', 'Publish Course'), array(
-						'course/publish',
-						'courseId' => $model->id,
-					),
-					array(
-						'class' => 'btn btn-success',
-					)
-				);?>
+				<?php 
+				// Not yet publish course
+				if ($model->status == 0){
+					echo CHtml::link(
+						Yii::t('site', 'Publish Course'), 
+						array(
+							'course/publish',
+							'courseId' => $model->id,
+						),
+						array(
+							'class' => 'btn btn-success',
+							'confirm' => 'Do you really want to publish this course',
+						)
+					);
+				}
+				else {
+					echo CHtml::link(
+						Yii::t('site', 'Unpublish Course'), array(
+							'course/unpublish',
+							'courseId' => $model->id,
+						),
+						array(
+							'class' => 'btn btn-warning',
+							'confirm' => 'Do you really want to unpublish this course',
+						)
+					);
+				}?>
 			</div><!-- end btn-group -->
 		</div><!-- end btn-toolbar-->
 		<div class="tabbable tabs-left">
@@ -51,31 +71,20 @@ $this->menu = array(
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="course_info">
-					<div class="well form"> 
 					<?php 
-					$this->renderPartial('_form', array(
-						'model'=>$model,
-						'categoryList'=>$categoryList,
-					)); 
+					$this->render('_updateCourseInfo',
+						array(
+							'model'=>$model,
+							'categoryList'=>$categoryList,
+						)
+					);
 					?>
-					</div>
-					<div class="well form">
-						<?php
-						$this->widget('CourseThumbnailUploader', array(
-							'course'=>$model,
-							'courseUrl'=>'#',
-						)); 
-						?>
-					</div>
-					<div class="well form">
-						<?php
-						$this->widget('IntroVideoUploader', array(
-							'course'=>$model,
-						));
-						?>
-					</div>
 				</div>
-				<div class="tab-pane" id="instructor_info">This is instructor info</div>
+				<div class="tab-pane" id="instructor_info">
+					<?php
+					$this->render('_updateInstructorInfo');
+					?>
+				</div>
 			<div>
 		</div>	
 	</div><!-- end wrapper -->

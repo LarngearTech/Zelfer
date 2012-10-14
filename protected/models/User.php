@@ -1,7 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "user".
+ * This is the mech ($model->courseInstructors as $instructorRecord)
+                        {
+                                $instructorModel = User::model();
+                                $instructorModel->id = $instructorRecord['id'];
+                                echo '<div class="instructor">
+                                                <div class="instructor-image">'.
+                                                        CHtml::image($instructorModel->profileImageUrl, 'Image of '.$instructorRecord['fullname']).'
+                                                </div>
+                                                <div class="instructor-detail">
+                                                        <h2>'.$instructorRecord['fullname'].'</h3>
+                                                        <h4>'.$instructorRecord['instructor_career'].'</h4>                                                             <p>'.$instructorRecord['instructor_description'].'</p>
+                                                </div>
+                                        </div><!-- end instructor -->';
+                        }
+del class for table "user".
  *
  * The followings are the available columns in table 'user':
  * @property integer $id
@@ -13,12 +27,9 @@
  */
 class User extends CActiveRecord
 {
-	const USER_RESOURCE_PREFIX = '/user/';
-	const DEFAULT_USER_PROFILE_URL = 'http://placehold.it/120x140';
+	const DEFAULT_PROFILE_IMAGE_URL = 'default.gif';
 
 	public $repeat_password;
-
-	protected $_profileImageUrl;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -145,6 +156,12 @@ class User extends CActiveRecord
 			$this->status = 1;
 		}
 
+
+		// Default profile image
+		if (empty($this->profile_image_url))
+		{
+			$this->profile_image_url = self::DEFAULT_PROFILE_IMAGE_URL;
+		}
 		return parent::beforeSave();
 	}
 
@@ -175,22 +192,4 @@ class User extends CActiveRecord
                 return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
         }
 
-	/**
-	 * Get URL of a user.
-	 * Return template image URL if image URL is not found
-	 * @return string profile image URL
-	 */
-	public function getProfileImageUrl()
-	{
-		$path = $this->getResourcePath();
-		if (file_exists("$path/profile.jpg"))
-		{
-			$this->_profileImageUrl = Yii::app()->baseUrl.self::USER_RESOURCE_PREFIX.$this->id."/profile.jpg";
-			return $this->_profileImageUrl;
-		}
-		else
-		{
-			return self::DEFAULT_USER_PROFILE_URL;
-		}
-	}
 }

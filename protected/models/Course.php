@@ -157,6 +157,28 @@ class Course extends CActiveRecord
 
 	
 	/**
+	 * Publish course.
+	 * @return string error message if publish failed.
+	 */
+	public function publish()
+	{
+		$this->status = 1;
+		$this->save();
+	}
+
+
+	/**
+	 * Unpublish course
+	 * @return string error message if unpublish failed.
+	 */
+	public function unpublish()
+	{
+		$this->status = 0;
+		$this->save();
+	}
+
+
+	/**
 	 * Return All record
 	 * @return array 
 	 */

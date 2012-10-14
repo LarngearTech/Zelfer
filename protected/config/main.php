@@ -25,6 +25,7 @@ return array(
 		'application.widgets.AddCourseThumbnail.*',
 		'application.widgets.CourseThumbnail.*',
 		'application.widgets.IntroVideo.*',
+		'application.widgets.InstructorList.*',
 		'application.widgets.EAjaxUpload.*',
 		'application.widgets.ZLogIn.*',
 		'application.widgets.ZSignUp.*',

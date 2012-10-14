@@ -31,11 +31,11 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions' => array('admin','delete'),
+				'actions' => array('admin'),
 				'users' => array('admin'),
 			),
 			array('deny',  // deny all users
@@ -111,7 +111,7 @@ class CourseController extends Controller
 		{
 			Yii::import("application.widgets.EAjaxUpload.qqFileUploader");
  
-			$folder=PHPHelper::getIntroVideoBasePath();
+			$folder=ResourcePath::getIntroVideoBasePath();
 			$sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
 			$allowedExtensions = array("avi", "mpeg", "mov","mp4");
 			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
@@ -161,7 +161,7 @@ class CourseController extends Controller
 		{
 			Yii::import("application.widgets.EAjaxUpload.qqFileUploader");
  
-			$folder='course/thumbnails/';
+			$folder=ResourcePath::getCourseThumbnailBasePath();
 			$sizeLimit = 256 * 1024;// maximum file size in bytes
 			$allowedExtensions = array("jpg", "jpeg", "bmp", "gif", "png");
 			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
@@ -173,7 +173,7 @@ class CourseController extends Controller
 			// Replace previous thumbnail with the current one
 			if (!empty($course->thumbnail_url))
 			{
-				$thumbnailPath = Yii::app()->basePath.'/../../'.$course->thumbnail_url;
+				$thumbnailPath = $folder.PHPHelper::getFileFullName($course->thumbnail_url);
 				if (file_exists($thumbnailPath))
 				{
 					unlink($thumbnailPath);
@@ -181,7 +181,7 @@ class CourseController extends Controller
 			}
 			$newname = uniqid().'.'.PHPHelper::getFileExtension($fileName);
 			rename($folder.$fileName, $folder.$newname);
-			$course->thumbnail_url = Yii::app()->baseUrl.'/'.$folder.$newname;
+			$course->thumbnail_url = ResourcePath::getCourseThumbnailBaseUrl().$newname;
 			if($course->save()){
 				$result['html'] = $this->widget('CourseThumbnail', 
 							array('course'=>$course),
@@ -197,6 +197,31 @@ class CourseController extends Controller
  
 	}
 
+
+	/**
+	 * Publish course.
+	 */
+	public function actionPublish($courseId)
+	{
+		$model = $this->loadModel($courseId);
+		if ($model){
+			$model->publish();
+			$this->redirect(array('site/index'));
+		}
+	}
+
+
+	/**
+	 * Unpublish course.
+	 */
+	public function actionUnpublish($courseId)
+	{
+		$model = $this->loadModel($courseId);
+		if ($model){
+			$model->unpublish();
+			$this->redirect(array('site/index'));
+		}
+	}
 
 	/**
 	 * @return list of pair of $user->id, $user->fullname for CJuiAutoComplete.
@@ -341,19 +366,10 @@ class CourseController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete($courseId)
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		$this->loadModel($courseId)->delete();
+		$this->redirect(array('site/index'));
 	}
 
 	/**

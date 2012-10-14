@@ -6,7 +6,6 @@
 	'htmlOptions' => array('enctype' => 'multipart/form-data',
 					'onsubmit'=>'return submitForm();',)
 )); ?>
-
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="input-row">
