@@ -101,6 +101,8 @@ $this->breadcrumbs = array(
 			'id' => 'problemset',
 		));
 			$this->widget('ZAssessment', array(
+				'lectureId' => 5,
+				'userId' => Yii::app()->user->id,
 				'headline' => 'Problem Set 1',
 				'description' => 'กรุณาเลือกคำตอบที่ดีที่สุด',
 				'items' => array(
