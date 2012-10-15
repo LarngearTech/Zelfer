@@ -72,7 +72,7 @@ $this->menu = array(
 			<div class="tab-content">
 				<div class="tab-pane active" id="course_info">
 					<?php 
-					$this->render('_updateCourseInfo',
+					$this->renderPartial('_updateCourseInfo',
 						array(
 							'model'=>$model,
 							'categoryList'=>$categoryList,
@@ -82,7 +82,11 @@ $this->menu = array(
 				</div>
 				<div class="tab-pane" id="instructor_info">
 					<?php
-					$this->render('_updateInstructorInfo');
+					$this->renderPartial('_updateInstructorInfo',
+						array(
+							'model'=>$model,
+						)
+					);
 					?>
 				</div>
 			<div>

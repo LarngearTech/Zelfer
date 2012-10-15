@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -239,8 +239,8 @@ class CourseController extends Controller
 			foreach ($data as $instructor)
 			{
 				$instructorList[] = array('id'=>$instructor->id,
-										'label'=>$instructor->fullname, 
-										'value'=>$instructor->fullname);
+							'label'=>$instructor->fullname, 
+							'value'=>$instructor->fullname);
 			}
 			echo CJSON::encode($instructorList);
 		}
@@ -273,30 +273,6 @@ class CourseController extends Controller
 				$transaction->rollback();
 				throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 			}
-			/*if($model->save())
-			{
-				$thumbnails = CUploadedFile::getInstancesByName('thumbnails');
-				
-				// Each course can has one and only one thumbnail and intro video.
-				// We use CMultipleFileUploader only to allow user to remove incorrect file before submitting.
-				if (isset($thumbnails) && count($thumbnails)===1)
-				{
-					foreach ($thumbnails as $key=>$thumbnail)
-					{
-						$this->saveThumbnail($thumbnail, $model->id);
-					}
-				}
-
-				$intros = CUploadedFile::getInstancesByName('introductions');
-				if (isset($intros) && count($intros)===1)
-				{
-					foreach ($intros as $key=>$intro)
-					{
-						$this->saveIntro($intro, $model->id);
-					}
-				}
-				$this->redirect(array('update','courseId'=>$model->id));
-			}*/
 		}
 
 		$this->render('create',array(
@@ -370,6 +346,28 @@ class CourseController extends Controller
 	{
 		$this->loadModel($courseId)->delete();
 		$this->redirect(array('site/index'));
+	}
+
+
+	/**
+	 * Add instructor specified by instructorId to list of instructor
+	 * specified by courseId
+	 */
+	public function actionAddInstructor()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$instructorId = $_POST['instructorId'];
+			$courseId = $_POST['courseId'];
+
+			// Insert new record to instructor_course table
+			$sqlStatement = 'INSERT INTO instructor_course(id, user_id, course_id, is_owner) VALUES(NULL, '.$instructorId.', '.$courseId.', 0)';				
+			$command=Yii::app()->db->createCommand($sqlStatement);
+			$command->execute();
+		}
+		$course = Course::model()->findByPk($courseId);
+		return $this->widget('InstructorList', array('instructorList'=>$course->instructors));
+
 	}
 
 	/**

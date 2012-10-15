@@ -157,20 +157,6 @@ Yii::app()->clientScript->registerScriptFile(
 		<h1><?php echo Yii::t('site', 'Instructor');?></h1>
 		<?php
 			$this->widget('InstructorList', array('instructorList'=>$model->instructors));
-			/*foreach ($model->courseInstructors as $instructorRecord)
-			{
-				$instructorModel = User::model();
-				$instructorModel->id = $instructorRecord['id'];
-				echo '<div class="instructor">
-						<div class="instructor-image">'.
-							CHtml::image($instructorModel->profileImageUrl, 'Image of '.$instructorRecord['fullname']).'
-						</div>
-						<div class="instructor-detail">
-							<h2>'.$instructorRecord['fullname'].'</h3>
-							<h4>'.$instructorRecord['instructor_career'].'</h4>								<p>'.$instructorRecord['instructor_description'].'</p>
-						</div>
-					</div><!-- end instructor -->';
-			}*/
 		?>
 	</div><!-- end course-instructors -->
 </div>
