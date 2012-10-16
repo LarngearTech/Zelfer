@@ -33,7 +33,7 @@ class ZAssessment extends CWidget
 			"$(function () {
 				$('.assessment-item').hide();
 				$('#assessment-test-1').show();
-				$('#paginator').jPaginator({
+				$('#paginator-control').jPaginator({
 					nbPages: 4,
 					selectedPage: 1,
 					overBtnLeft: '#paginator_o_left',
