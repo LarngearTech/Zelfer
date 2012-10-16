@@ -15,6 +15,42 @@ class ZAssessment extends CWidget
 	// $itemIds Array of assessment items (id, xmlPath)
 	public $items;
 
+	public function init()
+	{
+		// Get assets dir
+		$baseDir = dirname(__FILE__);
+		$assets = Yii::app()->getAssetManager()->publish($baseDir.DIRECTORY_SEPARATOR.'assets', false, -1, YII_DEBUG);
+
+		// Publish required assets
+		$cs = Yii::app()->getClientScript();
+		$cs->registerCoreScript('jquery');
+		$cs->registerCoreScript('jquery.ui');
+		$cs->registerCssFile($assets.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR.'style.css');
+		$cs->registerCssFile($assets.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR.'jPaginator.css');
+		$cs->registerScriptFile($assets.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'jPaginator.min.js');
+		$cs->registerScript(
+			'paginator',
+			"$(function () {
+				$('.assessment-item').hide();
+				$('#assessment-test-1').show();
+				$('#paginator').jPaginator({
+					nbPages: 4,
+					selectedPage: 1,
+					overBtnLeft: '#paginator_o_left',
+					overBtnRight: '#paginator_o_right',
+					maxBtnLeft: '#paginator_m_left',
+					maxBtnRight: '#paginator_m_right',
+					minSlidersForSlider: 5,
+					onPageClicked: function(a, num) {
+						$('.assessment-item').hide();
+						$('#assessment-test-' + num).show();
+					},
+				});
+			});",
+			CClientScript::POS_END
+		);
+	}
+
 	public function run()
 	{
 		// user submits data

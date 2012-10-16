@@ -1,4 +1,4 @@
-<div class="assessment-item">
+<div class="assessment-item" id="assessment-<?php echo $id;?>">
 	<h4><?php echo $item['title']; ?></h4>
 	<div class="assessment-prompt"><?php echo $item['prompt']; ?></div>
 	<div class="assessment-choices">
