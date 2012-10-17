@@ -148,24 +148,6 @@ class User extends CActiveRecord
 		return parent::beforeSave();
 	}
 
-	/**
-	 * @param integer $courseId courseId that will be added to student_course table
-	 */
-	public function addTakeCourse($courseId)
-	{
-	}
-
-	/**
-	 * @param integer $courseId courseId that will be added to instructor_course table
-	 * @param boolean $isOwner wheter this user is the owner of the course specified by $courseId
-	 */
-	public function addTeachCourse($courseId, $isOwner)
-	{
-		$sql = 'INSERT INTO instructor_course (user_id, course_id, is_owner)
-			VALUES('.$this->id.','.$courseId.','. $isOwner.')';
-		Yii::app()->db->createCommand($sql)->execute();
-	}
-	
 	 /**
          * Return path to resource of user
          * @return string resource path
@@ -174,5 +156,24 @@ class User extends CActiveRecord
         {
                 return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
         }
+
+
+	public function addTeachCourse($courseId)
+	{
+		$sql =  'INSERT INTO instructor_course(user_id, course_id) 
+			 VALUES('.$this->id.','.$courseId.')';
+		$command = Yii::app()->db->createCommand($sql);
+		$command->execute();
+	}
+
+
+	public function removeTeachCourse($courseId)
+	{
+		$sql = 'DELETE 
+			FROM instructor_course 
+			WHERE course_id='.$courseId.' AND user_id= '.$this->id;
+		$command = Yii::app()->db->createCommand($sql);
+		$command->execute(); 
+	}
 
 }

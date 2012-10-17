@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `course` (
   `category_id` int(11) NOT NULL,
   `thumbnail_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `intro_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `owner_id` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
@@ -116,13 +117,13 @@ CREATE TABLE IF NOT EXISTS `course` (
 -- Dumping data for table `course`
 --
 
-INSERT INTO `course` (`id`, `name`, `short_description`, `long_description`, `category_id`, `thumbnail_url`, `intro_url`, `status`) VALUES
-(1, 'คอมพิวเตอร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคอมพิวเตอร์โอลิมปิก', 'เพื่อเป็นการเตรียมพร้อมสำหรับการแข่งขันคอมพิวเตอร์โอลิมปิก คอร์สนี้จะสอนให้คุณได้รู้ถึงโครงสร้างข้อมูลพื้นฐานจนไปถึงการวิเคราะห์และการออกแบบอัลกอริทึมที่จำเป็นสำหรับการแข่งขัน', 1, NULL, NULL, 1),
-(2, 'คณิตศาสตร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคณิตศาสตร์โอลิมปิก', '', 1, NULL, NULL, 1),
-(3, 'เตรียมพร้อมการสอน', 'คอร์สสำหรับการเตรียมตัวสำหรับการสอน', '', 2, NULL, NULL, 1),
-(4, 'เคมีโอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันเคมีโอลิมปิก', '', 1, NULL, NULL, 1),
-(5, 'จิตวิทยาในการสอน', 'คอร์สสำหรับการเรียนรู้จิตวิทยาในการสอน', '', 2, NULL, NULL, 1),
-(6, 'ทดสอบการใช้งาน', 'สำหรับทดสอบการใช้งาน', 'คอร์สนี้สร้างมาเพื่อทดสอบการใช้งานระบบ', 2, NULL, NULL, 0);
+INSERT INTO `course` (`id`, `name`, `short_description`, `long_description`, `category_id`, `thumbnail_url`, `intro_url`, `owner_id`, `status`) VALUES
+(1, 'คอมพิวเตอร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคอมพิวเตอร์โอลิมปิก', 'เพื่อเป็นการเตรียมพร้อมสำหรับการแข่งขันคอมพิวเตอร์โอลิมปิก คอร์สนี้จะสอนให้คุณได้รู้ถึงโครงสร้างข้อมูลพื้นฐานจนไปถึงการวิเคราะห์และการออกแบบอัลกอริทึมที่จำเป็นสำหรับการแข่งขัน', 1, NULL, NULL, 1, 1),
+(2, 'คณิตศาสตร์โอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันคณิตศาสตร์โอลิมปิก', '', 1, NULL, NULL, 2, 1),
+(3, 'เตรียมพร้อมการสอน', 'คอร์สสำหรับการเตรียมตัวสำหรับการสอน', '', 2, NULL, NULL, 2, 1),
+(4, 'เคมีโอลิมปิก', 'คอร์สสำหรับการเตรียมตัวแข่งขันเคมีโอลิมปิก', '', 1, NULL, NULL, 1, 1),
+(5, 'จิตวิทยาในการสอน', 'คอร์สสำหรับการเรียนรู้จิตวิทยาในการสอน', '', 2, NULL, NULL, 2, 1),
+(6, 'ทดสอบการใช้งาน', 'สำหรับทดสอบการใช้งาน', 'คอร์สนี้สร้างมาเพื่อทดสอบการใช้งานระบบ', 2, NULL, NULL, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -160,7 +161,6 @@ CREATE TABLE IF NOT EXISTS `instructor_course` (
   `course_id` int(11) NOT NULL,
   `instructor_career` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `instructor_description` text COLLATE utf8_unicode_ci NOT NULL,
-  `is_owner` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `course_id` (`course_id`),
   KEY `user_id` (`user_id`)
@@ -170,14 +170,14 @@ CREATE TABLE IF NOT EXISTS `instructor_course` (
 -- Dumping data for table `instructor_course`
 --
 
-INSERT INTO `instructor_course` (`id`, `user_id`, `course_id`, `instructor_career`, `instructor_description`, `is_owner`) VALUES
-(1, 1, 1, 'Operations Manager at Larngear Technology', 'Supasate Choochaisri is a co-founder and managing director of Larngear Technology Co., Ltd. His company has\r\nwon several regional and international awards. He receives B. Eng., M. Eng., and Ph.D. in Computer Engineering, from Chulalongkorn University. \r\n\r\nCurrently, he has received a grant CP CU\r\nAcademic Excellence Scholarship. His research interests include various topics in augmented reality and ubiquitous computing with emphasis\r\non wireless sensor network, mobile computing, and distributed algorithms.\r\n', 1),
-(2, 2, 1, 'Tester Account at Larngear Technology', 'This is only an account for system testing.', 0),
-(3, 2, 2, '', '', 1),
-(4, 2, 3, '', '', 1),
-(5, 1, 4, '', '', 1),
-(6, 3, 5, '', '', 1),
-(7, 2, 6, '', '', 1);
+INSERT INTO `instructor_course` (`id`, `user_id`, `course_id`, `instructor_career`, `instructor_description`) VALUES
+(1, 1, 1, 'Operations Manager at Larngear Technology', 'Supasate Choochaisri is a co-founder and managing director of Larngear Technology Co., Ltd. His company has\r\nwon several regional and international awards. He receives B. Eng., M. Eng., and Ph.D. in Computer Engineering, from Chulalongkorn University. \r\n\r\nCurrently, he has received a grant CP CU\r\nAcademic Excellence Scholarship. His research interests include various topics in augmented reality and ubiquitous computing with emphasis\r\non wireless sensor network, mobile computing, and distributed algorithms.\r\n'),
+(2, 2, 1, 'Tester Account at Larngear Technology', 'This is only an account for system testing.'),
+(3, 2, 2, '', ''),
+(4, 2, 3, '', ''),
+(5, 1, 4, '', ''),
+(6, 3, 5, '', ''),
+(7, 2, 6, '', '');
 
 -- --------------------------------------------------------
 

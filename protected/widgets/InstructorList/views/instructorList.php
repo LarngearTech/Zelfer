@@ -1,6 +1,6 @@
 <?php
 foreach ($instructorList as $instructor)
 {
-	$this->widget($this->listItemView, array('instructor'=>$instructor));
+	$this->widget($this->itemWidget, array('instructor'=>$instructor));
 }
 ?>

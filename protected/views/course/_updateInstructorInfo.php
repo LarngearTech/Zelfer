@@ -1,9 +1,3 @@
-<!--form class='form-search'>
-	<div class='input-append'>
-		<input type='text' class='span2 search-query'/>
-		<button type='submit' class='btn'>Search</button>
-	</div>
-</form-->
 <div class='row'>
 	<div class='span6 input-append'>
 		<?php 
@@ -17,9 +11,6 @@
 					$("#instructorId").val(ui.item["id"]);
 				}'
 			),
-			'htmlOptions'=>array(
-				'id'=>'autocomplete_box',
-			)
 		));
 		echo CHtml::hiddenField('instructorId', 
 				'', 
@@ -34,10 +25,9 @@
 				),
 				'type'=>'POST',
 				'dataType'=>'html',
-				'update'=>'.instructor-list-container',
+				'update'=>'#instructor-list-container',
 			),
 			array(
-				'id'=>'autocomplete_btn',
 				'class'=>'btn'
 			)
 		);
@@ -46,9 +36,17 @@
 </div>
 
 <div class='row'>
-	<div class='span6'>
-		<div class='instructor-list-container'>
-			<?php $this->widget('InstructorList', array('instructorList'=>$model->instructors)); ?>
+	<div class='span9'>
+		<div id='instructor-list-container'>
+			<?php 
+			$this->widget('EditableInstructorList', 
+				array(
+				'course'=>$model,
+				'deleteInstructorHandler'=>$this->createUrl('course/deleteInstructor'),
+				'update'=>'#instructor-list-container',
+				'itemWidget'=>'EditableInstructorListItem'
+			)); 
+			?>
 		</div>
 	</div>
 </div>

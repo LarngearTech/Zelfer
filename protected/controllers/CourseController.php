@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -262,9 +262,10 @@ class CourseController extends Controller
 			$model->attributes=$_POST['Course'];
 			$transaction = Yii::app()->db->beginTransaction();
 			try {
+				$model->owner_id=Yii::app()->user->id;
 				$model->save();
 				$user = User::model()->findByPk(Yii::app()->user->id);
-				$user->addTeachCourse($model->id, true);
+				$user->addTeachCourse($model->id);
 				$transaction->commit();
 
 				$this->redirect(array('update','courseId'=>$model->id));
@@ -355,19 +356,68 @@ class CourseController extends Controller
 	 */
 	public function actionAddInstructor()
 	{
+		$courseId = $_POST['courseId'];
 		if(Yii::app()->request->isAjaxRequest)
 		{
 			$instructorId = $_POST['instructorId'];
-			$courseId = $_POST['courseId'];
 
-			// Insert new record to instructor_course table
-			$sqlStatement = 'INSERT INTO instructor_course(id, user_id, course_id, is_owner) VALUES(NULL, '.$instructorId.', '.$courseId.', 0)';				
-			$command=Yii::app()->db->createCommand($sqlStatement);
-			$command->execute();
+			// Check that instructorId is not existed for courseId
+			$sqlStatement = 'SELECT count(*) 
+					 FROM instructor_course 
+					 WHERE course_id='.$courseId.' AND user_id='.$instructorId;
+			$rows = Yii::app()->db->createCommand($sqlStatement)->queryAll();
+			if ($rows[0]['count(*)'] == 0)
+			{
+				// Insert new record to instructor_course table
+				$instructor = new User();
+				$instructor->id = $instructorId;
+				$instructor->addTeachCourse($courseId);
+			}
 		}
 		$course = Course::model()->findByPk($courseId);
-		return $this->widget('InstructorList', array('instructorList'=>$course->instructors));
+		$this->widget('EditableInstructorList', 
+			array(
+			'course'=>$course,
+			'deleteInstructorHandler'=>$this->createUrl('course/deleteInstructor'),
+			'update'=>'#instructor-list-container',
+		));
+	}
 
+
+	/**
+	 * Delete instructor specified by instructorId from course specified by courseId
+	 */
+	public function actionDeleteInstructor()
+	{
+		$courseId = $_POST['courseId'];
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$instructorId = $_POST['instructorId'];
+			$instructor = new User();
+			$instructor->id = $instructorId;
+			$instructor->removeTeachCourse($courseId);
+		}
+		$course = Course::model()->findByPk($courseId);
+		$this->widget('EditableInstructorList',
+			array(
+			'course'=>$course,
+			'deleteInstructorHandler'=>$this->createUrl('course/deleteInstructor'),
+			'update'=>'#instructor-list-container',
+		));
+	}
+
+
+	public function actionAddLecture()
+	{
+	}
+
+	public function actionAddChapter()
+	{
+	}
+
+	public function actionChangeContentOrder()
+	{
+		print_r($_POST);
 	}
 
 	/**

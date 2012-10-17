@@ -1,19 +1,19 @@
 <?php
 class InstructorList extends CWidget{
 	public $instructorList;
-	public $listItemView;
+	public $itemWidget;
 
 	function run()
 	{
-		if (empty($listItemView))
+		if (empty($this->itemWidget))
 		{
-			$this->listItemView = 'InstructorListItem';
+			$this->itemWidget = 'InstructorListItem';
 		}
 
 		$this->render('instructorList', 
 			array(
 			'instructorList' => $this->instructorList,
-			'listItemView' => $this->listItemView,
+			'itemWidget' => $this->itemWidget,
 			)
 		);
 	}

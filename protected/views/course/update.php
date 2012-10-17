@@ -1,17 +1,3 @@
-<?php
-$this->breadcrumbs = array(
-	Yii::t('site', 'Courses') => array('index'),
-	$model->name => array('view','id' => $model->id),
-	Yii::t('site', 'Edit'),
-);
-
-$this->menu = array(
-	array('label' => 'List Course', 'url' => array('index')),
-	array('label' => 'Create Course', 'url' => array('create')),
-	array('label' => 'View Course', 'url' => array('view', 'id' => $model->id)),
-	array('label' => 'Manage Course', 'url' => array('admin')),
-);
-?>
 <?php 
 	Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/bootstrap.min.js');
 ?>
@@ -68,6 +54,7 @@ $this->menu = array(
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#course_info" data-toggle="tab">Course Info</a><li>
 				<li><a href="#instructor_info" data-toggle="tab">Instructor Info</a><li>
+				<li><a href="#course_content" data-toggle="tab">Course Content</a><li>
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="course_info">
@@ -83,6 +70,15 @@ $this->menu = array(
 				<div class="tab-pane" id="instructor_info">
 					<?php
 					$this->renderPartial('_updateInstructorInfo',
+						array(
+							'model'=>$model,
+						)
+					);
+					?>
+				</div>
+				<div class="tab-pane" id="course_content">
+					<?php
+					$this->renderPartial('_updateCourseContent',
 						array(
 							'model'=>$model,
 						)
