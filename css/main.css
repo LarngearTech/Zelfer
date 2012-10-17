@@ -54,14 +54,14 @@ body .modal
 
 .navbar-inner
 {
-	min-height: 40px;
+	min-height: 50px;
 	font-family: RSURegular, Arial, Helvetica, sans-serif;
 	font-size: 14pt;
 }
 
 .navbar-inner li
 {
-	line-height: 20px;
+	line-height: 30px;
 }
 
 .navbar .nav .dropdown-toggle .caret
