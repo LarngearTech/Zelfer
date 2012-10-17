@@ -10,12 +10,16 @@
 )); ?>
 
     <div class="input-row">
-        <?php echo $form->textField($loginFormModel,'email', array('placeholder' => Yii::t('site', 'Email'))); ?>
+        <?php echo $form->textField($loginFormModel,'email', array(
+			'placeholder' => Yii::t('site', 'Email'),
+		)); ?>
         <?php echo $form->error($loginFormModel,'email'); ?>
     </div>
 
     <div class="input-row">
-        <?php echo $form->passwordField($loginFormModel,'password', array('placeholder' => Yii::t('site', 'Password'))); ?>
+        <?php echo $form->passwordField($loginFormModel,'password', array(
+			'placeholder' => Yii::t('site', 'Password'),
+		)); ?>
         <?php echo $form->error($loginFormModel,'password'); ?>
     </div>
     <div class="input-row rememberMe">

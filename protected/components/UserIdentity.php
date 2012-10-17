@@ -31,7 +31,6 @@ class UserIdentity extends CUserIdentity
 		{
 			$this->errorCode = self::ERROR_USERNAME_INVALID;
 		}
-		//else if(!$user->validatePassword($this->password))
 		else if (!$ph->CheckPassword($this->password, $record->password))
 		{
 			$this->errorCode = self::ERROR_PASSWORD_INVALID;

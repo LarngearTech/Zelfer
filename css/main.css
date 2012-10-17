@@ -52,6 +52,20 @@ body .modal
 	border-top: 3px solid #C9E0ED;
 }
 
+.header-section
+{
+    background: url("../images/body_bg.png") repeat fixed 0% 0% rgb(201, 204, 208);
+    border-bottom: 1px solid;
+    box-shadow: 0px 0px 30px black;
+
+}
+
+.header-wrapper
+{
+	margin-top: 50px;
+	margin-bottom: 60px;
+}
+
 #sidebar
 {
 	padding: 20px 20px 20px 0;
@@ -150,49 +164,6 @@ div.search-form
 	background: #eee;
 }
 
-.portlet
-{
-
-}
-
-.portlet-decoration
-{
-	padding: 3px 8px;
-	background: #B7D6E7;
-	border-left: 5px solid #6FACCF;
-}
-
-.portlet-title
-{
-	font-size: 12px;
-	font-weight: bold;
-	padding: 0;
-	margin: 0;
-	color: #298dcd;
-}
-
-.portlet-content
-{
-	font-size:0.9em;
-	margin: 0 0 15px 0;
-	padding: 5px 8px;
-	background:#EFFDFF;
-}
-
-.portlet-content ul
-{
-	list-style-image:none;
-	list-style-position:outside;
-	list-style-type:none;
-	margin: 0;
-	padding: 0;
-}
-
-.portlet-content li
-{
-	padding: 2px 0 4px 0px;
-}
-
 .operations
 {
 	list-style-type: none;
@@ -228,6 +199,49 @@ div.search-form
 .downloadlink a
 {
 	padding: 0px 20px 0px 20px;
+}
+
+.rounded-corners
+{
+	-moz-border-radius: 10px;
+	-webkit-border-radious: 10px;
+	-khtml-border-radious: 10px;
+	behavior: url(border-radious.htc);
+	border-radius: 10px;
+}
+
+.login-signup-wrapper
+{
+	padding: 20px;
+	border: solid 2px gray;
+	background-color: white;
+}
+
+.login-signup-wrapper h1
+{
+	margin: 0 0 10px 0;
+}
+
+.login-signup-wrapper input
+{
+	padding-left: 0;
+	padding-right: 0;
+	width: 100%;
+}
+
+#login-form .buttons
+{
+	margin-top: 18px;
+}
+
+.course-list-section
+{
+	margin-top: 60px;
+}
+
+.course-category
+{
+	margin-bottom: 40px;
 }
 
 #course-header 
