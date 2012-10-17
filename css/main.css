@@ -52,6 +52,14 @@ body .modal
 	border-top: 3px solid #C9E0ED;
 }
 
+.header-section
+{
+    background: url("../images/body_bg.png") repeat fixed 0% 0% rgb(201, 204, 208);
+    border-bottom: 1px solid;
+    box-shadow: 0px 0px 30px black;
+
+}
+
 #sidebar
 {
 	padding: 20px 20px 20px 0;
@@ -150,27 +158,6 @@ div.search-form
 	background: #eee;
 }
 
-.portlet
-{
-
-}
-
-.portlet-decoration
-{
-	padding: 3px 8px;
-	background: #B7D6E7;
-	border-left: 5px solid #6FACCF;
-}
-
-.portlet-title
-{
-	font-size: 12px;
-	font-weight: bold;
-	padding: 0;
-	margin: 0;
-	color: #298dcd;
-}
-
 .operations
 {
 	list-style-type: none;
@@ -208,7 +195,7 @@ div.search-form
 	padding: 0px 20px 0px 20px;
 }
 
-.course-list
+.course-list-section
 {
 	margin-top: 40px;
 }
