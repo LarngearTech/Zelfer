@@ -52,9 +52,26 @@ body .modal
 	border-top: 3px solid #C9E0ED;
 }
 
+.navbar-inner
+{
+	min-height: 40px;
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+}
+
+.navbar-inner li
+{
+	line-height: 20px;
+}
+
+.navbar .nav .dropdown-toggle .caret
+{
+	margin-top: 10px;
+}
+
 .header-section
 {
-    background: url("../images/education-1.jpg") repeat fixed 0% 0% rgb(201, 204, 208);
+    background: url("../images/education-1.jpg") rgb(201, 204, 208);
     border-bottom: 1px solid;
     box-shadow: 0px 0px 30px black;
 
@@ -236,7 +253,7 @@ div.search-form
 
 .course-list-section
 {
-	margin-top: 60px;
+	margin-top: 80px;
 }
 
 .course-category
