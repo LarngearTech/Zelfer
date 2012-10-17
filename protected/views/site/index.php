@@ -5,12 +5,14 @@
 		<div class="row">
 			<div class="header-wrapper span12">
 				<div class="row">
-			<div class="span9">
-				<img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" />
-			</div><!-- /span9 -->
-			<div class="span3">
-				<?php $this->widget('ZLogInSignUpFlipper');?>
-			</div><!-- /span3 -->
+					<div class="span9">
+						<img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" />
+					</div><!-- /span9 -->
+					<div class="span3">
+						<?php $this->widget('ZLogInSignUpFlipper', array(
+							'returnUrl' => Yii::app()->request->requestUri,
+						));?>
+					</div><!-- /span3 -->
 				</div><!-- /row -->
 			</div><!-- /header-wrapper -->
 		</div><!-- /row -->
