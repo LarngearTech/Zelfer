@@ -3,11 +3,11 @@ class ResourcePath
 {
 	public static function getCourseThumbnailBasePath()
 	{
-		return Yii::app()->basePath.'/../course/thumbnails';
+		return Yii::app()->basePath.'/../course/thumbnails/';
 	}
 	public static function getCourseThumbnailBaseUrl()
 	{
-		return Yii::app()->baseUrl.'/course/thumbnails';
+		return Yii::app()->baseUrl.'/course/thumbnails/';
 	}
 	public static function getIntroVideoBasePath()
 	{

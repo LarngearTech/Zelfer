@@ -5,6 +5,7 @@
 	<meta name="language" content="en" />
 
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.min.css'); ?>
+	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap-responsive.min.css'); ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main.css') ?>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
