@@ -201,6 +201,39 @@ div.search-form
 	padding: 0px 20px 0px 20px;
 }
 
+.rounded-corners
+{
+	-moz-border-radius: 10px;
+	-webkit-border-radious: 10px;
+	-khtml-border-radious: 10px;
+	behavior: url(border-radious.htc);
+	border-radius: 10px;
+}
+
+.login-signup-wrapper
+{
+	padding: 20px;
+	border: solid 2px gray;
+	background-color: white;
+}
+
+.login-signup-wrapper h1
+{
+	margin: 0 0 10px 0;
+}
+
+.login-signup-wrapper input
+{
+	padding-left: 0;
+	padding-right: 0;
+	width: 100%;
+}
+
+#login-form .buttons
+{
+	margin-top: 18px;
+}
+
 .course-list-section
 {
 	margin-top: 60px;
