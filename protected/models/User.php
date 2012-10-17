@@ -145,13 +145,13 @@ class User extends CActiveRecord
 	}
 
 	 /**
-         * Return path to resource of user
-         * @return string resource path
-         */
-        public function getResourcePath()
-        {
-                return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
-        }
+		 * Return path to resource of user
+		 * @return string resource path
+		 */
+		public function getResourcePath()
+		{
+				return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
+		}
 
 
 	public function addTeachCourse($courseId)
@@ -172,13 +172,4 @@ class User extends CActiveRecord
 		$command->execute(); 
 	}
 	
-	 /**
-         * Return path to resource of user
-         * @return string resource path
-         */
-        public function getResourcePath()
-        {
-                return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
-        }
-
 }
