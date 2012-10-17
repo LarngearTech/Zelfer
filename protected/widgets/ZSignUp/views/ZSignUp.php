@@ -23,11 +23,6 @@
 		<?php echo $form->error($userModel,'password'); ?>
 	</div>
 
-	<div class="input-row">
-		<?php echo $form->passwordField($userModel,'repeat_password',array('size'=>60,'maxlength'=>128, 'placeholder' => Yii::t('site', 'Repeat password'))); ?>
-		<?php echo $form->error($userModel,'repeat_password'); ?>
-	</div>
-
 	<?php if ($courseId != null): ?>
 	<div class="input-row">
 		<?php echo CHtml::hiddenField('courseId', $courseId); ?>

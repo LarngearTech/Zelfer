@@ -12,8 +12,6 @@ class User extends CActiveRecord
 {
 	const DEFAULT_PROFILE_IMAGE_URL = 'default.gif';
 
-	public $repeat_password;
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -40,9 +38,8 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, password, repeat_password, fullname, role', 'required'),
-			array('email, password, repeat_password, fullname', 'length', 'max'=>128),
-			array('password', 'compare', 'compareAttribute' => 'repeat_password'),
+			array('email, password, fullname, role', 'required'),
+			array('email, password, fullname', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, email, password, fullname, role, active', 'safe', 'on'=>'search'),
@@ -71,13 +68,11 @@ class User extends CActiveRecord
 			'id' => 'ID',
 			'email' => Yii::t('site', 'Email'),
 			'password' => Yii::t('site', 'Password'),
-			'repeat_password' => Yii::t('site', 'Repeat Password'),
 			'fullname' => Yii::t('site', 'Full Name'),
 			'role' => Yii::t('site', 'Role'),
 			'active' => Yii::t('site', 'Active'),
 		);
 	}
-
 
 	/**
 	 * @param CDbCriteria criteria search criteria
@@ -87,13 +82,12 @@ class User extends CActiveRecord
 	public function getDataProvider($criteria=null, $pagination=null)
 	{
  		if ((is_array ($criteria)) || ($criteria instanceof CDbCriteria) )
-		           $this->getDbCriteria()->mergeWith($criteria);
-        	return new CActiveDataProvider(__CLASS__, array(
-        			                'criteria'=>$this->getDbCriteria(),
-        			                'pagination' => $pagination
-        					));		
+			$this->getDbCriteria()->mergeWith($criteria);
+		return new CActiveDataProvider(__CLASS__, array(
+			'criteria'=>$this->getDbCriteria(),
+			'pagination' => $pagination
+		));		
 	}
-
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -104,7 +98,7 @@ class User extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('email',$this->email,true);
@@ -114,14 +108,14 @@ class User extends CActiveRecord
 		$criteria->compare('active',$this->active,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
 		));
 	}
 
 	public function beforeSave()
 	{
 		// Hash password
-		if (!empty($this->password) && $this->password == $this->repeat_password)
+		if (!empty($this->password))
 		{
 			$ph = new PasswordHash(Yii::app()->params['phpass']['iteration_count_log2'], Yii::app()->params['phpass']['portable_hashes']);
 			$this->password = $ph->HashPassword($this->password);
@@ -130,15 +124,14 @@ class User extends CActiveRecord
 		// Default role is '2' (normal user).
 		if (empty($this->role))
 		{
-			$this->role = 2;
+			$this->role = Yii::app()->params['normal_user'];
 		}
 
 		// Default status is '1' (active).
 		if (empty($this->status))
 		{
-			$this->status = 1;
+			$this->status = Yii::app()->params['active_status'];
 		}
-
 
 		// Default profile image
 		if (empty($this->profile_image_url))
@@ -166,13 +159,13 @@ class User extends CActiveRecord
 		Yii::app()->db->createCommand($sql)->execute();
 	}
 	
-	 /**
-         * Return path to resource of user
-         * @return string resource path
-         */
-        public function getResourcePath()
-        {
-                return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
-        }
+	/**
+	 * Return path to resource of user
+	 * @return string resource path
+	 */
+	public function getResourcePath()
+	{
+		return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
+	}
 
 }
