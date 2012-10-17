@@ -171,28 +171,6 @@ div.search-form
 	color: #298dcd;
 }
 
-.portlet-content
-{
-	font-size:0.9em;
-	margin: 0 0 15px 0;
-	padding: 5px 8px;
-	background:#EFFDFF;
-}
-
-.portlet-content ul
-{
-	list-style-image:none;
-	list-style-position:outside;
-	list-style-type:none;
-	margin: 0;
-	padding: 0;
-}
-
-.portlet-content li
-{
-	padding: 2px 0 4px 0px;
-}
-
 .operations
 {
 	list-style-type: none;
@@ -228,6 +206,16 @@ div.search-form
 .downloadlink a
 {
 	padding: 0px 20px 0px 20px;
+}
+
+.course-list
+{
+	margin-top: 40px;
+}
+
+.course-category
+{
+	margin-bottom: 40px;
 }
 
 #course-header 
