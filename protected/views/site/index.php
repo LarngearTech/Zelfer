@@ -1,7 +1,7 @@
 <?php $this->pageTitle=Yii::app()->name; ?>
+<?php if (Yii::app()->user->isGuest): ?>
 <div class="header-section">
 	<div class="container">
-		<?php if (Yii::app()->user->isGuest): ?>
 		<div class="row">
 			<div class="header-wrapper span12">
 				<div class="row">
@@ -14,9 +14,9 @@
 				</div><!-- /row -->
 			</div><!-- /header-wrapper -->
 		</div><!-- /row -->
-		<?php endif; ?>
 	</div><!-- /container -->
 </div><!-- /header-section -->
+<?php endif; ?>
 <div class="course-list-section">
 	<div class="container">
 		<?php foreach ($categories as $category): ?>
