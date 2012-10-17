@@ -6,7 +6,7 @@
 			<div class="header-wrapper span12">
 				<div class="row">
 					<div class="span8">
-						<img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" />
+						<!--img src="<?php echo Yii::app()->baseUrl.'/images/banner/6.jpg';?>" /-->
 					</div><!-- /span9 -->
 					<div class="span4">
 						<div class="login-signup-wrapper rounded-corners">
