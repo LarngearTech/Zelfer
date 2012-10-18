@@ -132,7 +132,8 @@ Yii::app()->clientScript->registerScriptFile(
 							<div id="course-syllabus">
 								<h1><?php echo Yii::t('site', 'Course Logistics');?></h1>
 								<?php $this->widget('ContentList', 	array(
-									'contents'=>$contents,
+									'mode' => 'normal',
+									'contents'=> $contents,
 								));?>
 							</div><!-- end course-syllabus -->
 						</div><!-- /span6 -->
