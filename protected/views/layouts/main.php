@@ -25,13 +25,15 @@
 		
 		$this->widget('EBootstrapNavigation', array(
 			'fixed' => false,
+			'responsive' => true,
 			'htmlOptions' => array(
 				'class' => 'navbar-inverse',
 			),
 			'items' => array(
 				array(
-					'label' => Yii::t('site', 'Home'),
+					'label' => Yii::t('site', 'YouKous'),
 					'url' => array('/site/index'),
+					'template' => '{brand}',
 				),
 				array(
 					'label' => !Yii::app()->user->isGuest?$userModel->fullname:'Guest',
