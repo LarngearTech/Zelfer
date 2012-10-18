@@ -52,7 +52,8 @@ class CourseController extends Controller
 	{
 		// get all chapters of a specified course id 
 		// with all corresponding lectures
-		$contents = Content::model()->chapter()->findAll('course_id=:courseID', 
+		$contents = Content::model()->findAll(
+				'course_id=:courseID', 
 				array(
 					':courseID'=>$id
 				));

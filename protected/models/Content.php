@@ -98,7 +98,7 @@ class Content extends CActiveRecord
 	}
 
 	/**
-	 * Return only content that is a chapter
+	 * Return only content that is a chapter.
 	 */
 	public function chapter()
 	{
@@ -106,5 +106,13 @@ class Content extends CActiveRecord
 			'condition'=>'parent_id=0',
 		));
 		return $this;
+	}
+
+	/**
+	 * Return child contents.
+	 */
+	public function getChildContent()
+	{
+		return Content::model()->findAll('parent_id=:parentId', array('parentId'=>$this->id));
 	}
 }
