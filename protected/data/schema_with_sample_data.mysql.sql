@@ -74,25 +74,33 @@ INSERT INTO `category` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chapter`
+-- Table structure for table `content`
 --
 
-CREATE TABLE IF NOT EXISTS `chapter` (
+CREATE TABLE IF NOT EXISTS `content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `course_id` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `chapter`
+-- Dumping data for table `content`
 --
 
-INSERT INTO `chapter` (`id`, `name`, `course_id`) VALUES
-(1, 'รู้จักกับอัลกอริทึม', 1),
-(2, 'การวิเคราะห์ประสิทธิภาพอัลกอริทึม', 1),
-(3, 'โครงสร้างข้อมูลพื้นฐาน', 1),
-(4, 'การเรียงลำดับและการค้นข้อมูล', 1);
+INSERT INTO `content` (`id`, `name`, `course_id`, `order`, `parent_id`, `type`) VALUES
+(1, 'รู้จักกับอัลกอริทึม', 1, 0, 0, 0),
+(2, 'อัลกอริทึมคืออะไร', 1, 1, 1, 0),
+(3, 'Lecture XYZ', 1, 2, 1, 0),
+(4, 'การวิเคราะห์ประสิทธิภาพอัลกอริทึม', 1, 3, 0, 0),
+(5, 'สัญกรณ์โอใหญ่', 1, 4, 4, 0),
+(6, 'อัตราการเติบโตของฟังก์ชัน', 1, 5, 4, 0),
+(7, 'โครงสร้างข้อมูลพื้นฐาน', 1, 6, 0, 0),
+(8, 'อาเรย์และรายการเชื่อมโยง', 1, 7, 7, 0),
+(9, 'การเรียงลำดับและการค้นข้อมูล', 1, 8, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -178,30 +186,6 @@ INSERT INTO `instructor_course` (`id`, `user_id`, `course_id`, `instructor_caree
 (5, 1, 4, '', ''),
 (6, 3, 5, '', ''),
 (7, 2, 6, '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lecture`
---
-
-CREATE TABLE IF NOT EXISTS `lecture` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `chapter_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
-
---
--- Dumping data for table `lecture`
---
-
-INSERT INTO `lecture` (`id`, `name`, `chapter_id`) VALUES
-(1, 'สัญกรณ์โอใหญ่', 2),
-(2, 'อัตราการเติบโตของฟังก์ชัน', 2),
-(3, 'อาเรย์และรายการเชื่อมโยง', 3),
-(4, 'อัลกอริทึมคืออะไร', 1),
-(5, 'Lecture XYZ', 1);
 
 -- --------------------------------------------------------
 
