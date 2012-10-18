@@ -29,6 +29,7 @@ body
 	color: #555;
 	font: normal 10pt Arial,Helvetica,sans-serif;
 	background: #f5f5f5;
+	background: url("../images/bg.png") repeat fixed 0% 0%;
 }
 
 body .modal
@@ -40,7 +41,7 @@ body .modal
 #page
 {
 	margin-bottom: 5px;
-	background: #f5f5f5;
+
 	/*border: 1px solid #C9E0ED;*/
 }
 
@@ -269,7 +270,7 @@ div.search-form
 #course-header 
 {
 	margin-top: -20px;
-	background: url("../images/bg.jpg") repeat fixed 0% 0% rgb(201, 204, 208);
+	background: url("../images/bg.jpg") repeat 0% 0% rgb(201, 204, 208);
 	border-bottom: 1px solid;
 	box-shadow: 0px 0px 30px black;
 }
@@ -294,6 +295,11 @@ div.search-form
 #course-header #course-header-name
 {
 	margin-left: 60px;
+}
+
+#course-header #course-header-name h1
+{
+	font-size: 3.5em;
 }
 
 #course-header #course-description
@@ -402,10 +408,10 @@ div.search-form
 /* Videos */ 
 .videoWrapper {
 	position: relative;
-	padding-bottom: 61.8%; /* video dimensions - width/height */
+	padding-bottom: 51.8%; /* video dimensions - width/height */
 	padding-top: 0px;
 	height: 0;
-	z-index: 1000;
+	z-index: 10;
 }
 
 video {

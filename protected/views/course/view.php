@@ -19,11 +19,6 @@ Yii::app()->clientScript->registerScriptFile(
 				</div><!-- end course-intro-video -->
 				<div id="course-header-description" class="span6"> 
 					<div class="row">
-						<div id="course-institute-logo">
-							<a href=""><img width=100 height=100 src="<?php echo Yii::app()->baseUrl.'/institute/tpa/logo.png'; ?>"/></a>
-						</div>
-					</div>
-					<div class="row">
 						<div id="course-header-name">
 							<h1><?php echo CHtml::encode($model->name);?></h1>
 							<h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->courseInstructorsShortString);?></h3>
