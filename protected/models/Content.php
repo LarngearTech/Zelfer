@@ -1,19 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "chapter".
+ * This is the model class for table "content".
  *
- * The followings are the available columns in table 'chapter':
+ * The followings are the available columns in table 'content':
  * @property integer $id
  * @property string $name
  * @property integer $course_id
+ * @property integer $order
+ * @property integer $parent_id
+ * @property integer $type
  */
-class Chapter extends CActiveRecord
+class Content extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Chapter the static model class
+	 * @return Content the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +28,7 @@ class Chapter extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'chapter';
+		return 'content';
 	}
 
 	/**
@@ -36,12 +39,12 @@ class Chapter extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, course_id', 'required'),
-			array('course_id', 'numerical', 'integerOnly'=>true),
+			array('name, course_id, order, parent_id, type', 'required'),
+			array('course_id, order, parent_id, type', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, course_id', 'safe', 'on'=>'search'),
+			array('id, name, course_id, order, parent_id, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,8 +56,6 @@ class Chapter extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'course' => array(self::BELONGS_TO, 'Course', 'course_id'),
-			'lectures' => array(self::HAS_MANY, 'Lecture', 'chapter_id'),
 		);
 	}
 
@@ -67,6 +68,9 @@ class Chapter extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Name',
 			'course_id' => 'Course',
+			'order' => 'Order',
+			'parent_id' => 'Parent',
+			'type' => 'Type',
 		);
 	}
 
@@ -84,9 +88,23 @@ class Chapter extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('course_id',$this->course_id);
+		$criteria->compare('order',$this->order);
+		$criteria->compare('parent_id',$this->parent_id);
+		$criteria->compare('type',$this->type);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	/**
+	 * Return only content that is a chapter
+	 */
+	public function chapter()
+	{
+		$this->getDbCriteria()->mergeWith(array(
+			'condition'=>'parent_id=0',
+		));
+		return $this;
 	}
 }

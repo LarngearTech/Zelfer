@@ -114,7 +114,7 @@ class Course extends CActiveRecord
 	}
 
 	/**
-	 * Default scope return only publish course
+	 * Default scope return publish and unpublish course
 	 */
 	public function defaultScope()
 	{

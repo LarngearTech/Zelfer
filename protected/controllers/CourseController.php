@@ -52,10 +52,13 @@ class CourseController extends Controller
 	{
 		// get all chapters of a specified course id 
 		// with all corresponding lectures
-		$chapters = Chapter::model()->with('lectures')->findAll('course_id=:courseID', array(':courseID'=>$id));
+		$contents = Content::model()->chapter()->findAll('course_id=:courseID', 
+				array(
+					':courseID'=>$id
+				));
 		$this->render('view',array(
 			'model' => $this->loadModel($id),
-			'chapters' => $chapters,
+			'contents' => $contents,
 		));
 	}
 

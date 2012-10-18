@@ -122,7 +122,14 @@ Yii::app()->clientScript->registerScriptFile(
 	<div id="course-syllabus" class="span6">
 		<h1><?php echo Yii::t('site', 'Course Logistics');?></h1>
 		<?php
-		$chapIdx = 0;
+			$this->widget('ContentList',
+				array(
+					'contents'=>$contents,
+				)
+			);
+		?>
+		<?php
+		/*$chapIdx = 0;
 		$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
 		foreach ($chapters as $chapter)
 		{
@@ -150,7 +157,7 @@ Yii::app()->clientScript->registerScriptFile(
 			';
 		}
 		$lecturesTabContent .= '</div><!-- accordion -->'; 
-		echo $lecturesTabContent;
+		echo $lecturesTabContent;*/
 	?>
 	</div><!-- end course-syllabus -->
 	<div id="course-instructors" class="span6">
