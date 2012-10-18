@@ -24,7 +24,7 @@
 		}
 		
 		$this->widget('EBootstrapNavigation', array(
-			'fixed' => true,
+			'fixed' => false,
 			'htmlOptions' => array(
 				'class' => 'navbar-inverse',
 			),
