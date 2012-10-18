@@ -1,18 +1,23 @@
 <?php
-class ContentList extends CWidget{
-	public $addLectureHandler;
-	public $addChapterHandler;
-	public $update;
+class ContentList extends BaseWidget{
+	public $contents;
+	
+	function comparator($a, $b){
+		if ($a->order == $b->order){
+			return 0;
+		}
+		else{
+			return ($a->order < $b->order)?-1:1;
+		}
+	}
+	
 	function run(){
-                // Publish required assets
-                $cs = Yii::app()->getClientScript();
-		$cs->registerCoreScript('jquery.ui');
+		usort($this->contents, array(__CLASS__, 'comparator'));
+		$this->publishAssets(Yii::getPathOfAlias('application.widgets.ContentList'));
 
 		$this->render('contentList',
 			array(
-				'addLectureHandler'=>$this->addLectureHandler,
-				'addChapterHandler'=>$this->addChapterHandler,
-				'update'=>$this->update,
+				'contents'=>$this->contents,
 			)
 		);
 	}
