@@ -119,43 +119,12 @@ Yii::app()->clientScript->registerScriptFile(
 	<div id="course-syllabus" class="span6">
 		<h1><?php echo Yii::t('site', 'Course Logistics');?></h1>
 		<?php
-			$this->widget('ContentList',
-				array(
-					'contents'=>$contents,
-				)
-			);
+		$this->widget('ContentList',
+			array(
+				'mode'=>'normal',
+				'contents'=>$contents,
+			));
 		?>
-		<?php
-		/*$chapIdx = 0;
-		$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
-		foreach ($chapters as $chapter)
-		{
-			$chapIdx++;
-			$lecturesTabContent .= '
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
-							'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
-						</a>
-					</div><!-- heading -->
-					<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse in">
-						<div class="accordion-inner">
-							<ul>';
-			// create a lecture list
-			$lectIdx = 0;
-			foreach ($chapter->lectures as $lecture)
-			{
-				$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
-			}
-			$lecturesTabContent .= '</ul>
-						</div><!-- inner -->
-					</div><!-- body -->
-				</div><!-- group -->
-			';
-		}
-		$lecturesTabContent .= '</div><!-- accordion -->'; 
-		echo $lecturesTabContent;*/
-	?>
 	</div><!-- end course-syllabus -->
 	<div id="course-instructors" class="span6">
 		<h1><?php echo Yii::t('site', 'Instructor');?></h1>
