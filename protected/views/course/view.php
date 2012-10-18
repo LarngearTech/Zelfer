@@ -108,60 +108,37 @@ Yii::app()->clientScript->registerScriptFile(
 </div><!-- end course-header -->
 
 
-<div id="course-summary">
-	<div class="container">
-		<h1><?php echo Yii::t('site', 'Course Summary');?></h1>
-		<p class="well"><?php echo CHtml::encode($model->long_description); ?></p>
-	</div>
-</div>
 <div class="container">
-<div class="row">
-	<div id="course-syllabus" class="span6">
-		<h1><?php echo Yii::t('site', 'Course Logistics');?></h1>
-		<?php
-			$this->widget('ContentList',
-				array(
-					'contents'=>$contents,
-				)
-			);
-		?>
-		<?php
-		/*$chapIdx = 0;
-		$lecturesTabContent = '<div class="accordion" id="chapter-accordion">';
-		foreach ($chapters as $chapter)
-		{
-			$chapIdx++;
-			$lecturesTabContent .= '
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="#chapter-accordion" href="#chapter'.$chapIdx.'-collapse">
-							'.Yii::t('site', 'Chapter').' '.$chapIdx.' '.CHtml::encode($chapter->name).'
-						</a>
-					</div><!-- heading -->
-					<div id="chapter'.$chapIdx.'-collapse" class="accordion-body collapse in">
-						<div class="accordion-inner">
-							<ul>';
-			// create a lecture list
-			$lectIdx = 0;
-			foreach ($chapter->lectures as $lecture)
-			{
-				$lecturesTabContent .= '<li>'.CHtml::encode($lecture->name).'</li>';
-			}
-			$lecturesTabContent .= '</ul>
-						</div><!-- inner -->
-					</div><!-- body -->
-				</div><!-- group -->
-			';
-		}
-		$lecturesTabContent .= '</div><!-- accordion -->'; 
-		echo $lecturesTabContent;*/
-	?>
-	</div><!-- end course-syllabus -->
-	<div id="course-instructors" class="span6">
-		<h1><?php echo Yii::t('site', 'Instructor');?></h1>
-		<?php
-			$this->widget('InstructorList', array('instructorList'=>$model->instructors));
-		?>
-	</div><!-- end course-instructors -->
-</div>
-</div>
+	<div class="row">
+		<div class="span12">
+			<div class="row">
+				<div class="span6">
+					<div class="row">
+						<div class="span6">
+							<div id="course-summary">
+								<h1><?php echo Yii::t('site', 'Course Summary');?></h1>
+								<p class="well"><?php echo CHtml::encode($model->long_description); ?></p>
+							</div><!-- course-summary -->
+						</div><!-- /span6 -->
+					</div><!-- /row -->
+					<div class="row">
+						<div class="span6">
+							<div id="course-syllabus">
+								<h1><?php echo Yii::t('site', 'Course Logistics');?></h1>
+								<?php $this->widget('ContentList', 	array(
+									'contents'=>$contents,
+								));?>
+							</div><!-- end course-syllabus -->
+						</div><!-- /span6 -->
+					</div><!-- /row -->
+				</div><!-- /span6 -->
+				<div class="span6">
+					<div id="course-instructors" class="span6">
+						<h1><?php echo Yii::t('site', 'Instructor');?></h1>
+						<?php $this->widget('InstructorList', array('instructorList'=>$model->instructors));?>
+					</div><!-- end course-instructors -->
+				</div><!-- /span6 -->
+			</div><!-- /row -->
+		</div><!-- /span12 -->
+	</div><!-- /row -->
+</div><!-- /container -->
