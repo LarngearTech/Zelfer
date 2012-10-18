@@ -69,13 +69,21 @@ body .modal
 	margin-top: 10px;
 }
 
+.dropdown-menu a
+{
+	line-height: 30px;
+}
+
 .dropdown-menu li > a:hover,
 .dropdown-menu li > a:focus,
 .dropdown-submenu > a
 {
-	background-color: rgb(137, 137, 137);
-	background-image: linear-gradient(to bottom, rgb(155,155,155), rgb(120,120,120));
-	background-repeat: repeat-x;
+	background: rgb(137, 137, 137); /* for non-css3 browsers */
+
+	background: linear-gradient(to bottom, rgb(155,155,155), rgb(120,120,120));
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(155,155,155)), to(rgb(120,120,120))); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  rgb(155,155,155),  rgb(120,120,120)); /* for firefox 3.6+ */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9b9b9b', endColorstr='#787878'); /* for IE */
 }
 
 .header-section
