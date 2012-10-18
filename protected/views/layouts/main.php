@@ -31,7 +31,7 @@
 			),
 			'items' => array(
 				array(
-					'label' => Yii::t('site', 'YouKous'),
+					'label' => Yii::t('site', 'Udamo'),
 					'url' => array('/site/index'),
 					'template' => '{brand}',
 				),

@@ -1,14 +1,14 @@
 
 @font-face
 {
-    font-family: 'RSURegular';
-    src: url('../fonts/rsu_regular.eot');
-    src: url('../fonts/rsu_regular.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/rsu_regular.woff') format('woff'),
-         url('../fonts/rsu_regular.ttf') format('truetype');
-         url('../fonts/rsu_regular.svg#RSURegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+		font-family: 'RSURegular';
+		src: url('../fonts/rsu_regular.eot');
+		src: url('../fonts/rsu_regular.eot?#iefix') format('embedded-opentype'),
+				 url('../fonts/rsu_regular.woff') format('woff'),
+				 url('../fonts/rsu_regular.ttf') format('truetype');
+				 url('../fonts/rsu_regular.svg#RSURegular') format('svg');
+		font-weight: normal;
+		font-style: normal;
 	unicode-range: U+0E00-0E7F;*/
 }
 
@@ -70,9 +70,9 @@ body .modal
 
 .header-section
 {
-    background: url("../images/class.jpg") rgb(201, 204, 208);
-    border-bottom: 1px solid;
-    box-shadow: 0px 0px 30px black;
+		background: url("../images/class.jpg") rgb(201, 204, 208);
+		border-bottom: 1px solid;
+		box-shadow: 0px 0px 30px black;
 
 }
 
@@ -398,3 +398,61 @@ div.search-form
 	border-radius: 4px;
 }
 
+/* Videos */ 
+.videoWrapper {
+	position: relative;
+	padding-bottom: 61.8%; /* video dimensions - width/height */
+	padding-top: 0px;
+	height: 0;
+	z-index: 1000;
+}
+
+video {
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	z-index: 1;
+}		
+
+video.video-js {
+	z-index: 1000;
+}							 
+
+.video-js-box .vjs-controls {
+	z-index: 1002;
+}
+
+.video-js-box .vjs-big-play-button {
+	z-index: 1002;
+}
+
+.videoWrapper .video-js-box {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	z-index: 1;
+	background: #000000;
+}				 
+
+.videoWrapper object,
+.videoWrapper embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100% !important;
+	z-index: 1;
+}				
+
+.vjs-spinner {
+	display: none !important;
+}
+
+.video-js-box img.vjs-poster {
+	height: 100% !important;
+	width: 100% !important;
+}

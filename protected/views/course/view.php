@@ -13,7 +13,9 @@ Yii::app()->clientScript->registerScriptFile(
 		<div class="course-header-wrapper span12">
 			<div class="row">
 				<div id="course-intro-video" class="span6">
-					<?php $this->widget('IntroVideoPlayer', array('course'=>$model)); ?>
+					<div class="videoWrapper">
+						<?php $this->widget('IntroVideoPlayer', array('course'=>$model)); ?>
+					</div><!-- /video-wrapper -->
 				</div><!-- end course-intro-video -->
 				<div id="course-header-description" class="span6"> 
 					<div class="row">
