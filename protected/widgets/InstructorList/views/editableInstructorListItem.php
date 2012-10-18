@@ -11,10 +11,28 @@
 				'Delete',
 				array(
 					'class'=>'btn btn-danger btn-delete',
-					'onclick'=>'deleteInstructor('.$instructor->id.')',
+					'onclick'=>'js:deleteInstructor('.$instructor->id.');',
 				)
 			);
 		}
 		?>
 	</div>
 </div>
+<?php
+	$cs = Yii::app()->clientScript;
+	$cs->registerScript('jsDeleteInstructor', 
+		'function deleteInstructor(instructorId){
+			$.ajax({
+				url:"'.Yii::app()->createUrl('course/deleteInstructor').'",
+				data:{
+					courseId:'.$course->id.', 
+					instructorId:instructorId
+				},			
+				type:"POST",
+				dataType:"html",
+				success:function(newList){
+					$("'.$update.'").html(newList);
+				}
+			});
+	}', CClientScript::POS_END);
+?>
