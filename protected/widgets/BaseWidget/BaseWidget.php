@@ -4,12 +4,12 @@ class BaseWidget extends CWidget{
 	public $htmlOptions;
 	public $options;
 	
-	public function publishAssets($assetsPath)
+	public function publishAssets($widgetPath)
 	{
-		if(file_exists($assetsPath))
+		if(file_exists($widgetPath.DIRECTORY_SEPARATOR.'assets'))
 		{
 			$webroot = Yii::getPathOfAlias('webroot').'/..';
-			$this->assetsUrl = Yii::app()->getAssetManager()->publish($assetsPath.DIRECTORY_SEPARATOR.'assets', false, -1, YII_DEBUG);
+			$this->assetsUrl = Yii::app()->getAssetManager()->publish($widgetPath.DIRECTORY_SEPARATOR.'assets', false, -1, YII_DEBUG);
 			$cs = Yii::app()->getClientScript();
 
 			// Register javascript
