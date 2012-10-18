@@ -8,7 +8,7 @@ class ZLectureStack extends CWidget
 	public $courseModel;
 
 	// Chapters in this course
-	public $chapters;
+	public $contents;
 
 	public function init()
 	{
@@ -44,7 +44,7 @@ class ZLectureStack extends CWidget
 	public function run()
 	{
 		$this->render('ZLectureStack', array(
-			'chapters' => $this->chapters,
+			'contents' => $this->contents,
 		));
 	}
 }

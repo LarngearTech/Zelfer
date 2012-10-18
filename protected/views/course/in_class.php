@@ -1,32 +1,3 @@
-<?php
-$this->breadcrumbs = array(
-	Yii::t('site', 'Courses') => array('index'),
-	$model->name,
-);
-?>
-<?php
-	/*Yii::app()->clientScript->registerScript('activate-chapter', '
-			$(document).ready(function() {
-				$("a.accordion-body .chapter").click(function(e) {
-					alert(this.id);
-				});
-				$(".playbutton").click(function(e){
-					ajaxUrl = <?php echo $this->createUrl("course/changeVideo") ?>;
-					$.ajax({
-						type : post,
-						url : ajaxUrl,
-						data : {
-								videoId : $this.id
-								},
-						dataType : "html",
-						success : "function(html){$(#lecture-content-wrapper).html(html);}"
-					});
-				 	//$("video:nth-child(1)").attr("src",this.id+"/encodedVideo.mp4");
-				 	//$("video:nth-child(1)").attr("src",this.id+"/encodedVideo.ogv");
-				});
-			});
-	');*/
-?>
 <div class="container">
 <h1><?php echo CHtml::encode($model->name); ?></h1>
 <h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->courseInstructorsShortString);?></h3>
@@ -36,9 +7,16 @@ $this->breadcrumbs = array(
 	$lecturesTabContent = '
 		<div class="row">
 			<div class="lecture-stack-wrapper span3">';
-	$lecturesTabContent .= $this->widget('ZLectureStack', array(
-								'chapters' => $chapters,
-							), true);			
+	/*$lecturesTabContent .= $this->widget('ZLectureStack', array(
+								'contents' => $contents,
+							), true);*/
+	$lecturesTabContent .= $this->widget('ContentList', 
+					array(
+						'mode'=>'inclass',
+						'contents'=>$contents,
+					),
+					true
+				);
 	$lecturesTabContent .= '
 			</div><!-- /lecture-stack-wrapperspan3 -->';
 	$lecturesTabContent .= '<div id="lecture-content-wrapper" class="span9">';

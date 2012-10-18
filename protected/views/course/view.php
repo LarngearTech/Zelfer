@@ -108,6 +108,12 @@ Yii::app()->clientScript->registerScriptFile(
 </div><!-- end course-header -->
 
 
+<div id="course-summary">
+	<div class="container">
+		<h1><?php echo Yii::t('site', 'Course Summary');?></h1>
+		<p class="well"><?php echo CHtml::encode($model->long_description); ?></p>
+	</div>
+</div>
 <div class="container">
 	<div class="row">
 		<div class="span12">
