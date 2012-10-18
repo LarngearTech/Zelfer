@@ -261,6 +261,11 @@ div.search-form
 	margin-bottom: 40px;
 }
 
+#course-form label
+{
+	font-size: 14pt;
+}
+
 #course-header 
 {
 	background: url("../images/bg.jpg") repeat fixed 0% 0% rgb(201, 204, 208);
