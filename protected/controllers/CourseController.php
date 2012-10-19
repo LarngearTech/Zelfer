@@ -393,19 +393,49 @@ class CourseController extends Controller
 			$instructor = new User();
 			$instructor->id = $instructorId;
 			$instructor->removeTeachCourse($courseId);
+
+			$course = Course::model()->findByPk($courseId);
+			$this->widget('EditableInstructorList',
+				array(
+					'course'=>$course,
+					'deleteInstructorHandler'=>$this->createUrl('course/deleteInstructor'),
+					'update'=>'#instructor-list-container',
+				));
 		}
-		$course = Course::model()->findByPk($courseId);
-		$this->widget('EditableInstructorList',
-			array(
-			'course'=>$course,
-			'deleteInstructorHandler'=>$this->createUrl('course/deleteInstructor'),
-			'update'=>'#instructor-list-container',
-		));
 	}
 
 
 	public function actionAddLecture()
 	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$course = Course::model()->findByPk($_POST['courseId']);
+			$lastChapterId=-1;
+			$maxOrder=-1;
+			foreach($course->contents as $content)
+			{
+				if($content->order > $maxOrder && $content->isChapter())
+				{
+					$maxOrder = $content->order;
+					$lastChapterId = $content->id;
+				}	
+			}
+
+			$lecture = new Content();
+			$lecture->course_id = $course->id;
+			$lecture->name = "Untitled Lecture";
+			$lecture->parent_id = $lastChapterId;
+			$lecture->order=sizeof($course->contents);
+			$lecture->type=1;
+			$lecture->save();
+
+			$course=Course::model()->findByPk($_POST['courseId']);	
+			$this->widget('SortableContentList',
+				array(
+					'course'=>$course,
+				)
+			);
+		}
 	}
 
 	public function actionAddChapter()

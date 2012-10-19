@@ -12,6 +12,10 @@ Yii::app()->clientScript->registerScriptFile(
  			$this->widget('CourseThumbnail', 
 				array(
 					'course'=>$course,
+					'courseUrl'=>Yii::app()->createUrl('course/inclass',
+						array(
+							'id'=>$course->id,
+						)),
 			));
 			echo CHtml::closeTag('li');
 		}

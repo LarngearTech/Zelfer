@@ -103,7 +103,7 @@ class Content extends CActiveRecord
 	public function chapter()
 	{
 		$this->getDbCriteria()->mergeWith(array(
-			'condition'=>'parent_id=0',
+			'condition'=>'type=0',
 		));
 		return $this;
 	}
@@ -114,5 +114,14 @@ class Content extends CActiveRecord
 	public function getChildContent()
 	{
 		return Content::model()->findAll('parent_id=:parentId', array('parentId'=>$this->id));
+	}
+
+
+	/**
+	 * Return whether a content is a chapter
+	 */
+	public function isChapter()
+	{
+		return $this->type==0;
 	}
 }
