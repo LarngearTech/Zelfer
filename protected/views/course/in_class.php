@@ -13,7 +13,7 @@
 	$lecturesTabContent .= $this->widget('ContentList', 
 					array(
 						'mode'=>'inclass',
-						'contents'=>$contents,
+						'course'=>$model,
 					),
 					true
 				);
