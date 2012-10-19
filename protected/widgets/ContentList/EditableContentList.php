@@ -1,5 +1,6 @@
 <?php
 class EditableContentList extends CWidget{
+	public $course;
 	public $addLectureHandler;
 	public $addChapterHandler;
 	public $update;
@@ -10,6 +11,7 @@ class EditableContentList extends CWidget{
 
 		$this->render('editableContentList',
 			array(
+				'course'=>$this->course,
 				'addLectureHandler'=>$this->addLectureHandler,
 				'addChapterHandler'=>$this->addChapterHandler,
 				'update'=>$this->update,

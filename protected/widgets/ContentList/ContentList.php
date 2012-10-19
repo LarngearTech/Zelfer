@@ -1,6 +1,6 @@
 <?php
 class ContentList extends BaseWidget{
-	public $contents;
+	public $course;
 	public $mode;
 	
 	function comparator($a, $b){
@@ -37,8 +37,11 @@ class ContentList extends BaseWidget{
 	}
 
 	function run(){
-		usort($this->contents, array(__CLASS__, 'comparator'));
 		$this->publishAssets(Yii::getPathOfAlias('application.widgets.ContentList'));
+
+		$contents = $this->course->contents;
+		usort($contents, array(__CLASS__, 'comparator'));
+
 		if (empty($this->mode))
 		{
 			$this->mode='normal';
@@ -52,7 +55,7 @@ class ContentList extends BaseWidget{
 		$this->render('contentList',
 			array(
 				'mode'=>$this->mode,
-				'contents'=>$this->contents,
+				'contents'=>$contents,
 				'assetsUrl'=>$this->assetsUrl,
 			)
 		);

@@ -50,16 +50,8 @@ class CourseController extends Controller
 	 */
 	public function actionView($id)
 	{
-		// get all chapters of a specified course id 
-		// with all corresponding lectures
-		$contents = Content::model()->findAll(
-				'course_id=:courseID', 
-				array(
-					':courseID'=>$id
-				));
 		$this->render('view',array(
 			'model' => $this->loadModel($id),
-			'contents' => $contents,
 		));
 	}
 
