@@ -1,6 +1,6 @@
-<div class="span9" class="editable-content-list-container">
+<div class="span9" class="edit-content-panel-container">
 	<?php
-	$this->widget('EditableContentList',
+	$this->widget('EditContentPanel',
 		array(
 			'course'=>$model,
 			'addLectureHandler'=>$this->createUrl('course/addLecture'),

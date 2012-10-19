@@ -430,7 +430,7 @@ class CourseController extends Controller
 			$lecture->save();
 
 			$course=Course::model()->findByPk($_POST['courseId']);	
-			$this->widget('SortableContentList',
+			$this->widget('EditableContentList',
 				array(
 					'course'=>$course,
 				)
@@ -440,6 +440,25 @@ class CourseController extends Controller
 
 	public function actionAddChapter()
 	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$course=Course::model()->findByPk($_POST['courseId']);	
+
+			$chapter = new Content();
+			$chapter->course_id = $_POST['courseId'];
+			$chapter->name = "Untitled Chapter";
+			$chapter->parent_id = -1;
+			$chapter->order=sizeof($course->contents);
+			$chapter->type=0;
+			$chapter->save();
+
+			$course=Course::model()->findByPk($_POST['courseId']);	
+			$this->widget('EditableContentList',
+				array(
+					'course'=>$course,
+				)
+			);
+		}
 	}
 
 	public function actionChangeContentOrder()

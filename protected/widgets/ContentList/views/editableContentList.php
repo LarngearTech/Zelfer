@@ -1,48 +1,13 @@
-<div class='sortable-list-container'>
+<ul class='content-list'>
 	<?php
-	$this->widget('SortableContentList',
-		array('course'=>$course)
-	);
+		foreach($contents as $content)
+		{
+			$class=$content->isChapter()?'chapter-item':'lecture-item';
+			echo 
+			'<li id="content_'.$content->id.'" class="'.$class.'">'.
+				$content->name.
+				'<a class="handle">move</a>
+			</li>';
+		}
 	?>
-</div>
-<div class='row'>
-	<?php 
-	echo CHtml::ajaxButton(
-		'Add Lecture',
-		$addLectureHandler,
-		array(
-			'type'=>'POST',
-			'dataType'=>'html',
-			'data'=>array(
-				'courseId'=>$course->id,
-			),
-			'success'=>'function(html){
-				$(".sortable-list-container").html(html);
-				makeSortable();
-			}'
-		),
-		array(
-			'class'=>'btn-add-lecture',
-		)
-	);
-	?>
-</div>
-<div class='row'>
-	<?php 
-	echo CHtml::ajaxButton(
-		'Add Chapter',
-		$addChapterHandler,
-		array(
-			'type'=>'POST',
-			'dataType'=>'html',
-			'data'=>array(
-				'courseId'=>$course->id,
-			),
-			'update'=>'.sortable-list-container',
-		),
-		array(
-			'class'=>'btn-add-chapter',
-		)
-	);
-	?>
-</div>
+</ul>
