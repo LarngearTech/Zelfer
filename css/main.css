@@ -508,7 +508,7 @@ div.search-form
 	margin-top: 10px;
 }
 
-#course-tabs .nav-tabs a
+.nav-tabs a
 {
     font-family: RSURegular, Arial, Helvetica, sans-serif;
 	font-size: 1.6em;
