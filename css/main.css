@@ -20,14 +20,14 @@ html
 h1, h2
 {
 	font-family: RSURegular, Arial, Helvetica, sans-serif;
-	text-shadow: 0px 1px 0px #fff;
+	text-shadow: 0px 1px 0px #000;
 }
 
 body
 {
 	margin: 0;
 	padding: 0;
-	color: #444;
+	color: #454545;
 	font: normal 10pt Arial,Helvetica,sans-serif;
 	text-shadow: 0px 1px 0px #fff;
 	background: #f5f5f5;
@@ -38,6 +38,11 @@ body .modal
 {
 	width: 480px;
 	margin: -210px 0 0 -240px;
+}
+
+a
+{
+	color: #686868;
 }
 
 a:hover
@@ -416,6 +421,7 @@ div.search-form
 	margin-top: 10px;
 	font-size: 1.2em;
 	text-shadow: 0px 1px 0px #ffffff;
+	background-color: #ffffff;
 }
 
 #course-syllabus #chapter-accordion
@@ -425,7 +431,8 @@ div.search-form
 
 .accordion-heading
 {
-	font-size: 1.4em;
+    font-family: RSURegular, Arial, Helvetica, sans-serif;
+	font-size: 1.8em;
 	background-color: rgb(217, 228, 232);
 	background-image: linear-gradient(rgb(255,255,255), rgb(235,235,235));
 }
@@ -433,6 +440,11 @@ div.search-form
 .accordion-heading a
 {
 	color: rgb(68, 68, 68); 
+}
+
+.accordion-inner
+{
+	background-color: #ffffff;
 }
 
 #course-syllabus .accordion-inner li 
