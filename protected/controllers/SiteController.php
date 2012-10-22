@@ -27,23 +27,7 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-
-		/*Yii::import('ext.qtiprocessor.*');
-		require_once('QtiProcessor.php');
-		//$qp = qp(Yii::app()->basePath.'/../qti-example.xml')->writeHTML();
-		$file = Yii::app()->basePath.'/../qti-choice-multiple.xml';
-		$qp = new QtiProcessor();
-		$item = array();
-		$item['type'] = 'choicemultiple';
-		$item['answers'] = array('7', '6');
-		$item['prompt'] = 'This is a question';
-		$item['shuffle'] = 'false';
-		$item['maxChoices'] = '0';
-		$item['choices'] = array(array('text'=>'one', 'value' => '1'), array('text' => 'seven', 'value' => '7'), array('text' => 'four', 'value' => '4'), array('text' => 'ten', 'value' => '10'));
-		$qp->createQtiXmlItem($item); exit();*/
-		/*$items = $qp->parseAssessmentItems($file);
-		print_r($items);
-		exit();*/
+		Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
 
 		$categories = Category::model()->findAll();
 
