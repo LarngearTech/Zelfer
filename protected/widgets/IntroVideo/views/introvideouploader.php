@@ -2,19 +2,21 @@
 	<div class="span9">
 		<h2>Introduction Video</h2>
 	</div>
+</div>
+<div class="row">
 	<div class="span6">
 		<div class="intro-video-player-container">
-		<?php 
+			<?php 
 			$this->widget('IntroVideoPlayer', array('course'=>$course));
-		?>
+			?>
 		</div>
 	</div>
-	<div class="span3">
+	<div class="span6">
 		<div>
 			<div>Max 10 MB AVI, MP4, WMV</div>
 		</div>
 		<div>
-		<?php
+			<?php
 			$this->widget('EAjaxUpload',
 				array(
 					'id'=>'introVideoFile',
@@ -28,7 +30,7 @@
 					)		
 				)
 			);
-		?>
+			?>
 		</div>
 	</div>
 </div>
