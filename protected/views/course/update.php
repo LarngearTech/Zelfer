@@ -3,54 +3,62 @@
 ?>
 
 <div class=container>
-<h1><?php echo Yii::t('site', 'Edit Course');?> <?php echo $model->name; ?></h1>
+	<div class="row">
+		<div class="span9">
+			<h1><?php echo Yii::t('site', 'Edit Course');?> <?php echo $model->name; ?></h1>
+		</div><!-- /span8 -->
+		<div class="span3">
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<?php echo CHtml::link(
+						Yii::t('site', 'Delete'), 
+						array(
+							'course/delete',
+							'courseId' => $model->id,
+						),
+						array(
+							'class' => 'btn btn-danger',
+							'confirm' => 'Do you really want to delete this course, this cannot be undone',
+						)
+					);?>
+				</div><!-- end btn-group -->
+				<div class="btn-group">
+					<?php 
+					// Not yet publish course
+					if ($model->status == 0){
+						echo CHtml::link(
+							Yii::t('site', 'Publish'), 
+							array(
+								'course/publish',
+								'courseId' => $model->id,
+							),
+							array(
+								'class' => 'btn btn-success',
+								'confirm' => 'Do you really want to publish this course',
+							)
+						);
+					}
+					else {
+						echo CHtml::link(
+							Yii::t('site', 'Unpublish'), array(
+								'course/unpublish',
+								'courseId' => $model->id,
+							),
+							array(
+								'class' => 'btn btn-warning',
+								'confirm' => 'Do you really want to unpublish this course',
+							)
+						);
+					}?>
+				</div><!-- end btn-group -->
+			</div><!-- end btn-toolbar-->
+
+		</div><!-- /span4 -->
+
+	</div><!-- /row -->
 <div id="edit-course-menu" class="row">
 	<div class="span12">
-		<div class="btn-toolbar well">
-			<div class="btn-group">
-				<?php echo CHtml::link(
-					Yii::t('site', 'Delete Course'), 
-					array(
-						'course/delete',
-						'courseId' => $model->id,
-					),
-					array(
-						'class' => 'btn btn-danger',
-						'confirm' => 'Do you really want to delete this course, this cannot be undone',
-					)
-				);?>
-			</div><!-- end btn-group -->
-			<div class="btn-group">
-				<?php 
-				// Not yet publish course
-				if ($model->status == 0){
-					echo CHtml::link(
-						Yii::t('site', 'Publish Course'), 
-						array(
-							'course/publish',
-							'courseId' => $model->id,
-						),
-						array(
-							'class' => 'btn btn-success',
-							'confirm' => 'Do you really want to publish this course',
-						)
-					);
-				}
-				else {
-					echo CHtml::link(
-						Yii::t('site', 'Unpublish Course'), array(
-							'course/unpublish',
-							'courseId' => $model->id,
-						),
-						array(
-							'class' => 'btn btn-warning',
-							'confirm' => 'Do you really want to unpublish this course',
-						)
-					);
-				}?>
-			</div><!-- end btn-group -->
-		</div><!-- end btn-toolbar-->
-		<div class="tabbable tabs-left">
+		<div class="tabbable tabs-top">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#course_info" data-toggle="tab">Course Info</a><li>
 				<li><a href="#instructor_info" data-toggle="tab">Instructor Info</a><li>
@@ -85,8 +93,7 @@
 					);
 					?>
 				</div>
-			<div>
-		</div>	
-	</div><!-- end wrapper -->
-</div>
-</div>
+			<div><!-- /tab-content -->
+		</div><!-- /tabbale -->	
+	</div><!-- /span12 -->
+</div><!-- /row -->
