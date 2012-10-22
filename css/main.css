@@ -406,6 +406,11 @@ div.search-form
 	text-align: left;
 }
 
+.login-signup-flipper a
+{
+	color: rgb(0, 136, 204);
+}
+
 .login-signup-flipper label
 {
 	font-size: 1em;
