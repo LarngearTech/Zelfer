@@ -39,6 +39,11 @@ body .modal
 	margin: -210px 0 0 -240px;
 }
 
+a:hover
+{
+	text-decoration: none;
+}
+
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input 
 {
 	font-size: 16px;
@@ -416,9 +421,16 @@ div.search-form
 	margin-top: 10px;
 }
 
-#course-syllabus .accordion-heading
+.accordion-heading
 {
-	font-size: 1.2em;
+	font-size: 1.4em;
+	background-color: rgb(217, 228, 232);
+	background-image: linear-gradient(rgb(255,255,255), rgb(235,235,235));
+}
+
+.accordion-heading a
+{
+	color: rgb(68, 68, 68); 
 }
 
 #course-syllabus .accordion-inner li 
