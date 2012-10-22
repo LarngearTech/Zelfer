@@ -4,7 +4,7 @@
 
 	foreach($contents as $content)
 	{
-		if ($content->parent_id == 0)
+		if ($content->isChapter())
 		{
 			// Add closing tag
 			if ($hasHeading){

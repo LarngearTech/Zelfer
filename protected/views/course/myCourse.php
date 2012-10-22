@@ -9,15 +9,21 @@ Yii::app()->clientScript->registerScriptFile(
 		foreach ($userModel->take_courses as $course) {
 			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span4'));
- 			$this->widget('CourseThumbnail', array(
-							'course'=>$course,
+ 			$this->widget('CourseThumbnail', 
+				array(
+					'course'=>$course,
+					'courseUrl'=>Yii::app()->createUrl('course/inclass',
+						array(
+							'id'=>$course->id,
+						)),
 			));
 			echo CHtml::closeTag('li');
 		}
 		echo CHtml::openTag('li', array('class' => 'span4'));
-		$this->widget('AddCourseThumbnail', array(
-							'redirectUrl'=>$this->createUrl('site/index'),
-							'caption'=>'Browse Course'
+		$this->widget('AddCourseThumbnail', 
+			array(
+				'redirectUrl'=>$this->createUrl('site/index'),
+				'caption'=>'Browse Course'
 		));
 		echo CHtml::closeTag('li');
 		?>
@@ -28,18 +34,21 @@ Yii::app()->clientScript->registerScriptFile(
 		foreach ($userModel->teach_courses as $course) {
 			//print_r($course);
 			echo CHtml::openTag('li', array('class' => 'span4'));
-			$this->widget('CourseThumbnail', array(
-							'course'=>$course,
-							'courseUrl'=>$this->createUrl('course/update', array(
-								'courseId'=>$course->id,
-				)),
+			$this->widget('CourseThumbnail', 
+				array(
+					'course'=>$course,
+					'courseUrl'=>$this->createUrl('course/update', 
+						array(
+							'courseId'=>$course->id,
+						)),
 			));
 			echo CHtml::closeTag('li');
 		}
 		echo CHtml::openTag('li', array('class' => 'span4'));
-		$this->widget('AddCourseThumbnail', array(
-	 					 'redirectUrl'=>$this->createUrl('course/create'),
-	 					 'caption'=>'Create Course'
+		$this->widget('AddCourseThumbnail',
+			array(
+	 		 'redirectUrl'=>$this->createUrl('course/create'),
+	 		 'caption'=>'Create Course'
 		));
 	 	echo CHtml::closeTag('li');
 		?>

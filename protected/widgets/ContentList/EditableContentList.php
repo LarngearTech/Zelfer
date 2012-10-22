@@ -1,18 +1,18 @@
 <?php
-class EditableContentList extends CWidget{
-	public $addLectureHandler;
-	public $addChapterHandler;
-	public $update;
+class EditableContentList extends ContentListBase{
+	public $course;
+
 	function run(){
+                $contents = $this->course->contents;
+                usort($contents, array(__CLASS__, 'comparator'));
+
                 // Publish required assets
                 $cs = Yii::app()->getClientScript();
 		$cs->registerCoreScript('jquery.ui');
 
 		$this->render('editableContentList',
 			array(
-				'addLectureHandler'=>$this->addLectureHandler,
-				'addChapterHandler'=>$this->addChapterHandler,
-				'update'=>$this->update,
+				'contents'=>$contents,
 			)
 		);
 	}

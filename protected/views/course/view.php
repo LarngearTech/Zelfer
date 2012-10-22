@@ -123,10 +123,13 @@ Yii::app()->clientScript->registerScriptFile(
 						<div class="span6">
 							<div id="course-syllabus">
 								<h1><?php echo Yii::t('site', 'Course Logistics');?></h1>
-								<?php $this->widget('ContentList', 	array(
-									'mode' => 'normal',
-									'contents'=> $contents,
-								));?>
+								<?php 
+								$this->widget('ContentList',
+									array(
+										'mode' => 'normal',
+										'course'=> $model,
+									));
+								?>
 							</div><!-- end course-syllabus -->
 						</div><!-- /span6 -->
 					</div><!-- /row -->
@@ -134,7 +137,9 @@ Yii::app()->clientScript->registerScriptFile(
 				<div class="span6">
 					<div id="course-instructors" class="span6">
 						<h1><?php echo Yii::t('site', 'Instructor');?></h1>
-						<?php $this->widget('InstructorList', array('instructorList'=>$model->instructors));?>
+						<?php $this->widget('InstructorList', 
+							array('instructorList'=>$model->instructors
+						));?>
 					</div><!-- end course-instructors -->
 				</div><!-- /span6 -->
 			</div><!-- /row -->

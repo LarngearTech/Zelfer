@@ -1,16 +1,7 @@
 <?php
-class ContentList extends BaseWidget{
-	public $contents;
+class ContentList extends ContentListBase{
+	public $course;
 	public $mode;
-	
-	function comparator($a, $b){
-		if ($a->order == $b->order){
-			return 0;
-		}
-		else{
-			return ($a->order < $b->order)?-1:1;
-		}
-	}
 	
 	function registerPlayButtonHandler(){
 		$cs=Yii::app()->clientScript;
@@ -37,8 +28,9 @@ class ContentList extends BaseWidget{
 	}
 
 	function run(){
-		usort($this->contents, array(__CLASS__, 'comparator'));
-		$this->publishAssets(Yii::getPathOfAlias('application.widgets.ContentList'));
+		$contents = $this->course->contents;
+		usort($contents, array(__CLASS__, 'comparator'));
+
 		if (empty($this->mode))
 		{
 			$this->mode='normal';
@@ -52,7 +44,7 @@ class ContentList extends BaseWidget{
 		$this->render('contentList',
 			array(
 				'mode'=>$this->mode,
-				'contents'=>$this->contents,
+				'contents'=>$contents,
 				'assetsUrl'=>$this->assetsUrl,
 			)
 		);
