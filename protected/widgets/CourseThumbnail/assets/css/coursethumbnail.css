@@ -30,9 +30,14 @@
 
 .coursethumbnail .thumbnail-caption-container{
 	margin:0;
-	padding:0px 6px 0px 6px;
+	padding:15px 6px 0px 6px;
 	word-wrap: break-word;
 	height:80px;
+}
+
+.coursethumbnail .thumbnail-caption-container h5
+{
+	margin: 0;
 }
 
 .coursethumbnail img{
