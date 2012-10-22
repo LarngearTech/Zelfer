@@ -4,9 +4,9 @@
 		font-family: 'RSURegular';
 		src: url('../fonts/rsu_regular.eot');
 		src: url('../fonts/rsu_regular.eot?#iefix') format('embedded-opentype'),
-				 url('../fonts/rsu_regular.woff') format('woff'),
-				 url('../fonts/rsu_regular.ttf') format('truetype');
-				 url('../fonts/rsu_regular.svg#RSURegular') format('svg');
+			 url('../fonts/rsu_regular.woff') format('woff'),
+			 url('../fonts/rsu_regular.ttf') format('truetype');
+			 url('../fonts/rsu_regular.svg#RSURegular') format('svg');
 		font-weight: normal;
 		font-style: normal;
 	unicode-range: U+0E00-0E7F;*/
@@ -36,6 +36,12 @@ body .modal
 {
 	width: 480px;
 	margin: -210px 0 0 -240px;
+}
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input 
+{
+	font-size: 16px;
+	height: 30px;
 }
 
 #page
@@ -82,7 +88,7 @@ body .modal
 
 	background: linear-gradient(to bottom, rgb(155,155,155), rgb(120,120,120));
 	background: -webkit-gradient(linear, left top, left bottom, from(rgb(155,155,155)), to(rgb(120,120,120))); /* for webkit browsers */
-	background: -moz-linear-gradient(top,  rgb(155,155,155),  rgb(120,120,120)); /* for firefox 3.6+ */
+	background: -moz-linear-gradient(top,	rgb(155,155,155),	rgb(120,120,120)); /* for firefox 3.6+ */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9b9b9b', endColorstr='#787878'); /* for IE */
 }
 
@@ -287,7 +293,7 @@ div.search-form
 #course-header 
 {
 	margin: -20px 0 40px 0;
-	background: url("../images/bg.jpg") repeat 0% 0% rgb(201, 204, 208);
+	background: url("../images/low_contrast_linen.png") repeat 0% 0% rgb(201, 204, 208);
 	border-bottom: 1px solid;
 	box-shadow: 0px 0px 30px black;
 }
@@ -296,6 +302,7 @@ div.search-form
 {
 	margin-bottom: 60px;
 	margin-top: 50px;
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
 }
 
 #course-header #course-intro-video
@@ -303,34 +310,86 @@ div.search-form
 	box-shadow: 5px 5px 15px black;
 }
 
-#course-header #course-institute-logo
-{
-	margin-left: 60px;
-	margin-bottom: 10px;
-}
-
 #course-header #course-header-name
 {
 	margin-left: 60px;
+	text-align: center;
 }
 
-#course-header #course-header-name h1
+#course-header-name h1
 {
+	color: #f5f5f5;
 	font-size: 3.5em;
+	filter: shadow(color=#000000,direction=135,strength=5);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=5)";
+	text-shadow: #000 0px 2px 5px;
 }
 
-#course-header #course-description
+#course-header-name h3
+{
+	filter: shadow(color=#000000,direction=135,strength=5);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=5)";
+	text-shadow: #000 1px 1px 1px;
+	color: #eeeeee;
+}
+
+#course-description
 {
 	margin-top: 20px;
 	margin-left: 60px;
 	margin-bottom: 20px;
-	font-size: 1.4em;
+	font-size: 2.2em;
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
+	color: white;
+	text-align: center;
+	filter: shadow(color=#000000,direction=135,strength=5);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=5)";
+	text-shadow: #000 1px 1px 3px;
 }
 
 #course-header #course-header-button
 {
 	margin-top: 20px;
 	margin-left: 60px;
+	text-align: center;
+}
+
+#course-header-button .btn-large
+{
+	font-size: 2em;
+}
+
+.login-signup-flipper
+{
+    font-family: RSURegular, Arial, Helvetica, sans-serif;
+	font-size: 1.4em;
+	text-align: left;
+}
+
+.login-signup-flipper h1
+{
+	text-align: center;
+}
+
+.login-signup-flipper label
+{
+	font-size: 1em;
+}
+
+.login-signup-flipper .rememberMe input[type="checkbox"]
+{
+	margin: 0;
+}
+
+.login-signup-flipper .buttons input
+{
+    font-family: RSURegular, Arial, Helvetica, sans-serif;
+	font-size: 2em;
+}
+
+#course-header-button .login-signup-flipper
+{
+	padding-left: 40px;
 }
 
 #course-summary p.well
