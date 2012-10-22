@@ -11,7 +11,7 @@ $(function () {
         {
             elem.flip({
                 direction: 'lr',
-                speed: 350,
+                speed: 250,
                 color: '#ffffff',
                 onBefore: function() {
                     elem.html(elem.siblings('.flip-back').html());
