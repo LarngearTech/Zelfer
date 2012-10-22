@@ -20,15 +20,16 @@ html
 h1, h2
 {
 	font-family: RSURegular, Arial, Helvetica, sans-serif;
+	text-shadow: 0px 1px 0px #fff;
 }
 
 body
 {
 	margin: 0;
 	padding: 0;
-	/*color: #555;*/
 	color: #444;
 	font: normal 10pt Arial,Helvetica,sans-serif;
+	text-shadow: 0px 1px 0px #fff;
 	background: #f5f5f5;
 	background: url("../images/bg.png") repeat 0% 0%;
 }
@@ -414,6 +415,7 @@ div.search-form
 {
 	margin-top: 10px;
 	font-size: 1.2em;
+	text-shadow: 0px 1px 0px #ffffff;
 }
 
 #course-syllabus #chapter-accordion
