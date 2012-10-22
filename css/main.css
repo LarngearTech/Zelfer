@@ -26,7 +26,8 @@ body
 {
 	margin: 0;
 	padding: 0;
-	color: #555;
+	/*color: #555;*/
+	color: #444;
 	font: normal 10pt Arial,Helvetica,sans-serif;
 	background: #f5f5f5;
 	background: url("../images/bg.png") repeat 0% 0%;
@@ -94,7 +95,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 .header-section
 {
-		background: url("../images/class.jpg") rgb(201, 204, 208);
+		background: url("../images/class.jpg") no-repeat rgb(201, 204, 208);
 		border-bottom: 1px solid;
 		box-shadow: 0px 0px 30px black;
 
@@ -103,7 +104,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .header-wrapper
 {
 	margin-top: 100px;
-	margin-bottom: 150px;
+	margin-bottom: 100px;
 }
 
 #sidebar
@@ -269,9 +270,14 @@ div.search-form
 	width: 100%;
 }
 
+.login-signup-wrapper input[type="checkbox"]
+{
+	width: 5%;
+}
+
 #login-form .buttons
 {
-	margin-top: 18px;
+	margin-top: 20px;
 }
 
 .header-section
@@ -380,6 +386,7 @@ div.search-form
 {
     font-family: RSURegular, Arial, Helvetica, sans-serif;
 	font-size: 2em;
+	height: 60px;
 }
 
 #course-header-button .login-signup-flipper
