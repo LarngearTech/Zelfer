@@ -73,3 +73,24 @@
     padding-left: 20px;
 }
 
+.content-list
+{
+    margin:0px;
+}
+.editable-chapter,
+.editable-lecture
+{
+    list-style:none;
+}
+
+.editable-chapter input[type=text],
+.editable-lecture input[type=text]
+{
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	background-color:transparent;
+	border:0;
+	outline:none;
+	outline-offset:0;
+}
