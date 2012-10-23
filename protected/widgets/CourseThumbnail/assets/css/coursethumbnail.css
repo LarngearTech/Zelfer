@@ -21,6 +21,16 @@
         color:rgb(51,51,51);
 }
 
+.coursethumbnail-container
+{
+	width: 300px;
+}
+
+.course-thumbnail-uploader label
+{
+	font-size: 1.6em;
+}
+
 .coursethumbnail .thumbnail-img-container{
 	margin:0;
 	padding:0;
@@ -46,4 +56,14 @@
 	margin:0px auto 0 auto;
 	max-width:100%;
 	max-height:100%;
+}
+
+.upload-thumbnail-caption-container
+{
+	padding: 5px 5px 5px 5px;
+}
+
+.upload-thumbnail-file-container
+{  
+	padding: 5px 5px 5px 5px;
 }
