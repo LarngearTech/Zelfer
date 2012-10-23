@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="span6">
+	<div class="span7">
 		<div class="well form">
 			<?php
 			$this->renderPartial('_form', array(
@@ -8,8 +8,8 @@
 			));
 ?>
 		</div>
-	</div><!-- /span6 -->
-	<div class="span6">
+	</div><!-- /span7 -->
+	<div class="span5">
 		<div class="well form">
 			<?php
 			$this->widget('CourseThumbnailUploader', array(
@@ -18,7 +18,7 @@
 			));
 			?>
 		</div>
-	</div><!-- /span6 -->
+	</div><!-- /span5 -->
 </div><!-- /row -->
 <div class="row">
 	<div class="span12">

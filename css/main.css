@@ -56,6 +56,11 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	height: 30px;
 }
 
+textarea
+{
+	height: 90px;
+}
+
 input[type="submit"]
 {
     font-family: RSURegular, Arial, Helvetica, sans-serif;
