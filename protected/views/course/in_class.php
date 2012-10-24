@@ -19,7 +19,7 @@
 				);
 	$lecturesTabContent .= '
 			</div><!-- /lecture-stack-wrapperspan3 -->';
-	$lecturesTabContent .= '<div class="span9"><form><legend id="lecture-name">First Lecture</legend>';
+	$lecturesTabContent .= '<div class="span9"><form><legend id="lecture-name">'.Yii::t('site', 'Choose lecture').'</legend>';
 	$lecturesTabContent .= '<div id="lecture-content-wrapper" class="videoWrapper">';
 	$lecturesTabContent .= $this->widget('application.extensions.videojs.EVideoJS', array(
 						'options' => array(
@@ -172,7 +172,7 @@
 		$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'discussion',
 		));
-			echo 'Discussion';
+			echo 'This feature is coming soon...';
 		$this->endWidget();
 	$this->endWidget();
 ?>

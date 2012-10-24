@@ -50,6 +50,12 @@ a:hover
 	text-decoration: none;
 }
 
+legend
+{
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
+	font-size: 2em;
+}
+
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input 
 {
 	font-size: 16px;
@@ -455,8 +461,12 @@ div.search-form
 {
     font-family: RSURegular, Arial, Helvetica, sans-serif;
 	font-size: 1.8em;
-	background-color: rgb(217, 228, 232);
+	background-color: rgb(240, 240, 240);
 	background-image: linear-gradient(rgb(255,255,255), rgb(235,235,235));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(255,255,255)), to(rgb(235,235,235))); /* for webkit browsers */
+    background: -moz-linear-gradient(top,   rgb(255,255,255),   rgb(235,235,235)); /* for firefox 3.6+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ebebeb'); /* for IE */
+
 }
 
 .accordion-heading a
@@ -626,7 +636,7 @@ video.video-js {
 #lecture-content-wrapper
 {
     position: relative;
-    padding-bottom: 40.7%; /* video dimensions - width/height */
+    padding-bottom: 56.3%; /* video dimensions - width/height */
     padding-top: 0px;
     height: 0;
     z-index: 10;

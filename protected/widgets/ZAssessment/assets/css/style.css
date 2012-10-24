@@ -67,3 +67,8 @@
 	{
 		margin-top: 20px;
 	}
+	
+	a.paginator_p 
+	{
+		line-height: 40px;
+	}
