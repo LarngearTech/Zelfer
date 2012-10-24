@@ -21,6 +21,7 @@
 		<nav id="paginator_o_right"></nav>
 		<nav id="paginator_m_right"></nav>
 	</div>
+	<div class="clearfix"></div>
 	<?php echo CHtml::submitButton(Yii::t('site', 'Submit'), array('class' => 'btn btn-primary')); ?>
 <?php echo CHtml::endForm(); ?>
 </div><!-- /assessments -->

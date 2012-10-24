@@ -60,5 +60,10 @@
 		border: solid 1px black ;
 	}
 	#paginator-control {
-		margin: 10px 10px 0 0;
+		margin: 10px 10px 10px 10px;
+	}
+
+	.assessments input[type="submit"]
+	{
+		margin-top: 20px;
 	}

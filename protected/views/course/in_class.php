@@ -100,6 +100,70 @@
                         'id' => 'test-4',
                         'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'4.xml',
                     ),
+					array(
+                        'id' => 'test-5',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'5.xml',
+                    ),
+					array(
+                        'id' => 'test-6',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'6.xml',
+                    ),
+					array(
+                        'id' => 'test-7',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'7.xml',
+                    ),
+					array(
+                        'id' => 'test-8',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'8.xml',
+                    ),
+					array(
+                        'id' => 'test-9',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'9.xml',
+                    ),
+					array(
+                        'id' => 'test-10',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'10.xml',
+                    ),
+					array(
+                        'id' => 'test-11',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'11.xml',
+                    ),
+					array(
+                        'id' => 'test-12',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'12.xml',
+                    ),
+					array(
+                        'id' => 'test-13',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'13.xml',
+                    ),
+					array(
+                        'id' => 'test-14',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'14.xml',
+                    ),
+					array(
+                        'id' => 'test-15',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'15.xml',
+                    ),
+					array(
+                        'id' => 'test-16',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'16.xml',
+                    ),
+					array(
+                        'id' => 'test-17',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'17.xml',
+                    ),
+					array(
+                        'id' => 'test-18',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'18.xml',
+                    ),
+					array(
+                        'id' => 'test-19',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'19.xml',
+                    ),
+					array(
+                        'id' => 'test-20',
+                        'itemPath' => Yii::app()->basePath.DIRECTORY_SEPARATOR.'assessments'.DIRECTORY_SEPARATOR.'5'.DIRECTORY_SEPARATOR.'20.xml',
+                    ),
 				)
 			));
 		$this->endWidget(); // end EbootstrapTabConent

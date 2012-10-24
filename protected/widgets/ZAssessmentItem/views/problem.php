@@ -7,6 +7,7 @@
 				'value' => $choice['value'],
 			));?>
 			<?php echo CHtml::label($choice['text'], $id); ?>	
+			<div class="clearfix"></div>
 		<?php endforeach; ?>
 	</div><!-- /assessment-choices -->
 </div><!-- /assessment-item -->

@@ -545,7 +545,7 @@ div.search-form
 /* Videos */ 
 .videoWrapper {
 	position: relative;
-	padding-bottom: 51.8%; /* video dimensions - width/height */
+	padding-bottom: 40.8%; /* video dimensions - width/height */
 	padding-top: 0px;
 	height: 0;
 	z-index: 10;
@@ -599,4 +599,20 @@ video.video-js {
 .video-js-box img.vjs-poster {
 	height: 100% !important;
 	width: 100% !important;
+}
+
+.assessment-prompt
+{
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
+	font-size: 1.6em;
+}
+.assessment-choices
+{
+	padding-left: 10px;
+}
+
+.assessment-choices label
+{
+	font-size: 1.6em;
+	padding-left: 10px;
 }
