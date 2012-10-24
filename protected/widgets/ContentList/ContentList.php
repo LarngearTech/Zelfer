@@ -13,7 +13,7 @@ class ContentList extends ContentListBase{
 				});
 				$(".playbutton").click(function(e){
 					$("#lecture-content-wrapper").html(
-						"<img src=\''.$this->assetsUrl.'/img/loading.gif\'/>"
+						"<img width=\'100%\' src=\''.$this->assetsUrl.'/img/loading.gif\'/>"
 					);
 					ajaxUrl = "'.Yii::app()->controller->createUrl("course/changeVideo").'";
 					$.ajax({
