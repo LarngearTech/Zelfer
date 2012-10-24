@@ -69,7 +69,7 @@
 				Yii::app()->createUrl('course/changeCourseInfo', array('courseId'=>$model->id)),
 				array(
 					'dataType'=>'html',
-					'update'=>'.course-thumbnail-container',
+					'update'=>'.coursethumbnail-container',
 				)
 			);
 		}
