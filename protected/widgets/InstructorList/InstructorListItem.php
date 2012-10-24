@@ -26,7 +26,7 @@ class InstructorListItem extends CWidget{
 		}
 		else
 		{
-			$this->instructor->profile_image_url;
+			$this->profileImageUrl = $this->instructor->profile_image_url;
 		}
 
 		// Render widget
