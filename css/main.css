@@ -622,3 +622,12 @@ video.video-js {
 	font-size: 1.6em;
 	padding-left: 10px;
 }
+
+#lecture-content-wrapper
+{
+    position: relative;
+    padding-bottom: 40.7%; /* video dimensions - width/height */
+    padding-top: 0px;
+    height: 0;
+    z-index: 10;
+}
