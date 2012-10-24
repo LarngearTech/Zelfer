@@ -74,7 +74,7 @@ function addInClassContent($content, $assetsUrl)
 	<li class="lecture">
 		<a href="javascript:void(0)"><?php echo CHtml::encode($content->name);?>
 			<em>
-				<img src="<?php echo $assetsUrl;?>/img/play.png"  class="playbutton" id='<?php echo Yii::app()->baseUrl.'/content/'.$content->id.'/';?>'/>
+				<img src="<?php echo $assetsUrl;?>/img/play.png"  class="playbutton" id='<?php echo Yii::app()->baseUrl.'/content/'.$content->id.'/';?>' name='<?php echo $content->name; ?>'/>
 			</em>
 		</a> 
 	</li>

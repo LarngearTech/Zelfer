@@ -12,6 +12,7 @@ class ContentList extends ContentListBase{
 					alert(this.id);
 				});
 				$(".playbutton").click(function(e){
+					$("#lecture-name").html(this.name);
 					$("#lecture-content-wrapper").html(
 						"<img width=\'100%\' src=\''.$this->assetsUrl.'/img/loading.gif\'/>"
 					);
