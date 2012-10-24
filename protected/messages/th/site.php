@@ -75,4 +75,5 @@ return array(
 	'signup now' => 'สมัครเลย',
 	'Already have an account?' => 'เคยสมัครไว้แล้ว?',
 	'login' => 'เข้าสู่ระบบ',
+	'Choose lecture' => 'เลือกบทเรียน',
 );
