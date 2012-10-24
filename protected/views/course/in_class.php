@@ -172,7 +172,7 @@
 		$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'discussion',
 		));
-			echo 'Discussion';
+			echo 'This feature is coming soon...';
 		$this->endWidget();
 	$this->endWidget();
 ?>
