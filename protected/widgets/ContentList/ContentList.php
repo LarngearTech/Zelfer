@@ -13,9 +13,9 @@ class ContentList extends ContentListBase{
 				});
 				$(".playbutton").click(function(e){
 					$("#lecture-content-wrapper").html(
-						"<img src="'.$this->assetsUrl.'/img/loading.gif"/>"
+						"<img src=\''.$this->assetsUrl.'/img/loading.gif\'/>"
 					);
-					/*ajaxUrl = "'.Yii::app()->controller->createUrl("course/changeVideo").'";
+					ajaxUrl = "'.Yii::app()->controller->createUrl("course/changeVideo").'";
 					$.ajax({
 						url : ajaxUrl,
 						data : {
@@ -23,7 +23,7 @@ class ContentList extends ContentListBase{
 						},
 						dataType : "html",
 						success : function(html){$("#lecture-content-wrapper").html(html);}
-					});*/
+					});
 				});
 			});',
 			CClientScript::POS_END
