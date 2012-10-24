@@ -636,7 +636,7 @@ video.video-js {
 #lecture-content-wrapper
 {
     position: relative;
-    padding-bottom: 40.7%; /* video dimensions - width/height */
+    padding-bottom: 56.3%; /* video dimensions - width/height */
     padding-top: 0px;
     height: 0;
     z-index: 10;
