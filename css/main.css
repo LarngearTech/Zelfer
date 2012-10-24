@@ -455,8 +455,12 @@ div.search-form
 {
     font-family: RSURegular, Arial, Helvetica, sans-serif;
 	font-size: 1.8em;
-	background-color: rgb(217, 228, 232);
+	background-color: rgb(240, 240, 240);
 	background-image: linear-gradient(rgb(255,255,255), rgb(235,235,235));
+    background: -webkit-gradient(linear, left top, left bottom, from(rgb(255,255,255)), to(rgb(235,235,235))); /* for webkit browsers */
+    background: -moz-linear-gradient(top,   rgb(255,255,255),   rgb(235,235,235)); /* for firefox 3.6+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ebebeb'); /* for IE */
+
 }
 
 .accordion-heading a
