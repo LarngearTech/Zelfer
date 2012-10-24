@@ -1,7 +1,8 @@
 <div class="container">
+<div id="course-header-in-class">
 <h1><?php echo CHtml::encode($model->name); ?></h1>
 <h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->courseInstructorsShortString);?></h3>
-
+</div><!-- /course-header -->
 <div id="course-tabs">
 	<?php
 	$lecturesTabContent = '
