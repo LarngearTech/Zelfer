@@ -8,7 +8,8 @@ $cs->registerScript('make-sort-script',
 					var contentList = $('.content-list').sortable();
 					var order = $(contentList).sortable('serialize');
 					$.ajax({
-						url:'".Yii::app()->createUrl('course/changeContentOrder')."',
+						url:'".Yii::app()->createUrl('course/changeContentOrder',
+							array('courseId'=>$course->id))."',
 						data:order,
 						dataType:'html',                
 						type:'POST',

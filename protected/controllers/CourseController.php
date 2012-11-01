@@ -497,9 +497,30 @@ class CourseController extends Controller
 		}
 	}
 
-	public function actionChangeContentOrder()
+	private function findNewOrder($currentOrder, $newOrderList)
 	{
-		print_r($_POST);
+		foreach($newOrderList as $key=>$value)
+		{
+			if($value==$currentOrder)
+			{
+				return $key;
+			}
+		}
+	}
+	public function actionChangeContentOrder($courseId)
+	{
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$model  = $this->loadModel($courseId);
+			$contents = $model->contents; 
+			$newOrderList = $_POST['content'];
+			foreach($contents as $content)
+			{
+				$content->order = $this->findNewOrder($content->order, $newOrderList);
+				//echo 'current order:'.$content->order.' new order:'.$this->findNewOrder($content->order, $newOrderList);
+				$content->save();
+			}
+		}
 	}
 
 	/**
