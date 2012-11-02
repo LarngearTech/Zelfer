@@ -3,7 +3,7 @@ $cs = Yii::app()->getClientScript();
 $cs->registerScript('make-sort-script',
 	"function makeSortable(){
 			$('.content-list').sortable({
-				handle : '.handle',
+				//handle : '.content-handle',
 				update : function(){
 					var contentList = $('.content-list').sortable();
 					var order = $(contentList).sortable('serialize');
@@ -18,7 +18,7 @@ $cs->registerScript('make-sort-script',
 			});
 	};
 	$(function(){
-		makeSortable()
+		makeSortable();
 	});",
 	CClientScript::POS_HEAD);
 ?>

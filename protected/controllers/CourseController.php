@@ -497,11 +497,11 @@ class CourseController extends Controller
 		}
 	}
 
-	private function findNewOrder($currentOrder, $newOrderList)
+	private function findNewOrder($contentId, $newOrderList)
 	{
 		foreach($newOrderList as $key=>$value)
 		{
-			if($value==$currentOrder)
+			if($value==$contentId)
 			{
 				return $key;
 			}
@@ -514,9 +514,10 @@ class CourseController extends Controller
 			$model  = $this->loadModel($courseId);
 			$contents = $model->contents; 
 			$newOrderList = $_POST['content'];
+			print_r($_POST);
 			foreach($contents as $content)
 			{
-				$content->order = $this->findNewOrder($content->order, $newOrderList);
+				$content->order = $this->findNewOrder($content->id, $newOrderList);
 				//echo 'current order:'.$content->order.' new order:'.$this->findNewOrder($content->order, $newOrderList);
 				$content->save();
 			}
