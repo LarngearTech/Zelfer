@@ -77,9 +77,12 @@
 {
     margin:0px;
 }
+
 .editable-chapter,
 .editable-lecture
 {
+    height:40px;
+    line-height:40px;
     display:inline-block;
     margin:2px 0px;
     padding:4px 14px;
@@ -87,11 +90,31 @@
     vertical-align:middle;
     cursor:move;
     list-style:none;
-    width:100%;
+    width:95%;
+    float:right;
     border: 1px solid #bbbbbb;
     -webkit-border-radius: 4px;
        -moz-border-radius: 4px;
             border-radius: 4px;
+}
+
+.editable-lecture
+{
+    width:90%;
+    float:right;
+}
+
+.editable-chapter .content-prefix,
+.editable-lecture .content-prefix
+{
+    font-size:16px;
+    font-weight:bold;
+}
+
+.editable-chapter .content-name,
+.editable-lecture .content-name
+{
+    font-size:16px;
 }
 
 .editable-chapter .edit-panel,
@@ -110,4 +133,9 @@
 	border:0;
 	outline:none;
 	outline-offset:0;
+}
+
+.add-content-panel
+{
+    clear:both;
 }

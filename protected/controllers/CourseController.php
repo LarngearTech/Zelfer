@@ -379,7 +379,10 @@ class CourseController extends Controller
 	public function actionDelete($courseId)
 	{
 		$this->loadModel($courseId)->delete();
-		$this->redirect(array('site/index'));
+		$this->redirect($this->createUrl(
+			'course/myCourse',
+			array('uid'=>Yii::app()->user->id)
+		));
 	}
 
 
@@ -445,7 +448,8 @@ class CourseController extends Controller
 	{
 		if(Yii::app()->request->isAjaxRequest)
 		{
-			$course = Course::model()->findByPk($_POST['courseId']);
+			$course  = $this->loadModel($_POST['courseId']);
+
 			$lastChapterId=-1;
 			$maxOrder=-1;
 			foreach($course->contents as $content)
@@ -465,7 +469,7 @@ class CourseController extends Controller
 			$lecture->type=1;
 			$lecture->save();
 
-			$course=Course::model()->findByPk($_POST['courseId']);	
+			$course  = $this->loadModel($_POST['courseId']);
 			$this->widget('EditableContentList',
 				array(
 					'course'=>$course,
@@ -478,7 +482,7 @@ class CourseController extends Controller
 	{
 		if(Yii::app()->request->isAjaxRequest)
 		{
-			$course=Course::model()->findByPk($_POST['courseId']);	
+			$course  = $this->loadModel($_POST['courseId']);
 
 			$chapter = new Content();
 			$chapter->course_id = $_POST['courseId'];
@@ -489,6 +493,7 @@ class CourseController extends Controller
 			$chapter->save();
 
 			$course=Course::model()->findByPk($_POST['courseId']);	
+
 			$this->widget('EditableContentList',
 				array(
 					'course'=>$course,
@@ -511,16 +516,36 @@ class CourseController extends Controller
 	{
 		if (Yii::app()->request->isAjaxRequest)
 		{
-			$model  = $this->loadModel($courseId);
-			$contents = $model->contents; 
-			$newOrderList = $_POST['content'];
-			print_r($_POST);
+			$course  = $this->loadModel($courseId);
+			$contents = $course->contents; 
+			$newOrderList=$_POST['content'];
+
 			foreach($contents as $content)
 			{
 				$content->order = $this->findNewOrder($content->id, $newOrderList);
-				//echo 'current order:'.$content->order.' new order:'.$this->findNewOrder($content->order, $newOrderList);
+			}
+
+			usort($contents, array('ProjectUtil', 'contentComparator'));
+			$currentChapter=-1;
+			foreach($contents as $content)
+			{
+                                // Update parentId
+                                if ($content->isChapter())
+                                {
+                                        $currentChapter=$content->id;
+                                }
+                                else
+                                {
+                                        $content->parent_id=$currentChapter;
+                                }
 				$content->save();
 			}
+
+			$this->widget('EditableContentList',
+				array(
+					'course'=>$course,
+				)
+			);
 		}
 	}
 

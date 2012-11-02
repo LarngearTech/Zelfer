@@ -13,6 +13,10 @@ $cs->registerScript('make-sort-script',
 						data:order,
 						dataType:'html',                
 						type:'POST',
+						success:function(html){
+							$('.editable-content-list-container').html(html);
+							makeSortable();
+						}
 					});
 				}       
 			});
@@ -29,7 +33,7 @@ $cs->registerScript('make-sort-script',
 	);
 	?>
 </div>
-<div class='btn-group'>
+<div class='btn-group add-content-panel'>
 	<?php 
 	echo CHtml::ajaxButton(
 		'Add Lecture',
