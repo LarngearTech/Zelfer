@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'deleteContent'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -512,6 +512,7 @@ class CourseController extends Controller
 			}
 		}
 	}
+
 	public function actionChangeContentOrder($courseId)
 	{
 		if (Yii::app()->request->isAjaxRequest)
@@ -547,6 +548,11 @@ class CourseController extends Controller
 				)
 			);
 		}
+	}
+
+	public function actionDeleteContent()
+	{
+		echo "delete content".$_POST['contentId'];
 	}
 
 	/**

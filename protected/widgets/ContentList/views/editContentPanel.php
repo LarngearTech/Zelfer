@@ -29,7 +29,9 @@ $cs->registerScript('make-sort-script',
 <div class='editable-content-list-container'>
 	<?php
 	$this->widget('EditableContentList',
-		array('course'=>$course)
+		array(
+			'course'=>$course,
+		)
 	);
 	?>
 </div>
