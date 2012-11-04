@@ -280,4 +280,29 @@ class Course extends CActiveRecord
 		}
 		return $insStr;
 	}
+
+	public function deleteIntroVideo()
+	{
+		if (!empty($this->intro_url))
+		{
+			$introVideoPath = ResourcePath::getIntroVideoBasePath().$this->intro_url;
+			if (file_exists($introVideoPath))
+			{
+				shell_exec('rm -rf '.$introVideoPath);
+			}
+		}
+	}
+
+
+	public function deleteThumbnail()
+	{
+		if (!empty($this->thumbnail_url))
+		{
+			$thumbnailPath = ResourcePath::getCourseThumbnailBasePath().PHPHelper::getFileFullName($this->thumbnail_url);
+			if (file_exists($thumbnailPath))
+			{
+				unlink($thumbnailPath);
+			}
+		}
+	}
 }

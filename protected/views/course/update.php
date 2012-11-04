@@ -14,7 +14,7 @@
 						Yii::t('site', 'Delete'), 
 						array(
 							'course/delete',
-							'courseId' => $model->id,
+							'courseId'=>$model->id,
 						),
 						array(
 							'class' => 'btn btn-danger',

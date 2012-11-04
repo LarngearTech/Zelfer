@@ -3,11 +3,11 @@ class PHPHelper
 {
 	public static function getFileFullName($filename)
 	{
-		return $this->getFileName($filename).'.'.$this->getFileExtension($filename);
+		return PHPHelper::getFileName($filename).'.'.PHPHelper::getFileExtension($filename);
 	}
 	public static function getFileName($filename)
 	{
-		return baseName($filename, '.'.$this->getFileExtension($filename));
+		return baseName($filename, '.'.PHPHelper::getFileExtension($filename));
 	}
 	public static function getFileExtension($filename)
 	{

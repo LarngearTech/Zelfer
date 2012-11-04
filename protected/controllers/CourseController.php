@@ -138,8 +138,7 @@ class CourseController extends Controller
 	 */
 	function actionChangeIntroVideo($courseId)
 	{
-		$course = Course::model()->findByPk($courseId);
-
+		$course = $this->loadModel($courseId);
 		if ($course)
 		{
 			Yii::import("application.widgets.EAjaxUpload.qqFileUploader");
@@ -154,14 +153,7 @@ class CourseController extends Controller
 			$fileName=$result['filename'];
 
 			// Replace previous intro video with the current one
-			if (!empty($course->intro_url))
-			{
-				$introVideoPath = $folder.$course->intro_url;
-				if (file_exists($introVideoPath))
-				{
-					shell_exec('rm -rf '.$introVideoPath);
-				}
-			}
+			$course->deleteIntroVideo();
 			$newName = uniqid().'.'.PHPHelper::getFileExtension($fileName);
 			rename($folder.$fileName, $folder.$newName);
 			// Convert file to x264 using ffmpeg
@@ -188,7 +180,7 @@ class CourseController extends Controller
 	 */
 	function actionChangeThumbnail($courseId)
 	{
-		$course = Course::model()->findByPk($courseId);
+		$course = $this->loadModel($courseId);
 
 		if ($course)
 		{
@@ -204,14 +196,7 @@ class CourseController extends Controller
 			$fileName=$result['filename'];
 
 			// Replace previous thumbnail with the current one
-			if (!empty($course->thumbnail_url))
-			{
-				$thumbnailPath = $folder.PHPHelper::getFileFullName($course->thumbnail_url);
-				if (file_exists($thumbnailPath))
-				{
-					unlink($thumbnailPath);
-				}
-			}
+			$course->deleteThumbnail();
 			$newname = uniqid().'.'.PHPHelper::getFileExtension($fileName);
 			rename($folder.$fileName, $folder.$newname);
 			$course->thumbnail_url = ResourcePath::getCourseThumbnailBaseUrl().$newname;
@@ -374,11 +359,18 @@ class CourseController extends Controller
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
 	 */
 	public function actionDelete($courseId)
 	{
-		$this->loadModel($courseId)->delete();
+		$course = $this->loadModel($courseId);
+		$course->deleteIntroVideo();
+		$course->deleteThumbnail();
+		$contents = $course->contents;
+		foreach ($contents as $content)
+		{
+			$content->delete();
+		}
+		$course->delete();
 		$this->redirect($this->createUrl(
 			'course/myCourse',
 			array('uid'=>Yii::app()->user->id)
@@ -550,9 +542,53 @@ class CourseController extends Controller
 		}
 	}
 
+	/**
+	 * Delete a content from course
+	 */
 	public function actionDeleteContent()
 	{
-		echo "delete content".$_POST['contentId'];
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$course=$this->loadModel($_POST['courseId']);
+			if ($course)
+			{
+				$prevChapter=-1;
+				$contents = $course->contents;
+				usort($contents, array('ProjectUtil', 'contentComparator'));
+				foreach($contents as $content)
+				{
+					if ($content->isChapter())
+					{
+						if ($content->id!=$_POST['contentId'])
+						{
+							$prevChapter=$content->id;
+						}
+						else
+						{
+							//echo "delete content ".$_POST['contentId']." from course ".$_POST['courseId']." prevChapter ".$prevChapter;
+							$childContents=$content->childContents;
+							foreach ($childContents as $childContent)
+							{
+								$childContent->parent_id=$prevChapter;
+								$childContent->save();
+							}
+							$content->delete();
+							
+						}
+					}
+					else if($content->id==$_POST['contentId'])
+					{
+						//echo "delete content ".$_POST['contentId']." from course ".$_POST['courseId'];
+						$content->delete();
+					}
+				}
+			}
+
+			$course=$this->loadModel($_POST['courseId']);
+			$this->widget('EditableContentList', 
+				array('course'=>$course)
+			);
+		}
 	}
 
 	/**

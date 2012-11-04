@@ -12,6 +12,7 @@ class EditableContentList extends ContentListBase{
 
 		$this->render('editableContentList',
 			array(
+				'courseId'=>$this->course->id,
 				'contents'=>$contents,
 			)
 		);

@@ -24,7 +24,7 @@ $cs->registerScript('make-sort-script',
 	$(function(){
 		makeSortable();
 	});",
-	CClientScript::POS_HEAD);
+	CClientScript::POS_END);
 ?>
 <div class='editable-content-list-container'>
 	<?php
