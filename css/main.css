@@ -347,6 +347,11 @@ div.search-form
 	font-size: 1.6em;
 }
 
+#course-form .input-row
+{
+	margin-bottom: 10px;
+}
+
 #course-form input[type="text"]
 {
 	width: 95%;
@@ -356,6 +361,19 @@ div.search-form
 {
 	width: 95%;
 	height: 200px;
+}
+
+#course-form select
+{
+	height: 40px;
+	padding: 4px 6px;
+}
+
+#course-form input[type="submit"]
+{
+	margin-top: 5px;
+	width: 100px;
+	height: 50px;
 }
 
 #course-header 
