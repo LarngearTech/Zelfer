@@ -5,5 +5,4 @@
 			'update' => '#instructor-list-container',
 			'itemWidget' => 'EditableInstructorListItem',
 	));?>
-
 </div><!-- /course-instructors -->

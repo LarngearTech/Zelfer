@@ -10,19 +10,6 @@
 		<div class="span3">
 			<div class="btn-toolbar">
 				<div class="btn-group">
-					<?php echo CHtml::link(
-						Yii::t('site', 'Delete'), 
-						array(
-							'course/delete',
-							'courseId'=>$model->id,
-						),
-						array(
-							'class' => 'btn btn-danger',
-							'confirm' => Yii::t('site', 'Do you really want to delete this course? This cannot be undone.'),
-						)
-					);?>
-				</div><!-- end btn-group -->
-				<div class="btn-group">
 					<?php 
 					// Not yet publish course
 					if ($model->status == 0){
@@ -50,6 +37,19 @@
 							)
 						);
 					}?>
+				</div><!-- end btn-group -->
+				<div class="btn-group">
+					<?php echo CHtml::link(
+						Yii::t('site', 'Delete'), 
+						array(
+							'course/delete',
+							'courseId'=>$model->id,
+						),
+						array(
+							'class' => 'btn btn-danger',
+							'confirm' => Yii::t('site', 'Do you really want to delete this course? This cannot be undone.'),
+						)
+					);?>
 				</div><!-- end btn-group -->
 			</div><!-- end btn-toolbar-->
 

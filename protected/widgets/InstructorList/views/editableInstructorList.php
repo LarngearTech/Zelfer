@@ -1,7 +1,6 @@
 <?php 
 foreach ($course->instructors as $instructor)
 {
-	echo '<div class="span6">';
 	$this->widget($this->itemWidget, 
 		array(
 		'course'=>$course,
@@ -9,5 +8,4 @@ foreach ($course->instructors as $instructor)
 		'deleteInstructorHandler'=>$deleteInstructorHandler,
 		'update'=>$update,
 	));
-	echo '</div>';
 }

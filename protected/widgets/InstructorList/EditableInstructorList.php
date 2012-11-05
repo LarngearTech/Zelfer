@@ -12,14 +12,12 @@ class EditableInstructorList extends CWidget{
 			$this->itemWidget = 'EditableInstructorListItem';
 		}
 
-		$this->render('editableInstructorList', 
-			array(
-			'course'=>$this->course,
-			'deleteInstructorHandler'=>$this->deleteInstructorHandler,
-			'update'=>$this->update,
-			'itemWidget'=>$this->itemWidget,
-			)
-		);
+		$this->render('editableInstructorList', array(
+			'course' => $this->course,
+			'deleteInstructorHandler' => $this->deleteInstructorHandler,
+			'update' => $this->update,
+			'itemWidget' => $this->itemWidget,
+		));
 	}
 }
 ?>

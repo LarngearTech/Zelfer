@@ -1,17 +1,19 @@
+<div class="instructor-wrapper">
 <?php $this->widget('InstructorListItem', array('instructor'=>$instructor)); ?>
 <?php 
 // Allow delete instructor only if the instructor is not the owner of this course
 if ($course->owner_id != $instructor->id)
 {
 	echo CHtml::button(
-		'Delete',
+		Yii::t('site', 'Delete'),
 		array(
-			'class'=>'btn btn-danger btn-delete',
-			'onclick'=>'js:deleteInstructor('.$instructor->id.');',
+			'class' => 'btn btn-danger btn-delete',
+			'onclick' => 'js:deleteInstructor('.$instructor->id.');',
 		)
 	);
 }
 ?>
+</div><!-- /instructor-wrapper -->
 <?php
 	$cs = Yii::app()->clientScript;
 	$cs->registerScript('jsDeleteInstructor', 

@@ -694,3 +694,9 @@ video.video-js {
 {
 	height: 40px;
 }
+
+.instructor-wrapper input[type="button"]
+{
+	width: 60px;
+	font-size: 18px;
+}
