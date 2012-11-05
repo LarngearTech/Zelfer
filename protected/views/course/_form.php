@@ -22,7 +22,7 @@
 
 	<div class="input-row">
 		<?php echo $form->labelEx($model,'long_description'); ?>
-		<?php echo $form->textArea($model,'long_description',array('style'=>'width:500px;resize:none', 'rows'=>10, 'cols'=>40,'maxlength'=>1000)); ?>
+		<?php echo $form->textArea($model,'long_description',array('rows'=>30, 'cols'=>40,'maxlength'=>1000)); ?>
 		<?php echo $form->error($model,'long_description'); ?>
 	</div>
 
