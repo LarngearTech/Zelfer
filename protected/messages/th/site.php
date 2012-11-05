@@ -83,4 +83,6 @@ return array(
 	'Already have an account?' => 'เคยสมัครไว้แล้ว?',
 	'login' => 'เข้าสู่ระบบ',
 	'Choose lecture' => 'เลือกบทเรียน',
+	'Do you really want to delete this course? This cannot be undone.' => 'คุณแน่ใจว่าจะลบคอร์สนี้? ถ้าลบแล้วจะไม่สามารถนำกลับมาได้',
+	'Do you really want to publish this course?' => 'ยืนยันว่าต้องการเปิดใช้งานคอร์สนี้',
 );
