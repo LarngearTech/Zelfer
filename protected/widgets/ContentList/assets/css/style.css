@@ -78,6 +78,11 @@
     margin:0px;
 }
 
+.content-editing
+{
+	height:auto !important;
+}
+
 .editable-chapter,
 .editable-lecture
 {
@@ -133,6 +138,12 @@
 	border:0;
 	outline:none;
 	outline-offset:0;
+	cursor:move;
+}
+
+.content-handle
+{
+	cursor:move;
 }
 
 .add-content-panel

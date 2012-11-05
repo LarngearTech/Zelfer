@@ -2,13 +2,21 @@
 	$cs = Yii::app()->clientScript;
 	$cs->registerScript(
 		'edit-content-handle',
-		'function editContent(contentId){
-			// hide edit icon
-			$("#toggle-edit-"+contentId).hide();
-
-			// change to edit mode
-			$("#content_"+contentId).addClass("editing");
-			$("#txt-content-name-"+contentId).prop("disabled", false);
+		'function editContent(contentId, contentPrefix){
+			$("#content_"+contentId).addClass("content-editing");
+			$.ajax({
+				url:"'.Yii::app()->createUrl('course/editContent').'",
+				data:{
+					contentId:contentId,
+					contentPrefix:contentPrefix,
+				},
+				type:"POST",
+				dataType:"html",
+				success:function(html){
+					$("#content_"+contentId).html(html);
+					makeSortable();
+				}
+			});
 		}',
 		CClientScript::POS_END
 		
@@ -39,6 +47,7 @@
 	$chapterId=0;
 	$lectureId=0;
 	$contentPrefix;
+	$class;
 	foreach($contents as $content)
 	{
 		if ($content->isChapter())
@@ -54,12 +63,13 @@
 			$lectureId++;
 			$contentPrefix=Yii::t('site', 'Lecture')." ".$lectureId.": ";
 		}
-		$this->render('editableContentListItem',
+		echo '<li id="content_'.$content->id.'" class="'.$class.'">';
+		$this->widget('EditableContentListItem',
 			array(
 				'contentPrefix'=>$contentPrefix,
 				'content'=>$content,
-				'class'=>$class
 			));
+		echo '</li>';
 	}
 ?>
 </ul>

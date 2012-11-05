@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'deleteContent'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'editContent', 'deleteContent'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -540,6 +540,18 @@ class CourseController extends Controller
 				)
 			);
 		}
+	}
+
+	public function actionEditContent()
+	{
+		$content=Content::model()->findByPk($_POST['contentId']);
+		$this->widget('EditableContentListItem',
+			array(
+				'content'=>$content,
+				'contentPrefix'=>$_POST['contentPrefix'],
+				'mode'=>'edit'
+			)
+		);
 	}
 
 	/**
