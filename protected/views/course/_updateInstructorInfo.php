@@ -11,12 +11,15 @@
 					$("#instructorId").val(ui.item["id"]);
 				}'
 			),
+			'htmlOptions' => array(
+				'placeholder' => Yii::t('site', 'Type instructor name'),
+			),
 		));
 		echo CHtml::hiddenField('instructorId', 
 				'', 
 				array('id'=>'instructorId')
 		);
-		echo CHtml::ajaxButton('Add',
+		echo CHtml::ajaxButton(Yii::t('site', 'Add'),
 			$this->createUrl('course/addInstructor'),
 			array(
 				'data'=>array(
@@ -36,17 +39,15 @@
 </div>
 
 <div class='row'>
-	<div class='span9'>
+	<div class='span12'>
 		<div id='instructor-list-container'>
+			<div id="course-instructors">
 			<?php 
-			$this->widget('EditableInstructorList', 
-				array(
-				'course'=>$model,
-				'deleteInstructorHandler'=>$this->createUrl('course/deleteInstructor'),
-				'update'=>'#instructor-list-container',
-				'itemWidget'=>'EditableInstructorListItem'
-			)); 
+			$this->renderPartial('_editableInstructorList', array(
+				'course' => $model,
+			));
 			?>
-		</div>
-	</div>
-</div>
+			</div><!-- /course-instructors -->
+		</div><!-- instructor-list-container -->
+	</div><!-- /span12 -->
+</div><!-- /row -->

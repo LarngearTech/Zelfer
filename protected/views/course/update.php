@@ -46,7 +46,7 @@
 							),
 							array(
 								'class' => 'btn btn-warning',
-								'confirm' => 'Do you really want to unpublish this course',
+								'confirm' => Yii::t('site', 'Do you really want to unpublish this course?'),
 							)
 						);
 					}?>
@@ -60,9 +60,9 @@
 	<div class="span12">
 		<div class="tabbable tabs-top">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#course_info" data-toggle="tab">Course Info</a><li>
-				<li><a href="#instructor_info" data-toggle="tab">Instructor Info</a><li>
-				<li><a href="#course_content" data-toggle="tab">Course Content</a><li>
+				<li class="active"><a href="#course_info" data-toggle="tab"><?php echo Yii::t('site', 'Course Info');?></a><li>
+				<li><a href="#instructor_info" data-toggle="tab"><?php echo Yii::t('site', 'Instructor Info');?></a><li>
+				<li><a href="#course_content" data-toggle="tab"><?php echo Yii::t('site', 'Course Content');?></a><li>
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="course_info">
