@@ -5,7 +5,7 @@
 		$this->widget('IntroVideoPlayer', array('course'=>$course));
 		?>
 	</div>
-	<div>Max 10 MB AVI, MP4, WMV</div>
+	<div class="upload-video-caption-container">Max 10 MB AVI, MP4, WMV</div>
 	<?php
 	$this->widget('EAjaxUpload', array(
 			'id' => 'introVideoFile',

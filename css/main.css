@@ -349,12 +349,12 @@ div.search-form
 
 #course-form input[type="text"]
 {
-	width: 90%;
+	width: 95%;
 }
 
 #course-form textarea
 {
-	width: 90%;
+	width: 95%;
 	height: 200px;
 }
 
