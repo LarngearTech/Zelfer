@@ -46,7 +46,7 @@
 							),
 							array(
 								'class' => 'btn btn-warning',
-								'confirm' => 'Do you really want to unpublish this course',
+								'confirm' => Yii::t('site', 'Do you really want to unpublish this course?'),
 							)
 						);
 					}?>

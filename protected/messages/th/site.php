@@ -18,9 +18,9 @@ return array(
 	'More' => 'เพิ่มเติม',
 	'Create' => 'สร้าง',
 	'Save' => 'บันทึก',
-	'Delete' => 'ลบทิ้ง',
-	'Publish' => 'เปิดใช้งานคอร์ส',
-	'Unpublish' => 'ยกเลิกการเปิดคอร์ส',
+	'Delete' => 'ลบ',
+	'Publish' => 'เปิดคอร์ส',
+	'Unpublish' => 'ซ่อนคอร์ส',
 
 	// General Form 
 	'Fields with' => 'ช่องที่มีเครื่องหมาย',
@@ -85,4 +85,5 @@ return array(
 	'Choose lecture' => 'เลือกบทเรียน',
 	'Do you really want to delete this course? This cannot be undone.' => 'คุณแน่ใจว่าจะลบคอร์สนี้? ถ้าลบแล้วจะไม่สามารถนำกลับมาได้',
 	'Do you really want to publish this course?' => 'ยืนยันว่าต้องการเปิดใช้งานคอร์สนี้',
+	'Do you really want to unpublish this course?' => 'ยืนยันว่าต้องการซ่อนคอร์สนี้',
 );
