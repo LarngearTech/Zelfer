@@ -1,6 +1,6 @@
 <div class="course-intro-video-uploader">
 	<label>Introduction Video</label>
-	<div class="intro-video-player-container">
+	<div class="videoWrapper">
 		<?php 
 		$this->widget('IntroVideoPlayer', array('course'=>$course));
 		?>
