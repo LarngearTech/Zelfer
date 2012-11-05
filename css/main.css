@@ -50,6 +50,14 @@ a:hover
 	text-decoration: none;
 }
 
+.btn-group > .btn
+{
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
+	font-size: 22px;
+	height: 40px;
+	line-height: 40px;
+}
+
 legend
 {
 	font-family: RSURegular, Arial, Helvetica, sans-serif;
@@ -119,11 +127,11 @@ label
 .dropdown-menu li > a:focus,
 .dropdown-submenu > a
 {
-	background: rgb(137, 137, 137); /* for non-css3 browsers */
+	background: rgb(180, 180, 180); /* for non-css3 browsers */
 
-	background: linear-gradient(to bottom, rgb(155,155,155), rgb(120,120,120));
-	background: -webkit-gradient(linear, left top, left bottom, from(rgb(155,155,155)), to(rgb(120,120,120))); /* for webkit browsers */
-	background: -moz-linear-gradient(top,	rgb(155,155,155),	rgb(120,120,120)); /* for firefox 3.6+ */
+	background: linear-gradient(to bottom, rgb(190,190,190), rgb(150,150,150));
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(190,190,190)), to(rgb(150,150,150))); /* for webkit browsers */
+	background: -moz-linear-gradient(top,	rgb(190,190,190),	rgb(150,150,150)); /* for firefox 3.6+ */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9b9b9b', endColorstr='#787878'); /* for IE */
 }
 
@@ -153,7 +161,7 @@ label
 	margin-bottom: 20px;
 	font-size: 0.8em;
 	text-align: center;
-	border-top: 1px solid #C9E0ED;
+	border-top: 1px solid rgb(221, 221, 221);
 }
 
 #logo
@@ -345,6 +353,35 @@ div.search-form
 #course-form label
 {
 	font-size: 1.6em;
+}
+
+#course-form .input-row
+{
+	margin-bottom: 10px;
+}
+
+#course-form input[type="text"]
+{
+	width: 95%;
+}
+
+#course-form textarea
+{
+	width: 95%;
+	height: 200px;
+}
+
+#course-form select
+{
+	height: 40px;
+	padding: 4px 6px;
+}
+
+#course-form input[type="submit"]
+{
+	margin-top: 5px;
+	width: 100px;
+	height: 50px;
 }
 
 #course-header 

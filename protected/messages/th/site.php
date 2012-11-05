@@ -17,6 +17,10 @@ return array(
 	'Edit' => 'แก้ไข',
 	'More' => 'เพิ่มเติม',
 	'Create' => 'สร้าง',
+	'Save' => 'บันทึก',
+	'Delete' => 'ลบทิ้ง',
+	'Publish' => 'เปิดใช้งานคอร์ส',
+	'Unpublish' => 'ยกเลิกการเปิดคอร์ส',
 
 	// General Form 
 	'Fields with' => 'ช่องที่มีเครื่องหมาย',
@@ -58,6 +62,9 @@ return array(
 	'Edit Course' => 'แก้ไขคอร์ส',
 	'Instructor' => 'ผู้สอน',
 	'Course Logistics' => 'เนื้อหาของคอร์ส', 
+	'Course\'s Thumbnail' => 'รูปประกอบคอร์ส',
+	'Introduction Video' => 'วิดีโอแนะนำคอร์ส',
+	'Max' => 'สูงสุด',
 	'Chapter' => 'บทที่',
 	'and {numIns} others.' => 'และอีก {numIns} คน',
 	'Go to course' => 'เข้าสู่คอร์ส',
@@ -76,4 +83,6 @@ return array(
 	'Already have an account?' => 'เคยสมัครไว้แล้ว?',
 	'login' => 'เข้าสู่ระบบ',
 	'Choose lecture' => 'เลือกบทเรียน',
+	'Do you really want to delete this course? This cannot be undone.' => 'คุณแน่ใจว่าจะลบคอร์สนี้? ถ้าลบแล้วจะไม่สามารถนำกลับมาได้',
+	'Do you really want to publish this course?' => 'ยืนยันว่าต้องการเปิดใช้งานคอร์สนี้',
 );

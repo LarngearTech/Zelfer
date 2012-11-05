@@ -1,5 +1,5 @@
 <div class="course-thumbnail-uploader clearfix">
-	<label>Course's Thumbnail</label>
+	<label><?php echo Yii::t('site', 'Course\'s Thumbnail');?></label>
 	<div class="coursethumbnail-container">
 		<?php 
 		$this->widget('CourseThumbnail', array(
@@ -10,7 +10,7 @@
 	</div>
 	<div class="clearfix"></div>
 	<div class="upload-thumbnail-caption-container">
-		Max 256 KB JPG, PNG, GIF, JPEG and BMP
+		<?php echo Yii::t('site', 'Max');?> 256 KB JPG, PNG, GIF, JPEG and BMP
 	</div>
 	<div class="upload-thumbnail-file-container">
 		<?php

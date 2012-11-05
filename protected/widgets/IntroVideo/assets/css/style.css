@@ -8,6 +8,12 @@
 	padding: 5px;
 }
 
-#introVideoFile
+.upload-video-caption-container
 {
+	padding: 5px;
+}
+
+.qq-upload-list
+{
+	display: none;
 }

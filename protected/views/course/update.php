@@ -18,7 +18,7 @@
 						),
 						array(
 							'class' => 'btn btn-danger',
-							'confirm' => 'Do you really want to delete this course, this cannot be undone',
+							'confirm' => Yii::t('site', 'Do you really want to delete this course? This cannot be undone.'),
 						)
 					);?>
 				</div><!-- end btn-group -->
@@ -34,7 +34,7 @@
 							),
 							array(
 								'class' => 'btn btn-success',
-								'confirm' => 'Do you really want to publish this course',
+								'confirm' => Yii::t('site', 'Do you really want to publish this course?'),
 							)
 						);
 					}
