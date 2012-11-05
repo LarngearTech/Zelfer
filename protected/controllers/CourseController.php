@@ -402,12 +402,17 @@ class CourseController extends Controller
 				$instructor->addTeachCourse($courseId);
 			}
 		}
-		$course = Course::model()->findByPk($courseId);
-		$this->widget('EditableInstructorList', 
+		//$course = Course::model()->findByPk($courseId);
+		$course = $this->loadModel($courseId);
+		
+		/*$this->widget('EditableInstructorList', 
 			array(
 			'course'=>$course,
 			'deleteInstructorHandler'=>$this->createUrl('course/deleteInstructor'),
 			'update'=>'#instructor-list-container',
+		));*/
+		$this->renderPartial('_editableInstructorList', array(
+			'course' => $course,
 		));
 	}
 
@@ -425,13 +430,17 @@ class CourseController extends Controller
 			$instructor->id = $instructorId;
 			$instructor->removeTeachCourse($courseId);
 
-			$course = Course::model()->findByPk($courseId);
-			$this->widget('EditableInstructorList',
+			//$course = Course::model()->findByPk($courseId);
+			$course = $this->loadModel($courseId);
+			/*$this->widget('EditableInstructorList',
 				array(
 					'course'=>$course,
 					'deleteInstructorHandler'=>$this->createUrl('course/deleteInstructor'),
 					'update'=>'#instructor-list-container',
-				));
+				));*/
+			$this->renderPartial('_editableInstructorList', array(
+				'course' => $course,
+			));
 		}
 	}
 
@@ -484,13 +493,16 @@ class CourseController extends Controller
 			$chapter->type=0;
 			$chapter->save();
 
-			$course=Course::model()->findByPk($_POST['courseId']);	
+			$course=$this->loadModel($_POST['courseId']);	
 
-			$this->widget('EditableContentList',
+			/*$this->widget('EditableContentList',
 				array(
 					'course'=>$course,
 				)
-			);
+			);*/
+			$this->renderPartial('_editableInstructorList', array(
+				'course' => $course,
+			));
 		}
 	}
 
