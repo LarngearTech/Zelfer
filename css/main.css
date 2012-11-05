@@ -50,6 +50,14 @@ a:hover
 	text-decoration: none;
 }
 
+.btn-group > .btn
+{
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
+	font-size: 22px;
+	height: 40px;
+	line-height: 40px;
+}
+
 legend
 {
 	font-family: RSURegular, Arial, Helvetica, sans-serif;

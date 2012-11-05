@@ -65,7 +65,7 @@
 		}
 		else {
 			echo CHtml::ajaxSubmitButton(
-				'Save', 
+				Yii::t('site', 'Save'), 
 				Yii::app()->createUrl('course/changeCourseInfo', array('courseId'=>$model->id)),
 				array(
 					'dataType'=>'html',

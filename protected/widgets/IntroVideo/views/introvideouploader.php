@@ -1,11 +1,11 @@
 <div class="course-intro-video-uploader">
-	<label>Introduction Video</label>
+	<label><?php echo Yii::t('site', 'Introduction Video');?></label>
 	<div class="videoWrapper">
 		<?php 
 		$this->widget('IntroVideoPlayer', array('course'=>$course));
 		?>
 	</div>
-	<div class="upload-video-caption-container">Max 10 MB AVI, MP4, WMV</div>
+	<div class="upload-video-caption-container"><?php echo Yii::t('site', 'Max');?> 10 MB AVI, MP4, WMV</div>
 	<?php
 	$this->widget('EAjaxUpload', array(
 			'id' => 'introVideoFile',
