@@ -7,6 +7,7 @@ if ($course->owner_id != $instructor->id)
 	echo CHtml::button(
 		Yii::t('site', 'Delete'),
 		array(
+			'href'=>'js:void(0);',
 			'class' => 'btn btn-danger btn-delete',
 			'onclick' => 'js:deleteInstructor('.$instructor->id.');',
 		)
@@ -30,5 +31,6 @@ if ($course->owner_id != $instructor->id)
 					$("'.$update.'").html(newList);
 				}
 			});
-	}', CClientScript::POS_END);
+		}', 
+	CClientScript::POS_END);
 ?>

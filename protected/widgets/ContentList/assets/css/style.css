@@ -83,6 +83,11 @@
 	height:auto !important;
 }
 
+.editable-chapter
+{
+	height:40px !important;
+	line-height:40px !important;
+}
 .editable-chapter,
 .editable-lecture
 {

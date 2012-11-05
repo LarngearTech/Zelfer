@@ -3,9 +3,16 @@
 	<span id="content-name-<?php echo $content->id; ?>" class="content-name">
 		<input type="text" value="<?php echo $content->name; ?>"/>
 	</span>
+<?php
+	if (!$content->isChapter())
+	{
+?>
 	<div>
 		<h4>Add content's material</h4>
 	</div>
+<?php
+	}
+?>
 	<div class="edit-panel">
 		<a class="btn"><i class="icon-ok"></i></a>
 		<a class="btn"><i class="icon-remove"></i></a>
