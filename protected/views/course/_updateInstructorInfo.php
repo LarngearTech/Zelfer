@@ -11,12 +11,15 @@
 					$("#instructorId").val(ui.item["id"]);
 				}'
 			),
+			'htmlOptions' => array(
+				'placeholder' => Yii::t('site', 'Type instructor name'),
+			),
 		));
 		echo CHtml::hiddenField('instructorId', 
 				'', 
 				array('id'=>'instructorId')
 		);
-		echo CHtml::ajaxButton('Add',
+		echo CHtml::ajaxButton(Yii::t('site', 'Add'),
 			$this->createUrl('course/addInstructor'),
 			array(
 				'data'=>array(

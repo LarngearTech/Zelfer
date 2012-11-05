@@ -14,6 +14,7 @@ return array(
 	'Logout' => 'ออกจากระบบ',
 	'By' => 'โดย',
 	'and' => 'และ',
+	'Add' => 'เพิ่ม',
 	'Edit' => 'แก้ไข',
 	'More' => 'เพิ่มเติม',
 	'Create' => 'สร้าง',
@@ -88,4 +89,5 @@ return array(
 	'Do you really want to delete this course? This cannot be undone.' => 'คุณแน่ใจว่าจะลบคอร์สนี้? ถ้าลบแล้วจะไม่สามารถนำกลับมาได้',
 	'Do you really want to publish this course?' => 'ยืนยันว่าต้องการเปิดใช้งานคอร์สนี้',
 	'Do you really want to unpublish this course?' => 'ยืนยันว่าต้องการซ่อนคอร์สนี้',
+	'Type instructor name' => 'พิมพ์ชื่อผู้สอนคอร์สนี้',
 );
