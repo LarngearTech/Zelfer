@@ -123,8 +123,8 @@
     float:right;
 }
 
-.editable-chapter input[type=text],
-.editable-lecture input[type=text]
+.editable-chapter input[type=text]:disabled,
+.editable-lecture input[type=text]:disabled
 {
 	box-shadow:none;
 	-webkit-box-shadow:none;
