@@ -127,11 +127,11 @@ label
 .dropdown-menu li > a:focus,
 .dropdown-submenu > a
 {
-	background: rgb(137, 137, 137); /* for non-css3 browsers */
+	background: rgb(180, 180, 180); /* for non-css3 browsers */
 
-	background: linear-gradient(to bottom, rgb(155,155,155), rgb(120,120,120));
-	background: -webkit-gradient(linear, left top, left bottom, from(rgb(155,155,155)), to(rgb(120,120,120))); /* for webkit browsers */
-	background: -moz-linear-gradient(top,	rgb(155,155,155),	rgb(120,120,120)); /* for firefox 3.6+ */
+	background: linear-gradient(to bottom, rgb(190,190,190), rgb(150,150,150));
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(190,190,190)), to(rgb(150,150,150))); /* for webkit browsers */
+	background: -moz-linear-gradient(top,	rgb(190,190,190),	rgb(150,150,150)); /* for firefox 3.6+ */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9b9b9b', endColorstr='#787878'); /* for IE */
 }
 
