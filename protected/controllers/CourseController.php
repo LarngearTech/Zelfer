@@ -573,12 +573,12 @@ class CourseController extends Controller
 	{
 		if (Yii::app()->request->isAjaxRequest)
 		{
-			$content=Content::model()->findByPk($_POST['contentId']);
+			$content=$this->getContent($_POST['contentId']);
 			$this->widget('EditableContentListItem',
 				array(
 					'content'=>$content,
 					'contentPrefix'=>$_POST['contentPrefix'],
-					'mode'=>'edit',
+					//'mode'=>'edit',
 				)
 			);
 		}
