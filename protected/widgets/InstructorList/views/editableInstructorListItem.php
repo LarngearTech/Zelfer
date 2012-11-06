@@ -1,4 +1,4 @@
-<div class="instructor-wrapper">
+<div class="instructor-wrapper well">
 <?php $this->widget('InstructorListItem', array('instructor'=>$instructor)); ?>
 <?php 
 // Allow delete instructor only if the instructor is not the owner of this course
