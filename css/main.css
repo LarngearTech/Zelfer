@@ -86,6 +86,15 @@ input[type="submit"]
     height: 40px;
 }
 
+.well
+{
+	background-color: rgb(251,251,251);
+}
+
+.tab-content
+{
+
+}
 
 #page
 {
