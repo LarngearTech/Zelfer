@@ -26,6 +26,8 @@ $cs->registerScript('make-sort-script',
 	});",
 	CClientScript::POS_END);
 ?>
+<h2><?php echo Yii::t('site', 'Create Content');?></h2>
+<div class="well clearfix">
 <div class='editable-content-list-container'>
 	<?php
 	$this->widget('EditableContentList',
@@ -35,6 +37,7 @@ $cs->registerScript('make-sort-script',
 	);
 	?>
 </div>
+</div><!-- /well -->
 <div class='btn-group add-content-panel'>
 	<?php 
 	echo CHtml::ajaxButton(

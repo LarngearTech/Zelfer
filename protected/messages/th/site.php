@@ -90,4 +90,5 @@ return array(
 	'Do you really want to publish this course?' => 'ยืนยันว่าต้องการเปิดใช้งานคอร์สนี้',
 	'Do you really want to unpublish this course?' => 'ยืนยันว่าต้องการซ่อนคอร์สนี้',
 	'Type instructor name' => 'พิมพ์ชื่อผู้สอน',
+	'Create Content' => 'สร้างเนื้อหา',
 );

@@ -117,14 +117,14 @@
 .editable-chapter .content-prefix,
 .editable-lecture .content-prefix
 {
-    font-size:16px;
+    font-size:20px;
     font-weight:bold;
 }
 
 .editable-chapter .content-name,
 .editable-lecture .content-name
 {
-    font-size:16px;
+    font-size:20px;
 }
 
 .editable-chapter .edit-panel,
