@@ -9,9 +9,9 @@
 ?>
 		</div>
 	</div><!-- /span6 -->
-	<div class="span6">
+	<div class="span6 fix-border-offset">
 		<div class="row">
-			<div class="span6">
+			<div class="span6 fix-border-offset">
 				<div class="well form">
 					<?php
 						$this->widget('CourseThumbnailUploader', array(
@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="span6">
+			<div class="span6 fix-border-offset">
 				<div class="well form">
 						<?php
 					$this->widget('IntroVideoUploader', array(

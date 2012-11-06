@@ -1,4 +1,4 @@
-<div class="span9" class="edit-content-panel-container">
+<div class="edit-content-panel-container">
 	<?php
 	$this->widget('EditContentPanel',
 		array(

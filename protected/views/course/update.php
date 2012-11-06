@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="span9">
 			<h1><?php echo Yii::t('site', 'Edit Course');?> <?php echo $model->name; ?></h1>
-		</div><!-- /span8 -->
+		</div><!-- /span9 -->
 		<div class="span3">
 			<div class="btn-toolbar">
 				<div class="btn-group">
@@ -65,7 +65,7 @@
 				<li><a href="#course_content" data-toggle="tab"><?php echo Yii::t('site', 'Course Content');?></a><li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="course_info">
+				<div class="tab-pane active clearfix" id="course_info">
 					<?php 
 					$this->renderPartial('_updateCourseInfo',
 						array(
@@ -75,7 +75,7 @@
 					);
 					?>
 				</div>
-				<div class="tab-pane" id="instructor_info">
+				<div class="tab-pane clearfix" id="instructor_info">
 					<?php
 					$this->renderPartial('_updateInstructorInfo',
 						array(
@@ -84,7 +84,7 @@
 					);
 					?>
 				</div>
-				<div class="tab-pane" id="course_content">
+				<div class="tab-pane clearfix" id="course_content">
 					<?php
 					$this->renderPartial('_updateCourseContent',
 						array(
