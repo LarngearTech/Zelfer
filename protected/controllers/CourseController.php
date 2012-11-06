@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'editContent', 'deleteContent'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -538,14 +538,50 @@ class CourseController extends Controller
 
 	public function actionEditContent()
 	{
-		$content=Content::model()->findByPk($_POST['contentId']);
-		$this->widget('EditableContentListItem',
-			array(
-				'content'=>$content,
-				'contentPrefix'=>$_POST['contentPrefix'],
-				'mode'=>'edit'
-			)
-		);
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$content=Content::model()->findByPk($_POST['contentId']);
+			$this->widget('EditableContentListItem',
+				array(
+					'content'=>$content,
+					'contentPrefix'=>$_POST['contentPrefix'],
+					'mode'=>'edit'
+				)
+			);
+		}
+	}
+
+	public function actionCommitContent()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$content=$this->getContent($_POST['contentId']);
+			$content->name=$_POST['contentName'];
+			$content->save();
+
+			$content=$this->getContent($_POST['contentId']);
+			$this->widget('EditableContentListItem',
+				array(
+					'content'=>$content,
+					'contentPrefix'=>$_POST['contentPrefix'],
+				)
+			);
+		}
+	}
+
+	public function actionCancelEditContent()
+	{
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$content=Content::model()->findByPk($_POST['contentId']);
+			$this->widget('EditableContentListItem',
+				array(
+					'content'=>$content,
+					'contentPrefix'=>$_POST['contentPrefix'],
+					'mode'=>'edit',
+				)
+			);
+		}
 	}
 
 	/**
@@ -658,6 +694,14 @@ class CourseController extends Controller
 		}
 	}
 
+
+	private function getContent($contentId)
+	{
+		$content=Content::model()->findByPk($contentId);
+		if($content===null)
+			throw new CHttpException(404, 'The requested content does not exist.');
+		return $content;
+	}
 
 	/**
 	 * Return Array array list of mapping between category->id and categoryName

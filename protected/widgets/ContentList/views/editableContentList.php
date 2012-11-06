@@ -1,6 +1,14 @@
 <?php
 	$cs = Yii::app()->clientScript;
 	$cs->registerScript(
+		'update-content-item-ui',
+		'function updateContentItemUi(contentId, html){
+			$("#content_"+contentId).html(html);
+			makeSortable();
+		}',
+		CClientScript::POS_END
+	);
+	$cs->registerScript(
 		'edit-content-handle',
 		'function editContent(contentId, contentPrefix){
 			$("#content_"+contentId).addClass("content-editing");
@@ -22,22 +30,60 @@
 		
 	);
 	$cs->registerScript(
-		"delete-content-handle",
-		"function deleteContent(contentId){
+		'commit-content-handle',
+		'function commitContent(contentId, contentPrefix){
 			$.ajax({
-				url:'".Yii::app()->createUrl('course/deleteContent')."',
+				url:"'.Yii::app()->createUrl('course/commitContent').'",
 				data:{
-					courseId:".$courseId.",
-					contentId:contentId, 
-				},                      
-				type:'POST',
-				dataType:'html',
+					contentId:contentId,
+					contentName:$("#txt-content-name-"+contentId).val(),
+					contentPrefix:contentPrefix,
+				},
+				type:"POST",
+				dataType:"html",
 				success:function(html){
-					$('.editable-content-list-container').html(html);
+					updateContentItemUi(contentId, html);
+				}
+			});
+		}',
+		CClientScript::POS_END 
+	);
+	$cs->registerScript(
+		'cancel-edit-content-handle',
+		'function cancelEditContent(contentId, contentPrefix){
+			$.ajax({
+				url:"'.Yii::app()->createUrl('course/cancelEditContent').'",
+				data:{
+					contentId:contentId,
+					contentPrefix:contentPrefix,
+				},
+				type:"POST",
+				dataType:"html",
+				success:function(html){
+					$("#content_"+contentId).html(html);
 					makeSortable();
 				}
 			});
-		}",
+		}',
+		CClientScript::POS_END
+	);
+	$cs->registerScript(
+		'delete-content-handle',
+		'function deleteContent(contentId){
+			$.ajax({
+				url:"'.Yii::app()->createUrl("course/deleteContent").'",
+				data:{
+					courseId:'.$courseId.',
+					contentId:contentId, 
+				},                      
+				type:"POST",
+				dataType:"html",
+				success:function(html){
+					$(".editable-content-list-container").html(html);
+					makeSortable();
+				}
+			});
+		}',
 		CClientScript::POS_END
 	);	
 ?>
