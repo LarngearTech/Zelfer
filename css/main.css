@@ -96,15 +96,56 @@ input[type="submit"]
 	margin-bottom: 0px;
 }
 
-.tab-pane
+.tab-content
 {
+	border-bottom: 1px solid rgb(221,221,221);
 	border-left: 1px solid rgb(221,221,221);
 	border-right: 1px solid rgb(221,221,221);
-	border-bottom: 1px solid rgb(221,221,221);
 	background-color: rgb(255,255,255);
-	padding: 20px;
 }
 
+.input-append
+{
+	margin: 20px;
+}
+
+.instructor-wrapper
+{
+	margin: 20px;
+}
+
+.edit-content-panel-container
+{
+	margin: 20px;
+}
+
+@media (min-width: 1200px)
+{
+	#course_info > .well
+	{
+		width: 43%;
+		float: left;
+		margin: 20px;
+	}
+
+	.instructor-wrapper 
+	{
+		width: 43%;
+		float: left;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px)
+{
+	#course_info > .well
+	{
+		width: 38%;
+		float: left;
+	}
+	}
+}
+
+/*
 .fix-border-offset
 {
 	width: 458px;
@@ -115,7 +156,7 @@ input[type="submit"]
 {
 	width: 526px;
 }
-}
+}*/
 
 #page
 {

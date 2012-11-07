@@ -36,11 +36,9 @@
 	?>
 </div>
 <div id='instructor-list-container' class="clearfix">
-	<div id="course-instructors">
 	<?php 
 	$this->renderPartial('_editableInstructorList', array(
 		'course' => $model,
 	));
 	?>
-	</div><!-- /course-instructors -->
 </div><!-- instructor-list-container -->

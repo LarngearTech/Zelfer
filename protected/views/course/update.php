@@ -56,8 +56,8 @@
 		</div><!-- /span4 -->
 
 	</div><!-- /row -->
-<div id="edit-course-menu" class="row">
-	<div class="span12">
+		
+	<div id="edit-course-menu">
 		<div class="tabbable tabs-top">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#course_info" data-toggle="tab"><?php echo Yii::t('site', 'Course Info');?></a><li>
@@ -65,7 +65,7 @@
 				<li><a href="#course_content" data-toggle="tab"><?php echo Yii::t('site', 'Course Content');?></a><li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active clearfix" id="course_info">
+				<div class="tab-pane active" id="course_info">
 					<?php 
 					$this->renderPartial('_updateCourseInfo',
 						array(
@@ -74,8 +74,8 @@
 						)
 					);
 					?>
-				</div>
-				<div class="tab-pane clearfix" id="instructor_info">
+				</div><!-- tab-pane -->
+				<div class="tab-pane" id="instructor_info">
 					<?php
 					$this->renderPartial('_updateInstructorInfo',
 						array(
@@ -83,8 +83,8 @@
 						)
 					);
 					?>
-				</div>
-				<div class="tab-pane clearfix" id="course_content">
+				</div><!-- tab-pane -->
+				<div class="tab-pane" id="course_content">
 					<?php
 					$this->renderPartial('_updateCourseContent',
 						array(
@@ -92,8 +92,8 @@
 						)
 					);
 					?>
-				</div>
-			<div><!-- /tab-content -->
-		</div><!-- /tabbale -->	
-	</div><!-- /span12 -->
-</div><!-- /row -->
+				</div><!-- tab-pane -->
+			</div><!-- /tab-content -->
+		</div><!-- /tabbable -->	
+	</div><!-- /edit-course-menu -->
+</div><!-- /container -->
