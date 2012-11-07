@@ -3,6 +3,9 @@ class EditableContentList extends ContentListBase{
 	public $course;
 
 	function run(){
+		// Need to publish css and js of FileUploader for later use
+		$this->publishAssets(Yii::getPathOfAlias('application.widgets.FileUploader'));
+
                 $contents = $this->course->contents;
                 usort($contents, array(__CLASS__, 'comparator'));
 
