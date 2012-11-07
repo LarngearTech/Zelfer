@@ -29,12 +29,13 @@ return array(
 		'application.widgets.InstructorList.*',
 		'application.widgets.ContentList.*',
 		'application.widgets.EAjaxUpload.*',
+		'application.widgets.FileUploader.*',
 		'application.widgets.ZLogIn.*',
 		'application.widgets.ZSignUp.*',
 		'application.widgets.ZLogInSignUpFlipper.*',
 		'application.widgets.ZLectureStack.*',
-		'application.widgets/ZAssessment.*',
-		'application.widgets/ZAssessmentItem.*',
+		'application.widgets.ZAssessment.*',
+		'application.widgets.ZAssessmentItem.*',
 	),
 
 	'modules' => array(

@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeVideo', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent', 'contentTypeSelected'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -573,12 +573,12 @@ class CourseController extends Controller
 	{
 		if (Yii::app()->request->isAjaxRequest)
 		{
-			$content=Content::model()->findByPk($_POST['contentId']);
+			$content=$this->getContent($_POST['contentId']);
 			$this->widget('EditableContentListItem',
 				array(
 					'content'=>$content,
 					'contentPrefix'=>$_POST['contentPrefix'],
-					'mode'=>'edit',
+					//'mode'=>'edit',
 				)
 			);
 		}
@@ -630,6 +630,18 @@ class CourseController extends Controller
 			$this->widget('EditableContentList', 
 				array('course'=>$course)
 			);
+		}
+	}
+
+	public function actionContentTypeSelected()
+	{
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$widget = new EditableContentList(); 
+			if ($_POST['contentType'] == 'video')
+			{
+				$widget->render('_addVideoContent');
+			}
 		}
 	}
 
