@@ -35,14 +35,10 @@
 	);
 	?>
 </div>
-<div class="well">
-		<div id='instructor-list-container' class="clearfix">
-			<div id="course-instructors">
-			<?php 
-			$this->renderPartial('_editableInstructorList', array(
-				'course' => $model,
-			));
-			?>
-			</div><!-- /course-instructors -->
-		</div><!-- instructor-list-container -->
-</div><!-- /well -->
+<div id='instructor-list-container' class="clearfix">
+	<?php 
+	$this->renderPartial('_editableInstructorList', array(
+		'course' => $model,
+	));
+	?>
+</div><!-- instructor-list-container -->
