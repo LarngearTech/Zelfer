@@ -1,3 +1,4 @@
+<div class="instructors-info-wrapper">
 <div class='input-append'>
 	<?php 
 	$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
@@ -42,3 +43,4 @@
 	));
 	?>
 </div><!-- instructor-list-container -->
+</div><!-- instructor-info-wrapper -->
