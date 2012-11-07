@@ -134,15 +134,34 @@ input[type="submit"]
 		float: left;
 		margin: 20px;
 	}
+}
 
+@media (min-width: 980px) and (max-width: 1199px)
+{
+	#course_info > .well
+	{
+		width: 42%;
+		float: left;
+		margin: 20px 0 0 20px;
+	}
 }
 
 @media (min-width: 768px) and (max-width: 979px)
 {
 	#course_info > .well
 	{
-		width: 38%;
+		width: 41%;
 		float: left;
+		margin: 20px 0 0 16px;
+	}
+}
+
+@media (max-width: 767px)
+{
+	#course_info > .well
+	{
+		width: 90%;
+		margin: 20px auto 20px auto;
 	}
 }
 
