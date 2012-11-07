@@ -7,7 +7,7 @@ class EditableInstructorListItem extends BaseWidget{
 
 	function run()
 	{
-		$this->publishAssets(Yii::getPathOfAlias('application.widgets.InstructorList'));
+		$this->publishAssets(__DIR__);
 
 		// Render widget
 		echo $this->render('editableInstructorListItem', 

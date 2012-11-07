@@ -86,6 +86,25 @@
 		}',
 		CClientScript::POS_END
 	);	
+	$cs->registerScript(
+		'content-type-selected-handle',
+		'function contentTypeSelected(contentId, contentType){
+			$.ajax({
+				url:"'.Yii::app()->createUrl('course/contentTypeSelected').'",
+				data:{
+					contentId:contentId,
+					contentType:contentType
+				},
+				type:"POST",
+				dataType:"html",
+				success:function(html){
+					$("#edit-content-body-"+contentId).html(html);
+					makeSortable();
+				}
+			});
+		}',
+		CClientScript::POS_END
+	);
 ?>
 
 <ul class='content-list'>

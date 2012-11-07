@@ -155,3 +155,25 @@
 {
     clear:both;
 }
+
+.content-type-icon-container
+{
+    width:70px !important;
+    display:inline-block;
+    margin:2px 10px;
+    padding:4px 14px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align:middle;
+    border: 1px solid #bbbbbb;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+    overflow:hidden;	
+}
+
+.content-type-icon-panel a,
+.content-type-icon-panel a:hover
+{
+    color:auto !important;
+    text-decoration:none;
+}

@@ -12,7 +12,7 @@ class ContentListBase extends BaseWidget{
 
 	function init()
 	{
-		$this->publishAssets(Yii::getPathOfAlias('application.widgets.ContentList'));
+		$this->publishAssets(__DIR__);
 	}
 }
 ?>

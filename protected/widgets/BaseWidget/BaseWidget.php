@@ -6,7 +6,7 @@ class BaseWidget extends CWidget{
 	
 	public function publishAssets($widgetPath)
 	{
-		if(file_exists($widgetPath.DIRECTORY_SEPARATOR.'assets'))
+		if(file_exists($widgetPath.'/assets'))
 		{
 			$webroot = Yii::getPathOfAlias('webroot').'/..';
 			$this->assetsUrl = Yii::app()->getAssetManager()->publish($widgetPath.DIRECTORY_SEPARATOR.'assets', false, -1, YII_DEBUG);
