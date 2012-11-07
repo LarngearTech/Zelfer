@@ -637,10 +637,11 @@ class CourseController extends Controller
 	{
 		if (Yii::app()->request->isAjaxRequest)
 		{
-			$widget = new EditableContentList(); 
+			$widget=new ContentList();
 			if ($_POST['contentType'] == 'video')
 			{
-				$widget->render('_addVideoContent');
+				$widget->render('addVideoContent', 
+					array('contentId'=>$_POST['contentId']));
 			}
 		}
 	}
