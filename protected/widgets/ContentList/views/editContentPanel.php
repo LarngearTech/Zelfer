@@ -41,7 +41,28 @@ $cs->registerScript('make-sort-script',
 <div class='btn-group add-content-panel'>
 	<?php 
 	echo CHtml::ajaxButton(
-		'Add Lecture',
+		Yii::t('site', 'Add Chapter'),
+		$addChapterHandler,
+		array(
+			'type'=>'POST',
+			'dataType'=>'html',
+			'data'=>array(
+				'courseId'=>$course->id,
+			),
+			'success'=>'function(html) {
+				$(".editable-content-list-container").html(html);
+				makeSortable();
+				alert(html);
+			}'
+		),
+		array(
+			'class'=>'btn btn-add-chapter',
+		)
+	);
+	?>
+	<?php 
+	echo CHtml::ajaxButton(
+		Yii::t('site', 'Add Lecture'),
 		$addLectureHandler,
 		array(
 			'type'=>'POST',
@@ -56,26 +77,6 @@ $cs->registerScript('make-sort-script',
 		),
 		array(
 			'class'=>'btn btn-add-lecture',
-		)
-	);
-	?>
-	<?php 
-	echo CHtml::ajaxButton(
-		'Add Chapter',
-		$addChapterHandler,
-		array(
-			'type'=>'POST',
-			'dataType'=>'html',
-			'data'=>array(
-				'courseId'=>$course->id,
-			),
-			'success'=>'function(html){
-				$(".editable-content-list-container").html(html);
-				makeSortable();
-			}'
-		),
-		array(
-			'class'=>'btn btn-add-chapter',
 		)
 	);
 	?>

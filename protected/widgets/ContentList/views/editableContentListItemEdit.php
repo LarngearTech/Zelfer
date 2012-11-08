@@ -3,7 +3,7 @@
 	<span id="content-name-<?php echo $content->id; ?>" class="content-name">
 		<input id="txt-content-name-<?php echo $content->id; ?>" type="text" value="<?php echo $content->name; ?>"/>
 	</span>
-<?php
+	<?php
 	if (!$content->isChapter())
 	{
 ?>
@@ -13,7 +13,7 @@
 	</div>
 <?php
 	}
-?>
+	?>
 	<div class="edit-panel">
 		<a class="btn commit-content" onclick="js:commitContent(
 			<?php echo $content->id; ?>,

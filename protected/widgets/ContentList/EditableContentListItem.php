@@ -9,8 +9,8 @@ class EditableContentListItem extends ContentListBase{
 		{
 			$this->render('editableContentListItemNormal',
 				array(
-					'contentPrefix'=>$this->contentPrefix,
-					'content'=>$this->content,
+					'contentPrefix' => $this->contentPrefix,
+					'content' => $this->content,
 				)
 			);
 		}
@@ -18,8 +18,8 @@ class EditableContentListItem extends ContentListBase{
 		{
 			$this->render('editableContentListItemEdit',
 				array(
-					'contentPrefix'=>$this->contentPrefix,
-					'content'=>$this->content,
+					'contentPrefix' => $this->contentPrefix,
+					'content' => $this->content,
 				)
 			);
 		}

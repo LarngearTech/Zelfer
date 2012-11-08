@@ -130,7 +130,8 @@
 .editable-chapter .edit-panel,
 .editable-lecture .edit-panel
 {
-    float:right;
+    float: right;
+	display: none;
 }
 
 .editable-chapter input[type=text]:disabled,

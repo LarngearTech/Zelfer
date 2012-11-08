@@ -91,4 +91,7 @@ return array(
 	'Do you really want to unpublish this course?' => 'ยืนยันว่าต้องการซ่อนคอร์สนี้',
 	'Type instructor name' => 'พิมพ์ชื่อผู้สอน',
 	'Create Content' => 'สร้างเนื้อหา',
+	'Add Chapter' => 'เพิ่มบท',
+	'Add Lecture' => 'เพิ่มบทเรียน',
+	'Add Content Material' => 'เลือกเนื้อหาของบทเรียน',
 );
