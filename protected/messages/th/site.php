@@ -20,6 +20,7 @@ return array(
 	'Create' => 'สร้าง',
 	'Save' => 'บันทึก',
 	'Delete' => 'ลบ',
+	'Cancel' => 'ยกเลิก',
 	'Publish' => 'เปิดคอร์ส',
 	'Unpublish' => 'ซ่อนคอร์ส',
 

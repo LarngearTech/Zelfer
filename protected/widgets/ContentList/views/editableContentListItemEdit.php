@@ -7,11 +7,11 @@
 		<a class="btn commit-content" onclick="js:commitContent(
 			<?php echo $content->id; ?>,
 			'<?php echo $contentPrefix; ?>'
-			)" title="commit change">
+			)" title="<?php echo Yii::t('site', 'Save');?>">
 			<i class="icon-ok"></i>
 		</a>
-		<a class="btn cancel-edit-edit" onclick="js:cancelEditContent(<?php echo $content->id; ?>, '<?php echo $contentPrefix; ?>')" title="reset"><i class="icon-remove"></i></a>
-		<a class="btn delete-content" onclick="js:deleteContent(<?php echo $content->id; ?>)" title="delete content"><i class="icon-trash"></i></a>
+		<a class="btn cancel-edit-edit" onclick="js:cancelEditContent(<?php echo $content->id; ?>, '<?php echo $contentPrefix; ?>')" title="<?php echo Yii::t('site', 'Cancel');?>"><i class="icon-repeat"></i></a>
+		<a class="btn delete-content" onclick="js:deleteContent(<?php echo $content->id; ?>)" title="<?php echo Yii::t('site', 'Delete');?>"><i class="icon-trash"></i></a>
 	</div>
 	<?php
 	if (!$content->isChapter())
