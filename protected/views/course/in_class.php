@@ -4,6 +4,7 @@
 <h3><?php echo Yii::t('site', 'By').' '.CHtml::encode($model->courseInstructorsShortString);?></h3>
 </div><!-- /course-header -->
 <div id="course-tabs">
+	<div class="tabbable tabs-top">
 	<?php
 	$lecturesTabContent = '
 		<div class="row">
@@ -19,7 +20,7 @@
 					true
 				);
 	$lecturesTabContent .= '
-			</div><!-- /lecture-stack-wrapperspan3 -->';
+			</div><!-- /lecture-stack-wrapper /span3 -->';
 	$lecturesTabContent .= '<div class="span9"><form><legend id="lecture-name">อัลกอริทึมคืออะไร</legend>';
 	$lecturesTabContent .= '<div id="lecture-content-wrapper" class="videoWrapper">';
 	$lecturesTabContent .= $this->widget('application.extensions.videojs.EVideoJS', array(
@@ -177,5 +178,6 @@
 		$this->endWidget();
 	$this->endWidget();
 ?>
+	</div><!-- /tabbable -->
 </div><!-- end course-tabs -->
 </div><!-- /container -->
