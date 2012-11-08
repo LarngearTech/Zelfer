@@ -28,7 +28,7 @@ body
 	margin: 0;
 	padding: 0;
 	color: #454545;
-	font: normal 12pt RSURegular,Helvetica, Ariel, sans-serif;
+	font: normal 12pt Helvetica, Ariel, sans-serif;
 	text-shadow: 0px 1px 0px #fff;
 	background: #f5f5f5;
 	background: url("../images/bg.png") repeat 0% 0%;
@@ -75,7 +75,7 @@ textarea
 	height: 90px;
 }
 
-label, input, button, select, textarea
+label, button
 {
 	font-family: RSURegular, Arial, Helvetica, sans-serif;
 }
@@ -182,8 +182,8 @@ input[type="submit"]
 
 .header-wrapper
 {
-	margin-top: 100px;
-	margin-bottom: 100px;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 #sidebar
@@ -455,7 +455,8 @@ div.search-form
 #course-header-name h1
 {
 	color: #f5f5f5;
-	font-size: 3.5em;
+	font-size: 52px;
+	line-height: 60px;
 	filter: shadow(color=#000000,direction=135,strength=5);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=5)";
 	text-shadow: #000 0px 2px 5px;
