@@ -7,6 +7,7 @@
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.min.css'); ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap-responsive.min.css'); ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main.css') ?>
+	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main-responsive.css') ?>
 	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/html5placeholder.jquery.js') ?>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -32,7 +33,7 @@
 			),
 			'items' => array(
 				array(
-					'label' => Yii::t('site', 'Udamo'),
+					'label' => Yii::t('site', 'OMC!'),
 					'url' => array('/site/index'),
 					'template' => '{brand}',
 				),
