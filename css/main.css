@@ -82,6 +82,7 @@ label, button
 
 input[type="submit"]
 {
+	font-family: RSURegular, Arial, Helvetica, sans-serif;
     font-size: 2em;
     height: 40px;
 }
