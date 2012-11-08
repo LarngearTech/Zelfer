@@ -33,7 +33,7 @@
 			),
 			'items' => array(
 				array(
-					'label' => Yii::t('site', 'Udamo'),
+					'label' => Yii::t('site', 'OMC!'),
 					'url' => array('/site/index'),
 					'template' => '{brand}',
 				),
