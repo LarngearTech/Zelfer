@@ -126,63 +126,9 @@ input[type="submit"]
 	margin: 20px;
 }
 
-@media (min-width: 1200px)
-{
-	#course_info > .well
-	{
-		width: 43%;
-		float: left;
-		margin: 20px;
-	}
-}
-
-@media (min-width: 980px) and (max-width: 1199px)
-{
-	#course_info > .well
-	{
-		width: 42%;
-		float: left;
-		margin: 20px 0 0 20px;
-	}
-}
-
-@media (min-width: 768px) and (max-width: 979px)
-{
-	#course_info > .well
-	{
-		width: 41%;
-		float: left;
-		margin: 20px 0 0 16px;
-	}
-}
-
-@media (max-width: 767px)
-{
-	#course_info > .well
-	{
-		width: 90%;
-		margin: 20px auto 20px auto;
-	}
-}
-
-/*
-.fix-border-offset
-{
-	width: 458px;
-}
-
-@media (min-width: 1200px) {
-.fix-border-offset
-{
-	width: 526px;
-}
-}*/
-
 #page
 {
 	margin-bottom: 5px;
-
-	/*border: 1px solid #C9E0ED;*/
 }
 
 #header
@@ -694,7 +640,7 @@ div.search-form
 /* Videos */ 
 .videoWrapper {
 	position: relative;
-	padding-bottom: 55.8%; /* video dimensions - width/height */
+	padding-bottom: 56.3%; /* video dimensions - width/height */
 	padding-top: 0px;
 	height: 0;
 	z-index: 10;
@@ -772,13 +718,18 @@ video.video-js {
 	padding-left: 10px;
 }
 
-#lecture-content-wrapper
+/*#lecture-content-wrapper
 {
     position: relative;
-    padding-bottom: 56.3%; /* video dimensions - width/height */
+    padding-bottom: 56.3%; 
     padding-top: 0px;
     height: 0;
     z-index: 10;
+}*/
+
+.lecture-content-wrapper
+{
+	padding: 20px;
 }
 
 #instructor_info input.btn
@@ -794,4 +745,5 @@ video.video-js {
 
 .lecture-stack-wrapper
 {
+	padding: 20px;
 }
