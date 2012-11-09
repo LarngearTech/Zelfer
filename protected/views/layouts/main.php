@@ -6,9 +6,9 @@
 
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.min.css'); ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap-responsive.min.css'); ?>
+	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/html5placeholder.jquery.js') ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main.css') ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main-responsive.css') ?>
-	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/html5placeholder.jquery.js') ?>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -36,6 +36,11 @@
 					'label' => Yii::t('site', 'OMC!'),
 					'url' => array('/site/index'),
 					'template' => '{brand}',
+				),
+				array(
+					'label' => Yii::t('site', 'Log In'),
+					'url' => array('/site/login'),
+					'visible' => Yii::app()->user->isGuest,
 				),
 				array(
 					'label' => !Yii::app()->user->isGuest?$userModel->fullname:'Guest',
