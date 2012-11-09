@@ -55,6 +55,7 @@ return array(
 	'All Rights Reserved.' => 'สงวนลิขสิทธิ์',
 
 	// Application Specific
+	'User Profile' => 'ข้อมูลส่วนตัว',
 	'Courses' => 'คอร์ส',
 	'Create Course' => 'สร้างคอร์ส',
 	'Course Name' => 'ชื่อคอร์ส',

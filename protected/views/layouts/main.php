@@ -47,8 +47,7 @@
 					'url' => '#',
 					'dropdown' => true,
 					'items' => array(
-							array('label' => Yii::t('site', 'Edit Profile'), 'url' => '#'),
-							array('label' => Yii::t('site', 'Change Password'), 'url' => '#'),
+							array('label' => Yii::t('site', 'Edit Profile'), 'url' => Yii::app()->createUrl('user/update', array('id'=>$userModel->id))),
 							array('label' => Yii::t('site', 'My Activities'), 'url' => '#'),
 							array('label' => Yii::t('site', 'Logout'), 'url' => array('/site/logout')),
 						),

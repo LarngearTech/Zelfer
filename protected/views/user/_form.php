@@ -5,8 +5,6 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="input-row">
@@ -27,27 +25,8 @@
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
-	<div class="input-row">
-		<?php echo $form->labelEx($model,'repeat_password'); ?>
-		<?php echo $form->passwordField($model,'repeat_password',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'repeat_password'); ?>
-	</div>
-
-
-	<div class="input-row">
-		<?php echo $form->labelEx($model,'role'); ?>
-		<?php echo $form->textField($model,'role',array('size'=>60,'maxlength'=>2)); ?>
-		<?php echo $form->error($model,'role'); ?>
-	</div>
-
-	<div class="input-row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status',array('size'=>60,'maxlength'=>1)); ?>
-		<?php echo $form->error($model,'status'); ?>
-	</div>
-
 	<div class="input-row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('site', 'Create') : Yii::t('site', 'Save')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
