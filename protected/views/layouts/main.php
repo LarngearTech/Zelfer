@@ -18,11 +18,13 @@
 	<?php
 		// Query all registered courses to display on menu
 		$userModel;
-		$mycourseUrl="#";
+		$mycourseUrl = "#";
+		$updateProfileUrl = "#";
 		if (!Yii::app()->user->isGuest)
 		{
 			$userModel = User::model()->findByPk(Yii::app()->user->id);
-			$mycourseUrl = Yii::app()->createUrl('course/myCourse', array('uid'=>$userModel->id));
+			$mycourseUrl = Yii::app()->createUrl('course/myCourse', array('uid' => $userModel->id));
+			$updateProfileUrl = Yii::app()->createUrl('user/update', array('id' => $userModel->id));
 		}
 		
 		$this->widget('EBootstrapNavigation', array(
@@ -47,7 +49,7 @@
 					'url' => '#',
 					'dropdown' => true,
 					'items' => array(
-							array('label' => Yii::t('site', 'Edit Profile'), 'url' => Yii::app()->createUrl('user/update', array('id'=>$userModel->id))),
+							array('label' => Yii::t('site', 'Edit Profile'), 'url' => $updateProfileUrl),
 							array('label' => Yii::t('site', 'My Activities'), 'url' => '#'),
 							array('label' => Yii::t('site', 'Logout'), 'url' => array('/site/logout')),
 						),
