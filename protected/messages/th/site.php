@@ -97,4 +97,6 @@ return array(
 	'Add Chapter' => 'เพิ่มบท',
 	'Add Lecture' => 'เพิ่มบทเรียน',
 	'Add Content Material' => 'เลือกเนื้อหาของบทเรียน',
+	'Taking' => 'ลงเรียน',
+	'Teaching' => 'เปิดสอน',
 );

@@ -54,8 +54,8 @@ a:hover
 {
 	font-family: RSURegular, Arial, Helvetica, sans-serif;
 	font-size: 22px;
-	height: 40px;
-	line-height: 40px;
+	height: 50px;
+	line-height: 45px;
 }
 
 legend
@@ -524,7 +524,7 @@ div.search-form
 {
     font-family: RSURegular, Arial, Helvetica, sans-serif;
 	font-size: 2em;
-	height: 60px;
+	height: 70px;
 }
 
 #course-header-button .login-signup-flipper

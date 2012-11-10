@@ -18,8 +18,8 @@ Yii::app()->clientScript->registerScript(
 <div class="container">
 	<div class="mycourse-wrapper">
 		<div id="mycourse-btn-group" class="btn-group" data-toggle="buttons-radio">
-			<button type="button" id="taking-btn" class="btn active">Taking</button>
-			<button type="button" id="teaching-btn" class="btn">Teaching</button>
+			<button type="button" id="taking-btn" class="btn active"><?php echo Yii::t('site', 'Taking');?></button>
+			<button type="button" id="teaching-btn" class="btn"><?php echo Yii::t('site', 'Teaching');?></button>
 		</div><!-- btn-group -->
 		<div id="taking-courses">
 			<ul class='thumbnails'>
