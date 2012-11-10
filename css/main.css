@@ -751,6 +751,16 @@ video.video-js {
 	padding: 20px;
 }
 
+.mycourse-wrapper
+{
+	text-align: center;
+}
+
+#mycourse-btn-group
+{
+	margin: 20px 0 40px 0;
+}
+
 #teaching-courses
 {
 	display: none;

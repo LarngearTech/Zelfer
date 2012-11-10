@@ -16,60 +16,62 @@ Yii::app()->clientScript->registerScript(
 );
 ?>
 <div class="container">
-	<div class="btn-group" data-toggle="buttons-radio">
-		<button type="button" id="taking-btn" class="btn active">Taking</button>
-		<button type="button" id="teaching-btn" class="btn">Teaching</button>
-	</div><!-- btn-group -->
-	<div id="taking-courses">
-		<ul class='thumbnails'>
-			<?php
-			foreach ($userModel->take_courses as $course) {
-				//print_r($course);
+	<div class="mycourse-wrapper">
+		<div id="mycourse-btn-group" class="btn-group" data-toggle="buttons-radio">
+			<button type="button" id="taking-btn" class="btn active">Taking</button>
+			<button type="button" id="teaching-btn" class="btn">Teaching</button>
+		</div><!-- btn-group -->
+		<div id="taking-courses">
+			<ul class='thumbnails'>
+				<?php
+				foreach ($userModel->take_courses as $course) {
+					//print_r($course);
+					echo CHtml::openTag('li', array('class' => 'span4'));
+ 					$this->widget('CourseThumbnail', 
+						array(
+							'course'=>$course,
+							'courseUrl'=>Yii::app()->createUrl('course/inclass',
+								array(
+									'id'=>$course->id,
+								)),
+					));
+					echo CHtml::closeTag('li');
+				}
 				echo CHtml::openTag('li', array('class' => 'span4'));
- 				$this->widget('CourseThumbnail', 
+				$this->widget('AddCourseThumbnail', 
 					array(
-						'course'=>$course,
-						'courseUrl'=>Yii::app()->createUrl('course/inclass',
-							array(
-								'id'=>$course->id,
-							)),
+						'redirectUrl'=>$this->createUrl('site/index'),
+						'caption'=>'Browse Course'
 				));
 				echo CHtml::closeTag('li');
-			}
-			echo CHtml::openTag('li', array('class' => 'span4'));
-			$this->widget('AddCourseThumbnail', 
-				array(
-					'redirectUrl'=>$this->createUrl('site/index'),
-					'caption'=>'Browse Course'
-			));
-			echo CHtml::closeTag('li');
-			?>
-		</ul>
-	</div><!-- /taking-courses -->
-	<div id="teaching-courses">
-		<ul class='thumbnails'>
-			<?php	
-			foreach ($userModel->teach_courses as $course) {
-				//print_r($course);
+				?>
+			</ul>
+		</div><!-- /taking-courses -->
+		<div id="teaching-courses">
+			<ul class='thumbnails'>
+				<?php	
+				foreach ($userModel->teach_courses as $course) {
+					//print_r($course);
+					echo CHtml::openTag('li', array('class' => 'span4'));
+					$this->widget('CourseThumbnail', 
+						array(
+							'course'=>$course,
+							'courseUrl'=>$this->createUrl('course/update', 
+								array(
+									'courseId'=>$course->id,
+								)),
+					));
+					echo CHtml::closeTag('li');
+				}
 				echo CHtml::openTag('li', array('class' => 'span4'));
-				$this->widget('CourseThumbnail', 
+				$this->widget('AddCourseThumbnail',
 					array(
-						'course'=>$course,
-						'courseUrl'=>$this->createUrl('course/update', 
-							array(
-								'courseId'=>$course->id,
-							)),
+			 		 'redirectUrl'=>$this->createUrl('course/create'),
+			 		 'caption'=>'Create Course'
 				));
-				echo CHtml::closeTag('li');
-			}
-			echo CHtml::openTag('li', array('class' => 'span4'));
-			$this->widget('AddCourseThumbnail',
-				array(
-		 		 'redirectUrl'=>$this->createUrl('course/create'),
-		 		 'caption'=>'Create Course'
-			));
-		 	echo CHtml::closeTag('li');
-			?>
-		</ul>
-	</div><!-- teaching-courses -->
+			 	echo CHtml::closeTag('li');
+				?>
+			</ul>
+		</div><!-- /teaching-courses -->
+	</div><!-- /mycourse-wrapper -->
 </div><!-- /container -->
