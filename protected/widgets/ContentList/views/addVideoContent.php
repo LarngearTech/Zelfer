@@ -3,7 +3,8 @@
 		array('config'=>array(
 			'id'=>'video-file-uploader-'.$contentId,
 			'placeholder'=>'Video file should have size less than 2GB',
-			'btnLabel'=>'Choose Video File'
+			'btnLabel'=>'Choose Video File',
+			'url'=>Yii::app()->createUrl('course/uploadContentVideo'),
 		))
 	);
 ?>
