@@ -1,6 +1,10 @@
 <?php
 class ResourcePath
 {
+	public static function getCOntentBasePath()
+	{
+		return Yii::app()->basePath.'/../contents/';
+	}
 	public static function getCourseThumbnailBasePath()
 	{
 		return Yii::app()->basePath.'/../course/thumbnails/';

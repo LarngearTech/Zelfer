@@ -30,6 +30,9 @@ function registerFileUploaderChangeHandle(fileuploader){
 							var percent=e.loaded/e.total*100;
 							percent=percent+"%";
 							$('#'+$(fileuploader).prop('id')+'-progressbar').width(percent);
+
+							filename = $('#'+$(fileuploader).prop('id')+'-label').html();
+							$('#'+$(fileuploader).prop('id')+'-label').html(filename+" "+e.loaded/1000000+"kb/"+e.total/1000000+"kb");
 						}
 					}, 
 					false); 

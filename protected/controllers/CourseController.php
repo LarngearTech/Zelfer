@@ -455,6 +455,8 @@ class CourseController extends Controller
 			$lecture->type=1;
 			$lecture->save();
 
+			mkdir(ResourcePath::getContentBasePath().$lecture->id, 0755);
+
 			$course  = $this->loadModel($_POST['courseId']);
 			$this->widget('EditableContentList',
 				array(
@@ -559,6 +561,18 @@ class CourseController extends Controller
 			$content->name=$_POST['contentName'];
 			$content->save();
 
+			// if content is a video, encode it
+			if ($content->type == 2)
+			{
+				$contentDir = ResourcePath::getContentBasePath().$_POST['contentId'].'/';
+				$rawfile = $contentDir.'/tmp/content.mp4';
+
+				if(file_exists($rawfile))
+				{
+					VideoUtil::encode($rawfile, $contentDir);
+				}
+			}
+
 			$content=$this->getContent($_POST['contentId']);
 			$this->widget('EditableContentListItem',
 				array(
@@ -573,7 +587,14 @@ class CourseController extends Controller
 	{
 		if (Yii::app()->request->isAjaxRequest)
 		{
+			// Remove temp dir
 			$content=$this->getContent($_POST['contentId']);
+			$contentDir=ResourcePath::getContentBasePath().$_POST['contentId'].'/tmp';
+			if(is_dir($contentDir))
+			{
+				rmdir($contentDir);
+			}
+
 			$this->widget('EditableContentListItem',
 				array(
 					'content'=>$content,
@@ -624,6 +645,13 @@ class CourseController extends Controller
 						$content->delete();
 					}
 				}
+
+				// Remove content directory
+				$contentDir = ResourcePath::getContentBasePath().$_POST['contentId'];
+				if (is_dir($contentDir))
+				{
+					rmdir($contentDir);
+				}
 			}
 
 			$course=$this->loadModel($_POST['courseId']);
@@ -646,11 +674,26 @@ class CourseController extends Controller
 		}
 	}
 
-	public function actionUploadContentVideo()
+	public function actionUploadContentVideo($contentId)
 	{
 		if (Yii::app()->request->isAjaxRequest)
 		{
-			echo $_FILES['uploadedFile']['tmp_name'];
+			$content = $this->getContent($contentId);
+			$content->type=2;
+			$content->save();
+
+			$contentDir=ResourcePath::getContentBasePath().$contentId.'/tmp';
+			if (is_dir($contentDir))
+			{
+				shell_exec('rm -rf '.$contentDir);
+			}
+			mkdir($contentDir, 0755, true);
+
+			$target='content.'.PHPHelper::getFileExtension($_FILES['uploadedFile']['name']);
+			if((!is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) or !copy($_FILES['uploadedFile']['tmp_name'], $contentDir.'/'.$target))
+			{
+				echo "Error copy files";	
+			}
 		}
 	}
 

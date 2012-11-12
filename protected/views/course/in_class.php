@@ -21,7 +21,7 @@
 				);
 	$lecturesTabContent .= '
 			</div><!-- /lecture-stack-wrapper /span3 -->';
-	$lecturesTabContent .= '<div class="lecture-content-wrapper span9"><form><legend id="lecture-name">อัลกอริทึมคืออะไร</legend>';
+	$lecturesTabContent .= '<div class="lecture-content-wrapper span9"><form><legend id="lecture-name">'.$model->contents[0]->name.'</legend>';
 	$lecturesTabContent .= '<div class="videoWrapper">';
 	$lecturesTabContent .= $this->widget('application.extensions.videojs.EVideoJS', array(
 						'options' => array(
@@ -34,9 +34,9 @@
 							// Poster image absolute URL
 							'poster' => false,
 							// Absolute URL of the video in MP4 format
-							'video_mp4' => "/zelfer/content/2/video.mp4",
+							'video_mp4' => ResourcePath::getContentBasePath().$model->contents[0]->id.'/video.mp4',
 							// Absolute URL of the video in OGV format
-							'video_ogv' => '/zelfer/content/2/video.ogv',
+							'video_ogv' => ResourcePath::getContentBasePath().$model->contents[0]->id.'/video.ogv',
 							//'video_ogv' => $model->intro_url.".ogv",
 							// Absolute URL of the video in WebM format
 							//'video_webm' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm',
