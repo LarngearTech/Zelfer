@@ -16,14 +16,18 @@ class ContentList extends ContentListBase{
 					$("#lecture-content-wrapper").html(
 						"<img width=\'100%\' src=\''.$this->assetsUrl.'/img/loading.gif\'/>"
 					);
-					ajaxUrl = "'.Yii::app()->controller->createUrl("course/changeVideo").'";
+					ajaxUrl = "'.Yii::app()->controller->createUrl("course/changeContent").'";
+					contentId = $(this).attr("data-contentId");
 					$.ajax({
 						url : ajaxUrl,
 						data : {
-							videoId : this.id
+							contentId : contentId 
 						},
+						type:"POST",
 						dataType : "html",
-						success : function(html){$("#lecture-content-wrapper").html(html);}
+						success : function(html){
+							$(".lecture-content-wrapper").html(html);
+						}
 					});
 				});
 			});',

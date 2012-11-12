@@ -28,6 +28,7 @@ return array(
 		'application.widgets.IntroVideo.*',
 		'application.widgets.InstructorList.*',
 		'application.widgets.ContentList.*',
+		'application.widgets.ContentDisplay.*',
 		'application.widgets.EAjaxUpload.*',
 		'application.widgets.FileUploader.*',
 		'application.widgets.ZLogIn.*',
