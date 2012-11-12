@@ -74,7 +74,7 @@ function addInClassContent($content, $assetsUrl)
 	<li class="lecture">
 		<a href="javascript:void(0)" 
 			class="playbutton" 
-			id='<?php echo Yii::app()->baseUrl.'/content/'.$content->id.'/';?>' 
+			data-contentId=<?php echo $content->id; ?>
 			name='<?php echo $content->name; ?>'>
 		<?php echo CHtml::encode($content->name);?>
 			<em>
