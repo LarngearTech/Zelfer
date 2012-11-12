@@ -1,5 +1,6 @@
-function registerFileUploaderChangeHandle(fileuploader){
-	$(fileuploader).change(function(){
+function registerFileUploaderChangeHandle(fileuploader)
+{
+	$(fileuploader).change(function() {
 		var file = this.files[0];
 		$('#'+$(this).prop('id')+'-label').html(file.name);
 
@@ -8,7 +9,7 @@ function registerFileUploaderChangeHandle(fileuploader){
 		$('#'+$(this).prop('id')+'-upload-cancel-btn').show();
 
 		// Send actual upload command
-		var url=$(fileuploader).attr('data-url');
+		var url = $(fileuploader).attr('data-url');
 		var formdata = new FormData();
 		formdata.append('uploadedFile', file);
 		$.ajax({
