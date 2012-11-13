@@ -1,5 +1,5 @@
 <div class="file-uploader-container">
-	<div class="file-name progress progress-info progress-striped active">
+	<div id="<?php echo $config['id'];?>-progressbar-container" class="file-name progress progress-info progress-striped active">
 		<span id="<?php echo $config['id']; ?>-label" class="file-name-text" data-placeholder="<?php echo $config['placeholder']; ?>"><?php echo $config['placeholder']; ?></span>
 		<div id="<?php echo $config['id']; ?>-progressbar" class="bar" style="width: 0%"></div>
 	</div>
@@ -13,7 +13,10 @@
 		>
 		</input>
 	</div>
+	<div id="<?php echo $config['id'];?>-delete-btn" class="btn btn-danger file-remove-btn" style="display:none" data-deleteUrl="<?php echo $config['deleteUrl']; ?>">
+		<span><?php echo Yii::t('site', 'delete'); ?></span>
+	</div>
 	<div id="<?php echo $config['id'];?>-upload-cancel-btn" class="btn btn-danger file-upload-cancel-btn" style="display:none;">
-		<span>cancel</span>
+		<span><?php echo Yii::t('site', 'cancel'); ?></span>
 	</div>
 </div>
