@@ -1,19 +1,5 @@
 <?php
 
-// AppFog MySql Configuration
-$services_json = json_decode(getenv("VCAP_SERVICES"),true);
-$mysql_config = $services_json["mysql-5.1"][0]["credentials"];
-$username = $mysql_config["username"];
-$password = $mysql_config["password"];
-$hostname = $mysql_config["hostname"];
-$port = $mysql_config["port"];
-$db = $mysql_config["name"];
-
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
-
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
 return array(
 	'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name' => 'Zelfer',
@@ -126,8 +112,6 @@ return array(
 		// user status
 		'active_status' => 1,
 		'inactive_status' => 2,
-		// amazon s3 base url
-		's3-baseurl' => 'https://s3-ap-southeast-1.amazonaws.com',
 	),
 	'sourceLanguage' => 'en_us',
 	'language' => 'th',

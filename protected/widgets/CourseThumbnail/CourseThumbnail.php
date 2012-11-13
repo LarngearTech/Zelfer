@@ -30,7 +30,20 @@ class CourseThumbnail extends CWidget{
 		{
 			if (!empty($this->thumbnailUrl))
 			{
-				$this->thumbnailUrl = file_exists(Yii::app()->basePath.'/../..'.$this->thumbnailUrl)?$this->thumbnailUrl:$this->defaultThumbnailUrl($assets);
+				//$this->thumbnailUrl = file_exists(Yii::app()->basePath.'/../..'.$this->thumbnailUrl)?$this->thumbnailUrl:$this->defaultThumbnailUrl($assets);
+				if (Yii::app()->params['local-storage-enable'] == true)
+				{
+					$this->thumbnailUrl = file_exists(Yii::app()->basePath.'/..'.$this->thumbnailUrl)? Yii::app()->params['storage-base-url'].$this->thumbnailUrl : $this->defaultThumbnailUrl($assets);
+				}
+				else
+				{
+					//// fill code for checking that resource is available ////
+
+
+					///////////////////////////////////////////////////////////
+
+					$this->thumbnailUrl = Yii::app()->params['storage-base-url'].$this->thumbnailUrl;
+				}
 			}
 			else
 			{
@@ -40,12 +53,25 @@ class CourseThumbnail extends CWidget{
 		// User specified course. Give priority to directly specified paramenter's value first, find from $course if isn't given.
 		else
 		{
-			$this->thumbnailUrl		= ($this->thumbnailUrl)?$this->thumbnailUrl:$this->course->thumbnail_url;
+			$this->thumbnailUrl		= ($this->thumbnailUrl) ? $this->thumbnailUrl : $this->course->thumbnail_url;
 			if (empty($this->thumbnailUrl))
 			{
 				$this->thumbnailUrl	= $this->defaultThumbnailUrl($assets);
 			}
-			$this->thumbnailUrl		= file_exists(Yii::app()->basePath.'/../..'.$this->thumbnailUrl)?$this->thumbnailUrl:$this->defaultThumbnailUrl($assets);
+			//$this->thumbnailUrl		= file_exists(Yii::app()->basePath.'/../..'.$this->thumbnailUrl)?$this->thumbnailUrl:$this->defaultThumbnailUrl($assets);
+			if (Yii::app()->params['local-storage-enable'] == true)
+			{
+				$this->thumbnailUrl = file_exists(Yii::app()->basePath.'/..'.$this->thumbnailUrl) ? Yii::app()->params['storage-base-url'].$this->thumbnailUrl : $this->defaultThumbnailUrl($assets);
+			}
+			else
+			{
+				//// fill code for checking that resource is available ////
+
+
+				///////////////////////////////////////////////////////////
+
+				$this->thumbnailUrl = Yii::app()->params['storage-base-url'].$this->thumbnailUrl;
+			}
 			$this->courseName		= ($this->courseName)?$this->courseName:$this->course->name;
 			$this->courseShortDescription	= ($this->courseShortDescription)?$this->courseShortDescription:$this->course->short_description;
 			//$this->courseUrl		= ($this->courseUrl)?$this->courseUrl:Yii::app()->createUrl('course/inclass', array('id' => $this->course->id));
