@@ -52,7 +52,6 @@ $cs->registerScript('make-sort-script',
 			'success'=>'function(html) {
 				$(".editable-content-list-container").html(html);
 				makeSortable();
-				alert(html);
 			}'
 		),
 		array(

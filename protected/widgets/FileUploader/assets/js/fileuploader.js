@@ -1,11 +1,12 @@
-function registerFileUploaderChangeHandle(fileuploader){
-	$(fileuploader).change(function(){
-		var file = this.files[0];
-		$('#'+$(this).prop('id')+'-label').html(file.name);
+function fileUploaderChangeHandler(fileuploader){
+		var file = $('#'+fileuploader).prop('files')[0];
+
+		var prefix = '#'+$('#'+fileuploader).prop('id');
+		$(prefix+'-label').html(file.name);
 
 		// Hide file upload button and show cancel button
-		$('#'+$(this).prop('id')+'-upload-btn').hide();
-		$('#'+$(this).prop('id')+'-upload-cancel-btn').show();
+		$(prefix+'-upload-btn').hide();
+		$(prefix+'-upload-cancel-btn').show();
 
 		// Send actual upload command
 		var url=$(fileuploader).attr('data-url');
@@ -29,10 +30,10 @@ function registerFileUploaderChangeHandle(fileuploader){
 						{
 							var percent=e.loaded/e.total*100;
 							percent=percent+"%";
-							$('#'+$(fileuploader).prop('id')+'-progressbar').width(percent);
+							$(prefix+'-progressbar').width(percent);
 
-							filename = $('#'+$(fileuploader).prop('id')+'-label').html();
-							$('#'+$(fileuploader).prop('id')+'-label').html(filename+" "+e.loaded/1000000+"kb/"+e.total/1000000+"kb");
+							filename = $(prefix+'-label').html();
+							$(prefix+'-label').html(filename+" "+e.loaded/1000000+"kb/"+e.total/1000000+"kb");
 						}
 					}, 
 					false); 
@@ -41,17 +42,17 @@ function registerFileUploaderChangeHandle(fileuploader){
 			},
 			// handle cancel file upload
 			beforeSend:function(){
-				$('#'+$(fileuploader).prop('id')+'-upload-cancel-btn').click(function(){
+				var id = $(fileuploader).prop('id');
+				$(prefix+'-upload-cancel-btn').click(function(){
 					xhr.abort();
+					$(prefix+'-upload-cancel-btn').hide();
+					$(prefix+'-upload-btn').show();
+					$(prefix+'-progressbar').width(0);
+					$(prefix+'-label').html($(prefix+'-label').attr('data-placeholder'));
 				});
 			},
 			success:function(html){
 				//alert(html);
 			}
 		});
-	})
-}
-
-function btnFileUploaderClick(fileuploader){
-	registerFileUploaderChangeHandle($('#'+fileuploader));
 }

@@ -526,18 +526,6 @@ class CourseController extends Controller
 			$content->name=$_POST['contentName'];
 			$content->save();
 
-			// if content is a video, encode it
-			if ($content->type == 2)
-			{
-				$contentDir = ResourcePath::getContentBasePath().$_POST['contentId'].'/';
-				$rawfile = $contentDir.'/tmp/content.mp4';
-
-				if(file_exists($rawfile))
-				{
-					VideoUtil::encode($rawfile, $contentDir);
-				}
-			}
-
 			$content=$this->getContent($_POST['contentId']);
 			$this->widget('EditableContentListItem',
 				array(
@@ -647,17 +635,23 @@ class CourseController extends Controller
 			$content->type=2;
 			$content->save();
 
-			$contentDir=ResourcePath::getContentBasePath().$contentId.'/tmp';
-			if (is_dir($contentDir))
+			$contentDir=ResourcePath::getContentBasePath().$contentId;
+			$tmpDir = $contentDir.'/tmp';
+			if (is_dir($tmpDir))
 			{
-				shell_exec('rm -rf '.$contentDir);
+				//PHPHelper::rrmdir($contentDir);
+				shell_exec('rm -rf '.$tmpDir);
 			}
-			mkdir($contentDir, 0755, true);
+			mkdir($tmpDir, 0755, true);
 
 			$target='content.'.PHPHelper::getFileExtension($_FILES['uploadedFile']['name']);
-			if((!is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) or !copy($_FILES['uploadedFile']['tmp_name'], $contentDir.'/'.$target))
+			if((!is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) or !copy($_FILES['uploadedFile']['tmp_name'], $tmpDir.'/'.$target))
 			{
 				echo "Error copy files";	
+			}
+			else
+			{
+				VideoUtil::encode($tmpDir.'/'.$target, $contentDir.'/');
 			}
 		}
 	}
