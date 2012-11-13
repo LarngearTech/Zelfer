@@ -13,7 +13,8 @@ class BaseWidget extends CWidget{
 			$cs = Yii::app()->getClientScript();
 
 			// Register javascript
-			$jsroot = $webroot.$this->assetsUrl.'/js';
+			//$jsroot = $webroot.$this->assetsUrl.'/js';
+			$jsroot = $this->assetsUrl.'/js';
 			if(file_exists($jsroot))
 			{
 				$jsItr = new DirectoryIterator($jsroot);
@@ -27,7 +28,8 @@ class BaseWidget extends CWidget{
 			}
 
 			// Register css
-			$cssroot = $webroot.$this->assetsUrl.'/css';
+			//$cssroot = $webroot.$this->assetsUrl.'/css';
+			$cssroot = $this->assetsUrl.'/css';
 			if(file_exists($cssroot))
 			{
 				$cssItr = new DirectoryIterator($cssroot);

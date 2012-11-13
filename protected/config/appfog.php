@@ -21,7 +21,7 @@ return CMap::mergeArray(
 		// using Yii::app()->params['paramName']
 		'params' => array(
 			// storage base url
-			'storage-base-url' => 'https://s3-ap-southeast-1.amazonaws.com',
+			'storage-base-url' => 'https://s3-ap-southeast-1.amazonaws.com/recture-bucket',
 			'local-storage-enable' => false,
 		),
 	)

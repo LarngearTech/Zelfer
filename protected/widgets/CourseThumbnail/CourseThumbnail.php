@@ -69,8 +69,10 @@ class CourseThumbnail extends CWidget{
 
 
 				///////////////////////////////////////////////////////////
-
-				$this->thumbnailUrl = Yii::app()->params['storage-base-url'].$this->thumbnailUrl;
+				if ($this->thumbnailUrl != $this->defaultThumbnailUrl($assets))
+				{
+					$this->thumbnailUrl = Yii::app()->params['storage-base-url'].$this->thumbnailUrl;
+				}
 			}
 			$this->courseName		= ($this->courseName)?$this->courseName:$this->course->name;
 			$this->courseShortDescription	= ($this->courseShortDescription)?$this->courseShortDescription:$this->course->short_description;
