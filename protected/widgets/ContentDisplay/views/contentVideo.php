@@ -38,5 +38,5 @@
 				),
 			));
 		?>
-	</div><!-- end lecture-content-wrappero span9 -->';
+	</div><!-- end lecture-content-wrappero span9 -->
 </form>
