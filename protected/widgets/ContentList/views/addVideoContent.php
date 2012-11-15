@@ -6,6 +6,8 @@
 			'btnLabel'=>'Choose Video File',
 			'url'=>Yii::app()->createUrl('course/uploadContentVideo',
 				array('contentId'=>$contentId)),
+			'deleteUrl'=>Yii::app()->createUrl('course/deleteContentVideo',
+				array('contentId'=>$contentId)),
 		))
 	);
 ?>

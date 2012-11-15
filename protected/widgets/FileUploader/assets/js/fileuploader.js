@@ -1,46 +1,13 @@
-<<<<<<< HEAD
 function fileUploaderChangeHandler(fileuploader){
 	var file = $('#'+fileuploader).prop('files')[0];
-=======
-function registerFileUploaderChangeHandle(fileuploader)
-{
-	$(fileuploader).change(function() {
-		var file = this.files[0];
-		$('#'+$(this).prop('id')+'-label').html(file.name);
->>>>>>> 36209e8d506803bd50bc743e032f0b8ab66fcbb0
-
 	var prefix = '#'+$('#'+fileuploader).prop('id');
 	$(prefix+'-label').html(file.name);
 
-<<<<<<< HEAD
 	// Hide file upload button and show cancel button
 	$(prefix+'-upload-btn').hide();
 	$(prefix+'-upload-cancel-btn').show();
-=======
-		// Send actual upload command
-		var url = $(fileuploader).attr('data-url');
-		var formdata = new FormData();
-		formdata.append('uploadedFile', file);
-		$.ajax({
-			url:url,
-			type:'POST',
-			data:formdata,
-			processData:false,
-			contentType:false,
-			cache:false,
-			xhr:function(){
-				xhr = $.ajaxSettings.xhr();
-				if(xhr.upload){
-					// update progress bar
-					xhr.upload.addEventListener(
-					'progress', 
-					function(e){
-						if (e.lengthComputable)
-						{
-							var percent=e.loaded/e.total*100;
-							percent=percent+"%";
-							$('#'+$(fileuploader).prop('id')+'-progressbar').width(percent);
->>>>>>> 36209e8d506803bd50bc743e032f0b8ab66fcbb0
+	$(prefix+'-progressbar-container').removeClass('progress-success');
+	$(prefix+'-progressbar-container').addClass('progress-info active');
 
 	// Send actual upload command
 	var url=$('#'+fileuploader).attr('data-url');
@@ -102,8 +69,17 @@ function registerFileUploaderChangeHandle(fileuploader)
 	});
 }
 
-function delteUploadedFile(fileuploader)
+function deleteUploadedFile(fileuploader)
 {
+	var prefix = '#'+fileuploader;
+	$(prefix+'-upload-btn').show();
+	$(prefix+'-upload-cancel-btn').hide();
+	$(prefix+'-delete-btn').hide();
+	$(prefix+'-label').html($(prefix+'-label').attr('data-placeholder'));
+	$(prefix+'-progressbar').width('0%');
+	$(prefix+'-progressbar-container').removeClass('progress-sucess');
+	$(prefix+'-progressbar-container').addClass('progress-info active');
+
 	$.ajax({
 		url:$('#'+fileuploader).attr('data-deleteUrl'),
 		type:'POST',

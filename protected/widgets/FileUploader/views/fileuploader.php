@@ -9,11 +9,12 @@
 			id="<?php echo $config['id']; ?>" 
 			type="file"
 			data-url="<?php echo $config['url']; ?>"
+			data-deleteUrl="<?php echo $config['deleteUrl']; ?>"
 			onchange="js:fileUploaderChangeHandler('<?php echo $config['id'];?>')"
 		>
 		</input>
 	</div>
-	<div id="<?php echo $config['id'];?>-delete-btn" class="btn btn-danger file-remove-btn" style="display:none" data-deleteUrl="<?php echo $config['deleteUrl']; ?>">
+	<div id="<?php echo $config['id'];?>-delete-btn" class="btn btn-danger file-delete-btn" style="display:none" onclick="js:deleteUploadedFile('<?php echo $config['id'];?>')">
 		<span><?php echo Yii::t('site', 'delete'); ?></span>
 	</div>
 	<div id="<?php echo $config['id'];?>-upload-cancel-btn" class="btn btn-danger file-upload-cancel-btn" style="display:none;">

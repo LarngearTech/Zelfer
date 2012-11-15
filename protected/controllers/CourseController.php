@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent', 'contentTypeSelected', 'uploadContentVideo'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent', 'contentTypeSelected', 'uploadContentVideo', 'deleteContentVideo'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -644,7 +644,7 @@ class CourseController extends Controller
 			}
 			mkdir($tmpDir, 0755, true);
 
-			$target='content.'.PHPHelper::getFileExtension($_FILES['uploadedFile']['name']);
+			$target='video.'.PHPHelper::getFileExtension($_FILES['uploadedFile']['name']);
 			if((!is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) or !copy($_FILES['uploadedFile']['tmp_name'], $tmpDir.'/'.$target))
 			{
 				echo "Error copy files";	
@@ -652,6 +652,22 @@ class CourseController extends Controller
 			else
 			{
 				VideoUtil::encode($tmpDir.'/'.$target, $contentDir.'/');
+			}
+		}
+	}
+
+	public function actionDeleteContentVideo($contentId)
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$content=$this->getContent($contentId);
+			$content->type=1;
+			$content->save();
+
+			$contentDir = ResourcePath::getContentBasePath().$contentId;
+			if (is_dir($contentDir.'/video'))
+			{
+				shell_exec('rm -rf '.$contentDir.'/video');
 			}
 		}
 	}
