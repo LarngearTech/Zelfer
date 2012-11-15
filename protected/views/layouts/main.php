@@ -35,7 +35,7 @@
 			),
 			'items' => array(
 				array(
-					'label' => Yii::t('site', 'OMC!'),
+					'label' => Yii::t('site', 'Recture'),
 					'url' => array('/site/index'),
 					'template' => '{brand}',
 				),

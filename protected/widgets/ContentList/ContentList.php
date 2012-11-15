@@ -18,6 +18,7 @@ class ContentList extends ContentListBase{
 					);
 					ajaxUrl = "'.Yii::app()->controller->createUrl("course/changeContent").'";
 					contentId = $(this).attr("data-contentId");
+					//alert(contentId);
 					$.ajax({
 						url : ajaxUrl,
 						data : {

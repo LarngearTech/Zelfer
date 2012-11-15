@@ -4,10 +4,10 @@
 $yii = dirname(__FILE__).'/yii/framework/yii.php';
 
 // uncomment the following line if using localhost
-//$config = dirname(__FILE__).'/protected/config/local.php';
+$config = dirname(__FILE__).'/protected/config/local.php';
 
 // uncomment the following line if using appfog
-$config = dirname(__FILE__).'/protected/config/appfog.php';
+//$config = dirname(__FILE__).'/protected/config/appfog.php';
 
 // remove the following lines when in production mode
 defined('YII_DEBUG') or define('YII_DEBUG',true);
