@@ -1,5 +1,8 @@
-.file-upload-container
+.file-uploader-container
 {
+   display:table-cell;
+   height:40px;
+   line-height:40px;
    vertical-align:middle;
 }
 
@@ -20,6 +23,7 @@
     vertical-align:middle;
     background:#F8F7F0;
     position:relative;
+    top:10px;
 }
 
 .file-name-text
