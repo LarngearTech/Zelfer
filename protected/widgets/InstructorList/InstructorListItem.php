@@ -26,7 +26,14 @@ class InstructorListItem extends CWidget{
 		}
 		else
 		{
-			$this->profileImageUrl = $this->instructor->profile_image_url;
+			if (Yii::app()->params['local-storage-enable'] == true)
+			{
+				$this->profileImageUrl = $this->instructor->profile_image_url;
+			}
+			else
+			{
+				$this->profileImageUrl = Yii::app()->params['storage-base-url'].$this->instructor->profile_image_url;
+			}
 		}
 
 		// Render widget
