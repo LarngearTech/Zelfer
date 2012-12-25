@@ -12,9 +12,9 @@
 				// Poster image absolute URL
 				'poster' => false,
 				// Absolute URL of the video in MP4 format
-				'video_mp4' => ResourcePath::getContentBaseUrl().$content->id.'/content/content.mp4',
+				'video_mp4' => ResourcePath::getContentBaseUrl().$content->id.'/video/video.mp4',
 				// Absolute URL of the video in OGV format
-				'video_ogv' => ResourcePath::getContentBaseUrl().$content->id.'/content/content.ogv',
+				'video_ogv' => ResourcePath::getContentBaseUrl().$content->id.'/video/video.ogv',
 				//'video_ogv' => $model->intro_url.".ogv",
 				// Absolute URL of the video in WebM format
 				//'video_webm' => 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.webm',
