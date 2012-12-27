@@ -107,11 +107,49 @@ class User extends CActiveRecord
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('fullname',$this->fullname,true);
 		$criteria->compare('role',$this->role,true);
-		$criteria->compare('active',$this->active,true);
+		$criteria->compare('status',$this->status,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		));
+	}
+
+	/**
+	 * Return all records
+	 */
+	public function defaultScope()
+	{
+		return array(
+			'condition'=>'true',
+		);
+	}
+
+	/**
+	 * Return only student records.
+	 */
+	public function students()
+	{
+		$this->getDbCriteria()->mergeWith(array(
+			'condition' => 'role=:role',
+			'params'=>array(
+				':role'=>2,
+			),
+		));
+		return $this;
+	}
+
+	/**
+	 * Return only teacher records.
+	 */
+	public function teachers()
+	{
+		$this->getDbCriteria()->mergeWith(array(
+			'condition' => 'role=:role',
+			'params'=>array(
+				':role'=>1,
+			),
+		));
+		return $this;
 	}
 
 	public function beforeSave()

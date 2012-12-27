@@ -27,23 +27,33 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
-
-		$categories = Category::model()->findAll();
-
-		// load all courses of each catgegory to display
-		$courses_in_categories = array();
-		foreach ($categories as $category) {
-			$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
-		}
-
 		// if user logined as admin
 		if (Yii::app()->user->isAdmin())
 		{
-			$this->render('index-admin');
+			$user = new User();
+			$students = $user->students();
+			$dataProvider->student = $students->getDataProvider();
+			
+			$user = new User();
+			$teachers = $user->teachers();
+			$dataProvider->teacher =  $teachers->getDataProvider();
+
+			$this->render('index-admin', array(
+				'dataProvider'=>$dataProvider,
+			));
 		}
 		else
 		{
+			Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
+
+			$categories = Category::model()->findAll();
+
+			// load all courses of each catgegory to display
+			$courses_in_categories = array();
+			foreach ($categories as $category) {
+				$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
+			}
+
 	 		// renders the view file 'protected/views/site/index.php'
 			// using the default layout 'protected/views/layouts/main.php'
 			$this->render('index', array(
@@ -51,8 +61,6 @@ class SiteController extends Controller
 					'courses_in_categories' => $courses_in_categories,
 			));
 		}
-		/*echo Yii::app()->user->fullname;
-		echo Yii::app()->user->role;*/
 	}
 
 	/**
