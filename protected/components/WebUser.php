@@ -5,6 +5,36 @@ class WebUser extends CWebUser
 	private $_model;
 
 	/**
+	 * Returns whether the user is loggined as admin or not
+	 * @return bool true if user is an admin, false otherwise.
+	 */
+	function isAdmin()
+	{
+		return $this->role == 3;
+	}
+
+	/**
+	 * Returns the role for the user.
+	 * @return int a number represents role of the user, if the user is not login this will return 0.
+	 */
+	function getRole()
+	{
+		if (($role = $this->getState('__role')) !== null)
+			return $this->role;
+		else
+			return 0;
+	}
+
+	/**
+	 * Sets the role for the user.
+	 * @param int $value represents user's role.
+	 */
+	function setRole($value)
+	{
+		$this->setState('__role', $value);
+	}
+
+	/**
 	 * Returns the full name for the user.
 	 * @return string the full name. If the user is not logged in, this will be {@link guestName}.
 	 */

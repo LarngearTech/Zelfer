@@ -8,6 +8,7 @@
 class UserIdentity extends CUserIdentity
 {
 	private $_id;
+	private $_role;
 
 	/**
 	 * Get user id.
@@ -16,6 +17,15 @@ class UserIdentity extends CUserIdentity
 	public function getId()
 	{
 		return $this->_id;
+	}
+
+	/**
+	 * Get user role.
+	 * @return integer user role.
+	 */
+	public function getRole()
+	{
+		return $this->_role;
 	}
 
 	/**
@@ -40,6 +50,8 @@ class UserIdentity extends CUserIdentity
 			$this->_id = $record->id;
 			$this->username = $record->email;
 			$this->setState('fullname', $record->fullname);
+			$this->_role = $record->role;
+			$this->setState('role', $record->role);
 			$this->errorCode = self::ERROR_NONE;
 		}
 		return !$this->errorCode;

@@ -37,12 +37,22 @@ class SiteController extends Controller
 			$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
 		}
 
-	 	// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index', array(
-				'categories' => $categories,
-				'courses_in_categories' => $courses_in_categories,
-		));
+		// if user logined as admin
+		if (Yii::app()->user->isAdmin())
+		{
+			$this->render('index-admin');
+		}
+		else
+		{
+	 		// renders the view file 'protected/views/site/index.php'
+			// using the default layout 'protected/views/layouts/main.php'
+			$this->render('index', array(
+					'categories' => $categories,
+					'courses_in_categories' => $courses_in_categories,
+			));
+		}
+		/*echo Yii::app()->user->fullname;
+		echo Yii::app()->user->role;*/
 	}
 
 	/**
