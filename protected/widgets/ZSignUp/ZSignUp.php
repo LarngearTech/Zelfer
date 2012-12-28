@@ -63,7 +63,8 @@ class ZSignUp extends CWidget
 				}
 				else
 				{
-					Yii::app()->controller->redirect(array('view', 'id' => $userModel->id));
+					//Yii::app()->controller->redirect(array('view', 'id' => $userModel->id));
+					Yii::app()->controller->redirect(array('site/index'));
 				}
 			}
 		}

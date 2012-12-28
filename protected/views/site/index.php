@@ -10,9 +10,14 @@
 					</div><!-- /span9 -->
 					<div class="span4">
 						<div class="login-signup-wrapper rounded-corners">
-							<?php $this->widget('ZLogInSignUpFlipper', array(
-								'returnUrl' => Yii::app()->request->requestUri,
-							));?>
+							<?php 
+								/*$this->widget('ZLogInSignUpFlipper', array(
+									'returnUrl' => Yii::app()->request->requestUri,
+								));*/
+								$this->widget('ZLogIn', array(
+									'returnUrl'=>Yii::app()->request->requestUri,
+								));
+							?>
 						</div><!-- /login-signup-wrapper -->
 					</div><!-- /span3 -->
 				</div><!-- /row -->

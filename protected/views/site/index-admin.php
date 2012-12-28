@@ -44,6 +44,15 @@ Yii::app()->clientScript->registerScript(
 				),
 			));
 		?>
+			<div class="add-user-btn-container">
+			<?php
+			echo CHtml::link(Yii::t('site', 'Add') 
+				, Yii::app()->createUrl('user/create')
+				, array(
+					'class'=>'btn',
+				));
+			?>
+			</div>
 		</div>
 		<div id="teacher-list">
 		<?php
@@ -64,6 +73,15 @@ Yii::app()->clientScript->registerScript(
 				),
 			));
 		?>
+			<div class="add-user-btn-container">
+			<?php
+			echo CHtml::link(Yii::t('site', 'Add') 
+				, Yii::app()->createUrl('user/create')
+				, array(
+					'class'=>'btn',
+				));
+			?>
+			</div>
 		</div>
 	</div><!-- /container -->
 </div><!-- /course-list-section -->

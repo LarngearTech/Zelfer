@@ -770,3 +770,8 @@ video.video-js {
 {
 	display: none;
 }
+
+.add-user-btn-container
+{
+	text-align: right;
+}
