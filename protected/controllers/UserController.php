@@ -35,7 +35,7 @@ class UserController extends Controller
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions' => array('admin','delete'),
+				'actions' => array('admin','delete','add'),
 				'users' => array('admin@zelfer.com', 'system@zelfer.com'),
 			),
 			array('deny',  // deny all users
@@ -134,6 +134,51 @@ class UserController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionAdd()
+	{
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$user = new User();
+			$user->fullname=$_POST['fullname'];
+			$user->email=$_POST['email'];
+			$user->role=$_POST['role'];
+			$user->password="zelfer";
+			$user->profile_image_url="default.gif";
+			if($user->save())
+			{
+				$users;
+				$txtFullName;
+				$txtEmail;
+				$addHandler;
+				if($user->role == 1)
+				{
+					$users=User::model()->teachers()->findAll();
+					$txtFullName="txtTeacherFullName";
+					$txtEmail="txtTeacherEmail";
+					$addHandler="addTeacher();";
+				}
+				else if($user->role == 2)
+				{
+					$users=User::model()->students()->findAll();
+					$txtFullName="txtStudentFullName";
+					$txtEmail="txtStudentEmail";
+					$addHandler="addStudent();";
+				}
+				$this->renderPartial('_addUser', 
+					array('users'=>$users,
+						'txtFullName'=>$txtFullName,
+						'txtEmail'=>$txtEmail,
+						'addHandler'=>$addHandler
+					)
+				);
+			}
+			else
+			{
+				throw CHttpException(500, 'Cannot add user');
+			}
+		}
 	}
 
 	/**

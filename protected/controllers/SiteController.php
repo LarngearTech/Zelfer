@@ -30,16 +30,10 @@ class SiteController extends Controller
 		// if user logined as admin
 		if (Yii::app()->user->isAdmin())
 		{
-			$user = new User();
-			$students = $user->students();
-			$dataProvider->student = $students->getDataProvider();
-			
-			$user = new User();
-			$teachers = $user->teachers();
-			$dataProvider->teacher =  $teachers->getDataProvider();
-
+			$user->students = User::model()->students()->findAll();
+			$user->teachers = User::model()->teachers()->findAll();
 			$this->render('index-admin', array(
-				'dataProvider'=>$dataProvider,
+				'user'=>$user,
 			));
 		}
 		else
