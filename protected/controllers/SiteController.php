@@ -59,38 +59,7 @@ class SiteController extends Controller
 			}
 			else
 			{
-				$user = User::model()->findByPk(Yii::app()->user->id);
-
-				// select all taken courses
-				$takenCourses = $user->getTakenCourses();
-
-				// select a number of chapters in each course
-				$numContents = $user->getNumChaptersInTakenCourses();
-
-				// classify completed and inprogress courses
-				$completedCourses = array();
-				$inprogressCourses = array();
-				foreach ($takenCourses as $takenCourse)
-				{
-					$numChapter = $numContents[$takenCourse['id']];
-					$takenCourse['numChapter'] = $numChapter;
-
-					if ($takenCourse['chapter_progress'] >= $numChapter)
-					{
-						$completedCourses[] = $takenCourse;
-					}
-					else
-					{
-						$inprogressCourses[] = $takenCourse;
-					}
-				}
-
-				// renders the view file 'protected/views/site/dashboard.php'
-				// using the default layout 'protected/views/layouts/main.php'
-				$this->render('dashboard', array(
-						'inprogressCourses' => $inprogressCourses,
-						'completedCourses' => $completedCourses,
-				));	
+				$this->redirect(array('user/dashboard'));
 			}
 		}
 	}

@@ -1,4 +1,3 @@
-<?php $this->pageTitle=Yii::app()->name; ?>
 <?php
 Yii::app()->clientScript->registerScriptFile(
 	Yii::app()->baseUrl.'/js/bootstrap.min.js'
@@ -18,7 +17,7 @@ Yii::app()->clientScript->registerScript(
 	CClientScript::POS_END
 );
 ?>
-<div class="container">
+<div class="mycourses">
 	<div id="mycourse-btn-group" class="btn-group" data-toggle="buttons-radio">
 		<h1><?php echo Yii::t('site', 'My Courses');?></h1>
 		<button type="button" id="inprogress-btn" class="btn active"><?php echo Yii::t('site', 'In Progress');?></button>
@@ -56,4 +55,4 @@ Yii::app()->clientScript->registerScript(
 		<?php endforeach; ?>
 		</ol>
 	</div><!-- /completed-courses-section -->
-</div><!-- /container -->
+</div><!-- /mycourses -->

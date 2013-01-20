@@ -26,12 +26,12 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+			array('allow',  // allow all users to perform 'index', 'view', and 'create' actions
 				'actions' => array('index','view','create'),
 				'users' => array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('update','mycourses'),
+			array('allow', // allow authenticated user to perform 'update' and 'dashboard' actions
+				'actions' => array('update','dashboard'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -187,6 +187,45 @@ class UserController extends Controller
 	public function actionMyCourses()
 	{
 
+	}
+
+	/**
+	 * Show user dashboard.
+	 */
+	public function actionDashboard()
+	{
+		$user = User::model()->findByPk(Yii::app()->user->id);
+
+		// select all taken courses
+		$takenCourses = $user->getTakenCourses();
+
+		// select a number of chapters in each course
+		$numContents = $user->getNumChaptersInTakenCourses();
+
+		// classify completed and inprogress courses
+		$completedCourses = array();
+		$inprogressCourses = array();
+		foreach ($takenCourses as $takenCourse)
+		{
+			$numChapter = $numContents[$takenCourse['id']];
+			$takenCourse['numChapter'] = $numChapter;
+
+			if ($takenCourse['chapter_progress'] >= $numChapter)
+			{
+				$completedCourses[] = $takenCourse;
+			}
+			else
+			{
+				$inprogressCourses[] = $takenCourse;
+			}
+		}
+
+		// renders the view file 'protected/views/site/dashboard.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('dashboard', array(
+				'inprogressCourses' => $inprogressCourses,
+				'completedCourses' => $completedCourses,
+		));	
 	}
 
 	/**
