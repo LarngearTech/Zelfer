@@ -38,22 +38,76 @@ class SiteController extends Controller
 		}
 		else
 		{
-			Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
+			if (Yii::app()->user->isGuest)
+			{
+				Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
 
-			$categories = Category::model()->findAll();
+				$categories = Category::model()->findAll();
 
-			// load all courses of each catgegory to display
-			$courses_in_categories = array();
-			foreach ($categories as $category) {
-				$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
+				// load all courses of each catgegory to display
+				$courses_in_categories = array();
+				foreach ($categories as $category) {
+					$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
+				}
+
+		 		// renders the view file 'protected/views/site/index.php'
+				// using the default layout 'protected/views/layouts/main.php'
+				$this->render('index', array(
+						'categories' => $categories,
+						'courses_in_categories' => $courses_in_categories,
+				));
 			}
+			else
+			{
+				// select all taken courses
+				$takenCourses = Yii::app()->db->createCommand()
+					->select('c.id, c.name, c.thumbnail_url, sc.chapter_progress, sc.assessment_progress')
+					->from('student_course sc')
+					->leftjoin('course c', 'sc.course_id=c.id')
+					->where('sc.user_id=:uid', array(':uid' => Yii::app()->user->id))
+					->queryAll();
 
-	 		// renders the view file 'protected/views/site/index.php'
-			// using the default layout 'protected/views/layouts/main.php'
-			$this->render('index', array(
-					'categories' => $categories,
-					'courses_in_categories' => $courses_in_categories,
-			));
+				// select a number of chapters in each course
+				$maxContentReader	= Yii::app()->db->createCommand()
+					->select('c.course_id, COUNT(c.course_id) as num')
+					->from('content c')
+					->leftjoin('student_course sc', 'c.course_id=sc.course_id')
+					->where('sc.user_id=:uid', array(':uid' => Yii::app()->user->id))
+					->group('c.course_id')
+					->query();
+				$maxContent = array();
+				while (($row = $maxContentReader->read()) !== false)
+				{
+					$maxContent[$row['course_id']] = $row['num'];
+				}
+
+				// classify completed and inprogress courses
+				$completedCourses = array();
+				$inprogressCourses = array();
+				foreach ($takenCourses as $takenCourse)
+				{
+					$maxChapter = $maxContent[$takenCourse['id']];
+					$takenCourse['numChapter'] = $maxChapter;
+
+					if ($takenCourse['chapter_progress'] >= $maxChapter)
+					{
+						$completedCourses[] = $takenCourse;
+					}
+					else
+					{
+						$inprogressCourses[] = $takenCourse;
+					}
+				}
+
+				// renders the view file 'protected/views/site/dashboard.php'
+				// using the default layout 'protected/views/layouts/main.php'
+				$this->render('dashboard', array(
+						'inprogressCourses' => $inprogressCourses,
+						'completedCourses' => $completedCourses,
+				));	
+
+
+			}
 		}
 	}
 
