@@ -99,4 +99,6 @@ return array(
 	'Add Content Material' => 'เลือกเนื้อหาของบทเรียน',
 	'Taking' => 'ลงเรียน',
 	'Teaching' => 'เปิดสอน',
+	'In Progress' => 'กำลังเรียน',
+	'Completed' => 'เรียนสำเร็จ',
 );

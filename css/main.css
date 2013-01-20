@@ -771,6 +771,7 @@ video.video-js {
 #mycourse-btn-group
 {
 	margin: 20px 0 40px 0;
+	text-align: center;
 }
 
 #teaching-courses
@@ -786,4 +787,117 @@ video.video-js {
 .add-user-btn-container
 {
 	text-align: right;
+}
+
+ol.inprogress-courses, ol.completed-courses
+{
+	list-style: none;
+}
+
+li.inprogress-course, li.completed-course
+{
+	margin: 0 0 2%;
+}
+
+li.inprogress-course:nth-child(2n), li.completed-course:nth-child(2n)
+{
+	float: right;
+}
+
+a.course-link
+{
+	color: #5f6d57;
+	text-decoration: none;
+	background-color: rgba(246, 245, 237, 0.6em);
+	border: 1px solid #d1cdc2;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	display: block;
+	padding: 10px;
+	border-color: rgb(215, 211, 201);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	position: relative;
+}
+
+.course-progress
+{
+	background: rgba(63, 73, 68, 0.3);
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	top: 0;
+	z-index: -1;
+}
+
+.number-progress
+{
+	color: #fff;
+	font-size: 1.8em;
+	position: absolute;
+	height: 63px;
+	text-align: center;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+	text-transform: uppercase;
+	top: 15px;
+	z-index: 2;
+	width: 48px;
+}
+
+.course-icon
+{
+	background: #f7f5ee;
+	border: 1px solid #d1cdc2;
+	-moz-border-radius: 100px;
+	-webkit-border-radius: 100px;
+	border-radius: 100px;
+	padding: 2px;
+	position: absolute;
+	left: 3px;
+	top: 6px;
+}
+
+.course-content
+{
+	padding: 5px 10px 6px 65px;
+}
+
+.course-name
+{
+	color: #5f6d67;
+	font-size: 1.6em;
+	letter-spacing: -1px;
+	margin: 0 10px 0 0;
+	padding-right: 80px;
+	overflow: : hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.course-control
+{
+	background-color: #cf895a;
+	background-image: -webkit-linear-gradient(top, #cf895a, #bc7646);
+	background-image: -moz-linear-gradient(top, #cf895a, #bc7646);
+	background-image: -ms-linear-gradient(top, #cf895a, #bc7646);
+	background-image: -o-linear-gradient(top, #cf895a, #bc7646);
+	background-image: linear-gradient(top, #cf895a, #bc7646);
+	border: 1px solid #915c38;
+	border-radius: 6px;
+	box-shadow: inset 0 1px rgba(255,255,255,0,35);
+	color: #492813;
+	cursor: pointer;
+	font-size: 1em;
+	text-align: center;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.35);
+	text-transform: uppercase;
+	padding: 12px 25px 8px 25px;
+	position: absolute;
+	right: 10px;
+	top: 4px;
 }
