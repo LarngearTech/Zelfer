@@ -60,12 +60,7 @@ class SiteController extends Controller
 			else
 			{
 				// select all taken courses
-				$takenCourses = Yii::app()->db->createCommand()
-					->select('c.id, c.name, c.thumbnail_url, sc.chapter_progress, sc.assessment_progress')
-					->from('student_course sc')
-					->leftjoin('course c', 'sc.course_id=c.id')
-					->where('sc.user_id=:uid', array(':uid' => Yii::app()->user->id))
-					->queryAll();
+				$takenCourses = User::model()->findByPk(Yii::app()->user->id)->getTakenCourses();
 
 				// select a number of chapters in each course
 				$maxContentReader	= Yii::app()->db->createCommand()

@@ -183,13 +183,13 @@ class User extends CActiveRecord
 	}
 
 	 /**
-		 * Return path to resource of user
-		 * @return string resource path
-		 */
-		public function getResourcePath()
-		{
-				return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
-		}
+	 * Return path to resource of user
+	 * @return string resource path
+	 */
+	public function getResourcePath()
+	{
+			return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
+	}
 
 
 	public function addTeachCourse($courseId)
@@ -208,6 +208,22 @@ class User extends CActiveRecord
 			WHERE course_id='.$courseId.' AND user_id= '.$this->id;
 		$command = Yii::app()->db->createCommand($sql);
 		$command->execute(); 
+	}
+
+	 /**
+	 * Return all courses taken by this user
+	 * @return array taken courses
+	 */
+	public function getTakenCourses()
+	{
+		echo 'id: '.$this->id;
+		$takenCourses = Yii::app()->db->createCommand()
+					->select('c.id, c.name, c.thumbnail_url, sc.chapter_progress, sc.assessment_progress')
+					->from('student_course sc')
+					->leftjoin('course c', 'sc.course_id=c.id')
+					->where('sc.user_id=:uid', array(':uid' => $this->id))
+					->queryAll();
+		return $takenCourses;
 	}
 	
 }
