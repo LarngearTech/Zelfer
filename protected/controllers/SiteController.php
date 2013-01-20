@@ -59,32 +59,23 @@ class SiteController extends Controller
 			}
 			else
 			{
+				$user = User::model()->findByPk(Yii::app()->user->id);
+
 				// select all taken courses
-				$takenCourses = User::model()->findByPk(Yii::app()->user->id)->getTakenCourses();
+				$takenCourses = $user->getTakenCourses();
 
 				// select a number of chapters in each course
-				$maxContentReader	= Yii::app()->db->createCommand()
-					->select('c.course_id, COUNT(c.course_id) as num')
-					->from('content c')
-					->leftjoin('student_course sc', 'c.course_id=sc.course_id')
-					->where('sc.user_id=:uid', array(':uid' => Yii::app()->user->id))
-					->group('c.course_id')
-					->query();
-				$maxContent = array();
-				while (($row = $maxContentReader->read()) !== false)
-				{
-					$maxContent[$row['course_id']] = $row['num'];
-				}
+				$numContents = $user->getNumChaptersInTakenCourses();
 
 				// classify completed and inprogress courses
 				$completedCourses = array();
 				$inprogressCourses = array();
 				foreach ($takenCourses as $takenCourse)
 				{
-					$maxChapter = $maxContent[$takenCourse['id']];
-					$takenCourse['numChapter'] = $maxChapter;
+					$numChapter = $numContents[$takenCourse['id']];
+					$takenCourse['numChapter'] = $numChapter;
 
-					if ($takenCourse['chapter_progress'] >= $maxChapter)
+					if ($takenCourse['chapter_progress'] >= $numChapter)
 					{
 						$completedCourses[] = $takenCourse;
 					}
@@ -100,8 +91,6 @@ class SiteController extends Controller
 						'inprogressCourses' => $inprogressCourses,
 						'completedCourses' => $completedCourses,
 				));	
-
-
 			}
 		}
 	}

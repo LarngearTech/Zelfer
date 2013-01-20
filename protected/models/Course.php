@@ -9,6 +9,10 @@
  * @property string $short_description
  * @property string $long_description
  * @property integer $category_id
+ * @property string $thumbnail_url
+ * @property string $intro_url
+ * @property integer $owner_id
+ * @property integer $status
  */
 class Course extends CActiveRecord
 {
