@@ -27,7 +27,7 @@ Yii::app()->clientScript->registerScript(
 		<ol class="inprogress-courses">
 		<?php foreach ($inprogressCourses as $ipCourse): ?>
 			<li class="inprogress-course">
-				<a href="#" class="course-link">
+				<a href="<?php echo Yii::app()->createUrl('course/inclass', array('id' => $ipCourse['id']));?>" class="course-link">
 					<?php $progressPercent = floor(($ipCourse['chapter_progress'] / $ipCourse['numChapter']) * 100); ?>
 					<div class="course-progress" data-width="<?php echo $progressPercent;?>%" style="width:<?php echo $progressPercent;?>%;"></div>
 					<span class="number-progress"><?php echo $progressPercent;?>%</span>
@@ -45,7 +45,7 @@ Yii::app()->clientScript->registerScript(
 		<ol class="completed-courses">
 		<?php foreach ($completedCourses as $cCourse): ?>
 			<li class="completed-course">
-				<a href="#" class="course-link">
+				<a href="<?php echo Yii::app()->createUrl('course/inclass', array('id' => $cCourse['id']));?>" class="course-link">
 					<div class="course-progress" data-width="100%" style="width:100%;"></div>
 					<div class="course-content">
 						<h4 class="course-name"><?php echo $cCourse['name'];?></h4>
