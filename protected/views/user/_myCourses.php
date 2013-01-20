@@ -7,12 +7,12 @@ Yii::app()->clientScript->registerScript(
 	'$("#inprogress-courses-section").show();
 	$("#completed-courses-section").hide();
 	$("#inprogress-btn").on("click", function(event) {
-		$("#inprogress-courses-section").show();
+		$("#inprogress-courses-section").fadeIn(300);
 		$("#completed-courses-section").hide();
 	});
 	$("#completed-btn").on("click", function(event) {
 		$("#inprogress-courses-section").hide();
-		$("#completed-courses-section").show();
+		$("#completed-courses-section").fadeIn(300);
 	});',
 	CClientScript::POS_END
 );
