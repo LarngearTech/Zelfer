@@ -32,7 +32,7 @@ Yii::app()->clientScript->registerScript(
 					<span class="number-progress">23%</span>
 					<div class="course-content">
 						<h4 class="course-name"><?php echo $ipCourse['name'];?></h4>
-						<p class="course-control">Play</p>
+						<p class="course-control">Resume</p>
 					</div>
 					<img class="course-icon" src="<?php echo Yii::app()->baseUrl.$ipCourse['thumbnail_url'];?>" width="59"/>
 				</a>
