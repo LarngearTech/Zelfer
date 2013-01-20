@@ -814,7 +814,7 @@ a.course-link
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 	display: block;
-	padding: 10px;
+	padding: 20px;
 	border-color: rgb(215, 211, 201);
 	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
@@ -844,7 +844,7 @@ a.course-link
 	text-align: center;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 	text-transform: uppercase;
-	top: 15px;
+	top: 25px;
 	z-index: 2;
 	width: 48px;
 }
@@ -858,13 +858,13 @@ a.course-link
 	border-radius: 100px;
 	padding: 2px;
 	position: absolute;
-	left: 3px;
-	top: 6px;
+	left: 10px;
+	top: 16px;
 }
 
 .course-content
 {
-	padding: 5px 10px 6px 65px;
+	padding: 5px 10px 6px 75px;
 }
 
 .course-name
@@ -898,6 +898,6 @@ a.course-link
 	text-transform: uppercase;
 	padding: 12px 25px 8px 25px;
 	position: absolute;
-	right: 10px;
-	top: 4px;
+	right: 18px;
+	top: 14px;
 }

@@ -28,8 +28,9 @@ Yii::app()->clientScript->registerScript(
 		<?php foreach ($inprogressCourses as $ipCourse): ?>
 			<li class="inprogress-course">
 				<a href="#" class="course-link">
-					<div class="course-progress" data-width="23%" style="width:23%;"></div>
-					<span class="number-progress">23%</span>
+					<?php $progressPercent = floor(($ipCourse['chapter_progress'] / $ipCourse['numChapter']) * 100); ?>
+					<div class="course-progress" data-width="<?php echo $progressPercent;?>%" style="width:<?php echo $progressPercent;?>%;"></div>
+					<span class="number-progress"><?php echo $progressPercent;?>%</span>
 					<div class="course-content">
 						<h4 class="course-name"><?php echo $ipCourse['name'];?></h4>
 						<p class="course-control">Resume</p>
