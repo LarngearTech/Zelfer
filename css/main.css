@@ -799,11 +799,6 @@ li.inprogress-course, li.completed-course
 	margin: 0 0 2%;
 }
 
-li.inprogress-course:nth-child(2n), li.completed-course:nth-child(2n)
-{
-	float: right;
-}
-
 a.course-link
 {
 	color: #5f6d57;
