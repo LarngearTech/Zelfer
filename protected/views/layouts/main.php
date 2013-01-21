@@ -32,6 +32,7 @@
 		$userModel;
 		$mycourseUrl = "#";
 		$updateProfileUrl = "#";
+		$exploreCourseUrl = Yii::app()->createUrl('course/explore');
 		if (!Yii::app()->user->isGuest)
 		{
 			$userModel = User::model()->findByPk(Yii::app()->user->id);
@@ -76,6 +77,10 @@
 					'label' => Yii::t('site', 'My Courses'),
 					'url' => $mycourseUrl,
 					'visible' => !Yii::app()->user->isGuest,
+				),
+				array(
+					'label' => Yii::t('site', 'Explore Courses'),
+					'url' => $exploreCourseUrl,
 				),
 			),
 		));

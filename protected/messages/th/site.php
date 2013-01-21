@@ -107,4 +107,5 @@ return array(
 	'Teaching' => 'เปิดสอน',
 	'In Progress' => 'กำลังเรียน',
 	'Completed' => 'เรียนสำเร็จ',
+	'Explore Courses' => 'สำรวจคอร์ส',
 );
