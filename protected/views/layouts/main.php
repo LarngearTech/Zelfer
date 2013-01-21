@@ -6,21 +6,26 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
+	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<meta name="description" content="Online Course Platform">
+	<meta property="og:title" content="<?php echo CHtml::encode($this->pageTitle); ?>">
+	<meta property="og:description" content="Online Course Platform">
+	<meta property="og:url" content="">
+	<meta name="viewport" content="width=device-width">
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.min.css'); ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap-responsive.min.css'); ?>
-	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/html5placeholder.jquery.js'); ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main.css'); ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main-responsive.css'); ?>
 	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/modernizr-2.6.2-respond-1.1.0.min.js');?>
+	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/html5placeholder.jquery.js',CClientScript::POS_END); ?>
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-	<meta name="description" content="Online Course Platform">
-	<meta name="viewport" content="width=device-width">
 
 </head>
 
 <body>
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
 <div class="top-bar"> 
 	<?php
 		// Query all registered courses to display on menu
