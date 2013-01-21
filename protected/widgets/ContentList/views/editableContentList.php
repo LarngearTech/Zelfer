@@ -4,15 +4,15 @@
 		'toggle-edit-panel',
 		'$(document).on({
 			mouseenter: function() {
-				$(".edit-panel", this).show();
+				$("> .edit-panel", this).show();
 			},
 			mouseleave: function() {
 				if (!$(this).hasClass("content-editing"))
 				{
-					$(".edit-panel", this).hide();
+					$("> .edit-panel", this).hide();
 				}
 			}
-		}, ".content-list li");',
+		}, ".content-list li div");',
 		CClientScript::POS_END
 	);
 	$cs->registerScript(
@@ -120,36 +120,104 @@
 		}',
 		CClientScript::POS_END
 	);
+
+	$cs->registerScript(
+		'add-question-handle',
+		'function addMultipleChoices(quizId, questionId){
+			var o = {};
+			var a = $("#question-form-"+questionId).serializeArray();
+
+			$.each(a, function(){
+				if (o[this.name] !== undefined) {
+            		if (!o[this.name].push) {
+                		o[this.name] = [o[this.name]];
+            		}
+            		o[this.name].push(this.value || "");
+        		} else {
+            		o[this.name] = this.value || "";
+        		}
+			});
+			//dat = JSON.stringify(o);
+
+			$.ajax({
+				url:"'.Yii::app()->createUrl("course/addMultiple").'",
+				data:{
+					contentId:questionId,
+					data:o
+				},
+				dataType:"html",
+				type:"POST",
+				success:function(html){
+					$("#content_"+quizId).html(html);
+					makeSortable();
+				}
+			});
+		}',
+		CClientScript::POS_END
+	);
+
+	$cs->registerScript(
+		'delete-question-handle',
+		'function deleteQuestion(quizId, questionId){
+			$.ajax({
+				url:"'.Yii::app()->createUrl("course/deleteQuestion").'",
+				data:{
+					contentId:questionId,
+				},
+				dataType:"html",
+				type:"POST",
+				success:function(html){
+					$("#content_"+quizId).html(html);
+					makeSortable();
+				}
+			});
+		}',
+		CClientScript::POS_END
+	);	
 ?>
 
 <ul class='content-list'>
 <?php
 	$chapterId = 0;
 	$lectureId = 0;
+	$quizId = 0;
 	$contentPrefix;
 	$class;
 	foreach ($contents as $content)
 	{
-		if ($content->isChapter())
+		if ($content->isChapter()
+			||$content->isLecture()
+			||$content->isQuiz())
 		{
-			$class = 'editable-chapter';
-			$chapterId++;
-			$lectureId = 0;
-			$contentPrefix = Yii::t('site', 'Chapter')." ".$chapterId.": ";
+			if ($content->isChapter())
+			{
+				$class = 'editable-chapter';
+				$chapterId++;
+				$lectureId = 0;
+				$quizId = 0;
+				$contentPrefix = Yii::t('site', 'Chapter')." ".$chapterId.": ";
+			}
+			else if($content->isLecture())
+			{
+				$class = 'editable-lecture';
+				$lectureId++;
+				$contentPrefix = Yii::t('site', 'Lecture')." ".$lectureId.": ";
+			}
+			else if ($content->isQuiz())
+			{
+				$class = 'editable-quiz';
+				$quizId++;
+				$contentPrefix = Yii::t('site', 'Quiz')." ".$quizId.": ";
+			}
+
+			echo '<li id="content_'.$content->id.'" class="'.$class.'">';
+			$this->widget('EditableContentListItem',
+				array(
+					'contentPrefix' => $contentPrefix,
+					'content' => $content,
+				));
+			echo '</li>';
 		}
-		else
-		{
-			$class = 'editable-lecture';
-			$lectureId++;
-			$contentPrefix = Yii::t('site', 'Lecture')." ".$lectureId.": ";
-		}
-		echo '<li id="content_'.$content->id.'" class="'.$class.'">';
-		$this->widget('EditableContentListItem',
-			array(
-				'contentPrefix' => $contentPrefix,
-				'content' => $content,
-			));
-		echo '</li>';
 	}
 ?>
 </ul>

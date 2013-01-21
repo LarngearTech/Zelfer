@@ -19,10 +19,16 @@
 		else
 		{
 			if ($mode == 'normal'){
-				addContent($content);
+				if ($content->isTopLevel())
+				{
+					addContent($content);
+				}
 			}
 			else{
-				addInClassContent($content, $assetsUrl);
+				if ($content->isTopLevel())
+				{
+					addInClassContent($content, $assetsUrl);
+				}
 			}
 		}
 	}

@@ -79,4 +79,24 @@ $cs->registerScript('make-sort-script',
 		)
 	);
 	?>
+	<?php
+	echo CHtml::ajaxButton(
+		Yii::t('site', 'Add Quiz'),
+		$addQuizHandler,
+		array(
+			'type'=>'POST',
+			'dataType'=>'html',
+			'data'=>array(
+				'courseId'=>$course->id,
+			),
+			'success'=>'function(html){
+				$(".editable-content-list-container").html(html);
+				makeSortable();
+			}'
+		),
+		array(
+			'class'=>'btn btn-add-quiz',
+		)
+	);
+	?>
 </div>

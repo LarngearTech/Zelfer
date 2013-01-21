@@ -3,6 +3,7 @@ class EditContentPanel extends CWidget{
 	public $course;
 	public $addLectureHandler;
 	public $addChapterHandler;
+	public $addQuizHandler;
 
 	function run(){
                 // Publish required assets
@@ -14,6 +15,7 @@ class EditContentPanel extends CWidget{
 				'course'=>$this->course,
 				'addLectureHandler'=>$this->addLectureHandler,
 				'addChapterHandler'=>$this->addChapterHandler,
+				'addQuizHandler'=>$this->addQuizHandler,
 			)
 		);
 	}

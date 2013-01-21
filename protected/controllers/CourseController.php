@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent', 'contentTypeSelected', 'uploadContentVideo', 'deleteContentVideo'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent', 'contentTypeSelected', 'uploadContentVideo', 'deleteContentVideo', 'deleteQuestion', 'addMultiple'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -394,6 +394,39 @@ class CourseController extends Controller
 		}
 	}
 
+	public function actionAddQuiz()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$course  = $this->loadModel($_POST['courseId']);
+
+			$lastChapterId=-1;
+			$maxOrder=-1;
+			foreach($course->contents as $content)
+			{
+				if($content->order > $maxOrder && $content->isChapter())
+				{
+					$maxOrder = $content->order;
+					$lastChapterId = $content->id;
+				}	
+			}
+
+			$quiz = new Content();
+			$quiz->course_id = $course->id;
+			$quiz->name = "Untitled Quiz";
+			$quiz->parent_id = $lastChapterId;
+			$quiz->order=sizeof($course->contents);
+			$quiz->type=3;
+			$quiz->save();
+
+			$course  = $this->loadModel($_POST['courseId']);
+			$this->widget('EditableContentList',
+				array(
+					'course'=>$course,
+				)
+			);
+		}
+	}
 
 	public function actionAddLecture()
 	{
@@ -624,6 +657,26 @@ class CourseController extends Controller
 				$widget->render('addVideoContent', 
 					array('contentId'=>$_POST['contentId']));
 			}
+			else if($_POST['contentType'] == 'multipleChoices')
+			{
+				$quiz = $this->getContent($_POST['contentId']);
+
+				if ($quiz)
+				{
+					$question = new Content();
+					$question->course_id = $quiz->course_id;
+					$question->parent_id = $quiz->id;
+					$question->name = "Untitled Question";
+					$question->order = sizeof($quiz->childContents);
+					$question->type = 4;
+					$question->save();
+
+					mkdir(ResourcePath::getContentBasePath().$question->id, 0755);
+					$widget->render('addMultipleChoices',
+						array('content'=>$question));
+
+				}
+			}
 		}
 	}
 
@@ -668,6 +721,72 @@ class CourseController extends Controller
 			if (is_dir($contentDir.'/video'))
 			{
 				shell_exec('rm -rf '.$contentDir.'/video');
+			}
+		}
+	}
+
+	public function actionDeleteQuestion()
+	{
+		if (Yii::app()->request->isAjaxRequest) {
+			$question = $this->getContent($_POST['contentId']);
+			if ($question)
+			{
+				$quiz=Content::model()->findByPk($question->parent_id);
+				shell_exec('rm -rf '.ResourcePath::getContentBasePath().$question->id);
+				$question->delete();
+
+				$this->widget('EditableContentListItem',
+					array(
+						'content'=>$quiz,
+						'contentPrefix'=>Yii::t('site', 'Quiz'),
+						'mode'=>'edit'
+					)
+				);
+			}
+
+		}
+	}
+
+	public function actionAddMultiple()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			//print_r($_POST['data']);
+			$contentId = $_POST['contentId'];
+
+			$question = $this->getContent($contentId);
+			if ($question)
+			{
+				Yii::import('ext.qtiprocessor.*');
+				require_once('QtiProcessor.php');
+				
+				$item = array();
+				$item['title'] = $_POST['data']['question'];
+				$item['type'] = 'choice';
+				$item['choices'] = $_POST['data']['txt-choice'];
+
+				$item['answers'] = $item['choices'][$_POST['data']['answer']];
+				$item['shuffle'] = 'false';
+				$item['maxChoices'] = 4;
+				$item['prompt'] = $_POST['data']['question'];
+		
+				$qt = new QtiProcessor();
+				$xml = $qt->createQtiXmlItem($item);
+				$file = fopen(ResourcePath::getContentBasePath().$contentId."/data.xml", "w");
+				fwrite($file, $xml);
+				fclose($file);
+
+				$question->name = $item['title'];
+				$question->save();
+
+				$quiz = Content::model()->findByPk($question->parent_id);
+				$this->widget('EditableContentListItem',
+					array(
+						'content'=>$quiz,
+						'contentPrefix'=>Yii::t('site', 'Quiz'),
+						'mode'=>'edit'
+					)
+				);
 			}
 		}
 	}

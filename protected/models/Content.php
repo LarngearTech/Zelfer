@@ -125,4 +125,25 @@ class Content extends CActiveRecord
 	{
 		return $this->type==0;
 	}
+
+	/**
+	 * Return whether a content is a lecture
+	 */
+	public function isLecture()
+	{
+		return $this->type==1 || $this->type==2;
+	}
+
+	/**
+	 * Return whether a content is a quiz
+	 */
+	public function isQuiz()
+	{
+		return $this->type==3;
+	}
+
+	public function isTopLevel()
+	{
+		return $this->type !=4;
+	}
 }

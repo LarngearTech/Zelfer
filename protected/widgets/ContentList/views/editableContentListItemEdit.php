@@ -13,13 +13,23 @@
 		<a class="btn cancel-edit-edit" onclick="js:cancelEditContent(<?php echo $content->id; ?>, '<?php echo $contentPrefix; ?>')" title="<?php echo Yii::t('site', 'Cancel');?>"><i class="icon-repeat"></i></a>
 		<a class="btn delete-content" onclick="js:deleteContent(<?php echo $content->id; ?>)" title="<?php echo Yii::t('site', 'Delete');?>"><i class="icon-trash"></i></a>
 	</div>
-	<?php
-	if (!$content->isChapter())
+<?php
+	if ($content->isLecture())
 	{
 ?>
 	<div id="edit-content-body-<?php echo $content->id; ?>" class="edit-content-body">
 		<?php $this->render('addContentMaterial',
 			array("contentId"=>$content->id)); ?>
+	</div>
+<?php
+	}
+	else if ($content->isQuiz())
+	{
+?>
+	<div id="edit-content-body-<?php echo $content->id; ?>" class="edit-content-body">
+		<?php $this->render('addQuestion',
+			array("content"=>$content)); 
+		?>
 	</div>
 <?php
 	}
