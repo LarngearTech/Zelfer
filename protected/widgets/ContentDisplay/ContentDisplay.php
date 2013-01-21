@@ -10,14 +10,20 @@ class ContentDisplay extends BaseWidget
 	{
 		if ($this->content)
 		{
-			if ($this->content->type == 1)
+			if ($this->content->type == Yii::app()->params["no_content"])
 			{
 				$this->render('noContent');
 			}
 			// content video
-			else if ($this->content->type == 2)
+			else if ($this->content->type == Yii::app()->params["video_content"])
 			{
 				$this->render('contentVideo', 
+					array('content'=>$this->content));
+			}
+			// quiz
+			else if ($this->content->type == Yii::app()->params["quiz_content"])
+			{
+				$this->render('contentQuiz', 
 					array('content'=>$this->content));
 			}
 		}

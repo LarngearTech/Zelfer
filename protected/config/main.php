@@ -118,6 +118,13 @@ return array(
 		// user status
 		'active_status' => 1,
 		'inactive_status' => 2,
+
+		// content type
+		'chapter_content' => 0,
+		'no_content' => 1,
+		'video_content' => 2,
+		'quiz_content' => 3,
+		'multiple_choice_content' => 4
 	),
 	'sourceLanguage' => 'en_us',
 	'language' => 'th',

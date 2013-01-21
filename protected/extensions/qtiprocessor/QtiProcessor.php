@@ -61,7 +61,7 @@ class QtiProcessor
 	 */
 	function createQtiXmlItem($item)
 	{
-		$qp = qp()->append('<assessmentItem></assessmentItem>');
+		$qp = qp()->append('<assessmentItem identifier="'.$item['type'].'" title="'.$item['title'].'"></assessmentItem>');
 		$type = strtolower($item['type']);
 		// type: select one choice
 		if ($type == 'choice')

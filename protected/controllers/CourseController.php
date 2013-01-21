@@ -767,7 +767,7 @@ class CourseController extends Controller
 
 				$item['answers'] = $item['choices'][$_POST['data']['answer']];
 				$item['shuffle'] = 'false';
-				$item['maxChoices'] = 4;
+				$item['maxChoices'] = 1;
 				$item['prompt'] = $_POST['data']['question'];
 		
 				$qt = new QtiProcessor();

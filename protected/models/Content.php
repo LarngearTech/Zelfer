@@ -56,7 +56,7 @@ class Content extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'childContents'=>array(self::HAS_MANY, 'Content', 'parent_id'),
+			//'childContents'=>array(self::HAS_MANY, 'Content', 'parent_id'),
 		);
 	}
 
@@ -112,9 +112,14 @@ class Content extends CActiveRecord
 	/**
 	 * Return child contents.
 	 */
-	public function getChildContent()
+	public function getChildContents()
 	{
-		return Content::model()->findAll('parent_id=:parentId', array('parentId'=>$this->id));
+		return Content::model()->findAll(
+			array(
+				'condition'=>'parent_id=:parentId',
+				'order'=>'`order`',
+				'params'=>array(':parentId'=>$this->id)
+		 	));
 	}
 
 
