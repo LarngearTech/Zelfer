@@ -5,6 +5,7 @@
 			'course'=>$model,
 			'addLectureHandler'=>$this->createUrl('course/addLecture'),
 			'addChapterHandler'=>$this->createUrl('course/addChapter'),
+			'addQuizHandler'=>$this->createUrl('course/addQuiz'),
 		)
 	);
 	?>

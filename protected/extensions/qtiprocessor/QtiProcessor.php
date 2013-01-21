@@ -61,7 +61,7 @@ class QtiProcessor
 	 */
 	function createQtiXmlItem($item)
 	{
-		$qp = qp()->append('<assessmentItem></assessmentItem>');
+		$qp = qp()->append('<assessmentItem identifier="'.$item['type'].'" title="'.$item['title'].'"></assessmentItem>');
 		$type = strtolower($item['type']);
 		// type: select one choice
 		if ($type == 'choice')
@@ -90,7 +90,7 @@ class QtiProcessor
 			$qp->find(':root')->append('<itemBody></itemBody>');
 			$qp = $this->appendChoiceInteraction($qp, $item['prompt'], $item['choices'], $item['shuffle'], $item['maxChoices']);
 		}
-		print htmlspecialchars($qp->top()->xml());
+		return $qp->top()->xml();
 	}
 
 	function appendChoiceInteraction($qp, $prompt, $choices, $shuffle, $maxChoices)
@@ -99,9 +99,9 @@ class QtiProcessor
 					->append('<choiceInteraction responseIdentifier="RESPONSE" shuffle="'.$shuffle.'" maxChoices="'.$maxChoices.'"></choiceInteraction>')
 					->children('choiceInteraction')
 					->append('<prompt>'.$prompt.'</prompt>');
-		foreach ($choices as $choice)
+		foreach ($choices as $value => $text)
 		{
-			$qp = $qp->append('<simpleChoice identifier="'.$choice['value'].'" fixed="false">'.$choice['text'].'</simpleChoice>');
+			$qp = $qp->append('<simpleChoice identifier="'.$value.'" fixed="false">'.$text.'</simpleChoice>');
 		}
 		return $qp;
 	}

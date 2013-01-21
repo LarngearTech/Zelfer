@@ -82,6 +82,7 @@ return array(
 	'Create Lecture' => 'เพิ่มเนื้อหาใหม่',
 	'Problem Set' => 'โจทย์ปัญหา',
 	'Discussion' => 'แลกเปลี่ยนความเห็น',
+	'Quiz' => 'แบบฝึกหัด',
 
 	'Edit Instructors' => 'แก้ไขผู้สอน',
 	'Don\'t you have an account?' => 'ยังไม่เคยสมัครใช้งาน?',
@@ -96,7 +97,15 @@ return array(
 	'Create Content' => 'สร้างเนื้อหา',
 	'Add Chapter' => 'เพิ่มบท',
 	'Add Lecture' => 'เพิ่มบทเรียน',
+	'Add Quiz' => 'เพิ่มแบบทดสอบ',
+	'Add Question' => 'เพิ่มคำถาม',
 	'Add Content Material' => 'เลือกเนื้อหาของบทเรียน',
+	'Choose Question Type' => 'เลือกประเภทคำถาม',
+	'Question' => 'คำถาม',
+	'Answer' => 'คำตอบ',
 	'Taking' => 'ลงเรียน',
 	'Teaching' => 'เปิดสอน',
+	'In Progress' => 'กำลังเรียน',
+	'Completed' => 'เรียนสำเร็จ',
+	'Explore Courses' => 'สำรวจคอร์ส',
 );

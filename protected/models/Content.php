@@ -56,7 +56,7 @@ class Content extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'childContents'=>array(self::HAS_MANY, 'Content', 'parent_id'),
+			//'childContents'=>array(self::HAS_MANY, 'Content', 'parent_id'),
 		);
 	}
 
@@ -112,9 +112,14 @@ class Content extends CActiveRecord
 	/**
 	 * Return child contents.
 	 */
-	public function getChildContent()
+	public function getChildContents()
 	{
-		return Content::model()->findAll('parent_id=:parentId', array('parentId'=>$this->id));
+		return Content::model()->findAll(
+			array(
+				'condition'=>'parent_id=:parentId',
+				'order'=>'`order`',
+				'params'=>array(':parentId'=>$this->id)
+		 	));
 	}
 
 
@@ -124,5 +129,26 @@ class Content extends CActiveRecord
 	public function isChapter()
 	{
 		return $this->type==0;
+	}
+
+	/**
+	 * Return whether a content is a lecture
+	 */
+	public function isLecture()
+	{
+		return $this->type==1 || $this->type==2;
+	}
+
+	/**
+	 * Return whether a content is a quiz
+	 */
+	public function isQuiz()
+	{
+		return $this->type==3;
+	}
+
+	public function isTopLevel()
+	{
+		return $this->type !=4;
 	}
 }
