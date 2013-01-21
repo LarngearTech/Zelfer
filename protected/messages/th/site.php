@@ -105,4 +105,6 @@ return array(
 	'Answer' => 'คำตอบ',
 	'Taking' => 'ลงเรียน',
 	'Teaching' => 'เปิดสอน',
+	'In Progress' => 'กำลังเรียน',
+	'Completed' => 'เรียนสำเร็จ',
 );

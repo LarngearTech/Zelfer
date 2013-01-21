@@ -27,16 +27,8 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// if user logined as admin
-		if (Yii::app()->user->isAdmin())
-		{
-			$user->students = User::model()->students()->findAll();
-			$user->teachers = User::model()->teachers()->findAll();
-			$this->render('index-admin', array(
-				'user'=>$user,
-			));
-		}
-		else
+		// First page for guest
+		if (Yii::app()->user->isGuest)
 		{
 			Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
 
@@ -55,6 +47,29 @@ class SiteController extends Controller
 					'courses_in_categories' => $courses_in_categories,
 			));
 		}
+		else // First page for logged in users
+		{
+			if (Yii::app()->user->isAdmin())
+			{
+				$this->redirect(array('site/admin'));
+			}
+			else
+			{
+				$this->redirect(array('user/dashboard'));
+			}
+		}	
+	}
+
+	/**
+	 * Controller for administrator
+	 */
+	public function actionAdmin()
+	{
+		$user->students = User::model()->students()->findAll();
+		$user->teachers = User::model()->teachers()->findAll();
+		$this->render('index-admin', array(
+			'user'=>$user,
+		));		
 	}
 
 	/**

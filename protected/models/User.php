@@ -183,13 +183,13 @@ class User extends CActiveRecord
 	}
 
 	 /**
-		 * Return path to resource of user
-		 * @return string resource path
-		 */
-		public function getResourcePath()
-		{
-				return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
-		}
+	 * Return path to resource of user
+	 * @return string resource path
+	 */
+	public function getResourcePath()
+	{
+			return Yii::getPathOfAlias('webroot').self::USER_RESOURCE_PREFIX.$this->id;
+	}
 
 
 	public function addTeachCourse($courseId)
@@ -209,5 +209,40 @@ class User extends CActiveRecord
 		$command = Yii::app()->db->createCommand($sql);
 		$command->execute(); 
 	}
-	
+
+	 /**
+	 * Return all courses taken by this user
+	 * @return array taken courses
+	 */
+	public function getTakenCourses()
+	{
+		$takenCourses = Yii::app()->db->createCommand()
+					->select('c.id, c.name, c.thumbnail_url, sc.chapter_progress, sc.assessment_progress')
+					->from('student_course sc')
+					->leftjoin('course c', 'sc.course_id=c.id')
+					->where('sc.user_id=:uid', array(':uid' => $this->id))
+					->queryAll();
+		return $takenCourses;
+	}
+
+	/**
+	 * Return {course_id, num_chapter} array of each taken courses 
+	 * @return array number of chapters in taken courses
+	 */
+	public function getNumChaptersInTakenCourses()
+	{
+		$numContentReader	= Yii::app()->db->createCommand()
+			->select('c.course_id, COUNT(c.course_id) as num')
+			->from('content c')
+			->leftjoin('student_course sc', 'c.course_id=sc.course_id')
+			->where('sc.user_id=:uid', array(':uid' => Yii::app()->user->id))
+			->group('c.course_id')
+			->query();
+		$numContents = array();
+		while (($row = $numContentReader->read()) !== false)
+		{
+			$numContents[$row['course_id']] = $row['num'];
+		}
+		return $numContents;
+	}
 }
