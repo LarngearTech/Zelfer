@@ -27,7 +27,7 @@ class CourseController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions' => array('index','view','inclass'),
+				'actions' => array('index','view','inclass', 'explore'),
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -180,6 +180,27 @@ class CourseController extends Controller
  
 	}
 
+	/**
+	 * Explore all courses.
+	 */
+	public function actionExplore()
+	{
+		// load all categories
+		$categories = Category::model()->findAll();
+
+		// load all courses of each catgegory to display
+		$courses_in_categories = array();
+		foreach ($categories as $category) {
+			$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
+		}
+
+ 		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->render('explore', array(
+				'categories' => $categories,
+				'courses_in_categories' => $courses_in_categories,
+		));
+	}
 
 	/**
 	 * Publish course.
