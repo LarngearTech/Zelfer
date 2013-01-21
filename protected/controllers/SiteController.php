@@ -27,6 +27,7 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		// First page for guest
 		if (Yii::app()->user->isGuest)
 		{
 			Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
@@ -46,7 +47,7 @@ class SiteController extends Controller
 					'courses_in_categories' => $courses_in_categories,
 			));
 		}
-		else
+		else // First page for logged in users
 		{
 			if (Yii::app()->user->isAdmin())
 			{

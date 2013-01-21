@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>		<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>			<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>			<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->	<html class="no-js"> <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap.min.css'); ?>
 	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/bootstrap-responsive.min.css'); ?>
-	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/html5placeholder.jquery.js') ?>
-	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main.css') ?>
-	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main-responsive.css') ?>
+	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/html5placeholder.jquery.js'); ?>
+	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main.css'); ?>
+	<?php Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl.'/css/main-responsive.css'); ?>
+	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl.'/js/modernizr-2.6.2-respond-1.1.0.min.js');?>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<meta name="description" content="Online Course Platform">
+	<meta name="viewport" content="width=device-width">
+
 </head>
 
 <body>
