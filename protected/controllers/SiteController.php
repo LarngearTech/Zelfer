@@ -27,41 +27,48 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// if user logined as admin
-		if (Yii::app()->user->isAdmin())
+		if (Yii::app()->user->isGuest)
 		{
-			$user->students = User::model()->students()->findAll();
-			$user->teachers = User::model()->teachers()->findAll();
-			$this->render('index-admin', array(
-				'user'=>$user,
+			Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
+
+			$categories = Category::model()->findAll();
+
+			// load all courses of each catgegory to display
+			$courses_in_categories = array();
+			foreach ($categories as $category) {
+				$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
+			}
+
+	 		// renders the view file 'protected/views/site/index.php'
+			// using the default layout 'protected/views/layouts/main.php'
+			$this->render('index', array(
+					'categories' => $categories,
+					'courses_in_categories' => $courses_in_categories,
 			));
 		}
 		else
 		{
-			if (Yii::app()->user->isGuest)
+			if (Yii::app()->user->isAdmin())
 			{
-				Yii::app()->clientScript->registerScript('placeholder','$("input[placeholder]").placeholder();',CClientScript::POS_END);
-
-				$categories = Category::model()->findAll();
-
-				// load all courses of each catgegory to display
-				$courses_in_categories = array();
-				foreach ($categories as $category) {
-					$courses_in_categories[$category->id] = Course::model()->category($category->id)->status('publish')->findAll();
-				}
-
-		 		// renders the view file 'protected/views/site/index.php'
-				// using the default layout 'protected/views/layouts/main.php'
-				$this->render('index', array(
-						'categories' => $categories,
-						'courses_in_categories' => $courses_in_categories,
-				));
+				$this->redirect(array('site/admin'));
 			}
 			else
 			{
 				$this->redirect(array('user/dashboard'));
 			}
-		}
+		}	
+	}
+
+	/**
+	 * Controller for administrator
+	 */
+	public function actionAdmin()
+	{
+		$user->students = User::model()->students()->findAll();
+		$user->teachers = User::model()->teachers()->findAll();
+		$this->render('index-admin', array(
+			'user'=>$user,
+		));		
 	}
 
 	/**
