@@ -27,6 +27,22 @@ class ContentList extends ContentListBase{
 						dataType : "html",
 						success : function(html){
 							$(".lecture-content-wrapper").html(html);
+							$(".assessment-item").hide();
+							$("#assessment-test-0").show();
+							$("#paginator-control").jPaginator({
+								nbPages: 4	,
+								selectedPage: 1,
+								overBtnLeft: "#paginator_o_left",
+								overBtnRight: "#paginator_o_right",
+								maxBtnLeft: "#paginator_m_left",
+								maxBtnRight: "#paginator_m_right",
+								minSlidersForSlider: 5,
+								onPageClicked: function(a, num) {
+									alert("hello");
+									$(".assessment-item").hide();
+									$("#assessment-test-" + num).show();
+								},
+							});
 						}
 					});
 				});

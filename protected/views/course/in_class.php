@@ -51,8 +51,9 @@
 			'id' => 'lecture',
 		));
 			echo $lecturesTabContent;
+
 		$this->endWidget();
-		$this->beginWidget('EBootstrapTabContent', array(
+		/*$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'problemset',
 		));
 			$this->widget('ZAssessment', array(
@@ -143,7 +144,7 @@
                     ),
 				)
 			));
-		$this->endWidget(); // end EbootstrapTabConent
+		$this->endWidget(); // end EbootstrapTabConent*/
 		$this->beginWidget('EBootstrapTabContent', array(
 			'id' => 'discussion',
 		));

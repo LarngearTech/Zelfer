@@ -64,11 +64,13 @@ class CourseController extends Controller
 		// get all chapters of a specified course id 
 		// with all corresponding lectures
 		//$chapters = Chapter::model()->with('lectures')->findAll('course_id=:courseID', array(':courseID'=>$id));
+		Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR.'jPaginator.css');
+		Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'jPaginator.js', CClientScript::POS_END);
 		$contents=Content::model()->findAll('course_id=:courseID', array(':courseID'=>$id));
 		$this->render('in_class',array(
 			'model' => $this->loadModel($id),
 			'contents' => $contents,
-		));
+		));		
 	}
 	
 	/*
