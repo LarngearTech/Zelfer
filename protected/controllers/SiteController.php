@@ -67,8 +67,19 @@ class SiteController extends Controller
 	{
 		$user->students = User::model()->students()->findAll();
 		$user->teachers = User::model()->teachers()->findAll();
+
+		$userMenu 		= array('id' => '1', 'name' => 'User', 'isGroupHeading' => true);
+		$addUserMenu 	= array('id' => '2', 'name' => 'Add User', 'isGroupHeading' => false);
+		$manageUserMenu	= array('id' => '3', 'name' => 'Manage User', 'isGroupHeading' => false);
+		$courseMenu 	= array('id' => '4', 'name' => 'Course', 'isGroupHeading' => true);
+		$addCourseMenu 	= array('id' => '5', 'name' => 'Add Course', 'isGroupHeading' => false);
+		$settingMenu 	= array('id' => '6', 'name' => 'Setting', 'isGroupHeading' => true);
+		$adminPwdMenu	= array('id' => '7', 'name' => 'Admin Password', 'isGroupHeading' => false);
+
+		$menus = array($userMenu, $addUserMenu, $manageUserMenu, $courseMenu, $addCourseMenu, $settingMenu, $adminPwdMenu);
 		$this->render('index-admin', array(
-			'user'=>$user,
+			'user' => $user,
+			'menus' => $menus,
 		));		
 	}
 

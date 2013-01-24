@@ -37,6 +37,7 @@ return array(
 		'application.widgets.ZLectureStack.*',
 		'application.widgets.ZAssessment.*',
 		'application.widgets.ZAssessmentItem.*',
+		'application.widgets.MenuList.*',
 	),
 
 	'modules' => array(

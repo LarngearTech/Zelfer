@@ -70,40 +70,10 @@ Yii::app()->clientScript->registerScript(
 ?>
 <div class="container">
 	<div class="row">
-		<div class="span3 bs-docs-sidebar">
-			<ul class="nav nav-list bs-docs-sidenav affix">
-				<li>
-					<a herf="#">
-						<i class="icon-chevron-right"></i>
-						<?php echo Yii::t('site', 'Users'); ?>
-					</a>
-				</li>
-				<li class="active">
-					<a herf="#">
-						<i class="icon-chevron-right"></i>
-						test2
-					</a>
-				</li>
-				<li>
-					<a herf="#">
-						<i class="icon-chevron-right"></i>
-						test3
-					</a>
-				</li>
-				<li>
-					<a herf="#">
-						<i class="icon-chevron-right"></i>
-						test4
-					</a>
-				</li>
-				<li>
-					<a herf="#">
-						<i class="icon-chevron-right"></i>
-						test5
-					</a>
-				</li>
-
-			</ul>
+		<div class="stack-wrapper span3">
+			<?php $this->widget('MenuList', array(
+				'menus' => $menus,
+			));?>
 		</div>
 		<div class="span9">
 			This is span 9
