@@ -1,3 +1,5 @@
+/* Desktop large 
+----------------------------------*/
 @media (min-width: 1200px)
 {
     #course_info > .well
@@ -12,8 +14,19 @@
         width: 740px;
         margin-left: -10px;
 	}
+
+    .bs-docs-sidenav 
+    {
+        width: 258px;
+    }
+    .bs-docs-sidenav > li > a 
+    {
+        width: 230px \9; /* Override the previous IE8-9 hack */
+    }
 }
 
+/* Desktop  
+----------------------------------*/
 @media (min-width: 980px) and (max-width: 1199px)
 {
     #course_info > .well
@@ -28,8 +41,19 @@
         width: 640px;
         margin-left: -10px;
     }
+
+    /* When affixed, space properly */
+    .bs-docs-sidenav 
+    {
+        top: 0;
+        width: 218px;
+        margin-top: 30px;
+        margin-right: 0;
+    }
 }
 
+/* Tablet to desktop
+----------------------------------*/
 @media (min-width: 768px) and (max-width: 979px)
 {
     #course_info > .well
@@ -44,8 +68,19 @@
         width: 485px;
         margin-left: -10px;
     }
+
+  /* Adjust sidenav width */
+  .bs-docs-sidenav {
+    width: 166px;
+    margin-top: 20px;
+  }
+  .bs-docs-sidenav.affix {
+    top: 0;
+  }
 }
 
+/* Tablet
+------------------------- */
 @media (max-width: 767px)
 {
 	div.container
@@ -60,4 +95,26 @@
         width: 90%;
         margin: 20px auto 20px auto;
     }
+
+    /* Sidenav */
+    .bs-docs-sidenav
+    {
+        width: auto;
+        margin-bottom: 20px;
+    }
+
+    .bs-docs-sidenav.affix
+    {
+        position: static;
+        width: auto;
+        top: 0;
+    }
+}
+
+
+/* Landscape phones
+------------------------- */
+@media (max-width: 480px) 
+{
+
 }
