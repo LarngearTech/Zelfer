@@ -8,9 +8,6 @@ class ContentList extends ContentListBase{
 		$cs->registerScript(
 			'playbutton-click',
 			'$(function() {
-				$("a.accordion-body .chapter").click(function(e) {
-					alert(this.id);
-				});
 				$(".playbutton").click(function(e){
 					$("#lecture-name").html(this.name);
 					$("#lecture-content-wrapper").html(
@@ -38,7 +35,6 @@ class ContentList extends ContentListBase{
 								maxBtnRight: "#paginator_m_right",
 								minSlidersForSlider: 5,
 								onPageClicked: function(a, num) {
-									alert("hello");
 									$(".assessment-item").hide();
 									$("#assessment-test-" + num).show();
 								},
