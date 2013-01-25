@@ -26,8 +26,10 @@ class QtiProcessor
 			$answers[] = $value->text();
 		}
 		$item['answers'] = $answers;
-// Handle multiple choice questions:
-		if (strtolower($item['type']) == 'choice' or strtolower($item['type']) == 'choicemultiple')
+
+		$type = strtolower($item['type']);
+		// Handle multiple choice questions:
+		if ($type == 'choice' or $type == 'choicemultiple')
 		{
 			$choiceInteraction = $qp->parent('assessmentItem')->find('itemBody>choiceInteraction');
 			$shuffle = $choiceInteraction->attr('shuffle');
@@ -52,6 +54,20 @@ class QtiProcessor
 			$item['maxChoices'] = $maxChoices;
 			$item['prompt'] = $prompt;
 			$item['choices'] = $choices;
+		}
+		else if ($type == 'extendedText')
+		{
+			$extendedTextInteraction = $qp->parent('assessmentItem')->find('itemBody>extendedTextInteraction');
+			$ansLen = $extendedTextInteraction->attr('expectedLength');
+			$prequestion = $extendedTextInteraction->find('p')->text();
+			$imageUrl = $extendedTextInteraction->find('img')->attr('src');
+			$prompt = $extendedTextInteraction->find('prompt')->text();
+			
+			// Store data
+			$item['prequestion'] = $prequestion;
+			$item['imageUrl'] = $imageUrl;
+			$item['prompt'] = $prompt;
+			$item['ansLen'] = $ansLen;
 		}
 		return $item;
 	}
@@ -90,6 +106,30 @@ class QtiProcessor
 			$qp->find(':root')->append('<itemBody></itemBody>');
 			$qp = $this->appendChoiceInteraction($qp, $item['prompt'], $item['choices'], $item['shuffle'], $item['maxChoices']);
 		}
+		// type: fill shot text in-line in the paragraph (note: not done)
+		else if ($type == 'textEntry')
+		{
+			$qp->find(':root')
+				->append('<responseDeclaration identifier="RESPONSE" cardicality="single" baseType="string"></responseDeclaration>')
+				->children('responseDeclaration')
+				->append('<correctResponse></correctResponse>')
+				->children('correctResponse')
+				->append('<value>'.$item['answers'][0].'</value>');
+			$qp->find(':root')->append('<itemBody></itemBody>');
+			$qp = $this->appendTextEntryInteraction($qp);
+		} 
+		// type: fill text answer after the paragraph/question
+		else if ($type == 'extendedText')
+		{
+			$qp->find(':root')
+				->append('<responseDeclaration identifier="RESPONSE" cardicality="single" baseType="string"></responseDeclaration>')
+				->children('responseDeclaration')
+				->append('<correctResponse></correctResponse>')
+				->children('correctResponse')
+				->append('<value>'.$item['answers'][0].'</value>');
+			$qp->find(':root')->append('<itemBody></itemBody>');
+			$qp = $this->appendTextEntryInteraction($qp, $item['prequestion'], $item['imageUrl'], $item['prompt'], $item['ansLen']);
+		}
 		return $qp->top()->xml();
 	}
 
@@ -103,6 +143,26 @@ class QtiProcessor
 		{
 			$qp = $qp->append('<simpleChoice identifier="'.$value.'" fixed="false">'.$text.'</simpleChoice>');
 		}
+		return $qp;
+	}
+
+	function appendTextEntryInteraction($qp)
+	{
+	}
+
+	function appendExtendedTextInteraction($qp, $prequestion, $imageUrl, $prompt, $ansLen)
+	{
+		$qp = $qp->find('itemBody')
+				->append('<p>'.$prequestion.'</p>');
+		if ($imageUrl)
+		{
+			$qp = $qp->find('itemBody')
+				->append('<img src="'.$imageUrl.'" />');
+		}
+		$qp = $qp->find('itemBody')
+				->append('<extendedTextInteraction responseIdentifier="RESPONSE" expectedLength="'.$ansLen.'"')
+				->children('extendedTextInteraction')
+				->append('<prompt>'.$prompt.'</prompt');
 		return $qp;
 	}
 }

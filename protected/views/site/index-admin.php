@@ -67,29 +67,37 @@ Yii::app()->clientScript->registerScript(
 	,
         CClientScript::POS_END
 );
-
 ?>
-<div class="mycourse-wrapper">
-	<div class="container">
-		<div id="usergroup-btn" class="btn-group" data-toggle="buttons-radio">
-			<button type="button" id="student-btn" class="btn active"><?php echo Yii::t('site', 'Student');?></button>
-			<button type="button" id="teacher-btn" class="btn"><?php echo Yii::t('site', 'Teacher');?></button>
-		</div>
-		<div id="student-list">
-			<?php $this->renderPartial('/user/_addUser', array(
-				'users'=>$user->students,
-				'txtFullName'=>'txtStudentFullName',
-				'txtEmail'=>'txtStudentEmail',
-				'addHandler'=>'addStudent();',
+<div class="container">
+	<div class="row">
+		<div class="stack-wrapper span3">
+			<?php $this->widget('MenuList', array(
+				'menus' => $menus,
 			));?>
 		</div>
-		<div id="teacher-list">
-			<?php $this->renderPartial('/user/_addUser', array(
-				'users'=>$user->teachers,
-				'txtFullName'=>'txtTeacherFullName',
-				'txtEmail'=>'txtTeacherEmail',
-				'addHandler'=>'addTeacher();',
-			));?>
+		<div class="span9">
+			<div class="mycourse-wrapper">
+				<div id="usergroup-btn" class="btn-group" data-toggle="buttons-radio">
+					<button type="button" id="student-btn" class="btn active"><?php echo Yii::t('site', 'Student');?></button>
+					<button type="button" id="teacher-btn" class="btn"><?php echo Yii::t('site', 'Teacher');?></button>
+				</div>
+				<div id="student-list">
+					<?php $this->renderPartial('/user/_addUser', array(
+						'users'=>$user->students,
+						'txtFullName'=>'txtStudentFullName',
+						'txtEmail'=>'txtStudentEmail',
+						'addHandler'=>'addStudent();',
+					));?>
+				</div>
+				<div id="teacher-list">
+					<?php $this->renderPartial('/user/_addUser', array(
+						'users'=>$user->teachers,
+						'txtFullName'=>'txtTeacherFullName',
+						'txtEmail'=>'txtTeacherEmail',
+						'addHandler'=>'addTeacher();',
+					));?>
+				</div>
+			</div><!-- /#mycourse-wrapper -->
 		</div>
-	</div><!-- /container -->
-</div><!-- /course-list-section -->
+	</div><!-- /.row -->
+</div><!-- /.container -->
