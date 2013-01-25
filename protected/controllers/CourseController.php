@@ -31,7 +31,14 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent', 'contentTypeSelected', 'uploadContentVideo', 'deleteContentVideo', 'deleteQuestion', 'addMultiple'),
+				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList'
+					, 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse'
+					, 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor'
+					, 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter'
+					, 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent'
+					, 'deleteContent', 'contentTypeSelected', 'uploadContentVideo'
+					, 'deleteContentVideo', 'deleteContentVideoAndRedirect'
+					, 'deleteQuestion', 'addMultiple', 'addTrueFalse'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -126,7 +133,6 @@ class CourseController extends Controller
 			rename($folder.$fileName, $folder.$newName);
 			// Convert file to x264 using ffmpeg
 			$baseName = VideoUtil::encode($folder.$newName, $folder);
-				
 			$course->intro_url = $baseName;
 			if($course->save()){
 				$result['html'] = $this->widget('IntroVideoPlayer', 
@@ -681,7 +687,7 @@ class CourseController extends Controller
 				$widget->render('addVideoContent', 
 					array('contentId'=>$_POST['contentId']));
 			}
-			else if($_POST['contentType'] == 'multipleChoices')
+			else if($_POST['contentType'] == Yii::app()->params["multiple_choice_content"])
 			{
 				$quiz = $this->getContent($_POST['contentId']);
 
@@ -692,11 +698,31 @@ class CourseController extends Controller
 					$question->parent_id = $quiz->id;
 					$question->name = "Untitled Question";
 					$question->order = sizeof($quiz->childContents);
-					$question->type = 4;
+					$question->type = Yii::app()->params["multiple_choice_content"];
 					$question->save();
 
 					mkdir(ResourcePath::getContentBasePath().$question->id, 0755);
 					$widget->render('addMultipleChoices',
+						array('content'=>$question));
+
+				}
+			}
+			else if($_POST['contentType'] == Yii::app()->params["true_false_content"])
+			{
+				$quiz = $this->getContent($_POST['contentId']);
+
+				if ($quiz)
+				{
+					$question = new Content();
+					$question->course_id = $quiz->course_id;
+					$question->parent_id = $quiz->id;
+					$question->name = "Untitled Question";
+					$question->order = sizeof($quiz->childContents);
+					$question->type = Yii::app()->params["true_false_content"];
+					$question->save();
+
+					mkdir(ResourcePath::getContentBasePath().$question->id, 0755);
+					$widget->render('addTrueFalse',
 						array('content'=>$question));
 
 				}
@@ -749,6 +775,31 @@ class CourseController extends Controller
 		}
 	}
 
+	public function actionDeleteContentVideoAndRedirect()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			$contentId = $_POST['contentId'];
+			$content=$this->getContent($contentId);
+			$content->type=1;
+			$content->save();
+
+			$contentDir = ResourcePath::getContentBasePath().$contentId;
+			if (is_dir($contentDir.'/video'))
+			{
+				shell_exec('rm -rf '.$contentDir.'/video');
+			}
+
+			$this->widget('EditableContentListItem',
+				array(
+					'content'=>$content,
+					'contentPrefix'=>$_POST['contentPrefix'],
+					'mode'=>'edit'
+				)
+			);
+		}
+	}
+
 	public function actionDeleteQuestion()
 	{
 		if (Yii::app()->request->isAjaxRequest) {
@@ -790,6 +841,50 @@ class CourseController extends Controller
 				$item['choices'] = $_POST['data']['txt-choice'];
 
 				$item['answers'] = $item['choices'][$_POST['data']['answer']];
+				$item['shuffle'] = 'false';
+				$item['maxChoices'] = 1;
+				$item['prompt'] = $_POST['data']['question'];
+		
+				$qt = new QtiProcessor();
+				$xml = $qt->createQtiXmlItem($item);
+				$file = fopen(ResourcePath::getContentBasePath().$contentId."/data.xml", "w");
+				fwrite($file, $xml);
+				fclose($file);
+
+				$question->name = $item['title'];
+				$question->save();
+
+				$quiz = Content::model()->findByPk($question->parent_id);
+				$this->widget('EditableContentListItem',
+					array(
+						'content'=>$quiz,
+						'contentPrefix'=>Yii::t('site', 'Quiz'),
+						'mode'=>'edit'
+					)
+				);
+			}
+		}
+	}
+
+	public function actionAddTrueFalse()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			//print_r($_POST['data']);
+			$contentId = $_POST['contentId'];
+
+			$question = $this->getContent($contentId);
+			if ($question)
+			{
+				Yii::import('ext.qtiprocessor.*');
+				require_once('QtiProcessor.php');
+				
+				$item = array();
+				$item['title'] = $_POST['data']['question'];
+				$item['type'] = 'choice';
+				$item['choices'] = array("True","False");
+
+				$item['answers'] = $_POST['data']['answer']==0?"True":"False";
 				$item['shuffle'] = 'false';
 				$item['maxChoices'] = 1;
 				$item['prompt'] = $_POST['data']['question'];

@@ -206,3 +206,24 @@
 {
     height:20px;
 }
+
+.video-thumbnail
+{
+    float:left;
+    width:200px;
+
+    margin:4px;
+    padding:0;
+    box-shadow: 0px 2px 4px rgb(170, 170, 170);
+    -moz-box-shadow: 0px 2px 4px rgb(170, 170, 170);
+    -webkit-box-shadow: 0px 2px 4px rgb(170, 170, 170);
+    border: 1px solid rgb(188, 190, 192);
+    background-color:none repeat scroll 0% 0% rgb(247, 247, 247);
+    color:rgb(51,51,51);
+}
+
+.video-title,
+.video-duration
+{
+    float:left;
+}

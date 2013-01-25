@@ -98,6 +98,21 @@
 					makeSortable();
 				}
 			});
+		}
+		function deleteContentVideoAndRedirect(contentId, contentPrefix){
+			$.ajax({
+				url:"'.Yii::app()->createUrl("course/deleteContentVideoAndRedirect").'",
+				data:{
+					contentId:contentId,
+					contentPrefix:contentPrefix,
+				},                      
+				type:"POST",
+				dataType:"html",
+				success:function(html){
+					$("#content_"+contentId).html(html);
+					makeSortable();
+				}
+			});
 		}',
 		CClientScript::POS_END
 	);	
@@ -122,8 +137,8 @@
 	);
 
 	$cs->registerScript(
-		'add-question-handle',
-		'function addMultipleChoices(quizId, questionId){
+		'toJSON',
+		'function toJSON(questionId){
 			var o = {};
 			var a = $("#question-form-"+questionId).serializeArray();
 
@@ -137,13 +152,21 @@
             		o[this.name] = this.value || "";
         		}
 			});
-			//dat = JSON.stringify(o);
+			return o;			
+		}',
+		CClientScript::POS_END
+	);
+
+	$cs->registerScript(
+		'add-question-handle',
+		'function addMultipleChoices(quizId, questionId){
+			var json = toJSON(questionId);
 
 			$.ajax({
 				url:"'.Yii::app()->createUrl("course/addMultiple").'",
 				data:{
 					contentId:questionId,
-					data:o
+					data:json
 				},
 				dataType:"html",
 				type:"POST",
@@ -152,7 +175,26 @@
 					makeSortable();
 				}
 			});
-		}',
+		}
+
+		function addTrueFalse(quizId, questionId){
+			var json = toJSON(questionId);
+
+			$.ajax({
+				url:"'.Yii::app()->createUrl("course/addTrueFalse").'",
+				data:{
+					contentId:questionId,
+					data:json
+				},
+				dataType:"html",
+				type:"POST",
+				success:function(html){
+					$("#content_"+quizId).html(html);
+					makeSortable();
+				}
+			});
+		}
+		',
 		CClientScript::POS_END
 	);
 

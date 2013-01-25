@@ -124,7 +124,9 @@ return array(
 		'no_content' => 1,
 		'video_content' => 2,
 		'quiz_content' => 3,
-		'multiple_choice_content' => 4
+		'multiple_choice_content' => 4,
+		'true_false_content' => 5,
+		'fill_in_the_blank_content' => 6,
 	),
 	'sourceLanguage' => 'en_us',
 	'language' => 'th',

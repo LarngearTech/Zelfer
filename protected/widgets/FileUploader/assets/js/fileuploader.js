@@ -57,7 +57,8 @@ function fileUploaderChangeHandler(fileuploader){
 		},
 		// handle cancel file upload
 		beforeSend:function(){
-			var id = $(fileuploader).prop('id');
+			//var id = $(fileuploader).prop('id');
+			$(prefix).replaceWith($(prefix).val("").clone(true));
 			$(prefix+'-upload-cancel-btn').click(function(){
 				xhr.abort();
 				$(prefix+'-upload-cancel-btn').hide();
@@ -79,6 +80,8 @@ function deleteUploadedFile(fileuploader)
 	$(prefix+'-progressbar').width('0%');
 	$(prefix+'-progressbar-container').removeClass('progress-sucess');
 	$(prefix+'-progressbar-container').addClass('progress-info active');
+
+	$(prefix).replaceWith($(prefix).val("").clone(true));
 
 	$.ajax({
 		url:$('#'+fileuploader).attr('data-deleteUrl'),

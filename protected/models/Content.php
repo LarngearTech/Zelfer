@@ -149,6 +149,6 @@ class Content extends CActiveRecord
 
 	public function isTopLevel()
 	{
-		return $this->type !=4;
+		return $this->type <= 3;
 	}
 }

@@ -100,6 +100,7 @@ return array(
 	'Add Quiz' => 'เพิ่มแบบทดสอบ',
 	'Add Question' => 'เพิ่มคำถาม',
 	'Add Content Material' => 'เลือกเนื้อหาของบทเรียน',
+	'Add Supplementary Material' => 'เพิ่มเอกสารเพิ่มเติม',
 	'Choose Question Type' => 'เลือกประเภทคำถาม',
 	'Question' => 'คำถาม',
 	'Answer' => 'คำตอบ',
@@ -107,5 +108,5 @@ return array(
 	'Teaching' => 'เปิดสอน',
 	'In Progress' => 'กำลังเรียน',
 	'Completed' => 'เรียนสำเร็จ',
-	'Explore Courses' => 'สำรวจคอร์ส',
+	'Explore Courses' => 'ค้นหาคอร์ส',
 );

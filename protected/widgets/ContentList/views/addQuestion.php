@@ -4,11 +4,24 @@
 <div class="content-type-icon-panel">
 	<a class="btn content-type-icon-container" 
 	href="javascript:void(0);" 
-	onclick="js:contentTypeSelected(<?php echo $content->id?>, 'multipleChoices')">
+	onclick="js:contentTypeSelected(<?php echo $content->id?>, '<?php echo Yii::app()->params["multiple_choice_content"]; ?>')">
 		<div><i class="icon-film"></i></div>
 		<div><?php echo Yii::t('site', 'Multiple Choices'); ?></div>
 	</a>
+	
+	<a class="btn content-type-icon-container" 
+	href="javascript:void(0);" 
+	onclick="js:contentTypeSelected(<?php echo $content->id?>, '<?php echo Yii::app()->params["true_false_content"]; ?>')">
+		<div><i class="icon-film"></i></div>
+		<div><?php echo Yii::t('site', 'True or False'); ?></div>
+	</a>
 
+	<a class="btn content-type-icon-container" 
+	href="javascript:void(0);" 
+	onclick="js:contentTypeSelected(<?php echo $content->id?>, '<?php ?>')">
+		<div><i class="icon-film"></i></div>
+		<div><?php echo Yii::t('site', 'Fill in the blank'); ?></div>
+	</a>
 </div>
 
 <?php
