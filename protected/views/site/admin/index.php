@@ -76,28 +76,11 @@ Yii::app()->clientScript->registerScript(
 			));?>
 		</div>
 		<div class="span9">
-			<div class="mycourse-wrapper">
-				<div id="usergroup-btn" class="btn-group" data-toggle="buttons-radio">
-					<button type="button" id="student-btn" class="btn active"><?php echo Yii::t('site', 'Student');?></button>
-					<button type="button" id="teacher-btn" class="btn"><?php echo Yii::t('site', 'Teacher');?></button>
-				</div>
-				<div id="student-list">
-					<?php $this->renderPartial('/user/_addUser', array(
-						'users'=>$user->students,
-						'txtFullName'=>'txtStudentFullName',
-						'txtEmail'=>'txtStudentEmail',
-						'addHandler'=>'addStudent();',
-					));?>
-				</div>
-				<div id="teacher-list">
-					<?php $this->renderPartial('/user/_addUser', array(
-						'users'=>$user->teachers,
-						'txtFullName'=>'txtTeacherFullName',
-						'txtEmail'=>'txtTeacherEmail',
-						'addHandler'=>'addTeacher();',
-					));?>
-				</div>
-			</div><!-- /#mycourse-wrapper -->
+			<div class="add-user-wrapper">
+				<?php $this->renderPartial('/site/admin/_user', array(
+					'user' => $user,
+				));?>
+			</div><!-- /.add-user-wrapper -->
 		</div>
 	</div><!-- /.row -->
 </div><!-- /.container -->
