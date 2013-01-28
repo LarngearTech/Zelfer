@@ -30,7 +30,6 @@ class CourseController extends Controller
 				'actions' => array('index', 'view', 'explore'),
 				'users' => array('*'),
 			),
-<<<<<<< HEAD
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList'
 					, 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse'
@@ -40,10 +39,6 @@ class CourseController extends Controller
 					, 'deleteContent', 'contentTypeSelected', 'uploadContentVideo'
 					, 'deleteContentVideo', 'deleteContentVideoAndRedirect'
 					, 'deleteQuestion', 'addMultiple', 'addTrueFalse'),
-=======
-			array('allow', // allow authenticated user to perform 'create', 'update', 'inclass', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent', 'contentTypeSelected', 'uploadContentVideo', 'deleteContentVideo', 'deleteQuestion', and 'addMultiple' actions
-				'actions' => array('create', 'update', 'inclass', 'changeCourseInfo', 'instructorList', 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse', 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor', 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter', 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent', 'deleteContent', 'contentTypeSelected', 'uploadContentVideo', 'deleteContentVideo', 'deleteQuestion', 'addMultiple'),
->>>>>>> 39345bf983bb8d1c054bf24767c1b32f00cfe263
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
