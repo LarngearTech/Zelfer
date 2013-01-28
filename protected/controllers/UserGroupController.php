@@ -36,7 +36,7 @@ class UserGroupController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('admin@zelfer.com', 'system@zelfer.com'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -115,7 +115,9 @@ class UserGroupController extends Controller
 		{
 			$model->attributes=$_POST['UserGroup'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				//$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
