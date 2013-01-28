@@ -65,8 +65,9 @@ class SiteController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$user->students = User::model()->students()->findAll();
-		$user->teachers = User::model()->teachers()->findAll();
+		$users->students = User::model()->students()->findAll();
+		$users->teachers = User::model()->teachers()->findAll();
+		$userGroups = UserGroup::model()->findAll();
 
 		$userMenu 		= array('id' => '1', 'name' => 'User', 'isGroupHeading' => true);
 		$addUserMenu 	= array('id' => '2', 'name' => 'Add User', 'isGroupHeading' => false);
@@ -79,8 +80,9 @@ class SiteController extends Controller
 
 		$menus = array($userMenu, $addUserMenu, $manageUserMenu, $courseMenu, $addCourseMenu, $manageCourseMenu, $settingMenu, $adminPwdMenu);
 		$this->render('admin/index', array(
-			'user' => $user,
 			'menus' => $menus,
+			'users' => $users,
+			'userGroups' => $userGroups,
 		));		
 	}
 

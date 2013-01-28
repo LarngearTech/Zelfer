@@ -1,4 +1,5 @@
 <div id="user-manage-tabs">
+<div id="user-manage-tabs">
 	<div class="tabbable tabs-top">
 		<?php $this->widget('EBootstrapTabNavigation', array(
 			'items' => array(
@@ -19,7 +20,7 @@
 				</div>
 				<div id="student-list">
 					<?php $this->renderPartial('/user/_addUser', array(
-						'users'=>$user->students,
+						'users'=>$users->students,
 						'txtFullName'=>'txtStudentFullName',
 						'txtEmail'=>'txtStudentEmail',
 						'addHandler'=>'addStudent();',
@@ -27,7 +28,7 @@
 				</div>
 				<div id="teacher-list">
 					<?php $this->renderPartial('/user/_addUser', array(
-						'users'=>$user->teachers,
+						'users'=>$users->teachers,
 						'txtFullName'=>'txtTeacherFullName',
 						'txtEmail'=>'txtTeacherEmail',
 						'addHandler'=>'addTeacher();',
@@ -39,7 +40,13 @@
 				'id' => 'group',
 				)); ?>
 				<!-- group management -->
-				The group management is coming soon...
+				<div id="group-list">
+					<?php $this->renderPartial('/userGroup/_addUserGroup', array(
+						'userGroups'=>$userGroups,
+						'txtUserGroupName'=>'txtUserGroupName',
+						'addHandler'=>'addUserGroup();',
+					));?>
+				</div>
 			<?php $this->endWidget(); // EBootstrapTabContent-group ?>
 
 			<?php $this->beginWidget('EBootstrapTabContent', array(

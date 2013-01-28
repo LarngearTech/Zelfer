@@ -61,21 +61,42 @@ class UserGroupController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new UserGroup;
+		$model = new UserGroup;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['UserGroup']))
+		if (isset($_POST['UserGroup']))
 		{
 			$model->attributes=$_POST['UserGroup'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+			if ($model->save())
+			{
+				if (Yii::app()->request->isAjaxRequest)
+				{				
+					$userGroups = UserGroup::model()->findAll();
+					$txtUserGroupName = "txtUserGroupName";
+					$addHandler = "addUserGroup();";
+					$this->renderPartial('_addUserGroup', 
+						array('userGroups'=>$userGroups,
+							'txtUserGroupName'=>$txtUserGroupName,
+							'addHandler'=>$addHandler
+						)
+					);
+				}
+				else
+				{
+					$this->redirect(array('view','id'=>$model->id));
+				}
+			}
+		}
+		else
+		{
+			$this->render('create',array(
+				'model'=>$model,
+			));	
+		}	
+		
 	}
 
 	/**
