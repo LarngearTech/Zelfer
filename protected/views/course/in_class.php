@@ -43,7 +43,7 @@
 			array('label' => Yii::t('site', 'Problem Set'), 'url' => '#problemset'),
 			array('label' => Yii::t('site', 'Discussion'), 'url' => '#discussion'),
 		),
-)	);
+	));
 
 	$this->beginWidget('EBootstrapTabContentWrapper');
 		$this->beginWidget('EBootstrapTabContent', array(
