@@ -73,10 +73,11 @@ class SiteController extends Controller
 		$manageUserMenu	= array('id' => '3', 'name' => 'Manage User', 'isGroupHeading' => false);
 		$courseMenu 	= array('id' => '4', 'name' => 'Course', 'isGroupHeading' => true);
 		$addCourseMenu 	= array('id' => '5', 'name' => 'Add Course', 'isGroupHeading' => false);
-		$settingMenu 	= array('id' => '6', 'name' => 'Setting', 'isGroupHeading' => true);
-		$adminPwdMenu	= array('id' => '7', 'name' => 'Admin Password', 'isGroupHeading' => false);
+		$manageCourseMenu = array('id' => '6', 'name' => 'Manage Course', 'isGroupHeading' => false);
+		$settingMenu 	= array('id' => '7', 'name' => 'Setting', 'isGroupHeading' => true);
+		$adminPwdMenu	= array('id' => '8', 'name' => 'Admin Password', 'isGroupHeading' => false);
 
-		$menus = array($userMenu, $addUserMenu, $manageUserMenu, $courseMenu, $addCourseMenu, $settingMenu, $adminPwdMenu);
+		$menus = array($userMenu, $addUserMenu, $manageUserMenu, $courseMenu, $addCourseMenu, $manageCourseMenu, $settingMenu, $adminPwdMenu);
 		$this->render('admin/index', array(
 			'user' => $user,
 			'menus' => $menus,

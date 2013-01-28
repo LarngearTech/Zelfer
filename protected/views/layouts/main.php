@@ -58,7 +58,7 @@
 					'visible' => Yii::app()->user->isGuest,
 				),
 				array(
-					'label' => !Yii::app()->user->isGuest?$userModel->fullname:'Guest',
+					'label' => !Yii::app()->user->isGuest ? $userModel->fullname : 'Guest',
 					'url' => '#',
 					'dropdown' => true,
 					'items' => array(
