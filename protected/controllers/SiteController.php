@@ -77,7 +77,7 @@ class SiteController extends Controller
 		$adminPwdMenu	= array('id' => '7', 'name' => 'Admin Password', 'isGroupHeading' => false);
 
 		$menus = array($userMenu, $addUserMenu, $manageUserMenu, $courseMenu, $addCourseMenu, $settingMenu, $adminPwdMenu);
-		$this->render('index-admin', array(
+		$this->render('admin/index', array(
 			'user' => $user,
 			'menus' => $menus,
 		));		
