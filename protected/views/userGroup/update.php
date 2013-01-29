@@ -1,18 +1,40 @@
-<?php
-$this->breadcrumbs=array(
-	'User Groups'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
+<div class="container">
+	<h1>Update User Group <?php echo $userGroupModel->name; ?></h1>
 
-$this->menu=array(
-	array('label'=>'List UserGroup', 'url'=>array('index')),
-	array('label'=>'Create UserGroup', 'url'=>array('create')),
-	array('label'=>'View UserGroup', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage UserGroup', 'url'=>array('admin')),
-);
+	<?php echo $this->renderPartial('_form', array('model'=>$userGroupModel)); ?>
+
+	<h1>User Subgroup</h1>
+	<div id="subgroup-list">
+		<?php echo $this->renderPartial('/userSubgroup/_addUserSubgroup', array(
+			'userSubgroups' => $userGroupModel->subgroups,
+		)); ?>
+	</div><!-- /#subgroup-list -->
+</div><!-- /.container -->
+<?php $cs = Yii::app()->getClientScript();
+	$cs->registerCoreScript('jquery');
+	$cs->registerScript('addSubgroup','
+		$(function() {
+			$("#subgroup-list").on("click", "#addSubgroup", function(event) {
+				if ($("#txtUserSubgroupName").val() == "")
+				{
+					alert("Please specify subgroup name.");
+				}
+				else
+				{
+					$.ajax({
+						url: "'.Yii::app()->createUrl('userSubgroup/create').'",
+						type: "POST",
+						dataType: "html",
+						data: {
+							"UserSubgroup[name]": $("#txtUserSubgroupName").val(),
+							"UserSubgroup[group_id]": '.$userGroupModel->id.'
+						},
+						success: function(html) {
+							 $("#subgroup-list").html(html);
+						}
+					});
+				}
+			});
+		})
+		' , CClientScript::POS_END);
 ?>
-
-<h1>Update UserGroup <?php echo $model->id; ?></h1>
-
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

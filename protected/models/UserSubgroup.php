@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'user_subgroup':
  * @property integer $id
- * @property integer $group
+ * @property integer $group_id
  * @property string $name
  */
 class UserSubgroup extends CActiveRecord
@@ -36,12 +36,12 @@ class UserSubgroup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('group, name', 'required'),
-			array('group', 'numerical', 'integerOnly'=>true),
+			array('group_id, name', 'required'),
+			array('group_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, group, name', 'safe', 'on'=>'search'),
+			array('id, group_id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +53,7 @@ class UserSubgroup extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+        	'groups' => array(self::BELONGS_TO, 'UserGroup', 'group_id'),
 		);
 	}
 
@@ -63,7 +64,7 @@ class UserSubgroup extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'group' => 'Group',
+			'group_id' => 'Group',
 			'name' => 'Name',
 		);
 	}
@@ -80,7 +81,7 @@ class UserSubgroup extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('group',$this->group);
+		$criteria->compare('group_id',$this->group_id);
 		$criteria->compare('name',$this->name,true);
 
 		return new CActiveDataProvider($this, array(

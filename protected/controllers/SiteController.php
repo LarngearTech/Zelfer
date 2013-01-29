@@ -68,6 +68,7 @@ class SiteController extends Controller
 		$users->students = User::model()->students()->findAll();
 		$users->teachers = User::model()->teachers()->findAll();
 		$userGroups = UserGroup::model()->findAll();
+		$userSubgroups = UserSubgroup::model()->findAll();
 
 		$userMenu 		= array('id' => '1', 'name' => 'User', 'isGroupHeading' => true);
 		$addUserMenu 	= array('id' => '2', 'name' => 'Add User', 'isGroupHeading' => false);
@@ -83,6 +84,7 @@ class SiteController extends Controller
 			'menus' => $menus,
 			'users' => $users,
 			'userGroups' => $userGroups,
+			'userSubgroups' => $userSubgroups,
 		));		
 	}
 

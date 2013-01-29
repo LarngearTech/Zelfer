@@ -3,10 +3,9 @@
 class UserGroupController extends Controller
 {
 	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 * @var string the default layout for the views.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/main';
 
 	/**
 	 * @return array action filters
@@ -68,7 +67,7 @@ class UserGroupController extends Controller
 
 		if (isset($_POST['UserGroup']))
 		{
-			$model->attributes=$_POST['UserGroup'];
+			$model->attributes = $_POST['UserGroup'];
 
 			if ($model->save())
 			{
@@ -86,7 +85,7 @@ class UserGroupController extends Controller
 				}
 				else
 				{
-					$this->redirect(array('view','id'=>$model->id));
+					$this->redirect(array('view','id' => $model->id));
 				}
 			}
 		}
@@ -106,22 +105,24 @@ class UserGroupController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		$userGroupModel = $this->loadModel($id);
+		//$subgroupModel = UserSubgroup::model()->with('groups')->findAll();
+		//print_r($subgroupModel); exit();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['UserGroup']))
 		{
-			$model->attributes=$_POST['UserGroup'];
-			if($model->save())
+			$userGroupModel->attributes=$_POST['UserGroup'];
+			if($userGroupModel->save())
 			{
 				//$this->redirect(array('view','id'=>$model->id));
 			}
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'userGroupModel'=>$userGroupModel,
 		));
 	}
 

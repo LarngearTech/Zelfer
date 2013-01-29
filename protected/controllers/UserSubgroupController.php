@@ -3,10 +3,9 @@
 class UserSubgroupController extends Controller
 {
 	/**
-	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
-	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 * @var string the default layout for the views. 
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/main';
 
 	/**
 	 * @return array action filters
@@ -61,21 +60,39 @@ class UserSubgroupController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new UserSubgroup;
+	
+		$model = new UserSubgroup;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['UserSubgroup']))
+		
+		if (isset($_POST['UserSubgroup']))
 		{
-			$model->attributes=$_POST['UserSubgroup'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
+			$model->attributes = $_POST['UserSubgroup'];
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+			if ($model->save())
+			{				
+				if (Yii::app()->request->isAjaxRequest)
+				{
+					$userGroupModel = UserGroup::model()->findByPk($model->group_id);
+					$userSubgroups = $userGroupModel->subgroups;
+					$this->renderPartial('//userSubgroup/_addUserSubgroup', array(
+						'userSubgroups' => $userSubgroups,
+					));
+				}
+				else
+				{
+					$this->redirect(array('view','id' => $model->id));
+				}
+			} 
+		}
+		else
+		{
+			// 
+			$this->render('create',array(
+				'model' => $model,
+			));
+		}
 	}
 
 	/**

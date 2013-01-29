@@ -38,27 +38,6 @@ Yii::app()->clientScript->registerScript(
 					});
 				}
 			}
-			function addUserSubgroup() 
-			{
-				if ($("#txtUserSubgroupName").val() == "")
-				{
-					alert("Please specify subgroup name.");
-				}
-				else
-				{
-					$.ajax({
-						url: "'.Yii::app()->createUrl('userSubgroup/create').'",
-						type: "POST",
-						dataType: "html",
-						data: {
-							name: $("#txtUserSubgroupName").val()
-						},
-						success: function(html) {
-							$("#subgroup-list").html(html);
-						}
-					});
-				}
-			}
 			function addStudent(){
 				if ($("#txtStudentFullName").val() == ""
 				|| $("#txtStudentEmail").val() == "")
