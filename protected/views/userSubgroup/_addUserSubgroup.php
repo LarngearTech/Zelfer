@@ -21,6 +21,7 @@
 					// delete button
 					echo CHtml::link(
 						CHtml::image('images/delete.png', 'delete'),
+						'#',
 						array(
 							'class' => 'delete-subgroup', 
 							'data-subgroup-id' => $subgroup->id
