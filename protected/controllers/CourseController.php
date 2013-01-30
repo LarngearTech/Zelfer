@@ -31,7 +31,7 @@ class CourseController extends Controller
 				'users' => array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions' => array('create', 'update', 'changeCourseInfo', 'instructorList'
+				'actions' => array('create', 'update', 'inclass', 'changeCourseInfo', 'instructorList'
 					, 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse'
 					, 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor'
 					, 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter'
