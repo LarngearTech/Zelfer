@@ -7,18 +7,24 @@
 		</tr>
 	</thead>
 	<tbody>
-	<?php //$userSubgroups = $userGroupModel->subgroups; 
+	<?php // show all subgroups that are belong to this group
 		foreach ($userSubgroups as $subgroup): ?>
 		<tr>
 			<td><?php echo $subgroup->id;?></td>
 			<td><?php echo $subgroup->name;?></td>
 			<td>
-				<?php
+				<?php // update button
 					echo CHtml::link(CHtml::image('images/update.png', 'update'),
-						Yii::app()->createUrl('userGroup/update', array('id'=>$subgroup->id))
+						Yii::app()->createUrl('userSubgroup/update', array('id'=>$subgroup->id)),
+						array('data-subgroupid' => $subgroup->id)
 					);
-					echo CHtml::link(CHtml::image('images/delete.png', 'delete'),
-						Yii::app()->createUrl('userGroup/delete', array('id'=>$subgroup->id))
+					// delete button
+					echo CHtml::link(
+						CHtml::image('images/delete.png', 'delete'),
+						array(
+							'class' => 'delete-subgroup', 
+							'data-subgroup-id' => $subgroup->id
+						)
 					);
 				?>
 			</td>

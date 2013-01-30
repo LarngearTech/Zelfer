@@ -35,6 +35,24 @@
 					});
 				}
 			});
-		})
-		' , CClientScript::POS_END);
+		})'
+	, CClientScript::POS_END);
+	$cs->registerScript('deleteSubgroup','
+		$(function() {
+			$("#subgroup-list").on("click", ".delete-subgroup", function(event) {
+				var subgroupId = $(this).data("subgroup-id");
+				$.ajax({
+					url: "'.Yii::app()->createUrl("userSubgroup/delete").'&id=" + subgroupId + "&ajax=subgroup-grid",
+					type: "POST",
+					dataType: "html",
+					data: {
+						"group-id": '.$_GET["id"].',
+					},
+					success: function(html) {
+						$("#subgroup-list").html(html);
+					}
+				});
+			});
+		})' 
+	, CClientScript::POS_END);
 ?>
