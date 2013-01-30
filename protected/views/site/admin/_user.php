@@ -1,5 +1,4 @@
 <div id="user-manage-tabs">
-<div id="user-manage-tabs">
 	<div class="tabbable tabs-top">
 		<?php $this->widget('EBootstrapTabNavigation', array(
 			'items' => array(
