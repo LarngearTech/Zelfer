@@ -1,5 +1,4 @@
 <div id="user-manage-tabs">
-<div id="user-manage-tabs">
 	<div class="tabbable tabs-top">
 		<?php $this->widget('EBootstrapTabNavigation', array(
 			'items' => array(
@@ -43,8 +42,6 @@
 				<div id="group-list">
 					<?php $this->renderPartial('/userGroup/_addUserGroup', array(
 						'userGroups'=>$userGroups,
-						'txtUserGroupName'=>'txtUserGroupName',
-						'addHandler'=>'addUserGroup();',
 					));?>
 				</div>
 			<?php $this->endWidget(); // EBootstrapTabContent-group ?>
@@ -58,3 +55,45 @@
 		<?php $this->endWidget(); // /EBootstrapTabContentWrapper ?>
 	</div><!-- /.tabbable -->
 </div><!-- /#user-manage-tabs -->
+<?php 
+	$cs = Yii::app()->getClientScript();
+	$cs->registerScript('addUserGroup', '
+		$(function() {
+			$("#group-list").on("click", "#add-user-group", function() {
+				if ($("#txtUserGroupName").val() == "")
+				{
+					alert("Please specify group name.");
+				}
+				else
+				{
+					$.ajax({
+						url: "'.Yii::app()->createUrl('userGroup/create').'",
+						type: "POST",
+						dataType: "html",
+						data: {
+							"UserGroup[name]": $("#txtUserGroupName").val()
+						},
+						success: function(html) {
+							$("#group-list").html(html);
+						}
+					});
+				}
+			});
+		});'
+		, CClientScript::POS_END);
+	$cs->registerScript('deleteUserGroup','
+		$(function() {
+			$("#group-list").on("click", ".delete-user-group", function(event) {
+				var userGroupId = $(this).data("user-group-id");
+				$.ajax({
+					url: "'.Yii::app()->createUrl("userGroup/delete").'&id=" + userGroupId + "&ajax=usergroup-grid",
+					type: "POST",
+					dataType: "html",
+					success: function(html) {
+						$("#group-list").html(html);
+					}
+				});
+			});
+		})' 
+	, CClientScript::POS_END);
+?>
