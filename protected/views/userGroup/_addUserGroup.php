@@ -31,7 +31,7 @@
 	<?php endforeach; ?>
 	<tr>
 		<td></td>
-		<td><?php echo CHtml::textField('UserGroup[name]','',array('id'=>$txtUserGroupName)); ?></td>
+		<td><?php echo CHtml::textField('UserGroup[name]','',array('id'=>'txtUserGroupName')); ?></td>
 		<td>
 			<i class="icon-plus" id="add-user-group" />
 		</td>

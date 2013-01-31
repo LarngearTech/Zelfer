@@ -42,8 +42,6 @@
 				<div id="group-list">
 					<?php $this->renderPartial('/userGroup/_addUserGroup', array(
 						'userGroups'=>$userGroups,
-						'txtUserGroupName'=>'txtUserGroupName',
-						'addHandler'=>'addUserGroup();',
 					));?>
 				</div>
 			<?php $this->endWidget(); // EBootstrapTabContent-group ?>

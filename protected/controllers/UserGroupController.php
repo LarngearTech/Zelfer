@@ -133,7 +133,7 @@ class UserGroupController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
+		if (Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
@@ -147,12 +147,9 @@ class UserGroupController extends Controller
 			{
 				// Ajax return UserGroup list to display
 				$userGroups = UserGroup::model()->findAll();
-				$txtUserGroupName = "txtUserGroupName";
-				$addHandler = "addUserGroup();";
 				$this->renderPartial('_addUserGroup', 
-					array('userGroups'=>$userGroups,
-						'txtUserGroupName'=>$txtUserGroupName,
-						'addHandler'=>$addHandler
+					array(
+						'userGroups'=>$userGroups,
 					)
 				);				
 			}
