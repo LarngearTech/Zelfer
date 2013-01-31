@@ -35,7 +35,7 @@ class UserSubgroupController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('admin', 'system@zelfer.com'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -126,14 +126,26 @@ class UserSubgroupController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
+		if (Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
+			if (!isset($_GET['ajax']))
+			{
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			}
+			else
+			{
+				// Ajax request comes from deleting subgroup in group update page
+				// Need to refactor later to handle request from other pages.
+				$userGroupModel = UserGroup::model()->findByPk($_POST['group-id']);
+				$userSubgroups = $userGroupModel->subgroups;
+				$this->renderPartial('//userSubgroup/_addUserSubgroup', array(
+					'userSubgroups' => $userSubgroups,
+				));
+			}
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
