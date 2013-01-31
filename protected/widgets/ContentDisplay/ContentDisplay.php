@@ -4,7 +4,7 @@ class ContentDisplay extends BaseWidget
 	public $content;
 	function init()
 	{
-		$this->publishAssets(__CLASS__);
+		$this->publishAssets(__DIR__);
 	}
 	function run()
 	{

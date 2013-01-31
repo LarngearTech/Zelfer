@@ -965,3 +965,7 @@ a.course-link
   top: auto;
   bottom: 270px;
 }
+
+.clickable {
+	cursor:pointer;
+}

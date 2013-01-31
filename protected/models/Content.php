@@ -122,6 +122,15 @@ class Content extends CActiveRecord
 		 	));
 	}
 
+	/**
+	 * Return materials
+	 */
+	public function getMaterials()
+	{
+		$contentDir=ResourcePath::getContentBasePath().$this->id;
+		$materialDir = $contentDir.'/materials';
+		return PHPHelper::getFilesInFolder($materialDir);
+	}
 
 	/**
 	 * Return whether a content is a chapter

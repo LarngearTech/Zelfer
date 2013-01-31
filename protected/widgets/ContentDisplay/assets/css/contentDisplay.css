@@ -1,0 +1,33 @@
+.tag-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-top: 5px;
+	overflow: hidden;
+}
+
+.tag-list li {
+	float: left;
+	margin-right: 10px;
+}
+
+.tag-list a {
+	padding: 3px 7px;
+	border: 1px solid #BDBDBD;
+	background-color: #E0E0E0;
+	color: #BC3415;
+	font-size: 11px;
+	line-height: 23px;
+	text-transform: none;
+	border-radius: 2px;
+	cursor:pointer;
+}
+
+.material-list-wrapper{
+	margin-top: 20px;
+}
+
+.material-list-wrapper .title{
+	font-size: 20px;
+	font-weight: bold;
+}
