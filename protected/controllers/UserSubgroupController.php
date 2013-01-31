@@ -29,12 +29,12 @@ class UserSubgroupController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+			array('allow', // allow authenticated user to perform  actions
+				'actions'=>array(),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+			array('allow', // allow admin user to perform 'admin', 'create','delete', and 'update' actions
+				'actions'=>array('admin','create', 'delete', 'update'),
 				'users'=>array('admin', 'system@zelfer.com'),
 			),
 			array('deny',  // deny all users

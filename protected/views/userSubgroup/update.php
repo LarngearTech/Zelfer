@@ -1,18 +1,5 @@
-<?php
-$this->breadcrumbs=array(
-	'User Subgroups'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
+<div class="container">
+	<h1><?php echo Yii::t('site', 'Update').' '.Yii::t('site', 'User Subgroup').' '.$model->name; ?></h1>
 
-$this->menu=array(
-	array('label'=>'List UserSubgroup', 'url'=>array('index')),
-	array('label'=>'Create UserSubgroup', 'url'=>array('create')),
-	array('label'=>'View UserSubgroup', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage UserSubgroup', 'url'=>array('admin')),
-);
-?>
-
-<h1>Update UserSubgroup <?php echo $model->id; ?></h1>
-
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+	<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+</div><!-- /.container -->
