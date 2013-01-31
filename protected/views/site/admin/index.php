@@ -17,27 +17,6 @@ Yii::app()->clientScript->registerScript(
                 	$("#teacher-list").show();
         	});
 		});
-		function addUserGroup() 
-		{
-			if ($("#txtUserGroupName").val() == "")
-			{
-				alert("Please specify group name.");
-			}
-			else
-			{
-				$.ajax({
-					url: "'.Yii::app()->createUrl('userGroup/create').'",
-					type: "POST",
-					dataType: "html",
-					data: {
-						"UserGroup[name]": $("#txtUserGroupName").val()
-					},
-					success: function(html) {
-						$("#group-list").html(html);
-					}
-				});
-			}
-		}
 		function addStudent(){
 			if ($("#txtStudentFullName").val() == ""
 			|| $("#txtStudentEmail").val() == "")

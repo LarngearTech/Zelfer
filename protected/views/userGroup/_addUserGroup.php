@@ -27,7 +27,7 @@
 		<td></td>
 		<td><?php echo CHtml::textField('UserGroup[name]','',array('id'=>$txtUserGroupName)); ?></td>
 		<td>
-			<i class="icon-plus" onclick="<?php echo $addHandler; ?>"/>
+			<i class="icon-plus" id="add-user-group" />
 		</td>
 	</tr>
 </table>

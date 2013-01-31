@@ -57,3 +57,30 @@
 		<?php $this->endWidget(); // /EBootstrapTabContentWrapper ?>
 	</div><!-- /.tabbable -->
 </div><!-- /#user-manage-tabs -->
+<?php 
+	$cs = Yii::app()->getClientScript();
+	$cs->registerScript('addUserGroup', '
+		$(function() {
+			$("#group-list").on("click", "#add-user-group", function() {
+				if ($("#txtUserGroupName").val() == "")
+				{
+					alert("Please specify group name.");
+				}
+				else
+				{
+					$.ajax({
+						url: "'.Yii::app()->createUrl('userGroup/create').'",
+						type: "POST",
+						dataType: "html",
+						data: {
+							"UserGroup[name]": $("#txtUserGroupName").val()
+						},
+						success: function(html) {
+							$("#group-list").html(html);
+						}
+					});
+				}
+			});
+		});'
+		, CClientScript::POS_END);
+?>
