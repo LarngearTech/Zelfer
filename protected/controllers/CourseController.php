@@ -34,8 +34,10 @@ class CourseController extends Controller
 				'actions' => array('create', 'update', 'inclass', 'changeCourseInfo', 'instructorList'
 					, 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse'
 					, 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor'
-					, 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter'
-					, 'changeContentOrder', 'commitContent', 'editContent', 'cancelEditContent'
+					, 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter', 'addSupplementaryMaterial'
+					, 'uploadSupplementaryMaterial', 'deleteSupplementaryMaterial'
+					, 'changeContentOrder', 'commitContent'
+					, 'editContent', 'cancelEditContent'
 					, 'deleteContent', 'contentTypeSelected', 'uploadContentVideo'
 					, 'deleteContentVideo', 'deleteContentVideoAndRedirect'
 					, 'deleteQuestion', 'addMultiple', 'addTrueFalse'),
@@ -455,6 +457,54 @@ class CourseController extends Controller
 					'course'=>$course,
 				)
 			);
+		}
+	}
+
+	public function actionAddSupplementaryMaterial()
+	{
+		if (Yii::app()->request->isAjaxRequest) {
+			$widget = new ContentList();
+			$widget->render('addSupplementaryMaterial', 
+				array('contentId'=>$_POST['contentId'],
+				'contentPrefix'=>$_POST['contentPrefix']));
+		}
+	}
+
+	public function actionUploadSupplementaryMaterial($contentId)
+	{
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$contentDir=ResourcePath::getContentBasePath().$contentId;
+			$materialDir = $contentDir.'/materials';
+			if (!is_dir($materialDir))
+			{
+				mkdir($materialDir, 0755, true);
+			}
+
+			if((!is_uploaded_file($_FILES['uploadedFile']['tmp_name'])) 
+				or !copy($_FILES['uploadedFile']['tmp_name'], 
+					$materialDir.'/'.$_FILES['uploadedFile']['name']))
+			{
+				echo "Error copy files";	
+			}
+			else
+			{
+				echo "Upload complete";
+			}
+		}
+	}
+
+	public function actionDeleteSupplementaryMaterial()
+	{
+		if (Yii::app()->request->isAjaxRequest) {
+			$content = $this->getContent($_POST['contentId']);
+			$contentDir=ResourcePath::getContentBasePath().$content->id;
+			$materialName = $contentDir.'/materials/'.$_POST['materialName'];
+			if(file_exists($materialName)) 
+			{
+				system("rm -rf \"$materialName\"");
+			}
+			$this->widget('MaterialList', array('content'=>$content));
 		}
 	}
 

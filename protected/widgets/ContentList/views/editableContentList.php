@@ -132,7 +132,38 @@
 					makeSortable();
 				}
 			});
-		}',
+		}
+
+		function addSupplementaryMaterial(contentId, contentPrefix){
+			$.ajax({
+				url:"'.Yii::app()->createUrl('course/addSupplementaryMaterial').'",
+				type:"POST",
+				data:{
+					contentId:contentId,
+					contentPrefix:contentPrefix,
+				},
+				dataType:"html",
+				success:function(html){
+					$("#edit-content-body-"+contentId).html(html);
+				}
+			});
+		}
+
+		function deleteSupplementaryMaterial(contentId, materialName){
+			$.ajax({
+				url:"'.Yii::app()->createUrl('course/deleteSupplementaryMaterial').'",
+				type:"POST",
+				data:{
+					contentId:contentId,
+					materialName:materialName
+				},
+				dataType:"html",
+				success:function(html){
+					$("#material-list-"+contentId).html(html);
+				}
+			});
+		}
+		',
 		CClientScript::POS_END
 	);
 

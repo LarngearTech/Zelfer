@@ -21,12 +21,12 @@
 		<?php 
 		if ($content->type == 1) {
 			$this->render('addContentMaterial',
-				array("contentId"=>$content->id)); 
+				array('contentId'=>$content->id)); 
 		}
 		else if ($content->type == 2) {
 			$this->render('editLecture',
-				array("content"=>$content,
-					"contentPrefix"=>$contentPrefix));
+				array('content'=>$content,
+					'contentPrefix'=>$contentPrefix));
 		}
 		?>
 	</div>
@@ -37,7 +37,7 @@
 ?>
 	<div id="edit-content-body-<?php echo $content->id; ?>" class="edit-content-body">
 		<?php $this->render('addQuestion',
-			array("content"=>$content)); 
+			array('content'=>$content)); 
 		?>
 	</div>
 <?php
