@@ -12,12 +12,18 @@
 			<td><?php echo $group->id;?></td>
 			<td><?php echo $group->name;?></td>
 			<td>
-				<?php
+				<?php // update button
 					echo CHtml::link(CHtml::image('images/update.png', 'update'),
 						Yii::app()->createUrl('userGroup/update', array('id'=>$group->id))
 					);
-					echo CHtml::link(CHtml::image('images/delete.png', 'delete'),
-						Yii::app()->createUrl('userGroup/delete', array('id'=>$group->id))
+					// delete button
+					echo CHtml::link(
+						CHtml::image('images/delete.png', 'delete'),
+						'#',
+						array(
+							'class' => 'delete-user-group', 
+							'data-user-group-id' => $group->id
+						)
 					);
 				?>
 			</td>

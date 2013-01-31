@@ -83,4 +83,19 @@
 			});
 		});'
 		, CClientScript::POS_END);
+	$cs->registerScript('deleteUserGroup','
+		$(function() {
+			$("#group-list").on("click", ".delete-user-group", function(event) {
+				var userGroupId = $(this).data("user-group-id");
+				$.ajax({
+					url: "'.Yii::app()->createUrl("userGroup/delete").'&id=" + userGroupId + "&ajax=usergroup-grid",
+					type: "POST",
+					dataType: "html",
+					success: function(html) {
+						$("#group-list").html(html);
+					}
+				});
+			});
+		})' 
+	, CClientScript::POS_END);
 ?>
