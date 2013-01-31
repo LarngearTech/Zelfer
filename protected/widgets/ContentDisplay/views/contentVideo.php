@@ -39,4 +39,5 @@
 			));
 		?>
 	</div><!-- end lecture-content-wrappero span9 -->
+	<?php $this->render('supplementaryMaterial', array('content'=>$content)); ?>
 </form>

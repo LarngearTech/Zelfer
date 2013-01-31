@@ -76,6 +76,10 @@ class CourseController extends Controller
 		Yii::app()->getClientScript()->registerCoreScript('jquery.ui');
 		Yii::app()->getClientScript()->registerCssFile(Yii::app()->baseUrl.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR.'jPaginator.css');
 		Yii::app()->getClientScript()->registerScriptFile(Yii::app()->baseUrl.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR.'jPaginator.js', CClientScript::POS_END);
+
+		$contentDisplay=new ContentDisplay();
+		$contentDisplay->publishAssets(Yii::getPathOfAlias("application.widgets.ContentDisplay"));
+
 		$contents=Content::model()->findAll('course_id=:courseID', array(':courseID'=>$id));
 		$this->render('in_class',array(
 			'model' => $this->loadModel($id),
