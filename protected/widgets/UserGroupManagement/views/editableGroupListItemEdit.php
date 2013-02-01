@@ -1,0 +1,24 @@
+<div>
+	<span class="group-prefix"><?php echo $groupPrefix; ?></span>
+	<span id="group-name-<?php echo $group->id; ?>" class="group-name">
+		<input id="txt-group-name-<?php echo $group->id; ?>" type="text" value="<?php echo $group->name; ?>"/>
+	</span>
+	<div class="edit-panel">
+		<a class="btn commit-group" onclick="js:commitGroup(
+			<?php echo $group->id; ?>,
+			'<?php echo $groupPrefix; ?>'
+			)" title="<?php echo Yii::t('site', 'Save');?>">
+			<i class="icon-ok"></i>
+		</a>
+		<a class="btn cancel-edit-edit" onclick="js:cancelEditGroup(<?php echo $group->id; ?>, '<?php echo $groupPrefix; ?>')" title="<?php echo Yii::t('site', 'Cancel');?>"><i class="icon-repeat"></i></a>
+		<a class="btn delete-group" onclick="js:deleteGroup(<?php echo $group->id; ?>)" title="<?php echo Yii::t('site', 'Delete');?>"><i class="icon-trash"></i></a>
+	</div>
+	<?php if ($group->isSubgroup()): ?>
+	<div id="edit-group-body-<?php echo $group->id; ?>" class="edit-group-body">
+		<?php $this->render('editSubgroup', array(
+			'group' => $group,
+			'groupPrefix' => $groupPrefix
+		));?>
+	</div>
+	<?php endif; ?>
+</div>

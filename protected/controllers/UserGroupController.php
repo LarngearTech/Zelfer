@@ -209,4 +209,53 @@ class UserGroupController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	protected function findNewOrder($groupId, $newOrderList)
+	{
+		foreach ($newOrderList as $key => $value)
+		{
+			if ($value == $groupId)
+			{
+				return $key;
+			}
+		}
+	}
+
+	/**
+	 * Re-arrange the order property of each group
+	 */
+	public function actionChangeGroupOrder()
+	{
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$groups = UserGroup::model()->findAll();
+			$newOrderList = $_POST['groups'];
+
+			foreach($groups as $group)
+			{
+				$group->order = $this->findNewOrder($group->id, $newOrderList);
+			}
+
+			usort($groups, array('ProjectUtil', 'contentComparator'));
+			$currentGroup = -1;
+
+			foreach($groups as $group)
+			{
+				// Update parentId
+				if ($group->isGroup())
+				{
+					$currentGroup = $group->id;
+				}
+				else
+				{
+					$group->parent_id = $currentGroup;
+				}
+				$group->save();
+			}
+
+			$this->widget('EditableGroupList', array(
+				'groups' => $groups,
+			));
+		}
+	}
 }

@@ -6,6 +6,9 @@
  * The followings are the available columns in table 'user_group':
  * @property integer $id
  * @property string $name
+ * @property integer $order
+ * @property integer $parent_id
+ * @property integer $type
  */
 class UserGroup extends CActiveRecord
 {
@@ -35,11 +38,12 @@ class UserGroup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
+			array('name, order, parent_id, type', 'required'),
+			array('order, parent_id, type', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name', 'safe', 'on'=>'search'),
+			array('id, name, order, parent_id, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,7 +55,6 @@ class UserGroup extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-        	'subgroups' => array(self::HAS_MANY, 'UserSubgroup', 'group_id'),
 		);
 	}
 
@@ -63,6 +66,9 @@ class UserGroup extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'order' => 'Order',
+			'parent_id' => 'Parent',
+			'type' => 'Type',
 		);
 	}
 
@@ -75,13 +81,40 @@ class UserGroup extends CActiveRecord
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('order',$this->order);
+		$criteria->compare('parent_id',$this->parent_id);
+		$criteria->compare('type',$this->type);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function isGroup()
+	{
+		if ($this->type == Yii::app()->params['group'])
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function isSubgroup()
+	{
+		if ($this->type == Yii::app()->params['subgroup'])
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

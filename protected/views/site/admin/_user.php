@@ -40,9 +40,12 @@
 				)); ?>
 				<!-- group management -->
 				<div id="group-list">
-					<?php $this->renderPartial('/userGroup/_addUserGroup', array(
+					<!--?php $this->renderPartial('/userGroup/_addUserGroup', array(
 						'userGroups'=>$userGroups,
-					));?>
+					));?-->
+					<?php $this->widget('EditGroupPanel', array(
+						'groups' => $userGroups,
+					)); ?>
 				</div>
 			<?php $this->endWidget(); // EBootstrapTabContent-group ?>
 

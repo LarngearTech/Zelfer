@@ -38,6 +38,7 @@ return array(
 		'application.widgets.ZAssessment.*',
 		'application.widgets.ZAssessmentItem.*',
 		'application.widgets.MenuList.*',
+		'application.widgets.UserGroupManagement.*',
 	),
 
 	'modules' => array(
@@ -128,6 +129,10 @@ return array(
 		'multiple_choice_content' => 4,
 		'true_false_content' => 5,
 		'fill_in_the_blank_content' => 6,
+
+		// user group type
+		'group' => 1,
+		'subgroup' => 2,
 	),
 	'sourceLanguage' => 'en_us',
 	'language' => 'th',

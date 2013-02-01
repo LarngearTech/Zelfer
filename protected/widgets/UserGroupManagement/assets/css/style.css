@@ -1,0 +1,159 @@
+.accordion-inner-wrapper
+{
+	margin: 10px;
+}
+
+.accordion-inner li a
+{
+	position: relative;
+	display: block;
+	padding: 7px 60px 7px 7px;
+}
+
+.accordion-inner li em
+{
+	position: absolute;
+	top: 7px;
+	right: 7px;
+}
+
+.group .accordion-inner
+{
+    padding: 0px;
+    margin: 0px;
+}
+
+.group ul
+{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+.group ul li.subgroup
+{
+    padding-bottom: 5px;
+    margin: 0;
+    background-color: #FFFFCC;
+}
+
+.group ul li.subgroup .active
+{
+    background-color: #FFFFCC;
+}
+
+.subgroup .subgroup-name
+{
+    padding: 2px 2px 2px 20px;
+    background-color: #AAAAAA;
+    color: white;
+}
+
+.subgroup .icon
+{
+    margin: 0 10px 0 10px;
+}
+
+.subgroup .play
+{
+    width: 30px;
+}
+
+.subgroup .subgroup-items
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.subgroup a
+{
+    font-size: 20px;
+    font-family: RSURegular, Arial, Helvetica, sans-serif;
+}
+
+.content-list
+{
+    margin:0px;
+}
+
+.content-editing
+{
+	height:auto !important;
+}
+
+.editable-group
+{
+	height:40px !important;
+	line-height:40px !important;
+}
+.editable-group,
+.editable-subgroup
+{
+    height:40px;
+    line-height:40px;
+    display:inline-block;
+    margin:2px 0px;
+    padding:4px 14px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align:middle;
+    cursor:move;
+    list-style:none;
+    width:95%;
+    float:right;
+    border: 1px solid #bbbbbb;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
+
+.editable-subgroup,
+{
+    width:90%;
+    float:right;
+}
+
+.editable-group .content-prefix,
+.editable-subgroup .content-prefix
+{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.editable-group .content-name,
+.editable-subgroup .content-name
+{
+    font-size:20px;
+}
+
+.editable-group .edit-panel,
+.editable-subgroup .edit-panel
+{
+    float: right;
+	display: none;
+}
+
+.editable-group input[type=text]:disabled,
+.editable-subgroup input[type=text]:disabled,
+.editable-subgroup input[type=text]:disabled
+{
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	background-color:transparent;
+	border:0;
+	outline:none;
+	outline-offset:0;
+	cursor:move;
+}
+
+.content-handle
+{
+	cursor:move;
+}
+
+.add-content-panel
+{
+    clear:both;
+}
