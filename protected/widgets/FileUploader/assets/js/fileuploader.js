@@ -48,7 +48,8 @@ function fileUploaderChangeHandler(fileuploader){
 					$(prefix+'-progressbar-container').addClass('progress-success');
 
 					$(prefix+'-upload-cancel-btn').hide();
-					$(prefix+'-delete-btn').show();
+					//$(prefix+'-delete-btn').show();
+					$(prefix+'-done-btn').show();
 				},
 				false
 				);
@@ -67,6 +68,16 @@ function fileUploaderChangeHandler(fileuploader){
 				$(prefix+'-label').html($(prefix+'-label').attr('data-placeholder'));
 			});
 		},
+	});
+}
+
+function doneUploadedFile(doneUrl, successHandler)
+{
+	$.ajax({
+		url:doneUploadUrl,
+		type:'POST',
+		dataType:'html',
+		success:successHandler
 	});
 }
 

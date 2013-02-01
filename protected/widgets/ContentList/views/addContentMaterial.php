@@ -4,7 +4,8 @@
 <div class="content-type-icon-panel">
 	<a class="btn content-type-icon-container" 
 	href="javascript:void(0);" 
-	onclick="js:contentTypeSelected(<?php echo $contentId?>, 'video')">
+	onclick="js:contentTypeSelected(<?php echo $contentId;?>, 
+		'<?php echo $contentPrefix;?>', 'video')">
 		<div><i class="icon-film"></i></div>
 		<div>Video</div>
 	</a>

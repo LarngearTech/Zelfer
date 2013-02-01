@@ -35,6 +35,7 @@ class CourseController extends Controller
 					, 'editInstructor', 'changeContent', 'changeIntroVideo', 'myCourse'
 					, 'changeThumbnail', 'publish', 'unpublish', 'delete', 'addInstructor'
 					, 'deleteInstructor', 'addLecture', 'addQuiz', 'addChapter', 'addSupplementaryMaterial'
+					, 'editQuestion'
 					, 'uploadSupplementaryMaterial', 'deleteSupplementaryMaterial'
 					, 'changeContentOrder', 'commitContent'
 					, 'editContent', 'cancelEditContent'
@@ -474,6 +475,38 @@ class CourseController extends Controller
 		}
 	}
 
+	public function actionEditQuestion()
+	{
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$widget = new ContentList();
+			$question = $this->getContent($_POST['contentId']);
+
+			if ($question) {
+				Yii::import('ext.qtiprocessor.*');
+				require_once('QtiProcessor.php');
+
+				$qp = new QtiProcessor();
+				
+				$item = $qp->parseAssessmentItem(
+					ResourcePath::getContentBasePath().$question->id."/data.xml");
+
+				if($question->type == Yii::app()->params['multiple_choice_content'])
+				{
+					$widget->render('addMultipleChoices',
+						array('content'=>$question,
+							'item'=>$item));
+				}
+				else if ($question->type == Yii::app()->params['true_false_content']) 
+				{
+					$widget->render('addTrueFalse',
+						array('content'=>$question,
+							'item'=>$item));
+				}
+			}
+		}
+	}
+
 	public function actionUploadSupplementaryMaterial($contentId)
 	{
 		if (Yii::app()->request->isAjaxRequest)
@@ -739,7 +772,8 @@ class CourseController extends Controller
 			if ($_POST['contentType'] == 'video')
 			{
 				$widget->render('addVideoContent', 
-					array('contentId'=>$_POST['contentId']));
+					array('contentId'=>$_POST['contentId'],
+						'contentPrefix'=>$_POST['contentPrefix']));
 			}
 			else if($_POST['contentType'] == Yii::app()->params["multiple_choice_content"])
 			{
@@ -757,7 +791,8 @@ class CourseController extends Controller
 
 					mkdir(ResourcePath::getContentBasePath().$question->id, 0755);
 					$widget->render('addMultipleChoices',
-						array('content'=>$question));
+						array('content'=>$question, 
+							'item'=>null));
 
 				}
 			}
@@ -777,7 +812,8 @@ class CourseController extends Controller
 
 					mkdir(ResourcePath::getContentBasePath().$question->id, 0755);
 					$widget->render('addTrueFalse',
-						array('content'=>$question));
+						array('content'=>$question,
+							'item'=>null));
 
 				}
 			}
