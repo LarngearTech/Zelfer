@@ -118,11 +118,15 @@
 	);	
 	$cs->registerScript(
 		'content-type-selected-handle',
-		'function contentTypeSelected(contentId, contentType){
+		'function contentTypeSelected(contentId, 
+				contentPrefix, 
+				contentType)
+		{
 			$.ajax({
 				url:"'.Yii::app()->createUrl('course/contentTypeSelected').'",
 				data:{
 					contentId:contentId,
+					contentPrefix:contentPrefix,
 					contentType:contentType
 				},
 				type:"POST",
@@ -189,7 +193,7 @@
 	);
 
 	$cs->registerScript(
-		'add-question-handle',
+		'question-handle',
 		'function addMultipleChoices(quizId, questionId){
 			var json = toJSON(questionId);
 
@@ -225,13 +229,23 @@
 				}
 			});
 		}
-		',
-		CClientScript::POS_END
-	);
 
-	$cs->registerScript(
-		'delete-question-handle',
-		'function deleteQuestion(quizId, questionId){
+		function editQuestion(quizId, questionId){
+			$.ajax({
+				url:"'.Yii::app()->createUrl("course/editQuestion").'",
+				data:{
+					contentId:questionId,
+				},
+				dataType:"html",
+				type:"POST",
+				success:function(html){
+					$("#edit-content-body-"+quizId).html(html);
+					makeSortable();
+				}
+			});
+		}
+
+		function deleteQuestion(quizId, questionId){
 			$.ajax({
 				url:"'.Yii::app()->createUrl("course/deleteQuestion").'",
 				data:{
@@ -244,9 +258,10 @@
 					makeSortable();
 				}
 			});
-		}',
+		}
+		',
 		CClientScript::POS_END
-	);	
+	);
 ?>
 
 <ul class='content-list'>

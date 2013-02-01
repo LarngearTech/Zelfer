@@ -32,7 +32,7 @@
 		?>
 		<div class="row">
 			<div class="span7">
-			<input class="btn" type="button" 
+			<input class="btn btn-primary" type="button" 
 				onclick="js:addSupplementaryMaterial(<?php echo $content->id;?>, '<?php echo $contentPrefix; ?>')" 
 				value="<?php echo Yii::t('site', 'Add Supplementary Material'); ?>"/>
 			</div>

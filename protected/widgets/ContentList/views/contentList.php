@@ -83,9 +83,16 @@ function addInClassContent($content, $assetsUrl)
 			data-contentId=<?php echo $content->id; ?>
 			name='<?php echo $content->name; ?>'>
 		<?php echo CHtml::encode($content->name);?>
-			<em>
-				<img src="<?php echo $assetsUrl;?>/img/play.png"/>
-			</em>
+		<?php 
+			if ($content->type == Yii::app()->params['video_content'])
+			{
+		?>
+				<em>
+					<img src="<?php echo $assetsUrl;?>/img/play.png"/>
+				</em>
+		<?php
+			}
+		?>
 		</a> 
 	</li>
 <?php
