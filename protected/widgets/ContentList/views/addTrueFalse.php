@@ -15,12 +15,12 @@
 		<div class="choice-list">
 			<ul>
 				<li>
-					<input type="radio" name="answer" <?php if ($item['answers'][0]=='True'){echo 'checked="true"';}?> value="true">
+					<input type="radio" name="answer" <?php if ($item['answers'][0]=='True'){echo 'checked="true"';}?> value="0">
 						<span>True</span>
 					</input>
 				</li>
 				<li>
-					<input type="radio" name="answer" <?php if ($item['answers'][0]=='False'){echo 'checked="false"';}?> value="false">
+					<input type="radio" name="answer" <?php if ($item['answers'][0]=='False'){echo 'checked="true"';}?> value="1">
 						<span>False</span>
 					</input>
 				</li>

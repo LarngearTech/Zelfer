@@ -930,7 +930,7 @@ class CourseController extends Controller
 				$item['type'] = 'choice';
 				$item['choices'] = $_POST['data']['txt-choice'];
 
-				$item['answers'] = $item['choices'][$_POST['data']['answer']];
+				$item['answers'][] = $item['choices'][$_POST['data']['answer']];
 				$item['shuffle'] = 'false';
 				$item['maxChoices'] = 1;
 				$item['prompt'] = $_POST['data']['question'];
@@ -974,7 +974,7 @@ class CourseController extends Controller
 				$item['type'] = 'choice';
 				$item['choices'] = array("True","False");
 
-				$item['answers'] = $_POST['data']['answer']==0?"True":"False";
+				$item['answers'][] = $_POST['data']['answer']==0?"True":"False";
 				$item['shuffle'] = 'false';
 				$item['maxChoices'] = 1;
 				$item['prompt'] = $_POST['data']['question'];

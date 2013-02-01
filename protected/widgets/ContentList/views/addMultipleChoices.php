@@ -20,26 +20,19 @@
 		<h3><?php echo Yii::t('site', 'Answer'); ?></h3>
 		<div class="choice-list">
 			<ul>
-				<li>
-					<input type="radio" <?php if($item['answers'][0]==0){ echo "checked='true'";}?> name="answer" value="<?php echo $item['choices'][0]['value']; ?>">
-						<input name="txt-choice" type="text" value="<?php echo $item['choices'][0]['text']; ?>"/>
-					</input>
-				</li>
-				<li>
-					<input type="radio" <?php if($item['answers'][0]==1){ echo "checked='true'";}?> name="answer" value="<?php echo $item['choices'][1]['value']; ?>">
-						<input name="txt-choice" type="text" value="<?php echo $item['choices'][1]['text']; ?>"/>
-					</input>
-				</li>
-				<li>
-					<input type="radio" <?php if($item['answers'][0]==2){ echo "checked='true'";}?> name="answer" value="<?php echo $item['choices'][2]['value']; ?>">
-						<input name="txt-choice" type="text" value="<?php echo $item['choices'][2]['text']; ?>"/>
-					</input>
-				</li>
-				<li>
-					<input type="radio" <?php if($item['answers'][0]==3){ echo "checked='true'";}?> name="answer" value="<?php echo $item['choices'][3]['value']; ?>">
-						<input name="txt-choice" type="text" value="<?php echo $item['choices'][3]['text']; ?>"/>
-					</input>
-				</li>
+				<?php
+				$i=0;
+				foreach($item['choices'] as $choice){
+				?>
+					<li>
+						<input type="radio" <?php if($item['answers'][0]==$item['choices'][$i]['text']){ echo "checked='true'";}?> name="answer" value="<?php echo $item['choices'][$i]['value']; ?>">
+							<input name="txt-choice" type="text" value="<?php echo $item['choices'][$i]['text']; ?>"/>
+						</input>
+					</li>
+				<?php
+					$i++;
+				}
+				?>
 			</ul>
 		</div>
 	</form>
