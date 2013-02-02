@@ -128,7 +128,14 @@ class QtiProcessor
 				->children('correctResponse')
 				->append('<value>'.$item['answers'][0].'</value>');
 			$qp->find(':root')->append('<itemBody></itemBody>');
-			$qp = $this->appendTextEntryInteraction($qp, $item['prequestion'], $item['imageUrl'], $item['prompt'], $item['ansLen']);
+			
+			// Set default value if not specified
+			$item['prequestion'] = $item['prequestion'] ? $item['prequestion'] : '';
+			$item['imageUrl'] = $item['imageUrl'] ? $item['imageUrl'] : '';
+			$item['prompt'] = $item['prompt'] ? $item['prompt'] : '';
+			$item['ansLen'] = $item['ansLen'] ? $item['ansLen'] : 50;
+
+			$qp = $this->appendExtendedTextInteraction($qp, $item['prequestion'], $item['imageUrl'], $item['prompt'], $item['ansLen']);
 		}
 		return $qp->top()->xml();
 	}
@@ -154,7 +161,7 @@ class QtiProcessor
 	{
 		$qp = $qp->find('itemBody')
 				->append('<p>'.$prequestion.'</p>');
-		if ($imageUrl)
+		if ($imageUrl != '')
 		{
 			$qp = $qp->find('itemBody')
 				->append('<img src="'.$imageUrl.'" />');

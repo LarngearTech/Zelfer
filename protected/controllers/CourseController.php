@@ -1042,7 +1042,7 @@ class CourseController extends Controller
 				
 				$item = array();
 				$item['title'] = $_POST['data']['question'];
-				$item['type'] = 'extendedText';
+				$item['type'] = 'extendedtext';
 
 				$item['answers'][] = $_POST['data']['answer'];
 				$item['prompt'] = $_POST['data']['question'];
