@@ -102,6 +102,7 @@ return array(
 	'Update Question' => 'แก้ไขคำถาม',
 	'Add Content Material' => 'เลือกเนื้อหาของบทเรียน',
 	'Add Supplementary Material' => 'เพิ่มเอกสารเพิ่มเติม',
+	'Please specify a correct answer' => 'กรุณากำหนคำตอบที่ถูกต้อง',
 	'Material List' => 'รายการเอกสารเพิ่มเติม',
 	'Material Name' => 'ชื่อเอกสาร',
 	'Size' => 'ขนาด',

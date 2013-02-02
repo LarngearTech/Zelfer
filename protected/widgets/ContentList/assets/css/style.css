@@ -128,6 +128,7 @@
 {
     font-size:20px;
     font-weight:bold;
+    font-family: RSURegular, Arial, Helvetica, sans-serif;
 }
 
 .editable-chapter .content-name,
@@ -135,6 +136,7 @@
 .editable-quiz .content-name
 {
     font-size:20px;
+    font-family: RSURegular, Arial, Helvetica, sans-serif;
 }
 
 .editable-chapter .edit-panel,

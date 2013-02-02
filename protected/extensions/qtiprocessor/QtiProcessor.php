@@ -107,7 +107,7 @@ class QtiProcessor
 			$qp = $this->appendChoiceInteraction($qp, $item['prompt'], $item['choices'], $item['shuffle'], $item['maxChoices']);
 		}
 		// type: fill shot text in-line in the paragraph (note: not done)
-		else if ($type == 'textEntry')
+		else if ($type == 'textentry')
 		{
 			$qp->find(':root')
 				->append('<responseDeclaration identifier="RESPONSE" cardicality="single" baseType="string"></responseDeclaration>')
@@ -119,7 +119,7 @@ class QtiProcessor
 			$qp = $this->appendTextEntryInteraction($qp);
 		} 
 		// type: fill text answer after the paragraph/question
-		else if ($type == 'extendedText')
+		else if ($type == 'extendedtext')
 		{
 			$qp->find(':root')
 				->append('<responseDeclaration identifier="RESPONSE" cardicality="single" baseType="string"></responseDeclaration>')

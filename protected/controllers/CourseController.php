@@ -41,7 +41,7 @@ class CourseController extends Controller
 					, 'editContent', 'cancelEditContent'
 					, 'deleteContent', 'contentTypeSelected', 'uploadContentVideo'
 					, 'deleteContentVideo', 'deleteContentVideoAndRedirect'
-					, 'deleteQuestion', 'addMultiple', 'addTrueFalse'),
+					, 'deleteQuestion', 'addMultiple', 'addTrueFalse', 'addFillInTheBlank'),
 				'users' => array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -503,6 +503,12 @@ class CourseController extends Controller
 						array('content'=>$question,
 							'item'=>$item));
 				}
+				else if ($question->type == Yii::app()->params['fill_in_the_blank_content']) 
+				{
+					$widget->render('addFillInTheBlank',
+						array('content'=>$question,
+							'item'=>$item));
+				}
 			}
 		}
 	}
@@ -817,6 +823,27 @@ class CourseController extends Controller
 
 				}
 			}
+			else if($_POST['contentType'] == Yii::app()->params["fill_in_the_blank_content"])
+			{
+				$quiz = $this->getContent($_POST['contentId']);
+
+				if ($quiz)
+				{
+					$question = new Content();
+					$question->course_id = $quiz->course_id;
+					$question->parent_id = $quiz->id;
+					$question->name = "Untitled Question";
+					$question->order = sizeof($quiz->childContents);
+					$question->type = Yii::app()->params["fill_in_the_blank_content"];
+					$question->save();
+
+					mkdir(ResourcePath::getContentBasePath().$question->id, 0755);
+					$widget->render('addFillInTheBlank',
+						array('content'=>$question,
+							'item'=>null));
+
+				}
+			}
 		}
 	}
 
@@ -930,7 +957,7 @@ class CourseController extends Controller
 				$item['type'] = 'choice';
 				$item['choices'] = $_POST['data']['txt-choice'];
 
-				$item['answers'] = $item['choices'][$_POST['data']['answer']];
+				$item['answers'][] = $item['choices'][$_POST['data']['answer']];
 				$item['shuffle'] = 'false';
 				$item['maxChoices'] = 1;
 				$item['prompt'] = $_POST['data']['question'];
@@ -974,9 +1001,50 @@ class CourseController extends Controller
 				$item['type'] = 'choice';
 				$item['choices'] = array("True","False");
 
-				$item['answers'] = $_POST['data']['answer']==0?"True":"False";
+				$item['answers'][] = $_POST['data']['answer']==0?"True":"False";
 				$item['shuffle'] = 'false';
 				$item['maxChoices'] = 1;
+				$item['prompt'] = $_POST['data']['question'];
+		
+				$qt = new QtiProcessor();
+				$xml = $qt->createQtiXmlItem($item);
+				$file = fopen(ResourcePath::getContentBasePath().$contentId."/data.xml", "w");
+				fwrite($file, $xml);
+				fclose($file);
+
+				$question->name = $item['title'];
+				$question->save();
+
+				$quiz = Content::model()->findByPk($question->parent_id);
+				$this->widget('EditableContentListItem',
+					array(
+						'content'=>$quiz,
+						'contentPrefix'=>Yii::t('site', 'Quiz'),
+						'mode'=>'edit'
+					)
+				);
+			}
+		}
+	}
+
+	public function actionAddFillInTheBlank()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+			//print_r($_POST['data']);
+			$contentId = $_POST['contentId'];
+
+			$question = $this->getContent($contentId);
+			if ($question)
+			{
+				Yii::import('ext.qtiprocessor.*');
+				require_once('QtiProcessor.php');
+				
+				$item = array();
+				$item['title'] = $_POST['data']['question'];
+				$item['type'] = 'extendedText';
+
+				$item['answers'][] = $_POST['data']['answer'];
 				$item['prompt'] = $_POST['data']['question'];
 		
 				$qt = new QtiProcessor();
