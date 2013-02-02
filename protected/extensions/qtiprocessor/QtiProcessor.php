@@ -130,10 +130,10 @@ class QtiProcessor
 			$qp->find(':root')->append('<itemBody></itemBody>');
 			
 			// Set default value if not specified
-			$item['prequestion'] = $item['prequestion'] ? $item['prequestion'] : '';
-			$item['imageUrl'] = $item['imageUrl'] ? $item['imageUrl'] : '';
-			$item['prompt'] = $item['prompt'] ? $item['prompt'] : '';
-			$item['ansLen'] = $item['ansLen'] ? $item['ansLen'] : 50;
+			$item['prequestion'] = array_key_exists('prequestion', $item) ? $item['prequestion'] : '';
+			$item['imageUrl'] = array_key_exists('imageUrl', $item) ? $item['imageUrl'] : '';
+			$item['prompt'] = array_key_exists('prompt', $item) ? $item['prompt'] : '';
+			$item['ansLen'] = array_key_exists('ansLen', $item) ? $item['ansLen'] : 50;
 
 			$qp = $this->appendExtendedTextInteraction($qp, $item['prequestion'], $item['imageUrl'], $item['prompt'], $item['ansLen']);
 		}
@@ -167,9 +167,9 @@ class QtiProcessor
 				->append('<img src="'.$imageUrl.'" />');
 		}
 		$qp = $qp->find('itemBody')
-				->append('<extendedTextInteraction responseIdentifier="RESPONSE" expectedLength="'.$ansLen.'"')
+				->append('<extendedTextInteraction responseIdentifier="RESPONSE" expectedLength="'.$ansLen.'"></extendedTextInteraction>')
 				->children('extendedTextInteraction')
-				->append('<prompt>'.$prompt.'</prompt');
+				->append('<prompt>'.$prompt.'</prompt>');
 		return $qp;
 	}
 }
