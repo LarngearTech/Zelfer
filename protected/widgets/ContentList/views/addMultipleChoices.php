@@ -25,7 +25,14 @@
 				foreach($item['choices'] as $choice){
 				?>
 					<li>
-						<input type="radio" <?php if($item['answers'][0]==$item['choices'][$i]['text']){ echo "checked='true'";}?> name="answer" value="<?php echo $item['choices'][$i]['value']; ?>">
+						<input type="radio" <?php 
+							if($item['answers'][0]==$item['choices'][$i]['text']
+							&& !$isAdd){ 
+								echo "checked='true'";
+							}?> 
+							name="answer" 
+							value="<?php echo $item['choices'][$i]['value']; ?>"
+						>
 							<input name="txt-choice" type="text" value="<?php echo $item['choices'][$i]['text']; ?>"/>
 						</input>
 					</li>

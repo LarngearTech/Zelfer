@@ -23,7 +23,8 @@
 	<a class="btn content-type-icon-container" 
 	href="javascript:void(0);" 
 	onclick="js:contentTypeSelected(<?php echo $content->id?>, 
-		'<?php echo $contentPrefix; ?>', '<?php ?>')">
+		'<?php echo $contentPrefix; ?>', 
+		'<?php echo Yii::app()->params["fill_in_the_blank_content"]; ?>')">
 		<div><i class="icon-film"></i></div>
 		<div><?php echo Yii::t('site', 'Fill in the blank'); ?></div>
 	</a>

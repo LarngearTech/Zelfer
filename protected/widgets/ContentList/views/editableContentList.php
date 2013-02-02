@@ -197,37 +197,74 @@
 		'function addMultipleChoices(quizId, questionId){
 			var json = toJSON(questionId);
 
-			$.ajax({
-				url:"'.Yii::app()->createUrl("course/addMultiple").'",
-				data:{
-					contentId:questionId,
-					data:json
-				},
-				dataType:"html",
-				type:"POST",
-				success:function(html){
-					$("#content_"+quizId).html(html);
-					makeSortable();
-				}
-			});
+			if (json.answer!=undefined) {
+				$.ajax({
+					url:"'.Yii::app()->createUrl("course/addMultiple").'",
+					data:{
+						contentId:questionId,
+						data:json
+					},
+					dataType:"html",
+					type:"POST",
+					success:function(html){
+						$("#content_"+quizId).html(html);
+						makeSortable();
+					}
+				});
+			}
+			else
+			{
+				alert("'.Yii::t("site", "Please specify a correct answer").'");
+			}
 		}
 
 		function addTrueFalse(quizId, questionId){
 			var json = toJSON(questionId);
 
-			$.ajax({
-				url:"'.Yii::app()->createUrl("course/addTrueFalse").'",
-				data:{
-					contentId:questionId,
-					data:json
-				},
-				dataType:"html",
-				type:"POST",
-				success:function(html){
-					$("#content_"+quizId).html(html);
-					makeSortable();
-				}
-			});
+			if (json.answer!=undefined) {
+				$.ajax({
+					url:"'.Yii::app()->createUrl("course/addTrueFalse").'",
+					data:{
+						contentId:questionId,
+						data:json
+					},
+					dataType:"html",
+					type:"POST",
+					success:function(html){
+						$("#content_"+quizId).html(html);
+						makeSortable();
+					}
+				});
+			}
+			else
+			{
+				alert("'.Yii::t('site', 'Please specify a correct answer').'");
+			}
+		}
+
+		function addFillInTheBlank(quizId, questionId){
+			var json = toJSON(questionId);
+
+			if (json.answer!=undefined) {
+				$.ajax({
+					url:"'.Yii::app()->createUrl('course/addFillInTheBlank').'",
+					data:{
+						contentId:questionId,
+						data:json
+					},
+					dataType:"html",
+					type:"POST",
+					success:function(html){
+						$("#content_"+quizId).html(html);
+						makeSortable();
+					}
+				});
+			}
+			else
+			{
+				alert("'.Yii::t('site', 'Please specify a correct answer').'");
+			}
+
 		}
 
 		function editQuestion(quizId, questionId){
