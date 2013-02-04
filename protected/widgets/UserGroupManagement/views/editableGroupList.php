@@ -16,14 +16,6 @@ $cs->registerScript(
 	CClientScript::POS_END
 );
 $cs->registerScript(
-	'update-group-item-ui',
-	'function updateContentItemUi(groupId, html){
-		$("#group_"+groupId).html(html).removeClass("group-editing");
-		makeSortable();
-	}',
-	CClientScript::POS_END
-);
-$cs->registerScript(
 	'edit-group-handle',
 	'$("#group-list").on("click", ".btn.group-edit", function() {
 		var groupId = $(this).data("groupid");
@@ -47,20 +39,27 @@ $cs->registerScript(
 );
 $cs->registerScript(
 	'commit-group-handle',
-	'function commitContent(groupId, groupPrefix){
+	'$("#group-list").on("click", ".btn.commit-group", function() {
+		var groupId = $(this).data("groupid");
+		var groupPrefix = $(this).data("group-prefix");
 		$.ajax({
-			url:"'.Yii::app()->createUrl('userGroup/commitContent').'",
-			data:{
-				groupId:groupId,
-				groupName:$("#txt-group-name-"+groupId).val(),
-				groupPrefix:groupPrefix,
+			url: "'.Yii::app()->createUrl('userGroup/update').'&id=" + groupId + "&ajax=delete-group",
+			data: {
+				"UserGroup[id]": groupId,
+				"UserGroup[name]": $("#txt-group-name-"+groupId).val(),
+				groupPrefix: groupPrefix,
 			},
-			type:"POST",
-			dataType:"html",
-			success:function(html){
+			type: "POST",
+			dataType: "html",
+			success: function(html){
 				updateContentItemUi(groupId, html);
 			}
 		});
+	})
+
+	function updateContentItemUi(groupId, html){
+		$("#group_"+groupId).html(html).removeClass("group-editing");
+		makeSortable();
 	}',
 	CClientScript::POS_END 
 );

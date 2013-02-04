@@ -114,7 +114,6 @@ class UserGroupController extends Controller
 	{
 		$userGroupModel = $this->loadModel($id);
 		//$subgroupModel = UserSubgroup::model()->with('groups')->findAll();
-		//print_r($subgroupModel); exit();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -125,6 +124,15 @@ class UserGroupController extends Controller
 			if($userGroupModel->save())
 			{
 				//$this->redirect(array('view','id'=>$model->id));
+				if (Yii::app()->request->isAjaxRequest)
+				{
+					$this->widget('EditableGroupListItem',
+						array(
+							'group'=>$userGroupModel,
+							'groupPrefix'=>$_POST['groupPrefix'],
+						)
+					);
+				}
 			}
 		}
 		else
@@ -234,6 +242,10 @@ class UserGroupController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	/**
+	 * return the new order of the specified group id
+	 */
 
 	protected function findNewOrder($groupId, $newOrderList)
 	{
