@@ -34,7 +34,7 @@ class UserGroupController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete', 'cancelEditGroup'),
+				'actions'=>array('admin','delete', 'cancelEditGroup', 'changeGroupOrder'),
 				'users'=>array('admin@zelfer.com', 'system@zelfer.com'),
 			),
 			array('deny',  // deny all users
@@ -254,7 +254,7 @@ class UserGroupController extends Controller
 		if (Yii::app()->request->isAjaxRequest)
 		{
 			$groups = UserGroup::model()->findAll();
-			$newOrderList = $_POST['groups'];
+			$newOrderList = $_POST['group'];
 
 			foreach($groups as $group)
 			{
