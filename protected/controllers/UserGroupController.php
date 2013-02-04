@@ -34,7 +34,7 @@ class UserGroupController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete', 'cancelEditGroup'),
 				'users'=>array('admin@zelfer.com', 'system@zelfer.com'),
 			),
 			array('deny',  // deny all users
@@ -127,10 +127,25 @@ class UserGroupController extends Controller
 				//$this->redirect(array('view','id'=>$model->id));
 			}
 		}
-
-		$this->render('update',array(
-			'userGroupModel'=>$userGroupModel,
-		));
+		else
+		{
+			if (Yii::app()->request->isAjaxRequest)
+			{
+				$this->widget('EditableGroupListItem',
+					array(
+						'group'=>$userGroupModel,
+						'groupPrefix'=>$_POST['groupPrefix'],
+						'mode'=>'edit'
+					)
+				);
+			}
+			else
+			{
+				$this->render('update',array(
+					'userGroupModel'=>$userGroupModel,
+				));
+			}
+		}
 	}
 
 	/**
@@ -266,6 +281,24 @@ class UserGroupController extends Controller
 			$this->widget('EditableGroupList', array(
 				'groups' => $groups,
 			));
+		}
+	}
+
+	/**
+	 * Cancel group editing and return to group item in normal mode
+	 */
+	public function actionCancelEditGroup()
+	{
+		if (Yii::app()->request->isAjaxRequest)
+		{
+			$group = UserGroup::model()->findByPk($_POST['groupId']);
+
+			$this->widget('EditableGroupListItem',
+				array(
+					'group' => $group,
+					'groupPrefix' => $_POST['groupPrefix'],
+				)
+			);
 		}
 	}
 }

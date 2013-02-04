@@ -25,24 +25,25 @@ $cs->registerScript(
 );
 $cs->registerScript(
 	'edit-group-handle',
-	'function editContent(groupId, groupPrefix){
+	'$("#group-list").on("click", ".btn.group-edit", function() {
+		var groupId = $(this).data("groupid");
+		var groupPrefix = $(this).data("group-prefix");
 		$("#group_"+groupId).addClass("group-editing");
 		$.ajax({
-			url:"'.Yii::app()->createUrl('userGroup/editContent').'",
-			data:{
-				groupId:groupId,
-				groupPrefix:groupPrefix,
+			url: "'.Yii::app()->createUrl('userGroup/update').'&id=" + groupId + "&ajax=edit-group",
+			data: {
+				groupId: groupId,
+				groupPrefix: groupPrefix,
 			},
-			type:"POST",
-			dataType:"html",
-			success:function(html){
+			type: "POST",
+			dataType: "html",
+			success: function(html) {
 				$("#group_"+groupId).html(html);
 				makeSortable();
 			}
 		});
-	}',
+	});',
 	CClientScript::POS_END
-	
 );
 $cs->registerScript(
 	'commit-group-handle',
@@ -65,21 +66,23 @@ $cs->registerScript(
 );
 $cs->registerScript(
 	'cancel-edit-group-handle',
-	'function cancelEditContent(groupId, groupPrefix){
+	'$("#group-list").on("click", ".btn.cancel-edit-group", function() {
+		var groupId = $(this).data("groupid");
+		var groupPrefix = $(this).data("groupPrefix");
 		$.ajax({
-			url:"'.Yii::app()->createUrl('userGroup/cancelEditContent').'",
+			url: "'.Yii::app()->createUrl('userGroup/cancelEditGroup').'",
 			data:{
-				groupId:groupId,
-				groupPrefix:groupPrefix,
+				groupId: groupId,
+				groupPrefix: groupPrefix,
 			},
-			type:"POST",
-			dataType:"html",
-			success:function(html){
+			type: "POST",
+			dataType: "html",
+			success: function(html) {
 				$("#group_"+groupId).html(html).removeClass("group-editing");
 				makeSortable();
 			}
 		});
-	}',
+	})',
 	CClientScript::POS_END
 );
 $cs->registerScript(
