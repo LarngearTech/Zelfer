@@ -154,11 +154,14 @@ class UserGroupController extends Controller
 			{
 				// Ajax return UserGroup list to display
 				$userGroups = UserGroup::model()->findAll();
-				$this->renderPartial('_addUserGroup', 
+				/*$this->renderPartial('_addUserGroup', 
 					array(
 						'userGroups'=>$userGroups,
 					)
-				);				
+				);*/
+				$this->widget('EditableGroupList', array(
+					'groups' => $userGroups,
+				));				
 			}
 		}
 		else

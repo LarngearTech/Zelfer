@@ -82,6 +82,25 @@ $cs->registerScript(
 	}',
 	CClientScript::POS_END
 );
+$cs->registerScript(
+	'delete-group-handle',
+	'$("#group-list").on("click", ".btn.group-delete", function() {
+		var groupId = $(this).data("groupid");
+		$.ajax({
+			url: "'.Yii::app()->createUrl("userGroup/delete").'&id=" + groupId + "&ajax=delete-group",
+			data: {
+				groupId: groupId, 
+			},                      
+			type: "POST",
+			dataType: "html",
+			success:function(html) {
+				$(".editable-group-list-container").html(html);
+				makeSortable();
+			}
+		});
+	});',
+	CClientScript::POS_END
+);
 ?>
 
 <ul class='group-list'>
