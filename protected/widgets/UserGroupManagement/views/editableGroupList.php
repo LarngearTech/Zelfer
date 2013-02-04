@@ -1,4 +1,4 @@
-<?php
+<?php 
 $cs = Yii::app()->clientScript;
 $cs->registerScript(
 	'toggle-edit-panel',

@@ -10,10 +10,10 @@ $cs->registerScript(
 				var groupList = $('.group-list').sortable();
 				var order = $(groupList).sortable('serialize');
 				$.ajax({
-					url:'".Yii::app()->createUrl('userGroup/changeGroupOrder')."',
-					data:order,
-					dataType:'html',                
-					type:'POST',
+					url: '".Yii::app()->createUrl('userGroup/changeGroupOrder')."',
+					data: order,
+					dataType: 'html',                
+					type: 'POST',
 					success:function(html){
 						$('.editable-group-list-container').html(html);
 						makeSortable();
@@ -43,6 +43,9 @@ $cs->registerScript(
 		array(
 			'type' => 'POST',
 			'dataType' => 'html',
+			'data' => array(
+				'type' => '1'
+			),
 			'success' => 'function(html) {
 				$(".editable-group-list-container").html(html);
 				makeSortable();
@@ -56,10 +59,13 @@ $cs->registerScript(
 	<?php 
 	echo CHtml::ajaxButton(
 		Yii::t('site', 'Add Subgroup'),
-		$addSubgroupHandler,
+		$addGroupHandler,
 		array(
 			'type'=>'POST',
 			'dataType'=>'html',
+			'data' => array(
+				'type' => '2'
+			),
 			'success'=>'function(html){
 				$(".editable-group-list-container").html(html);
 				makeSortable();

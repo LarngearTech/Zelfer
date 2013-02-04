@@ -15,7 +15,7 @@ class EditGroupPanel extends BaseWidget
 			array(
 				'groups' => $this->groups,
 				'addGroupHandler'=>$this->addGroupHandler,
-				'addSubgroupHandler'=>$this->addSubgroupHandler,
+				//'addSubgroupHandler'=>$this->addSubgroupHandler,
 			)
 		);
 	}

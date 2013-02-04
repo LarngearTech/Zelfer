@@ -65,37 +65,44 @@ class UserGroupController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['UserGroup']))
+		if (Yii::app()->request->isAjaxRequest)
 		{
-			$model->attributes = $_POST['UserGroup'];
-
-			if ($model->save())
+			$userGroup = new UserGroup();
+			$userGroup->name = "Untitled Group";
+			$userGroup->parent_id = -1;
+			$userGroup->order = UserGroup::model()->count() + 1;
+			$userGroup->type = $_POST['type'];
+			
+			if ($userGroup->save())
 			{
-				if (Yii::app()->request->isAjaxRequest)
-				{				
-					$userGroups = UserGroup::model()->findAll();
-					$txtUserGroupName = "txtUserGroupName";
-					$addHandler = "addUserGroup();";
-					$this->renderPartial('_addUserGroup', 
-						array('userGroups'=>$userGroups,
-							'txtUserGroupName'=>$txtUserGroupName,
-							'addHandler'=>$addHandler
-						)
-					);
-				}
-				else
-				{
-					$this->redirect(array('view','id' => $model->id));
-				}
+				$groups = UserGroup::model()->findAll();
+				$this->widget('EditableGroupList', array(
+					'groups' => $groups,
+				));
+			}
+			else
+			{
+				echo 'There is a problem when adding group. Please contact the system administrator. Sorry for your Inconvinience.';
 			}
 		}
 		else
 		{
-			$this->render('create',array(
-				'model'=>$model,
-			));	
-		}	
-		
+			if (isset($_POST['UserGroup']))
+			{
+				$model->attributes = $_POST['UserGroup'];
+	
+				if ($model->save())
+				{
+					$this->redirect(array('view','id' => $model->id));
+				}
+			}
+			else
+			{
+				$this->render('create',array(
+					'model'=>$model,
+				));	
+			}	
+		}
 	}
 
 	/**

@@ -45,6 +45,7 @@
 					));?-->
 					<?php $this->widget('EditGroupPanel', array(
 						'groups' => $userGroups,
+						'addGroupHandler' => $this->createUrl('userGroup/create'),
 					)); ?>
 				</div>
 			<?php $this->endWidget(); // EBootstrapTabContent-group ?>
