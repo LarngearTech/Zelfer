@@ -16,19 +16,21 @@ class PHPHelper
 	}
 	public static function getFilesInFolder($foldername)
 	{
-		if ($handle = opendir($foldername))
-		{
-			$files=array();
-			while (false !== ($entry = readdir($handle)))
+		if (is_dir($foldername)) {
+			if ($handle = opendir($foldername))
 			{
-				if ($entry != "." && $entry != "..")
+				$files=array();
+				while (false !== ($entry = readdir($handle)))
 				{
-					$files[]=array('name'=>$entry,
-						'size'=>filesize($foldername.'/'.$entry));
+					if ($entry != "." && $entry != "..")
+					{
+						$files[]=array('name'=>$entry,
+							'size'=>filesize($foldername.'/'.$entry));
+					}
 				}
-			}
-			closedir($handle);
-			return $files;
+				closedir($handle);
+				return $files;
+			}	
 		}
 		else
 		{
