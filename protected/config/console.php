@@ -7,18 +7,16 @@ return array(
 	'name'=>'My Console Application',
 	// application components
 	'components'=>array(
-		'db'=>array(
+		/*'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
+		),*/
 		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+		'db' => array(
+			'connectionString' => 'mysql:host=localhost;dbname=zelfer',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+			'username' => 'username_here',
+			'password' => 'password_here',
 			'charset' => 'utf8',
 		),
-		*/
 	),
 );
