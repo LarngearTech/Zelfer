@@ -19,7 +19,7 @@
 				</div>
 				<div id="student-list">
 					<?php $this->renderPartial('/user/_addUser', array(
-						'users'=>$users->students,
+						'users'=>$students,
 						'txtFullName'=>'txtStudentFullName',
 						'txtEmail'=>'txtStudentEmail',
 						'addHandler'=>'addStudent();',
@@ -27,7 +27,7 @@
 				</div>
 				<div id="teacher-list">
 					<?php $this->renderPartial('/user/_addUser', array(
-						'users'=>$users->teachers,
+						'users'=>$teachers,
 						'txtFullName'=>'txtTeacherFullName',
 						'txtEmail'=>'txtTeacherEmail',
 						'addHandler'=>'addTeacher();',

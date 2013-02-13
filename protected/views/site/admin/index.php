@@ -75,7 +75,8 @@ Yii::app()->clientScript->registerScript(
 		<div class="span9">
 			<div class="add-user-wrapper">
 				<?php $this->renderPartial('/site/admin/_user', array(
-					'users' => $users,
+					'students' => $students,
+					'teachers' => $teachers,
 					'userGroups' => $userGroups,
 				));?>
 			</div><!-- /.add-user-wrapper -->
