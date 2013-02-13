@@ -117,4 +117,18 @@ class UserGroup extends CActiveRecord
 			return false;
 		}
 	}
+
+	/**
+	 * Get all users in the group.
+	 */ 
+	public function getUsers()
+	{
+		$users = Yii::app()->db->createCommand()
+			->select('id, fullname')
+			->from('user u')
+			->join('user_in_group uig', 'uig.uid=u.id')
+			->where('uig.gid=:id', array(':id' => $this->id))
+			->queryAll();
+		return $users;
+	}
 }

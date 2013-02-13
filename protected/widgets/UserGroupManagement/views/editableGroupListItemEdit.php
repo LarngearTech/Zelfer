@@ -16,10 +16,10 @@
 	</div>
 	<?php if ($group->isSubgroup()): ?>
 	<div id="edit-group-body-<?php echo $group->id; ?>" class="edit-group-body">
-		<?php /*$this->render('editSubgroup', array(
+		<?php $this->render('userList', array(
 			'group' => $group,
-			'groupPrefix' => $groupPrefix
-		));*/?>
+			'users' => $users,
+		));?>
 	</div>
 	<?php endif; ?>
 </div>
