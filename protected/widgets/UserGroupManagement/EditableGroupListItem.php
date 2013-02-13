@@ -21,7 +21,8 @@ class EditableGroupListItem extends EditableGroupListBase{
 				array(
 					'groupPrefix' => $this->groupPrefix,
 					'group' => $this->group,
-					'users' => $this->group->users,
+					'ingroupusers' => $this->group->users,
+					'otherusers' => $this->group->notInGroupUsers,
 				)
 			);
 		}

@@ -1,5 +1,5 @@
-<?php foreach ($users as $user): ?>
+<?php foreach ($ingroupusers as $user): ?>
 	<?php echo $user['fullname']; ?>
 	<br />
 <?php endforeach; ?>
-		<input type="text" data-provide="typeahead" data-source='["aaaa", "aba", "aac"]' data-items="4">	
+		<input type="text" data-provide="typeahead" data-source='[<?php echo '"'.implode('","', $otherusers).'"';?>]' data-items="4">	

@@ -131,4 +131,21 @@ class UserGroup extends CActiveRecord
 			->queryAll();
 		return $users;
 	}
+
+	public function getNotInGroupUsers()
+	{
+		$inGroupUsers = $this->users;
+		$inGroupUserIds = array();
+		foreach ($inGroupUsers as $user)
+		{
+			$inGroupUserIds[] = $user['id'];
+		}
+		$notInGroupUsers = Yii::app()->db->createCommand()
+			->select('id, fullname')
+			->from('user u')
+			->where(array('not in', 'id', $inGroupUserIds))
+			->queryAll();
+		return $notInGroupUsers;
+
+	}
 }

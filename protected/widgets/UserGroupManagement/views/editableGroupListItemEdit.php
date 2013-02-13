@@ -16,9 +16,15 @@
 	</div>
 	<?php if ($group->isSubgroup()): ?>
 	<div id="edit-group-body-<?php echo $group->id; ?>" class="edit-group-body">
-		<?php $this->render('userList', array(
+		<?php $otherUserNames = array();
+		foreach ($otherusers as $user)
+		{
+			$otherUserNames[] = $user['fullname'];
+		}
+		$this->render('userList', array(
 			'group' => $group,
-			'users' => $users,
+			'ingroupusers' => $ingroupusers,
+			'otherusers' => $otherUserNames,
 		));?>
 	</div>
 	<?php endif; ?>
